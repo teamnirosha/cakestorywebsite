@@ -40,4 +40,5 @@ export const STORAGE_KEYS = {
   ORDERS: "orders",
   ENQUIRIES: "enquiries",
   SITE_CONTENT: "site_content",
+  ADMIN_CREDENTIALS: "admin_credentials",
 } as const;

@@ -395,31 +395,146 @@ export type User = {
   id: string;
   name: string;
   email: string;
-  password: string;
+  password?: string;
   role: string;
   avatar: string;
 };
 
+export type AuthUser = {
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  role: "admin";
+  avatar: string;
+  isInitialCredentials?: boolean;
+};
+
+export type AdminCredentials = {
+  username: string;
+  passwordHash: string;
+  updatedAt: string;
+  isInitial: boolean;
+};
+
+const INITIAL_USERNAME = "cakestory&desserts.in";
+const INITIAL_PASSWORD = "cakestory@123";
+
+function getAdminCredentials(): AdminCredentials {
+  const existing = storage.get<AdminCredentials | null>(STORAGE_KEYS.ADMIN_CREDENTIALS, null);
+  if (!existing) {
+    const initial: AdminCredentials = {
+      username: INITIAL_USERNAME,
+      passwordHash: INITIAL_PASSWORD,
+      updatedAt: new Date().toISOString(),
+      isInitial: true,
+    };
+    storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, initial);
+    return initial;
+  }
+  return existing;
+}
+
 export const authService = {
-  login(email: string, password: string): User | null {
-    const user = (seedUsers as User[]).find(
-      (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
-    );
-    if (user) {
-      const session = { ...user, password: undefined };
-      storage.set(STORAGE_KEYS.SESSION, session);
-      return user;
+  getCredentials(): AdminCredentials {
+    return getAdminCredentials();
+  },
+
+  isInitialCredentials(): boolean {
+    return getAdminCredentials().isInitial;
+  },
+
+  login(identifierInput: string, passwordInput: string): AuthUser | null {
+    const creds = getAdminCredentials();
+    const inputUser = identifierInput.trim().toLowerCase();
+    const targetUser = creds.username.trim().toLowerCase();
+
+    // Allow username or email match (also fallback for initial admin email if applicable)
+    const matchesUser = inputUser === targetUser || (creds.isInitial && inputUser === "admin@cakestory.com");
+    const matchesPass = passwordInput === creds.passwordHash;
+
+    if (matchesUser && matchesPass) {
+      const authUser: AuthUser = {
+        id: "admin-master",
+        name: "CakeStory Operations Lead",
+        username: creds.username,
+        email: creds.username.includes("@") ? creds.username : "admin@cakestory.com",
+        role: "admin",
+        avatar: "https://i.pravatar.cc/120?img=68",
+        isInitialCredentials: creds.isInitial,
+      };
+      // Store session WITHOUT raw password
+      storage.set(STORAGE_KEYS.SESSION, authUser);
+      return authUser;
     }
     return null;
   },
+
   logout(): void {
     storage.remove(STORAGE_KEYS.SESSION);
   },
-  current(): (User & { password?: string }) | null {
-    return storage.get<User | null>(STORAGE_KEYS.SESSION, null);
+
+  current(): AuthUser | null {
+    const session = storage.get<AuthUser | null>(STORAGE_KEYS.SESSION, null);
+    if (!session || session.role !== "admin") return null;
+    return session;
   },
+
   isAuthed(): boolean {
     return !!this.current();
+  },
+
+  verifyCurrentPassword(passwordInput: string): boolean {
+    const creds = getAdminCredentials();
+    return passwordInput === creds.passwordHash;
+  },
+
+  changeUsername(newUsername: string): { success: boolean; error?: string } {
+    const trimmed = newUsername.trim();
+    if (!trimmed) {
+      return { success: false, error: "Username cannot be empty." };
+    }
+    if (trimmed.length < 3) {
+      return { success: false, error: "Username must be at least 3 characters long." };
+    }
+    const creds = getAdminCredentials();
+    const updated: AdminCredentials = {
+      ...creds,
+      username: trimmed,
+      updatedAt: new Date().toISOString(),
+    };
+    storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, updated);
+
+    // Invalidate active session so administrator re-authenticates with new username
+    this.logout();
+
+    return { success: true };
+  },
+
+  changePassword(currentPasswordInput: string, newPasswordInput: string): { success: boolean; error?: string } {
+    const creds = getAdminCredentials();
+    if (currentPasswordInput !== creds.passwordHash) {
+      return { success: false, error: "Current password is incorrect." };
+    }
+    if (!newPasswordInput || newPasswordInput.length < 6) {
+      return { success: false, error: "New password must be at least 6 characters long." };
+    }
+    if (newPasswordInput === creds.passwordHash) {
+      return { success: false, error: "New password must be different from your current password." };
+    }
+
+    const updated: AdminCredentials = {
+      ...creds,
+      passwordHash: newPasswordInput,
+      isInitial: false,
+      updatedAt: new Date().toISOString(),
+    };
+    storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, updated);
+
+    // Invalidate active session so administrator re-authenticates with new password
+    this.logout();
+
+    return { success: true };
   },
 };
 

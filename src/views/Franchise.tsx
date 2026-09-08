@@ -81,7 +81,7 @@ export default function Franchise() {
               </div>
               <div>
                 <div className="font-display text-2xl font-bold text-[#2a1d2e]">Compact</div>
-                <div className="text-xs text-[#5a4a5e] mt-0.5">150-350 sq.ft. Store Format</div>
+                <div className="text-xs text-[#5a4a5e] mt-0.5">300-400 sq.ft. Store Format</div>
               </div>
               <div>
                 <div className="font-display text-2xl font-bold text-[#2a1d2e]">Turnkey</div>

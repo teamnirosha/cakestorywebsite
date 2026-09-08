@@ -9,6 +9,7 @@ import BrandHeroVisual from "../components/common/BrandHeroVisual";
 import OutletCard from "../components/common/OutletCard";
 import BakeryBackgroundDecor from "../components/common/BakeryBackgroundDecor";
 import ImageReveal from "../components/common/ImageReveal";
+import CustomizationExperience from "../components/home/CustomizationExperience";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -348,6 +349,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ⭐ SIGNATURE CUSTOMIZATION EXPERIENCE ⭐ */}
+      <CustomizationExperience />
 
       {/* SECTION 3 — OUR GROWTH STORY (OPTION C: INTERACTIVE DYNAMIC VISUAL STAGE & COMPACT MILESTONES) */}
       <section className="reveal-section py-16 sm:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">

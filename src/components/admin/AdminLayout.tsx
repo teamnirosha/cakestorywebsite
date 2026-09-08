@@ -21,9 +21,10 @@ export default function AdminLayout({
 
   const navItems = [
     { to: "/admin/dashboard", label: "Dashboard", icon: "📊" },
-    { to: "/admin/franchises", label: "Outlet Network", icon: "🏪" },
+    { to: "/admin/franchises", label: "Outlet Networks", icon: "🏪" },
     { to: "/admin/enquiries", label: "Franchise Leads", icon: "📋" },
     { to: "/admin/catalog", label: "Product Catalog", icon: "🎂" },
+    { to: "/admin/account", label: "Account & Security", icon: "🔒" },
   ];
 
   const logout = () => {
@@ -73,7 +74,7 @@ export default function AdminLayout({
             </div>
           </div>
 
-          {/* Navigation Links — Strictly 4 Essential Modules */}
+          {/* Navigation Links */}
           <div className="px-3 py-4 flex-1 overflow-y-auto space-y-1">
             <div className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
               Operations & Management
@@ -98,28 +99,37 @@ export default function AdminLayout({
           </div>
 
           {/* User Session Footer */}
-          <div className="p-4 border-t border-slate-800 bg-slate-950/40">
+          <div className="p-4 border-t border-slate-800 bg-slate-950/40 space-y-3">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-pink-500/20 border border-pink-500/40 text-pink-300 flex items-center justify-center font-bold text-xs shrink-0">
                 {user?.name ? user.name.charAt(0).toUpperCase() : "A"}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="text-xs font-semibold text-white truncate">{user?.name || "Operations Lead"}</div>
-                <div className="text-[10px] text-slate-400 truncate">{user?.email || "admin@cakestory.com"}</div>
+                <div className="text-[10px] text-slate-400 truncate">{user?.username || user?.email || "cakestory&desserts.in"}</div>
               </div>
               <button
                 onClick={logout}
-                className="p-1.5 text-slate-400 hover:text-rose-400 rounded-md hover:bg-slate-800 transition"
-                title="Log out"
+                className="p-1.5 text-slate-400 hover:text-rose-400 rounded-md hover:bg-slate-800 transition cursor-pointer"
+                title="Log out session"
               >
                 ↩
               </button>
             </div>
-            <div className="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
-              <span>JSON Data Mode</span>
-              <span className="inline-flex items-center gap-1 text-emerald-400 font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> Active
-              </span>
+
+            <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between gap-2 text-[10px]">
+              <Link
+                to="/admin/account"
+                className="text-slate-400 hover:text-pink-400 font-semibold transition flex items-center gap-1"
+              >
+                <span>⚙️ Security Settings</span>
+              </Link>
+              <button
+                onClick={logout}
+                className="text-rose-400 hover:underline font-semibold cursor-pointer"
+              >
+                Logout
+              </button>
             </div>
           </div>
         </aside>

@@ -31,6 +31,7 @@ import AdminCakes from "./views/admin/AdminCakes";
 import AdminRecipes from "./views/admin/AdminRecipes";
 import AdminHeroContent from "./views/admin/AdminHeroContent";
 import AdminSettings from "./views/admin/AdminSettings";
+import AdminAccount from "./views/admin/AdminAccount";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -93,6 +94,7 @@ export default function App() {
           <Route path="/admin/recipes" element={<RequireAuth><AdminRecipes /></RequireAuth>} />
           <Route path="/admin/hero" element={<RequireAuth><AdminHeroContent /></RequireAuth>} />
           <Route path="/admin/settings" element={<RequireAuth><AdminSettings /></RequireAuth>} />
+          <Route path="/admin/account" element={<RequireAuth><AdminAccount /></RequireAuth>} />
 
           <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
         </Routes>
