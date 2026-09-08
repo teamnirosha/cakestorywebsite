@@ -1,0 +1,68 @@
+[
+  {
+    "id": "event-001",
+    "title": "Birthday Bash",
+    "description": "From whimsical kids' themes to elegant adult milestones, our birthday cakes turn the moment into memory.",
+    "image": "DSC08617.JPG",
+    "icon": "🎉",
+    "date": "All Year",
+    "package": "From $49",
+    "featured": true,
+    "color": "from-pink-300 to-rose-200"
+  },
+  {
+    "id": "event-002",
+    "title": "Wedding Bliss",
+    "description": "Multi-tier masterpieces that steal the show. Custom sugar flowers, monograms, and luxurious flavors.",
+    "image": "A7401344.jpeg",
+    "icon": "💍",
+    "date": "All Year",
+    "package": "From $299",
+    "featured": true,
+    "color": "from-rose-200 to-pink-100"
+  },
+  {
+    "id": "event-003",
+    "title": "Corporate Events",
+    "description": "Branded cakes, dessert tables, and bulk orders for your company's milestones and launches.",
+    "image": "1.jpg",
+    "icon": "💼",
+    "date": "All Year",
+    "package": "Custom Quote",
+    "featured": true,
+    "color": "from-blue-200 to-indigo-200"
+  },
+  {
+    "id": "event-004",
+    "title": "Anniversary",
+    "description": "Romantic designs with personalized messages, photo prints, and heart-shaped creations.",
+    "image": "AZ_01692.JPG",
+    "icon": "💕",
+    "date": "All Year",
+    "package": "From $59",
+    "featured": true,
+    "color": "from-pink-200 to-red-100"
+  },
+  {
+    "id": "event-005",
+    "title": "Kids Party",
+    "description": "Cartoon characters, rainbow themes, and edible surprises that make kids' eyes light up.",
+    "image": "14.JPG",
+    "icon": "🎈",
+    "date": "All Year",
+    "package": "From $39",
+    "featured": true,
+    "color": "from-yellow-200 to-pink-200"
+  },
+  {
+    "id": "event-006",
+    "title": "Custom Celebration",
+    "description": "Any theme, any occasion, any size. Our artists bring your wildest dreams to life.",
+    "image": "AZ_01460.JPG",
+    "icon": "✨",
+    "date": "All Year",
+    "package": "Custom Quote",
+    "featured": true,
+    "color": "from-purple-200 to-pink-200"
+  }
+]

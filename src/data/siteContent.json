@@ -1,0 +1,158 @@
+{
+  "brand": {
+    "name": "CakeStory Desserts",
+    "tagline": "Build Your Future With a Brand That's Built to Grow",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "established": "2020",
+    "description": "A growing modern bakery brand and franchise ecosystem scaling across Pune."
+  },
+  "homeHero": {
+    "badgeText": "CakeStory Desserts • A Growing Bakery Brand from Pune",
+    "headingPrefix": "Build Your Future With a Brand That's",
+    "headingHighlight": "Built to Grow.",
+    "description": "CakeStory Desserts is expanding across Pune and looking for motivated entrepreneurs who want to build a successful bakery business with an established local brand, proven products, consistent processes, and complete operational support.",
+    "primaryCta": {
+      "label": "Start Your Franchise Journey",
+      "action": "modal",
+      "link": "/franchise"
+    },
+    "secondaryCta": {
+      "label": "See Our Outlets",
+      "link": "/outlets"
+    },
+    "statistics": [
+      {
+        "id": "stat-1",
+        "value": "12+",
+        "label": "PUNE OUTLETS",
+        "description": "Growing local network",
+        "active": true
+      },
+      {
+        "id": "stat-2",
+        "value": "5",
+        "label": "ACTIVE ZONES",
+        "description": "Strategic territorial coverage",
+        "active": true
+      },
+      {
+        "id": "stat-3",
+        "value": "100%",
+        "label": "CENTRAL SOPS",
+        "description": "Standardized batch consistency",
+        "active": true
+      }
+    ],
+    "supportingCards": [
+      {
+        "id": "card-1",
+        "icon": "🏭",
+        "title": "Central Pune Kitchen",
+        "description": "Daily batch quality control & cold chain dispatch",
+        "active": true
+      },
+      {
+        "id": "card-2",
+        "icon": "🤝",
+        "title": "Franchise Support",
+        "description": "Turnkey store setup guidance & counter staff training",
+        "active": true
+      }
+    ],
+    "floatingBadges": [
+      {
+        "id": "badge-1",
+        "icon": "⭐",
+        "title": "Consistent Quality",
+        "subtitle": "Standardised Recipes",
+        "position": "top-left",
+        "active": true
+      },
+      {
+        "id": "badge-2",
+        "icon": "📍",
+        "title": "Pune Network",
+        "subtitle": "High-Growth Catchments",
+        "position": "bottom-right",
+        "active": true
+      }
+    ],
+    "visual": {
+      "type": "image",
+      "imageAsset": "/images/hero-cake.jpg",
+      "caption": "Signature Handcrafted CakeStory Desserts Celebration Cake"
+    }
+  },
+  "storyHero": {
+    "imageAsset": "AZ_01460.JPG",
+    "caption": "Central Kitchen Craftsmanship & Fresh Gourmet Ingredients"
+  },
+  "franchiseHero": {
+    "imageAsset": "/images/franchise-hero.png",
+    "caption": "CakeStory Desserts Premium Packaged Treats & Festive Retail Collection"
+  },
+  "coreStrengths": {
+    "badge": "Core Strengths",
+    "title": "Why Build Your Business With CakeStory Desserts?",
+    "subtitle": "More than a bakery brand — CakeStory Desserts is building a scalable business ecosystem across Pune, designed for ambitious young entrepreneurs.",
+    "cards": [
+      {
+        "id": "cs-1",
+        "icon": "🏪",
+        "title": "Proven Product Demand",
+        "description": "Operate in an everyday celebration & dessert category with products refined for high customer retention and repeat neighborhood orders.",
+        "active": true
+      },
+      {
+        "id": "cs-2",
+        "icon": "⚙️",
+        "title": "Centralized Quality System",
+        "description": "Standardized recipes, automated ingredient batching, and strict temperature control eliminate guesswork and baking variances.",
+        "active": true
+      },
+      {
+        "id": "cs-3",
+        "icon": "🏭",
+        "title": "Central Kitchen Support",
+        "description": "Cakes are baked, decorated, and chilled in our central Pune facility, dispatched fresh daily to keep outlet operations lean.",
+        "active": true
+      },
+      {
+        "id": "cs-4",
+        "icon": "✨",
+        "title": "Handcrafted + Standardized",
+        "description": "Every cake unites artisan visual presentation with industrial consistency, giving customers celebratory perfection every time.",
+        "active": true
+      },
+      {
+        "id": "cs-5",
+        "icon": "🤝",
+        "title": "Franchise Support",
+        "description": "Receive end-to-end guidance spanning commercial site selection, retail fit-out blueprints, counter POS software, and staff training.",
+        "active": true
+      },
+      {
+        "id": "cs-6",
+        "icon": "📍",
+        "title": "Local Pune Advantage",
+        "description": "Deep territorial presence across Pune's top residential and tech catchments ensures authentic brand recognition and customer trust.",
+        "active": true
+      },
+      {
+        "id": "cs-7",
+        "icon": "🚀",
+        "title": "Youth Entrepreneur Opportunity",
+        "description": "Designed for motivated first-time and young entrepreneurs who want to lead a respected business with structured systems.",
+        "active": true
+      },
+      {
+        "id": "cs-8",
+        "icon": "🎯",
+        "title": "Grow With the Brand",
+        "description": "Become a foundational partner as CakeStory Desserts expands across Pune, securing prime territorial rights in high-growth neighborhoods.",
+        "active": true
+      }
+    ]
+  }
+}

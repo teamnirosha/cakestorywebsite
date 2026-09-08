@@ -1,0 +1,34 @@
+[
+  {
+    "id": "t-001",
+    "name": "Ananya Verma",
+    "role": "Wedding Client",
+    "quote": "Our wedding cake was a dream. The 3D design preview helped us visualize everything before the big day.",
+    "avatar": "https://i.pravatar.cc/120?img=47",
+    "rating": 5
+  },
+  {
+    "id": "t-002",
+    "name": "Rohit Khanna",
+    "role": "Corporate Client",
+    "quote": "CakeStory delivered 200 cupcakes for our product launch — all perfect, on time, and beautifully branded.",
+    "avatar": "https://i.pravatar.cc/120?img=12",
+    "rating": 5
+  },
+  {
+    "id": "t-003",
+    "name": "Sara Iyer",
+    "role": "Birthday Mom",
+    "quote": "My daughter's unicorn cake was the highlight of her party. The 3D customization tool was so fun!",
+    "avatar": "https://i.pravatar.cc/120?img=45",
+    "rating": 5
+  },
+  {
+    "id": "t-004",
+    "name": "Karan Malhotra",
+    "role": "Anniversary",
+    "quote": "The pink velvet heart cake was romantic and delicious. The midnight delivery was a wonderful surprise.",
+    "avatar": "https://i.pravatar.cc/120?img=33",
+    "rating": 5
+  }
+]

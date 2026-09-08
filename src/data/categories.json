@@ -1,0 +1,16 @@
+[
+  { "id": "all", "name": "All Cakes", "icon": "🎂", "color": "from-pink-200 to-rose-200" },
+  { "id": "cat-birthday", "name": "Birthday", "icon": "🎉", "color": "from-pink-200 to-rose-200" },
+  { "id": "cat-wedding", "name": "Wedding", "icon": "💍", "color": "from-rose-200 to-pink-100" },
+  { "id": "cat-anniversary", "name": "Anniversary", "icon": "💕", "color": "from-rose-100 to-pink-200" },
+  { "id": "cat-chocolate", "name": "Chocolate", "icon": "🍫", "color": "from-amber-200 to-orange-100" },
+  { "id": "cat-fruit", "name": "Fruit", "icon": "🍓", "color": "from-red-200 to-rose-200" },
+  { "id": "cat-premium", "name": "Premium", "icon": "👑", "color": "from-amber-100 to-yellow-100" },
+  { "id": "cat-custom", "name": "Custom", "icon": "✨", "color": "from-purple-200 to-pink-200" },
+  { "id": "cat-cupcakes", "name": "Cupcakes", "icon": "🧁", "color": "from-pink-200 to-fuchsia-200" },
+  { "id": "cat-macarons", "name": "Macarons", "icon": "🍬", "color": "from-rose-200 to-pink-100" },
+  { "id": "cat-donuts", "name": "Donuts", "icon": "🍩", "color": "from-pink-200 to-amber-100" },
+  { "id": "cat-cookies", "name": "Cookies", "icon": "🍪", "color": "from-amber-200 to-yellow-100" },
+  { "id": "cat-brownies", "name": "Brownies", "icon": "🍫", "color": "from-amber-300 to-orange-200" },
+  { "id": "cat-bread", "name": "Bread", "icon": "🍞", "color": "from-orange-100 to-amber-100" }
+]

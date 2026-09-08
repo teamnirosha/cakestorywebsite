@@ -1,0 +1,226 @@
+[
+  {
+    "id": "recipe-001",
+    "name": "Signature Red Velvet",
+    "code": "REC-RV-01",
+    "category": "Eggless Sponge & Velvet",
+    "image": "A7401344.jpeg",
+    "batchYield": "12 units (500g each)",
+    "prepTime": "35 mins",
+    "bakeTime": "28 mins @ 165°C",
+    "difficulty": "Intermediate",
+    "description": "Standardized central production recipe for CakeStory's signature velvety crimson sponge paired with cultured cream cheese frosting.",
+    "ingredients": [
+      "Refined Wheat Flour 1.2kg",
+      "Buttermilk & Curd Culture 800ml",
+      "Natural Beetroot Extract 45ml",
+      "Valrhona Dutch Cocoa Powder 120g",
+      "Baking Soda & Acidity Balancer 25g",
+      "Castor Sugar 1kg",
+      "Cream Cheese Frosting 1.8kg"
+    ],
+    "sopSteps": [
+      "Sift flour and cocoa powder twice for uniform aeration and clumping prevention.",
+      "Emulsify wet ingredients at 180 RPM in central batch mixer.",
+      "Fold dry and wet mixtures under 90 seconds to prevent gluten over-development.",
+      "Bake in rotary rack oven at 165°C for 28 mins with core temperature probe verification.",
+      "Blast chill to 4°C before central cold-chain dispatch to franchise network."
+    ]
+  },
+  {
+    "id": "recipe-002",
+    "name": "Belgian Chocolate Truffle",
+    "code": "REC-CT-02",
+    "category": "Truffles & Gateaux",
+    "image": "1.jpg",
+    "batchYield": "16 units (500g each)",
+    "prepTime": "40 mins",
+    "bakeTime": "30 mins @ 170°C",
+    "difficulty": "Professional",
+    "description": "Standardized recipe utilizing 55% Belgian dark chocolate couverture and rich dairy ganache formulated for consistency across all outlets.",
+    "ingredients": [
+      "Belgian Dark Couverture (55%) 2.4kg",
+      "Heavy Dairy Cream (35%) 1.6L",
+      "Eggless Chocolate Sponge 16 bases",
+      "Vanilla Infusion Syrup 800ml",
+      "Mirror Cocoa Glaze 1.2kg"
+    ],
+    "sopSteps": [
+      "Melt couverture chocolate gently in jacketed kettle between 45°C - 48°C.",
+      "Emulsify heated cream into chocolate starting from center for ultra-glossy ganache.",
+      "Soak sponge layers evenly with 50ml vanilla syrup per layer.",
+      "Enrobe in temperature-controlled glaze at 32°C.",
+      "Conduct visual gloss inspection and core temperature check before packaging."
+    ]
+  },
+  {
+    "id": "recipe-003",
+    "name": "Lotus Biscoff Delight",
+    "code": "REC-LB-03",
+    "category": "Specialty & Fusion",
+    "image": "AZ_01460.JPG",
+    "batchYield": "10 units (500g each)",
+    "prepTime": "30 mins",
+    "bakeTime": "26 mins @ 165°C",
+    "difficulty": "Standard",
+    "description": "Central kitchen formulation balancing crunchy speculoos biscuits with creamy caramelized Biscoff spread and whipped mousse.",
+    "ingredients": [
+      "Lotus Biscoff Spread 1.5kg",
+      "Biscoff Biscuit Crumbs 800g",
+      "Whipped Dairy Cream 1.2kg",
+      "Caramelized Sponge Bases 10 units",
+      "White Chocolate Ganache 600g"
+    ],
+    "sopSteps": [
+      "Layer crushed biscuit base with gentle pneumatic compaction.",
+      "Spread warmed Biscoff spread between aerated sponge disks.",
+      "Apply whipped dairy frosting with motorized turntable at fixed speed.",
+      "Drizzle warmed spread at 30°C for signature drip effect and garnish with whole biscuits."
+    ]
+  },
+  {
+    "id": "recipe-004",
+    "name": "Royal Black Forest",
+    "code": "REC-BF-04",
+    "category": "Classic Gateaux",
+    "image": "14.JPG",
+    "batchYield": "14 units (500g each)",
+    "prepTime": "35 mins",
+    "bakeTime": "28 mins @ 170°C",
+    "difficulty": "Standard",
+    "description": "Traditional Schwarzwälder formulation featuring tart Maraschino cherries, dark chocolate shavings, and fresh whipped cream.",
+    "ingredients": [
+      "Dark Chocolate Sponge 14 bases",
+      "Maraschino & Red Cherries 1.2kg",
+      "Pure Whipped Cream 2.2kg",
+      "Dark Chocolate Curls 800g",
+      "Cherry Compote Glaze 500ml"
+    ],
+    "sopSteps": [
+      "Level and split chocolate sponge into 3 uniform disks using laser guide.",
+      "Infuse cherry reduction syrup evenly across sponge surface.",
+      "Pipe fresh whipped cream and distribute chopped cherries uniformly.",
+      "Garnish with hand-crafted dark chocolate flakes and whole glazed cherries."
+    ]
+  },
+  {
+    "id": "recipe-005",
+    "name": "Dutch Truffle Gateau",
+    "code": "REC-DT-05",
+    "category": "Truffles & Gateaux",
+    "image": "5.png",
+    "batchYield": "12 units (500g each)",
+    "prepTime": "45 mins",
+    "bakeTime": "32 mins @ 168°C",
+    "difficulty": "Professional",
+    "description": "Dense, intense cocoa-rich gateau made with Dutch-processed cocoa and heavy ganache glaze for chocolate connoisseurs.",
+    "ingredients": [
+      "Dutch Processed Cocoa Powder 600g",
+      "Dark Ganache 2.8kg",
+      "Condensed Dairy Milk 900g",
+      "Vegetarian Sponge Base 12 units"
+    ],
+    "sopSteps": [
+      "Prepare rich Dutch chocolate emulsion at 50°C.",
+      "Infuse layers with dark chocolate nectar.",
+      "Smooth enrobe with heated metal spatula at 30°C.",
+      "Chill for 2 hours in central refrigeration unit before temperature-controlled logistics dispatch."
+    ]
+  },
+  {
+    "id": "recipe-006",
+    "name": "Fresh Strawberry Cream",
+    "code": "REC-SC-06",
+    "category": "Seasonal & Fruit",
+    "image": "AZ_01692.JPG",
+    "batchYield": "12 units (500g each)",
+    "prepTime": "25 mins",
+    "bakeTime": "25 mins @ 165°C",
+    "difficulty": "Seasonal Standard",
+    "description": "Seasonal recipe using farm-sourced Mahabaleshwar strawberries and light vanilla chiffon sponge.",
+    "ingredients": [
+      "Mahabaleshwar Fresh Strawberries 3kg",
+      "Light Vanilla Chiffon Sponge 12 bases",
+      "Fresh Whipped Cream 2kg",
+      "Natural Strawberry Compote Reduction 600g"
+    ],
+    "sopSteps": [
+      "Wash and inspect grade-A Mahabaleshwar strawberries under sanitization line.",
+      "Cook half portion into natural fruit compote with zero artificial color.",
+      "Layer fresh sliced strawberries between fluffy cream and sponge disks.",
+      "Top with glazed whole strawberries and chill at 2°C - 4°C."
+    ]
+  },
+  {
+    "id": "recipe-007",
+    "name": "Artisan Butterscotch Crunch",
+    "code": "REC-BC-07",
+    "category": "Classic Sponges",
+    "image": "DSC03187.JPG",
+    "batchYield": "15 units (500g each)",
+    "prepTime": "30 mins",
+    "bakeTime": "27 mins @ 165°C",
+    "difficulty": "Standard",
+    "description": "Caramelized brown sugar sponge layered with house-made praline crunch and golden caramel drizzle.",
+    "ingredients": [
+      "House-made Cashew Nut Praline 1.2kg",
+      "Caramel Sauce Reduction 900ml",
+      "Brown Sugar Sponge 15 bases",
+      "Butterscotch Mousse Cream 2kg"
+    ],
+    "sopSteps": [
+      "Caramelize sugar and roasted cashew nuts for crunchy praline.",
+      "Crush praline to 3mm particle size for consistent mouthfeel.",
+      "Assemble sponge layers with rich caramel drip and praline spread.",
+      "Coat perimeter with golden praline crunch and set in refrigeration."
+    ]
+  },
+  {
+    "id": "recipe-008",
+    "name": "Gulab Jamun Fusion Celebration",
+    "code": "REC-GJ-08",
+    "category": "Festive Fusion",
+    "image": "AZ_01683.JPG",
+    "batchYield": "10 units (1kg each)",
+    "prepTime": "50 mins",
+    "bakeTime": "30 mins @ 165°C",
+    "difficulty": "Advanced",
+    "description": "Fusion recipe combining delicate cardamom saffron sponge, rabdi mousse cream, and soft khoya gulab jamuns.",
+    "ingredients": [
+      "Soft Khoya Gulab Jamuns 80 units",
+      "Cardamom & Saffron Sponge 10 bases",
+      "Rabdi Mousse Cream 2.5kg",
+      "Pistachio & Almond Slivers 300g"
+    ],
+    "sopSteps": [
+      "Drain excess sugar syrup from mini gulab jamuns to maintain sponge moisture balance.",
+      "Layer fragrant cardamom sponge with rabdi mousse.",
+      "Embed whole mini gulab jamuns symmetrically inside cake core.",
+      "Garnish with edible silver leaf and slivered California almonds."
+    ]
+  },
+  {
+    "id": "recipe-009",
+    "name": "Alfonso Mango Bliss",
+    "code": "REC-MB-09",
+    "category": "Seasonal & Fruit",
+    "image": "DSC08534.JPG",
+    "batchYield": "12 units (500g each)",
+    "prepTime": "30 mins",
+    "bakeTime": "26 mins @ 165°C",
+    "difficulty": "Seasonal Standard",
+    "description": "Formulated with 100% pure Ratnagiri Alphonso mango pulp and dairy mousse for signature summer indulgence.",
+    "ingredients": [
+      "Ratnagiri Alphonso Mango Pulp 2.5kg",
+      "Vanilla Sponge 12 bases",
+      "Dairy Whipped Cream 1.8kg",
+      "Natural Mango Mirror Glaze 500g"
+    ],
+    "sopSteps": [
+      "Puree fresh Alphonso mangoes with zero added water.",
+      "Fold 60% mango pulp into cream for rich mango mousse.",
+      "Alternate sponge layers with pulp and fresh diced mango chunks.",
+      "Apply mirror mango glaze at 28°C and seal."
+    ]
+  }
+]

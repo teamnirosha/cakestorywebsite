@@ -1,0 +1,47 @@
+[
+  {
+    "id": "enq-101",
+    "fullName": "Rajesh Sharma",
+    "mobile": "9823012345",
+    "cityArea": "Pune - Kothrud",
+    "investmentReadiness": "Ready to invest immediately",
+    "submittedAt": "2026-09-05T10:30:00.000Z",
+    "status": "new"
+  },
+  {
+    "id": "enq-102",
+    "fullName": "Pooja Deshmukh",
+    "mobile": "9890123456",
+    "cityArea": "Mumbai - Thane West",
+    "investmentReadiness": "Within 3 months",
+    "submittedAt": "2026-09-04T14:15:00.000Z",
+    "status": "contacted"
+  },
+  {
+    "id": "enq-103",
+    "fullName": "Amitav Sengupta",
+    "mobile": "9765432109",
+    "cityArea": "Bangalore - HSR Layout",
+    "investmentReadiness": "Ready to invest immediately",
+    "submittedAt": "2026-09-03T18:45:00.000Z",
+    "status": "qualified"
+  },
+  {
+    "id": "enq-104",
+    "fullName": "Siddharth Rao",
+    "mobile": "9123456780",
+    "cityArea": "Hyderabad - Gachibowli",
+    "investmentReadiness": "Within 6 months",
+    "submittedAt": "2026-09-02T11:20:00.000Z",
+    "status": "new"
+  },
+  {
+    "id": "enq-105",
+    "fullName": "Neha Agarwal",
+    "mobile": "9988776655",
+    "cityArea": "Delhi - Dwarka Sector 10",
+    "investmentReadiness": "Just exploring",
+    "submittedAt": "2026-09-01T09:00:00.000Z",
+    "status": "closed"
+  }
+]

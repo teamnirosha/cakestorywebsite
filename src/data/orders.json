@@ -1,0 +1,10 @@
+[
+  { "id": "ord-001", "customer": "Ananya Verma", "items": 1, "total": 299.99, "status": "delivered", "date": "2024-12-12", "outlet": "CakeStory Bandra" },
+  { "id": "ord-002", "customer": "Rohit Khanna", "items": 50, "total": 1249.50, "status": "delivered", "date": "2024-12-14", "outlet": "CakeStory Indiranagar" },
+  { "id": "ord-003", "customer": "Sara Iyer", "items": 1, "total": 49.99, "status": "in-transit", "date": "2024-12-18", "outlet": "CakeStory Baner" },
+  { "id": "ord-004", "customer": "Karan Malhotra", "items": 2, "total": 109.98, "status": "preparing", "date": "2024-12-19", "outlet": "CakeStory Koregaon" },
+  { "id": "ord-005", "customer": "Priya Nair", "items": 1, "total": 46.99, "status": "delivered", "date": "2024-12-15", "outlet": "CakeStory Viman Nagar" },
+  { "id": "ord-006", "customer": "Vivek Shah", "items": 3, "total": 154.97, "status": "delivered", "date": "2024-12-16", "outlet": "CakeStory Connaught Place" },
+  { "id": "ord-007", "customer": "Megha Joshi", "items": 1, "total": 299.99, "status": "in-transit", "date": "2024-12-20", "outlet": "CakeStory Whitefield" },
+  { "id": "ord-008", "customer": "Arjun Reddy", "items": 1, "total": 54.99, "status": "preparing", "date": "2024-12-21", "outlet": "CakeStory Jubilee Hills" }
+]

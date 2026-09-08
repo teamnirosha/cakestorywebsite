@@ -1,0 +1,10 @@
+[
+  {
+    "id": "user-001",
+    "name": "Admin",
+    "email": "admin@cakestory.com",
+    "password": "admin123",
+    "role": "admin",
+    "avatar": "https://i.pravatar.cc/120?img=68"
+  }
+]

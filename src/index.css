@@ -1,0 +1,263 @@
+@import "tailwindcss";
+
+:root {
+  --cs-pink: #ff8fb1;
+  --cs-pink-deep: #ff5c97;
+  --cs-rose: #ffd3e2;
+  --cs-blue: #b9dcff;
+  --cs-blue-deep: #6fa8f5;
+  --cs-cream: #fff7f1;
+  --cs-vanilla: #fff0e0;
+  --cs-ink: #2a1d2e;
+  --cs-ink-soft: #5a4a5e;
+  --cs-mint: #c4f0e2;
+  --cs-lilac: #e7d6ff;
+  --cs-yellow: #ffe7a3;
+  --cs-shadow: 0 20px 60px -20px rgba(255, 92, 151, 0.25);
+  --cs-glass-bg: rgba(255, 255, 255, 0.55);
+  --cs-glass-border: rgba(255, 255, 255, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: linear-gradient(180deg, #fff7fb 0%, #f3f8ff 60%, #fff5ee 100%);
+  color: var(--cs-ink);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Fraunces', serif;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.font-display {
+  font-family: 'Fraunces', serif;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #ff5c97 0%, #b16cea 50%, #6fa8f5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+img {
+  image-orientation: from-image;
+}
+
+.glass {
+  background: var(--cs-glass-bg);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--cs-glass-border);
+  box-shadow: 0 8px 40px -10px rgba(184, 109, 199, 0.15);
+}
+
+.glass-dark {
+  background: linear-gradient(135deg, rgba(26, 20, 36, 0.96) 0%, rgba(42, 29, 50, 0.96) 50%, rgba(20, 15, 30, 0.98) 100%);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
+}
+
+.glass-soft {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: white;
+  background: linear-gradient(135deg, #ff7eb3 0%, #ff5c97 100%);
+  box-shadow: 0 12px 30px -8px rgba(255, 92, 151, 0.5);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px -10px rgba(255, 92, 151, 0.6);
+  filter: brightness(1.05);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--cs-ink);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 143, 177, 0.3);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--cs-pink);
+  transform: translateY(-2px);
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 143, 177, 0.25);
+  font-size: 0.95rem;
+  color: var(--cs-ink);
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.input-field:focus {
+  border-color: var(--cs-pink-deep);
+  box-shadow: 0 0 0 4px rgba(255, 143, 177, 0.15);
+  background: white;
+}
+textarea.input-field { resize: vertical; min-height: 90px; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 143, 177, 0.2);
+  color: var(--cs-ink-soft);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.chip:hover { border-color: var(--cs-pink); color: var(--cs-pink-deep); }
+.chip-active {
+  background: linear-gradient(135deg, #ff7eb3 0%, #ff5c97 100%);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 6px 16px -4px rgba(255, 92, 151, 0.4);
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fade-in { animation: fadeIn 0.6s ease forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.float-y { animation: floatY 6s ease-in-out infinite; }
+@keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+.spin-slow { animation: spin 22s linear infinite; }
+@keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+.pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+@keyframes pulseGlow {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,143,177,0.4); }
+  50% { box-shadow: 0 0 0 18px rgba(255,143,177,0); }
+}
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Leaflet override */
+.leaflet-container { font-family: inherit; border-radius: 18px; }
+.leaflet-popup-content-wrapper {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px -8px rgba(184, 109, 199, 0.25);
+}
+.leaflet-popup-tip { background: rgba(255, 255, 255, 0.95); }
+.cs-marker {
+  width: 38px; height: 38px;
+  border-radius: 50% 50% 50% 0;
+  background: linear-gradient(135deg, #ff7eb3, #ff5c97);
+  transform: rotate(-45deg);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 20px -4px rgba(255, 92, 151, 0.5);
+  border: 2px solid white;
+}
+.cs-marker span { transform: rotate(45deg); font-size: 18px; }
+
+/* Micro-interaction hover arrow translation */
+.btn-primary:hover span:last-child,
+.btn-ghost:hover span:last-child {
+  transform: translateX(4px);
+  transition: transform 0.25s ease;
+}
+
+/* Glass shine shimmer effect */
+.glass-shine {
+  position: relative;
+  overflow: hidden;
+}
+.glass-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 40%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.03) 60%,
+    transparent 100%
+  );
+  transform: rotate(30deg) translateY(-100%);
+  transition: transform 0.8s ease;
+}
+.glass-shine:hover::after {
+  transform: rotate(30deg) translateY(100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .float-y, .spin-slow, .pulse-glow {
+    animation: none !important;
+  }
+}
+
