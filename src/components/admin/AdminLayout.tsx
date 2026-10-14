@@ -24,6 +24,9 @@ export default function AdminLayout({
     { to: "/admin/franchises", label: "Outlet Networks", icon: "🏪" },
     { to: "/admin/enquiries", label: "Franchise Leads", icon: "📋" },
     { to: "/admin/catalog", label: "Product Catalog", icon: "🎂" },
+    { to: "/admin/hero", label: "Hero & Dynamic CMS", icon: "🎨" },
+    { to: "/admin/recipes", label: "Central Recipes SOP", icon: "📖" },
+    { to: "/admin/orders", label: "Orders (B2B/B2C)", icon: "📦" },
     { to: "/admin/account", label: "Account & Security", icon: "🔒" },
   ];
 

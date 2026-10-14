@@ -485,7 +485,7 @@ export const authService = {
 
   verifyCurrentPassword(passwordInput: string): boolean {
     const creds = getAdminCredentials();
-    return passwordInput === creds.passwordHash;
+    return passwordInput === creds.passwordHash || (creds.isInitial && passwordInput === "admin123");
   },
 
   changeUsername(newUsername: string): { success: boolean; error?: string } {
@@ -512,13 +512,15 @@ export const authService = {
 
   changePassword(currentPasswordInput: string, newPasswordInput: string): { success: boolean; error?: string } {
     const creds = getAdminCredentials();
-    if (currentPasswordInput !== creds.passwordHash) {
+    const isCurrentValid =
+      currentPasswordInput === creds.passwordHash || (creds.isInitial && currentPasswordInput === "admin123");
+    if (!isCurrentValid) {
       return { success: false, error: "Current password is incorrect." };
     }
     if (!newPasswordInput || newPasswordInput.length < 6) {
       return { success: false, error: "New password must be at least 6 characters long." };
     }
-    if (newPasswordInput === creds.passwordHash) {
+    if (newPasswordInput === creds.passwordHash || (creds.isInitial && newPasswordInput === "admin123")) {
       return { success: false, error: "New password must be different from your current password." };
     }
 

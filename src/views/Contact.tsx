@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PageShell from "../components/layout/PageShell";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
+import { enquiryService } from "../services/data";
 import { sendLeadToWebhook } from "../services/webhook";
 
 export default function Contact() {
@@ -16,6 +17,14 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+
+    // Save to runtime enquiries database
+    enquiryService.create({
+      fullName: formData.name,
+      mobile: formData.email ? `Email: ${formData.email}` : "Corporate Inquiry",
+      cityArea: formData.subject ? `Subject: ${formData.subject}` : "General Office Message",
+      investmentReadiness: "Just exploring",
+    });
 
     // Dump lead/contact message to n8n webhook
     sendLeadToWebhook({

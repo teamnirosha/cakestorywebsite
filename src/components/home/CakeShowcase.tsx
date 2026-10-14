@@ -1,25 +1,11 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import cakeList from "../../data/cakes.json";
+import { cakeService, Cake } from "../../services/data";
 import CakeImage from "../common/CakeImage";
 
-export interface CakeItem {
-  id: string;
-  name: string;
-  category: string;
-  description: string;
-  price: number;
-  image: string;
-  ingredients: string[];
-  flavor: string;
-  size: string;
-  tags: string[];
-  rating: number;
-}
+export type CakeItem = Cake;
 
-const typedCakes = cakeList as CakeItem[];
-
-// Pick the premier showcase cakes backed by verified photography
+// Premier default showcase cakes backed by verified photography
 const SHOWCASE_IDS = [
   "cake-001", // Belgian Chocolate Truffle (1.jpg)
   "cake-002", // Fresh Strawberry Gateau (12.jpg)
@@ -29,12 +15,22 @@ const SHOWCASE_IDS = [
   "cake-011", // Velvet Rose & Raspberry (DSC08617.JPG)
 ];
 
-const showcaseCakes = typedCakes.filter((c) => SHOWCASE_IDS.includes(c.id));
-
 export default function CakeShowcase() {
-  const [selectedId, setSelectedId] = useState<string>(showcaseCakes[0]?.id || "cake-001");
+  const allCakes = cakeService.list();
 
-  const currentCake = showcaseCakes.find((c) => c.id === selectedId) || showcaseCakes[0];
+  // Dynamic active showcase cakes with fallback to all active products
+  const showcaseCakes = useMemo(() => {
+    const active = allCakes.filter(
+      (c) => (c.status ? c.status === "active" : c.availability !== "out-of-stock")
+    );
+    const matched = active.filter((c) => SHOWCASE_IDS.includes(c.id));
+    if (matched.length >= 4) return matched;
+    return active.slice(0, 6);
+  }, [allCakes]);
+
+  const [selectedId, setSelectedId] = useState<string>(() => showcaseCakes[0]?.id || "cake-001");
+
+  const currentCake = showcaseCakes.find((c) => c.id === selectedId) || showcaseCakes[0] || allCakes[0];
 
   return (
     <section className="reveal-section py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-b from-transparent via-white/70 to-transparent">

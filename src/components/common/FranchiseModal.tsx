@@ -1,6 +1,7 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 import { enquiryService, FranchiseEnquiry } from "../../services/data";
 import { useToast } from "./Toast";
+import { useLanguage } from "../../context/LanguageContext";
 
 type InvestmentOption = FranchiseEnquiry["investmentReadiness"];
 
@@ -43,6 +44,7 @@ export function useFranchiseModal() {
 
 export function FranchiseModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const { show } = useToast();
+  const { t } = useLanguage();
   const [fullName, setFullName] = useState("");
   const [mobile, setMobile] = useState("");
   const [cityArea, setCityArea] = useState("");
@@ -172,7 +174,7 @@ export function FranchiseModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
               {/* 1. Full Name */}
               <div>
                 <label className="block text-xs font-semibold text-[#2a1d2e] mb-1">
-                  Full Name <span className="text-rose-500">*</span>
+                  {t("contact.name")} <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -181,7 +183,7 @@ export function FranchiseModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
                     setFullName(e.target.value);
                     if (errors.fullName) setErrors((prev) => ({ ...prev, fullName: "" }));
                   }}
-                  placeholder="Enter your full name"
+                  placeholder="e.g. Rahul Patil"
                   className={`input-field ${errors.fullName ? "border-rose-400 bg-rose-50/50" : ""}`}
                 />
                 {errors.fullName && (
@@ -192,7 +194,7 @@ export function FranchiseModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
               {/* 2. Mobile Number */}
               <div>
                 <label className="block text-xs font-semibold text-[#2a1d2e] mb-1">
-                  Mobile Number <span className="text-rose-500">*</span>
+                  {t("contact.phone")} <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="tel"
@@ -203,7 +205,7 @@ export function FranchiseModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
                     setMobile(val);
                     if (errors.mobile) setErrors((prev) => ({ ...prev, mobile: "" }));
                   }}
-                  placeholder="Enter your 10-digit mobile number"
+                  placeholder="e.g. 98230XXXXX"
                   className={`input-field ${errors.mobile ? "border-rose-400 bg-rose-50/50" : ""}`}
                 />
                 {errors.mobile && (
@@ -214,7 +216,7 @@ export function FranchiseModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
               {/* 3. City / Area */}
               <div>
                 <label className="block text-xs font-semibold text-[#2a1d2e] mb-1">
-                  City / Area <span className="text-rose-500">*</span>
+                  {t("contact.city")} <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -223,7 +225,7 @@ export function FranchiseModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
                     setCityArea(e.target.value);
                     if (errors.cityArea) setErrors((prev) => ({ ...prev, cityArea: "" }));
                   }}
-                  placeholder="e.g., Pune - Kothrud"
+                  placeholder="e.g. Baner / Kothrud"
                   className={`input-field ${errors.cityArea ? "border-rose-400 bg-rose-50/50" : ""}`}
                 />
                 {errors.cityArea && (
@@ -234,18 +236,17 @@ export function FranchiseModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
               {/* 4. Investment Readiness */}
               <div>
                 <label className="block text-xs font-semibold text-[#2a1d2e] mb-1">
-                  Investment Readiness <span className="text-rose-500">*</span>
+                  {t("contact.readiness")} <span className="text-rose-500">*</span>
                 </label>
                 <select
                   value={investmentReadiness}
                   onChange={(e) => setInvestmentReadiness(e.target.value as InvestmentOption)}
                   className="input-field cursor-pointer"
                 >
-                  {INVESTMENT_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
-                    </option>
-                  ))}
+                  <option value="Ready to invest immediately">{t("contact.readiness1")}</option>
+                  <option value="Within 3 months">{t("contact.readiness2")}</option>
+                  <option value="Within 6 months">{t("contact.readiness3")}</option>
+                  <option value="Just exploring">{t("contact.readiness4")}</option>
                 </select>
                 {errors.investmentReadiness && (
                   <p className="text-[11px] text-rose-500 mt-1">{errors.investmentReadiness}</p>
@@ -262,10 +263,10 @@ export function FranchiseModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
                   {isSubmitting ? (
                     <span className="flex items-center justify-center gap-2">
                       <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      Submitting Enquiry...
+                      {t("contact.submitting")}
                     </span>
                   ) : (
-                    "Submit Enquiry"
+                    t("contact.submit")
                   )}
                 </button>
               </div>

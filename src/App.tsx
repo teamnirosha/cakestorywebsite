@@ -20,9 +20,13 @@ const Contact = lazy(() => import("./views/Contact"));
 const Blog = lazy(() => import("./views/Blog"));
 const BlogDetail = lazy(() => import("./views/BlogDetail"));
 
-// Legacy & Secondary Routes
+// Secondary & Feature Views
 const Cakes = lazy(() => import("./views/Cakes"));
 const CakeDetail = lazy(() => import("./views/CakeDetail"));
+const CustomCake = lazy(() => import("./views/CustomCake"));
+const Cart = lazy(() => import("./views/Cart"));
+const Events = lazy(() => import("./views/Events"));
+const EventDetail = lazy(() => import("./views/EventDetail"));
 const Factory = lazy(() => import("./views/Factory"));
 const About = lazy(() => import("./views/About"));
 const NotFound = lazy(() => import("./views/NotFound"));
@@ -36,8 +40,12 @@ const AdminEnquiries = lazy(() => import("./views/admin/AdminEnquiries"));
 const AdminCakes = lazy(() => import("./views/admin/AdminCakes"));
 const AdminRecipes = lazy(() => import("./views/admin/AdminRecipes"));
 const AdminHeroContent = lazy(() => import("./views/admin/AdminHeroContent"));
+const AdminOrders = lazy(() => import("./views/admin/AdminOrders"));
+const AdminEvents = lazy(() => import("./views/admin/AdminEvents"));
 const AdminSettings = lazy(() => import("./views/admin/AdminSettings"));
 const AdminAccount = lazy(() => import("./views/admin/AdminAccount"));
+
+import { LanguageProvider } from "./context/LanguageContext";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -64,11 +72,12 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <ToastProvider>
-      <FranchiseModalProvider>
-        <ScrollToTop />
-        <Suspense fallback={<LoadingScreen />}>
-          <Routes>
+    <LanguageProvider>
+      <ToastProvider>
+        <FranchiseModalProvider>
+          <ScrollToTop />
+          <Suspense fallback={<LoadingScreen />}>
+            <Routes>
             {/* Main 7 Public Routes */}
             <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
             <Route path="/home" element={<Navigate to="/" replace />} />
@@ -82,9 +91,13 @@ export default function App() {
             <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
             <Route path="/blog/:id" element={<PublicLayout><BlogDetail /></PublicLayout>} />
 
-            {/* Legacy internal routes */}
+            {/* Catalog, Custom Builder & Ordering Routes */}
             <Route path="/cakes" element={<PublicLayout><Cakes /></PublicLayout>} />
             <Route path="/cakes/:id" element={<PublicLayout><CakeDetail /></PublicLayout>} />
+            <Route path="/custom-cake" element={<PublicLayout><CustomCake /></PublicLayout>} />
+            <Route path="/cart" element={<PublicLayout><Cart /></PublicLayout>} />
+            <Route path="/events" element={<PublicLayout><Events /></PublicLayout>} />
+            <Route path="/events/:id" element={<PublicLayout><EventDetail /></PublicLayout>} />
             <Route path="/factory" element={<PublicLayout><Factory /></PublicLayout>} />
             <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
 
@@ -100,6 +113,8 @@ export default function App() {
             <Route path="/admin/cakes" element={<RequireAuth><AdminCakes /></RequireAuth>} />
             <Route path="/admin/recipes" element={<RequireAuth><AdminRecipes /></RequireAuth>} />
             <Route path="/admin/hero" element={<RequireAuth><AdminHeroContent /></RequireAuth>} />
+            <Route path="/admin/orders" element={<RequireAuth><AdminOrders /></RequireAuth>} />
+            <Route path="/admin/events" element={<RequireAuth><AdminEvents /></RequireAuth>} />
             <Route path="/admin/settings" element={<RequireAuth><AdminSettings /></RequireAuth>} />
             <Route path="/admin/account" element={<RequireAuth><AdminAccount /></RequireAuth>} />
 
@@ -108,5 +123,6 @@ export default function App() {
         </Suspense>
       </FranchiseModalProvider>
     </ToastProvider>
+  </LanguageProvider>
   );
 }

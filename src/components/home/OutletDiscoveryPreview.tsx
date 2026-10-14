@@ -1,37 +1,24 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import franchises from "../../data/franchises.json";
+import { franchiseService, Franchise } from "../../services/data";
 import CakeImage from "../common/CakeImage";
 
-export interface OutletItem {
-  id: string;
-  slug: string;
-  name: string;
-  outletName: string;
-  zone: string;
-  address: string;
-  city: string;
-  latitude: number;
-  longitude: number;
-  phone: string;
-  openingHours: string;
-  image?: string;
-  active: boolean;
-}
-
-const verifiedOutlets = franchises as OutletItem[];
+export type OutletItem = Franchise;
 
 const ZONES = ["All Zones", "West Pune", "East Pune", "South Pune", "PCMC"];
 
 export default function OutletDiscoveryPreview() {
   const [activeZone, setActiveZone] = useState("All Zones");
+  const verifiedOutlets = franchiseService.listActive();
 
-  const filtered = verifiedOutlets
-    .filter((o) => o.active)
-    .filter((o) => {
-      if (activeZone === "All Zones") return true;
-      return o.zone === activeZone || (activeZone === "South Pune" && o.zone.includes("Satara"));
-    });
+  const filtered = useMemo(() => {
+    return verifiedOutlets
+      .filter((o) => o.active)
+      .filter((o) => {
+        if (activeZone === "All Zones") return true;
+        return o.zone === activeZone || (activeZone === "South Pune" && (o.zone || "").includes("Satara"));
+      });
+  }, [verifiedOutlets, activeZone]);
 
   return (
     <section className="reveal-section py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-b from-transparent via-pink-50/20 to-transparent">

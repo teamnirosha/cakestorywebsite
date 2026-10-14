@@ -1,175 +1,171 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useFranchiseModal } from "../common/FranchiseModal";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function Footer() {
   const { openModal } = useFranchiseModal();
+  const { t } = useLanguage();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleScrollTo = (id: string) => {
+    if (location.pathname === "/") {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate(`/#${id}`);
+    }
+  };
 
   return (
-    <footer className="relative mt-20 sm:mt-28 glass-soft border-t border-rose-100/70 overflow-hidden bg-gradient-to-b from-white/40 via-white/70 to-rose-50/40">
-      {/* Ambient background accents */}
-      <div className="blob w-80 h-80 -bottom-20 -left-20 bg-pink-200/30" />
-      <div className="blob w-96 h-96 -top-20 -right-20 bg-blue-100/30" />
-
+    <footer className="relative mt-20 border-t border-slate-200 overflow-hidden bg-slate-900 text-slate-300">
       {/* Brand Value Pillars Bar */}
-      <div className="border-b border-rose-100/60 bg-white/50 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 py-6 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center sm:text-left">
+      <div className="border-b border-slate-800 bg-slate-950/60">
+        <div className="max-w-6xl mx-auto px-6 py-6 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center sm:text-left">
           <div className="flex items-center justify-center sm:justify-start gap-3">
-            <span className="w-10 h-10 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-lg shrink-0 shadow-2xs">
+            <span className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center text-lg shrink-0">
               🌱
             </span>
             <div>
-              <div className="font-bold text-xs sm:text-sm text-[#2a1d2e]">100% Pure Vegetarian</div>
-              <div className="text-[11px] text-[#5a4a5e]">Cloud-soft eggless artisanal recipes</div>
+              <div className="font-bold text-xs sm:text-sm text-white">100% Pure Vegetarian</div>
+              <div className="text-[11px] text-slate-400">Pure veg recipes crafted with premium dairy cream</div>
             </div>
           </div>
 
           <div className="flex items-center justify-center sm:justify-start gap-3">
-            <span className="w-10 h-10 rounded-2xl bg-pink-50 border border-pink-100 flex items-center justify-center text-lg shrink-0 shadow-2xs">
+            <span className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center text-lg shrink-0">
               ❄️
             </span>
             <div>
-              <div className="font-bold text-xs sm:text-sm text-[#2a1d2e]">Daily Cold-Chain Logistics</div>
-              <div className="text-[11px] text-[#5a4a5e]">Central kitchen consistency across Pune</div>
+              <div className="font-bold text-xs sm:text-sm text-white">Daily Cold-Chain Supply</div>
+              <div className="text-[11px] text-slate-400">Refrigerated morning dispatch to every Pune outlet</div>
             </div>
           </div>
 
           <div className="flex items-center justify-center sm:justify-start gap-3">
-            <span className="w-10 h-10 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-lg shrink-0 shadow-2xs">
+            <span className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center text-lg shrink-0">
               🏪
             </span>
             <div>
-              <div className="font-bold text-xs sm:text-sm text-[#2a1d2e]">Turnkey Partner Model</div>
-              <div className="text-[11px] text-[#5a4a5e]">Zero in-store baking • High retail margins</div>
+              <div className="font-bold text-xs sm:text-sm text-white">Turnkey Franchise Model</div>
+              <div className="text-[11px] text-slate-400">Zero in-store baking • High retail profit margins</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Footer Links & Information */}
-      <div className="max-w-7xl mx-auto px-6 pt-14 pb-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
-          {/* Brand Manifesto & Franchise CTA Card */}
-          <div className="lg:col-span-4 space-y-4">
-            <Link to="/" className="inline-block group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e63971] rounded-2xl">
+      <div className="max-w-6xl mx-auto px-6 pt-12 pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
+          {/* Brand & Mission */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="inline-block p-2 rounded-2xl bg-white/95 shadow-md">
               <img
                 src="/assets/logo/cs-logo.png"
                 alt="CakeStory Desserts"
-                className="h-11 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-10 w-auto object-contain"
               />
-            </Link>
+            </div>
 
-            <p className="text-xs sm:text-sm text-[#5a4a5e] leading-relaxed max-w-sm">
-              CakeStory Desserts is Pune's rapidly scaling artisanal bakery brand. We blend standardized pharmaceutical-grade central production with high-margin retail franchise partnerships across prime catchments.
+            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm">
+              CakeStory Desserts is Pune's rapidly scaling celebration cake franchise brand. We combine centralized cleanroom batch manufacturing with high-margin retail store partnerships across prime residential and commercial catchments.
             </p>
 
-            {/* Quick Conversion Card */}
-            <div className="glass-card p-4 sm:p-5 rounded-2xl border border-rose-100 bg-white/80 shadow-xs max-w-sm">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-[#e63971] mb-1">
-                Territory Allotment Open
-              </div>
-              <div className="font-display font-bold text-sm text-[#2a1d2e] mb-2">
-                Grow Your Business With CakeStory
-              </div>
+            <div className="pt-1">
               <button
                 onClick={openModal}
-                className="btn-primary w-full !py-2.5 !text-xs !font-bold shadow-md"
+                className="btn-primary !py-2.5 !px-6 !text-xs !font-bold shadow-md cursor-pointer"
               >
-                <span>Request Franchise Prospectus</span>
-                <span aria-hidden="true">→</span>
+                <span>Request Franchise Prospectus →</span>
               </button>
             </div>
           </div>
 
-          {/* Column 2: Brand & Craftsmanship */}
-          <div className="lg:col-span-2 space-y-3">
-            <h4 className="font-display text-sm font-bold text-[#2a1d2e] tracking-tight">Brand &amp; Craft</h4>
+          {/* Quick Section Navigation Links */}
+          <div className="lg:col-span-3 space-y-3">
+            <h4 className="font-display text-sm font-bold text-white tracking-wide uppercase text-xs">
+              Quick Navigation
+            </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/our-story" className="text-[#5a4a5e] hover:text-[#e63971] transition-colors focus:outline-none focus-visible:underline">
-                  Our Story &amp; Origins
-                </Link>
+                <button
+                  onClick={() => handleScrollTo("home")}
+                  className="text-slate-400 hover:text-pink-400 transition cursor-pointer"
+                >
+                  {t("nav.home")}
+                </button>
               </li>
               <li>
-                <Link to="/cakes" className="text-[#5a4a5e] hover:text-[#e63971] transition-colors focus:outline-none focus-visible:underline">
-                  Artisanal Cakes Catalog
-                </Link>
+                <button
+                  onClick={() => handleScrollTo("story")}
+                  className="text-slate-400 hover:text-pink-400 transition cursor-pointer"
+                >
+                  {t("nav.story")}
+                </button>
               </li>
               <li>
-                <Link to="/factory" className="text-[#5a4a5e] hover:text-[#e63971] transition-colors focus:outline-none focus-visible:underline">
-                  Central Kitchen SOPs
-                </Link>
+                <button
+                  onClick={() => handleScrollTo("franchise")}
+                  className="text-slate-400 hover:text-pink-400 transition cursor-pointer"
+                >
+                  {t("nav.franchise")}
+                </button>
               </li>
               <li>
-                <Link to="/custom-cake" className="text-[#5a4a5e] hover:text-[#e63971] transition-colors focus:outline-none focus-visible:underline">
-                  Custom Cake Orders
-                </Link>
+                <button
+                  onClick={() => handleScrollTo("outlets")}
+                  className="text-slate-400 hover:text-pink-400 transition cursor-pointer"
+                >
+                  {t("nav.outlets")}
+                </button>
               </li>
               <li>
-                <Link to="/blog" className="text-[#5a4a5e] hover:text-[#e63971] transition-colors focus:outline-none focus-visible:underline">
-                  Bakery Industry Insights
-                </Link>
+                <button
+                  onClick={() => handleScrollTo("faq")}
+                  className="text-slate-400 hover:text-pink-400 transition cursor-pointer"
+                >
+                  {t("nav.faq")}
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleScrollTo("contact")}
+                  className="text-slate-400 hover:text-pink-400 transition cursor-pointer"
+                >
+                  {t("nav.contact")}
+                </button>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Franchise & Outlets */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="font-display text-sm font-bold text-[#2a1d2e] tracking-tight">Franchise &amp; Stores</h4>
-            <ul className="space-y-2 text-xs">
-              <li>
-                <Link to="/franchise" className="text-[#5a4a5e] hover:text-[#e63971] transition-colors font-medium focus:outline-none focus-visible:underline">
-                  Franchise Model &amp; Economics
-                </Link>
-              </li>
-              <li>
-                <Link to="/outlets" className="text-[#5a4a5e] hover:text-[#e63971] transition-colors focus:outline-none focus-visible:underline">
-                  Pune Outlets Directory (12 Stores)
-                </Link>
-              </li>
-              <li>
-                <Link to="/outlets/cakestory-baner" className="text-[#5a4a5e] hover:text-[#e63971] transition-colors focus:outline-none focus-visible:underline">
-                  Baner Flagship Outlet
-                </Link>
-              </li>
-              <li>
-                <Link to="/outlets/cakestory-hinjewadi" className="text-[#5a4a5e] hover:text-[#e63971] transition-colors focus:outline-none focus-visible:underline">
-                  Hinjewadi Tech Catchment
-                </Link>
-              </li>
-              <li>
-                <Link to="/faq" className="text-[#5a4a5e] hover:text-[#e63971] transition-colors focus:outline-none focus-visible:underline">
-                  Franchise FAQs &amp; Support
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Central Operations Office */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="font-display text-sm font-bold text-[#2a1d2e] tracking-tight">Corporate Desk</h4>
-            <div className="space-y-2.5 text-xs text-[#5a4a5e]">
+          {/* Corporate Desk */}
+          <div className="lg:col-span-4 space-y-3">
+            <h4 className="font-display text-sm font-bold text-white tracking-wide uppercase text-xs">
+              Corporate Headquarters
+            </h4>
+            <div className="space-y-2 text-xs text-slate-400">
               <div>
-                <strong className="text-[#2a1d2e] block mb-0.5">Central Hub &amp; Headquarters:</strong>
+                <strong className="text-white block mb-0.5">Central Hub & Office:</strong>
                 Commercial Tower 3, Near Pancard Club Road, Baner, Pune, Maharashtra 411045
               </div>
               <div>
-                <strong className="text-[#2a1d2e] block mb-0.5">Franchise Inquiry Hotline:</strong>
-                <a href="tel:+919823045600" className="hover:text-[#e63971] transition-colors">
+                <strong className="text-white block mb-0.5">Franchise Desk Phone:</strong>
+                <a href="tel:+919823045600" className="hover:text-pink-400 transition">
                   +91 98230 45600 / +91 20 6789 0123
                 </a>
               </div>
               <div>
-                <strong className="text-[#2a1d2e] block mb-0.5">Official Inquiries:</strong>
-                <a href="mailto:franchise@cakestory.com" className="hover:text-[#e63971] transition-colors">
+                <strong className="text-white block mb-0.5">Official Communications:</strong>
+                <a href="mailto:franchise@cakestory.com" className="hover:text-pink-400 transition">
                   franchise@cakestory.com
                 </a>
               </div>
               <div className="pt-2">
                 <Link
                   to="/admin/login"
-                  className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#8c7a90] hover:text-[#e63971] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 hover:text-pink-400 transition"
                 >
-                  <span>🔐 Operations Login</span>
+                  <span>🔐 {t("footer.opsLogin")}</span>
                 </Link>
               </div>
             </div>
@@ -177,18 +173,18 @@ export default function Footer() {
         </div>
 
         {/* Bottom Legal, Attribution & Tagline */}
-        <div className="mt-12 pt-6 border-t border-rose-100/70 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#8c7a90]">
-          <p>© {new Date().getFullYear()} CakeStory Desserts. All rights reserved.</p>
-          <p className="font-display text-center text-[#5a4a5e]">
-            Every Flavour Has A Story • Pune Franchise Network
+        <div className="mt-10 pt-6 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          <p>© {new Date().getFullYear()} CakeStory Desserts. {t("footer.rights")}</p>
+          <p className="font-display text-center text-slate-400">
+            {t("footer.tagline")}
           </p>
-          <p className="flex items-center gap-1" style={{ fontFamily: "Poppins, sans-serif" }}>
-            Designed &amp; developed by{" "}
+          <p className="flex items-center gap-1">
+            {t("footer.devBy")}{" "}
             <a
               href="https://nirosha.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-[#2a1d2e] hover:text-[#e63971] transition-colors underline underline-offset-2"
+              className="font-medium text-pink-400 hover:text-pink-300 transition underline underline-offset-2"
             >
               Team Nirosha
             </a>.
