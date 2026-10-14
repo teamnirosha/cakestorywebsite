@@ -1,4 +1,3 @@
-import React from "react";
 import CakeImage from "../common/CakeImage";
 
 export default function StoryTimeline() {

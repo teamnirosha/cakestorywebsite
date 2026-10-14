@@ -9,7 +9,7 @@ export default function AdminSettings() {
 
   const resetData = () => {
     if (confirm("Reset all franchise data to seed defaults? This will clear any custom additions.")) {
-      franchiseService.resetSeed();
+      franchiseService.resetToSeed();
       show("Franchise data reset to defaults", "info");
       setTimeout(() => window.location.reload(), 800);
     }

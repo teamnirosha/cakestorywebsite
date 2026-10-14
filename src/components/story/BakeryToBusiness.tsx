@@ -1,4 +1,3 @@
-import React from "react";
 import { useFranchiseModal } from "../common/FranchiseModal";
 
 export default function BakeryToBusiness() {

@@ -5,7 +5,6 @@ import { storage, STORAGE_KEYS } from "./storage";
 import seedFranchises from "../data/franchises.json";
 import seedCakes from "../data/cakes.json";
 import seedOrders from "../data/orders.json";
-import seedUsers from "../data/users.json";
 import seedEvents from "../data/events.json";
 import seedCategories from "../data/categories.json";
 import seedTestimonials from "../data/testimonials.json";
@@ -818,7 +817,19 @@ export const faqService = {
   categories: () => Array.from(new Set(seedFaq.map((f: any) => f.category))),
 };
 
+export type BlogPost = {
+  id: string;
+  title: string;
+  slug: string;
+  category: string;
+  excerpt: string;
+  date: string;
+  author: string;
+  content: string;
+  image: string;
+};
+
 export const blogService = {
-  list: () => seedBlog as Array<{ id: string; title: string; slug: string; excerpt: string; date: string; author: string; content: string; image: string }>,
-  get: (idOrSlug: string) => seedBlog.find((b: any) => b.id === idOrSlug || b.slug === idOrSlug),
+  list: () => seedBlog as BlogPost[],
+  get: (idOrSlug: string) => (seedBlog as BlogPost[]).find((b) => b.id === idOrSlug || b.slug === idOrSlug),
 };

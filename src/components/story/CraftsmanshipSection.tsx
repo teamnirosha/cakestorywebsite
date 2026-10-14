@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CakeImage from "../common/CakeImage";
 
 export default function CraftsmanshipSection() {

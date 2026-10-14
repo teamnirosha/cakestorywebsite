@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import PageShell from "../components/layout/PageShell";
@@ -6,19 +6,14 @@ import PageShell from "../components/layout/PageShell";
 import StoryHero from "../components/story/StoryHero";
 import StoryIntro from "../components/story/StoryIntro";
 import ProcessStory from "../components/story/ProcessStory";
-import QualitySection from "../components/story/QualitySection";
 import BrandValues from "../components/story/BrandValues";
-import HumanTouch from "../components/story/HumanTouch";
 import StoryTimeline from "../components/story/StoryTimeline";
-import BakeryToBusiness from "../components/story/BakeryToBusiness";
-import PuneConnectionMap from "../components/story/PuneConnectionMap";
 import StoryVision from "../components/story/StoryVision";
-import StoryCTA from "../components/story/StoryCTA";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Story() {
-  const containerRef = React.useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Respect reduced motion accessibility

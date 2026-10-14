@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import PageShell from "../components/layout/PageShell";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
-import { franchiseService, faqService, contentService, SiteContent } from "../services/data";
+import { franchiseService, contentService, SiteContent } from "../services/data";
 import CakeImage from "../components/common/CakeImage";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -13,8 +13,6 @@ export default function Franchise() {
   const { openModal } = useFranchiseModal();
   const [siteContent, setSiteContent] = useState<SiteContent>(() => contentService.get());
   const totalOutlets = franchiseService.countActive();
-  const zones = franchiseService.zones();
-  const franchiseFaqs = faqService.list().filter((f) => f.category.includes("Franchise") || f.category.includes("Onboarding"));
 
   useEffect(() => {
     const onStorage = () => setSiteContent(contentService.get());
@@ -260,7 +258,7 @@ export default function Franchise() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3">
-            {processSteps.map((p, idx) => (
+            {processSteps.map((p) => (
               <div key={p.step} className="glass rounded-2xl p-4 text-center bg-white/80 border border-white flex flex-col justify-between shadow-xs">
                 <div>
                   <div className="text-[10px] font-bold text-[#ff5c97] uppercase tracking-wider mb-1">

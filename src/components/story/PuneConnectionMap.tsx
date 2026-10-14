@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { franchiseService } from "../../services/data";
 
 export default function PuneConnectionMap() {
@@ -13,7 +13,7 @@ export default function PuneConnectionMap() {
       hubs: "Baner • Balewadi • Wakad • Aundh • Bavdhan",
       desc: "High-density IT corridors and affluent residential townships with soaring demand for celebratory bakes.",
       stats: "Primary Hub",
-      outlets: outlets.filter((o) => o.area === "West Pune" || o.city.includes("Baner") || o.city.includes("Wakad")),
+      outlets: outlets.filter((o) => o.zone === "West Pune" || o.city.includes("Baner") || o.city.includes("Wakad")),
       x: "30%",
       y: "40%",
     },
@@ -23,7 +23,7 @@ export default function PuneConnectionMap() {
       hubs: "Viman Nagar • Kharadi • Kalyani Nagar • Magarpatta",
       desc: "Tech parks, corporate hubs, and cosmopolitan residential clusters seeking consistent daily cake delivery.",
       stats: "Corporate Hub",
-      outlets: outlets.filter((o) => o.area === "East Pune" || o.city.includes("Viman") || o.city.includes("Kharadi")),
+      outlets: outlets.filter((o) => o.zone === "East Pune" || o.city.includes("Viman") || o.city.includes("Kharadi")),
       x: "70%",
       y: "35%",
     },
@@ -33,7 +33,7 @@ export default function PuneConnectionMap() {
       hubs: "Kothrud • Deccan • Swargate • Camp • Bibwewadi",
       desc: "Established residential heartland with deep family traditions and word-of-mouth brand loyalty.",
       stats: "Heritage Hub",
-      outlets: outlets.filter((o) => o.area === "South Pune" || o.city.includes("Kothrud") || o.city.includes("Camp")),
+      outlets: outlets.filter((o) => o.zone === "South Pune" || o.city.includes("Kothrud") || o.city.includes("Camp")),
       x: "45%",
       y: "65%",
     },
@@ -43,7 +43,7 @@ export default function PuneConnectionMap() {
       hubs: "Pimple Saudagar • Chinchwad • Nigdi • Ravet",
       desc: "Rapidly expanding residential belt with high young-family demographics and celebration frequency.",
       stats: "Growth Belt",
-      outlets: outlets.filter((o) => o.area === "PCMC" || o.city.includes("Pimple") || o.city.includes("Chinchwad")),
+      outlets: outlets.filter((o) => o.zone === "PCMC" || o.city.includes("Pimple") || o.city.includes("Chinchwad")),
       x: "35%",
       y: "20%",
     },
@@ -53,7 +53,7 @@ export default function PuneConnectionMap() {
       hubs: "Satara Road • Shirwal Corridor • Highway Hubs",
       desc: "Strategic retail gateways connecting Pune to tier-2 cities across Western Maharashtra.",
       stats: "Expansion Corridor",
-      outlets: outlets.filter((o) => o.area === "Satara" || o.city.includes("Satara")),
+      outlets: outlets.filter((o) => o.zone === "Satara" || o.city.includes("Satara")),
       x: "55%",
       y: "85%",
     },

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import CakeImage from "../common/CakeImage";
 
 export default function ProcessStory() {

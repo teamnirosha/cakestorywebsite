@@ -2,121 +2,224 @@ import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useFranchiseModal } from "../common/FranchiseModal";
 
-const links = [
-  { to: "/", label: "Home" },
+const navLinks = [
   { to: "/our-story", label: "Our Story" },
+  { to: "/cakes", label: "Cakes" },
   { to: "/franchise", label: "Franchise" },
+  { to: "/outlets", label: "Locations" },
+  { to: "/blog", label: "Insights" },
   { to: "/faq", label: "FAQ" },
-  { to: "/outlets", label: "Outlets" },
   { to: "/contact", label: "Contact" },
-  { to: "/blog", label: "Blog" },
 ];
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-  const loc = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
   const { openModal } = useFranchiseModal();
 
+  // Scroll listener for dynamic navbar compression
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 25);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu on route change
   useEffect(() => {
-    setOpen(false);
-  }, [loc.pathname]);
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  // Keyboard navigation: Close on Escape key & body scroll lock
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileMenuOpen(false);
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled ? "py-3" : "py-5"}`}>
-        <div className={`mx-auto px-6 transition-all duration-300 ${scrolled ? "max-w-6xl" : "max-w-7xl"}`}>
-          <div className="glass rounded-full pl-5 pr-2 py-2 flex items-center justify-between transition-all">
-            <Link to="/" className="flex items-center gap-2 group py-0.5">
-              <img
-                src="/assets/logo/cs-logo.png"
-                alt="CakeStory Desserts"
-                className="h-9 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-              />
-            </Link>
+      <header
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 pointer-events-none ${
+          scrolled ? "py-2.5 sm:py-3" : "py-4 sm:py-5"
+        }`}
+      >
+        <div className={`mx-auto px-4 sm:px-6 transition-all duration-300 ${scrolled ? "max-w-6xl" : "max-w-7xl"}`}>
+          <nav
+            aria-label="Main Navigation"
+            className="pointer-events-auto glass-pill px-3.5 sm:px-5 py-2 flex items-center justify-between transition-all duration-300"
+          >
+            {/* Brand Logo & Origin Badge */}
+            <div className="flex items-center gap-2.5">
+              <Link
+                to="/"
+                className="flex items-center gap-2 group py-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e63971] rounded-full"
+                aria-label="CakeStory Desserts Homepage"
+              >
+                <img
+                  src="/assets/logo/cs-logo.png"
+                  alt="CakeStory Desserts"
+                  className="h-8 sm:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                />
+              </Link>
+              <span className="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-50 border border-rose-100 text-[10px] font-bold text-[#e63971] tracking-wider uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Pune Network
+              </span>
+            </div>
 
+            {/* Desktop Navigation Links */}
             <div className="hidden lg:flex items-center gap-1">
-              {links.map((l) => (
+              {navLinks.map((item) => (
                 <NavLink
-                  key={l.to}
-                  to={l.to}
+                  key={item.to}
+                  to={item.to}
                   className={({ isActive }) =>
-                    `px-3.5 py-2 rounded-full text-sm font-medium transition-all ${
-                      isActive ? "bg-white/90 text-[#ff5c97] shadow-sm font-semibold" : "text-[#2a1d2e] hover:bg-white/50"
+                    `px-3 py-1.5 rounded-full text-[13px] font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e63971] ${
+                      isActive
+                        ? "bg-white text-[#e63971] shadow-xs font-bold"
+                        : "text-[#2a1d2e] hover:text-[#e63971] hover:bg-white/60"
                     }`
                   }
                 >
-                  {l.label}
+                  {item.label}
                 </NavLink>
               ))}
             </div>
 
-            <div className="flex items-center gap-2">
-              
+            {/* Action Group */}
+            <div className="flex items-center gap-2 sm:gap-2.5">
               <button
                 onClick={openModal}
-                className="btn-primary !py-2 !px-5 !text-sm whitespace-nowrap shadow-lg hover:shadow-pink-300/50"
+                className="btn-primary !py-2 sm:!py-2.5 !px-4 sm:!px-5 !text-xs sm:!text-[13px] !font-bold whitespace-nowrap shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#e63971]"
+                aria-label="Open Franchise Enquiry Form"
               >
-                Franchise Enquiry
+                <span>Franchise Enquiry</span>
+                <span aria-hidden="true">→</span>
               </button>
 
+              {/* Mobile Menu Toggle Button */}
               <button
-                onClick={() => setOpen(!open)}
-                className="lg:hidden w-10 h-10 rounded-full bg-white/70 flex flex-col items-center justify-center gap-1.5"
-                aria-label="Menu"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden w-9 sm:w-10 h-9 sm:h-10 rounded-full bg-white/80 border border-white hover:bg-white flex flex-col items-center justify-center gap-1 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e63971]"
+                aria-expanded={mobileMenuOpen}
+                aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               >
-                <span className={`w-4 h-0.5 bg-[#2a1d2e] transition-all ${open ? "rotate-45 translate-y-1" : ""}`} />
-                <span className={`w-4 h-0.5 bg-[#2a1d2e] transition-all ${open ? "opacity-0" : ""}`} />
-                <span className={`w-4 h-0.5 bg-[#2a1d2e] transition-all ${open ? "-rotate-45 -translate-y-1" : ""}`} />
+                <span
+                  className={`w-4 h-0.5 bg-[#2a1d2e] transition-all duration-300 origin-center ${
+                    mobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
+                  }`}
+                />
+                <span
+                  className={`w-4 h-0.5 bg-[#2a1d2e] transition-all duration-200 ${
+                    mobileMenuOpen ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`w-4 h-0.5 bg-[#2a1d2e] transition-all duration-300 origin-center ${
+                    mobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
+                  }`}
+                />
               </button>
             </div>
-          </div>
+          </nav>
         </div>
-      </nav>
+      </header>
 
-      {open && (
-        <div className="fixed inset-0 z-30 lg:hidden pt-24">
+      {/* Mobile Drawer Overlay */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-30 lg:hidden" role="dialog" aria-modal="true" aria-label="Mobile Navigation Menu">
+          {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-gradient-to-b from-pink-50/95 via-rose-50/95 to-amber-50/95 backdrop-blur-xl"
-            onClick={() => setOpen(false)}
+            className="fixed inset-0 bg-[#1c121e]/40 backdrop-blur-md transition-opacity duration-300"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
           />
-          <div className="relative flex flex-col items-center gap-2 p-6 fade-in">
-            <img
-              src="/assets/logo/cs-logo.png"
-              alt="CakeStory Desserts"
-              className="h-12 w-auto object-contain mb-2"
-            />
-            {links.map((l) => (
-              <NavLink
-                key={l.to}
-                to={l.to}
-                className={({ isActive }) =>
-                  `px-8 py-3 rounded-full text-lg font-display font-medium transition-all ${
-                    isActive ? "bg-white text-[#ff5c97] shadow-md font-bold" : "text-[#2a1d2e] hover:bg-white/60"
-                  }`
-                }
-              >
-                {l.label}
-              </NavLink>
-            ))}
-            <Link to="/admin/login" className="text-sm font-semibold text-[#5a4a5e] py-2">
-              Admin Panel
-            </Link>
-            <button
-              onClick={() => {
-                setOpen(false);
-                openModal();
-              }}
-              className="btn-primary mt-2 w-full max-w-xs font-bold"
-            >
-              Franchise Enquiry
-            </button>
+
+          {/* Drawer Container */}
+          <div className="relative pt-24 pb-8 px-5 max-w-md mx-auto h-full flex flex-col justify-between overflow-y-auto">
+            <div className="glass-card p-6 shadow-2xl flex flex-col gap-2 fade-in">
+              <div className="flex items-center justify-between pb-3 mb-2 border-b border-rose-100/60">
+                <div className="flex items-center gap-2">
+                  <img
+                    src="/assets/logo/cs-logo.png"
+                    alt="CakeStory Desserts"
+                    className="h-8 w-auto object-contain"
+                  />
+                  <span className="text-[10px] font-bold text-[#e63971] uppercase tracking-wider bg-rose-50 px-2 py-0.5 rounded-full">
+                    Pune Network
+                  </span>
+                </div>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-xs font-semibold text-[#5a4a5e] hover:text-[#e63971] px-2 py-1"
+                  aria-label="Close menu"
+                >
+                  ✕ Close
+                </button>
+              </div>
+
+              {/* Navigation Items */}
+              <nav className="flex flex-col gap-1.5">
+                {navLinks.map((item) => (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    className={({ isActive }) =>
+                      `flex items-center justify-between px-4 py-3 rounded-2xl text-base font-display transition-all ${
+                        isActive
+                          ? "bg-rose-50 text-[#e63971] font-bold shadow-2xs"
+                          : "text-[#2a1d2e] hover:bg-white/80 hover:text-[#e63971]"
+                      }`
+                    }
+                  >
+                    <span>{item.label}</span>
+                    <span className="text-xs text-rose-300" aria-hidden="true">→</span>
+                  </NavLink>
+                ))}
+              </nav>
+
+              <div className="pt-4 mt-2 border-t border-rose-100/60 flex flex-col gap-2.5">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    openModal();
+                  }}
+                  className="btn-primary w-full !py-3 !text-sm font-bold shadow-lg"
+                >
+                  <span>Apply for Franchise</span>
+                  <span aria-hidden="true">→</span>
+                </button>
+
+                <div className="flex items-center justify-between px-2 pt-1">
+                  <Link
+                    to="/admin/login"
+                    className="text-xs font-medium text-[#8c7a90] hover:text-[#e63971] transition"
+                  >
+                    Manager Portal →
+                  </Link>
+                  <span className="text-[11px] text-[#8c7a90]">
+                    12 Pune Outlets
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center py-2 text-[11px] text-white/80">
+              © {new Date().getFullYear()} CakeStory Desserts • Central Kitchen SOPs
+            </div>
           </div>
         </div>
       )}

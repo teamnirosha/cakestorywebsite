@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function StoryVision() {
   return (
     <section className="reveal-story-section py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-purple-50/20 to-transparent relative overflow-hidden">

@@ -1,4 +1,3 @@
-import React from "react";
 import BakeryBackgroundDecor from "../common/BakeryBackgroundDecor";
 import CakeImage from "../common/CakeImage";
 import { useFranchiseModal } from "../common/FranchiseModal";
