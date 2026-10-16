@@ -73,13 +73,14 @@ export default function AdminEnquiries() {
       show("No enquiries to export", "warning");
       return;
     }
-    const headers = ["ID", "Full Name", "Mobile Number", "City / Area", "Investment Readiness", "Submitted Date", "Status"];
+    const headers = ["ID", "Full Name", "Mobile Number", "City / Area", "Investment Readiness", "Source", "Submitted Date", "Status"];
     const rows = filtered.map((e) => [
       e.id,
       `"${e.fullName}"`,
       `"${e.mobile}"`,
       `"${e.cityArea}"`,
       `"${e.investmentReadiness}"`,
+      `"${e.source || "Website Enquiry"}"`,
       `"${new Date(e.submittedAt).toLocaleString()}"`,
       e.status,
     ]);
@@ -149,6 +150,7 @@ export default function AdminEnquiries() {
                   <th className="px-4 py-3.5">Mobile Number</th>
                   <th className="px-4 py-3.5">City / Area</th>
                   <th className="px-4 py-3.5">Investment Readiness</th>
+                  <th className="px-4 py-3.5">Channel / Source</th>
                   <th className="px-4 py-3.5">Submitted Date/Time</th>
                   <th className="px-4 py-3.5">Status</th>
                   <th className="px-4 py-3.5 text-right">Actions</th>
@@ -172,6 +174,21 @@ export default function AdminEnquiries() {
                       <td className="px-4 py-3.5">
                         <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-700">
                           {e.investmentReadiness}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3.5">
+                        <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${
+                          e.source?.includes("On-Page Contact") || e.source?.includes("Contact Form")
+                            ? "bg-amber-100 text-amber-800 border border-amber-200"
+                            : e.source?.includes("General Contact")
+                            ? "bg-blue-100 text-blue-800 border border-blue-200"
+                            : "bg-rose-100 text-rose-800 border border-rose-200"
+                        }`}>
+                          {e.source?.includes("On-Page Contact")
+                            ? "On-Page Contact"
+                            : e.source?.includes("General Contact")
+                            ? "Corporate Form"
+                            : "Enquiry Modal"}
                         </span>
                       </td>
                       <td className="px-4 py-3.5 text-xs text-[#5a4a5e]">{dateStr}</td>
@@ -262,6 +279,29 @@ export default function AdminEnquiries() {
                   {selectedEnquiry.investmentReadiness}
                 </div>
               </div>
+
+              <div>
+                <span className="text-xs font-semibold text-[#5a4a5e]">5. Lead Source / Channel</span>
+                <div className="font-medium text-slate-800 bg-amber-50 border border-amber-200/70 p-2 rounded-xl mt-0.5 text-xs">
+                  {selectedEnquiry.source || "CakeStory Website — Franchise Enquiry Modal"}
+                </div>
+              </div>
+
+              {selectedEnquiry.email && (
+                <div>
+                  <span className="text-xs font-semibold text-[#5a4a5e]">Email Address</span>
+                  <div className="font-medium text-slate-800 text-xs">{selectedEnquiry.email}</div>
+                </div>
+              )}
+
+              {selectedEnquiry.notes && (
+                <div>
+                  <span className="text-xs font-semibold text-[#5a4a5e]">Message / Notes</span>
+                  <div className="text-xs text-slate-700 bg-slate-50 p-2 rounded-xl whitespace-pre-wrap mt-0.5">
+                    {selectedEnquiry.notes}
+                  </div>
+                </div>
+              )}
 
               <div className="pt-2 border-t border-slate-100">
                 <span className="text-xs font-semibold text-[#5a4a5e]">Submitted On</span>

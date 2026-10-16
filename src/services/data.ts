@@ -27,6 +27,9 @@ export type FranchiseEnquiry = {
   investmentReadiness: "Ready to invest immediately" | "Within 3 months" | "Within 6 months" | "Just exploring";
   submittedAt: string;
   status: "new" | "contacted" | "qualified" | "closed";
+  source?: string;
+  email?: string;
+  notes?: string;
 };
 
 const ENQUIRY_INIT_KEY = "__cs_enquiries_seeded__";
@@ -46,7 +49,7 @@ export const enquiryService = {
   get(id: string): FranchiseEnquiry | undefined {
     return getEnquiriesRaw().find((e) => e.id === id);
   },
-  create(data: Omit<FranchiseEnquiry, "id" | "submittedAt" | "status">): FranchiseEnquiry {
+  create(data: Omit<FranchiseEnquiry, "id" | "submittedAt" | "status"> & { source?: string }): FranchiseEnquiry {
     const all = getEnquiriesRaw();
     const id = `enq-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
     const newEnquiry: FranchiseEnquiry = {
@@ -54,13 +57,22 @@ export const enquiryService = {
       id,
       submittedAt: new Date().toISOString(),
       status: "new",
+      source: data.source || "CakeStory Website — Franchise Enquiry Modal",
     };
     storage.set(STORAGE_KEYS.ENQUIRIES, [newEnquiry, ...all]);
 
     // Dump lead data to n8n webhook asynchronously
     sendLeadToWebhook({
-      ...newEnquiry,
-      source: "CakeStory Website — Franchise Enquiry Modal",
+      id: newEnquiry.id,
+      fullName: newEnquiry.fullName,
+      mobile: newEnquiry.mobile,
+      cityArea: newEnquiry.cityArea,
+      investmentReadiness: newEnquiry.investmentReadiness,
+      source: newEnquiry.source,
+      submittedAt: newEnquiry.submittedAt,
+      status: newEnquiry.status,
+      email: newEnquiry.email,
+      message: newEnquiry.notes,
     });
 
     return newEnquiry;

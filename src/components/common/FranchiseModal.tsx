@@ -1,6 +1,5 @@
 import React, { useState, createContext, useContext, useEffect, useRef } from "react";
 import { enquiryService, FranchiseEnquiry } from "../../services/data";
-import { sendLeadToWebhook } from "../../services/webhook";
 import { useToast } from "./Toast";
 import { useLanguage } from "../../context/LanguageContext";
 
@@ -217,16 +216,8 @@ export function FranchiseModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
     setIsSubmitting(true);
 
     try {
-      // 1. Store in runtime enquiries database
+      // 1. Store in runtime enquiries database & dispatch to n8n webhook
       enquiryService.create({
-        fullName: fullName.trim(),
-        mobile: mobile.trim(),
-        cityArea: cityArea.trim(),
-        investmentReadiness,
-      });
-
-      // 2. Dispatch to n8n webhook asynchronously
-      sendLeadToWebhook({
         fullName: fullName.trim(),
         mobile: mobile.trim(),
         cityArea: cityArea.trim(),
@@ -482,13 +473,6 @@ export function FranchiseInlineForm() {
     setIsSubmitting(true);
     try {
       enquiryService.create({
-        fullName: fullName.trim(),
-        mobile: mobile.trim(),
-        cityArea: cityArea.trim(),
-        investmentReadiness,
-      });
-
-      sendLeadToWebhook({
         fullName: fullName.trim(),
         mobile: mobile.trim(),
         cityArea: cityArea.trim(),

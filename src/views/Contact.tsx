@@ -2,7 +2,6 @@ import { useState } from "react";
 import PageShell from "../components/layout/PageShell";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
 import { enquiryService } from "../services/data";
-import { sendLeadToWebhook } from "../services/webhook";
 
 export default function Contact() {
   const { openModal } = useFranchiseModal();
@@ -18,23 +17,15 @@ export default function Contact() {
     e.preventDefault();
     setSubmitted(true);
 
-    // Save to runtime enquiries database
+    // Save to runtime enquiries database & dispatch to n8n webhook
     enquiryService.create({
       fullName: formData.name,
       mobile: formData.email ? `Email: ${formData.email}` : "Corporate Inquiry",
-      cityArea: formData.subject ? `Subject: ${formData.subject}` : "General Office Message",
+      cityArea: formData.subject ? `Subject: ${formData.subject}` : "Pune Central Office",
       investmentReadiness: "Just exploring",
-    });
-
-    // Dump lead/contact message to n8n webhook
-    sendLeadToWebhook({
-      fullName: formData.name,
+      source: "CakeStory Website — Corporate Contact Form",
       email: formData.email,
-      mobile: "N/A",
-      cityArea: "General Contact Form",
-      subject: formData.subject,
-      message: formData.message,
-      source: "CakeStory Website — General Contact Form",
+      notes: `Subject: ${formData.subject || "General Inquiry"}\nMessage: ${formData.message || "N/A"}`,
     });
 
     setTimeout(() => {

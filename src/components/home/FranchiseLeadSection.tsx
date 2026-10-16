@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { enquiryService } from "../../services/data";
-import { sendLeadToWebhook } from "../../services/webhook";
 import { useToast } from "../common/Toast";
 import { useLanguage } from "../../context/LanguageContext";
 import { prefersReducedMotion, MOTION } from "../../utils/motion";
@@ -187,37 +186,38 @@ export default function FranchiseLeadSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!fullName.trim() || !mobile.trim() || !cityArea.trim()) {
-      show("Please fill out all fields", "warning");
+    const cleanName = fullName.trim();
+    const cleanMobile = mobile.trim();
+    const cleanCity = cityArea.trim();
+
+    if (!cleanName || !cleanMobile || !cleanCity) {
+      show(language === "mr" ? "कृपया सर्व आवश्यक माहिती भरा." : "Please fill out all required fields.", "warning");
+      return;
+    }
+
+    if (!/^[6-9]\d{9}$/.test(cleanMobile)) {
+      show(language === "mr" ? "कृपया वैध 10-अंकी मोबाईल नंबर प्रविष्ट करा." : "Please enter a valid 10-digit mobile number.", "warning");
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      // 1. Store in runtime enquiries database
+      // 1. Store in backend pipeline & dispatch to n8n webhook
       enquiryService.create({
-        fullName: fullName.trim(),
-        mobile: mobile.trim(),
-        cityArea: cityArea.trim(),
+        fullName: cleanName,
+        mobile: cleanMobile,
+        cityArea: cleanCity,
         investmentReadiness,
-      });
-
-      // 2. Send lead data asynchronously to n8n webhook
-      sendLeadToWebhook({
-        fullName: fullName.trim(),
-        mobile: mobile.trim(),
-        cityArea: cityArea.trim(),
-        investmentReadiness,
-        source: "CakeStory Website — On-Page Franchise Application",
+        source: "CakeStory Website — On-Page Contact Form",
       });
 
       setIsSubmitting(false);
       setIsSuccess(true);
-      show("Application submitted successfully!", "success");
+      show(language === "mr" ? "आपला अर्ज यशस्वीरित्या मिळाला! आमची फ्रँचायझी टीम लवकरच संपर्क करेल." : "Application submitted successfully! Our franchise team will contact you shortly.", "success");
     } catch {
       setIsSubmitting(false);
-      show("Failed to submit. Please try again.", "error");
+      show(language === "mr" ? "कृपया पुन्हा प्रयत्न करा." : "Failed to submit. Please try again.", "error");
     }
   };
 
