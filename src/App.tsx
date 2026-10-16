@@ -2,6 +2,7 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useEffect, lazy, Suspense } from "react";
 import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
+import FloatingWhatsApp from "./components/common/FloatingWhatsApp";
 import { ToastProvider } from "./components/common/Toast";
 import { FranchiseModalProvider } from "./components/common/FranchiseModal";
 import { LoadingScreen } from "./components/common/Loading";
@@ -68,6 +69,7 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
       <Navigation />
       {children}
       <Footer />
+      <FloatingWhatsApp />
     </>
   );
 }

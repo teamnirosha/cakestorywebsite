@@ -1,11 +1,14 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import PageShell from "../components/layout/PageShell";
 import { franchiseService } from "../services/data";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
 import { useLanguage } from "../context/LanguageContext";
 import { prefersReducedMotion, MOTION } from "../utils/motion";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // ---------- Animated / Active SVG Vector Icons ----------
 
@@ -201,18 +204,38 @@ export default function OutletDetail() {
     if (prefersReducedMotion() || !containerRef.current || !outlet) return;
 
     const ctx = gsap.context(() => {
+      // 1. Hero elements entrance on initial load
       gsap.fromTo(
-        ".boutique-stagger",
-        { opacity: 0, y: 22 },
+        ".boutique-hero-elem",
+        { opacity: 0, y: 16 },
         {
           opacity: 1,
           y: 0,
-          duration: MOTION.duration.reveal,
-          stagger: 0.07,
+          duration: 0.75,
+          stagger: 0.1,
           ease: MOTION.ease.default,
-          clearProps: "opacity,transform",
         }
       );
+
+      // 2. Sections down the page reveal on scroll and replay reliably
+      gsap.utils.toArray<HTMLElement>(".boutique-scroll-elem").forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            ease: MOTION.ease.default,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 86%",
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
+            },
+          }
+        );
+      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -292,7 +315,7 @@ export default function OutletDetail() {
             {/* Direct 2-Tier Breadcrumb: Our Outlets > Current Outlet */}
             <nav
               aria-label="Breadcrumb"
-              className="boutique-stagger flex items-center gap-2 mb-6 sm:mb-8 text-xs sm:text-sm font-medium text-rose-200/80"
+              className="boutique-hero-elem flex items-center gap-2 mb-6 sm:mb-8 text-xs sm:text-sm font-medium text-rose-200/80"
             >
               <Link
                 to="/"
@@ -311,7 +334,7 @@ export default function OutletDetail() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
 
               {/* Left Column: Royal Headings, Badges, Narrative, 3 Action Buttons */}
-              <div className="lg:col-span-7 space-y-4 sm:space-y-5 boutique-stagger">
+              <div className="lg:col-span-7 space-y-4 sm:space-y-5 boutique-hero-elem">
 
                 {/* Official Boutique Jewel Capsule */}
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 via-rose-500/20 to-amber-500/10 border border-amber-400/40 text-amber-200 text-xs sm:text-sm font-bold uppercase tracking-wider shadow-md">
@@ -405,7 +428,7 @@ export default function OutletDetail() {
               </div>
 
               {/* Right Column: Imperial Amber-Gold Framed Boutique Photo */}
-              <div className="lg:col-span-5 boutique-stagger">
+              <div className="lg:col-span-5 boutique-hero-elem">
                 <div className="relative rounded-[2rem] sm:rounded-[2.5rem] border-3 sm:border-4 border-amber-400/90 shadow-2xl shadow-rose-950/60 overflow-hidden aspect-[16/10] sm:aspect-[4/3] bg-stone-900 group">
                   <img
                     src={imgSrc}
@@ -440,7 +463,7 @@ export default function OutletDetail() {
         ========================================================= */}
         <section className="w-full py-12 sm:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white dark:bg-[#150d18] rounded-[2.5rem] p-6 sm:p-10 lg:p-12 shadow-2xl border border-rose-100/80 dark:border-white/10 boutique-stagger">
+            <div className="bg-white dark:bg-[#150d18] rounded-[2.5rem] p-6 sm:p-10 lg:p-12 shadow-2xl border border-rose-100/80 dark:border-white/10 boutique-scroll-elem">
 
               {/* Section Header */}
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 mb-8 border-b border-rose-100/60 dark:border-white/10">
@@ -656,7 +679,7 @@ export default function OutletDetail() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
             {/* Elevated Section Header */}
-            <div className="boutique-stagger mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="boutique-scroll-elem mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
               <div>
                 <span className="text-xs font-bold text-amber-300 uppercase tracking-wider block mb-1">
                   {t("outletDetail.moreLocations")}
@@ -680,7 +703,7 @@ export default function OutletDetail() {
             </div>
 
             {/* 3 Frosted Glass Boutique Cards (No Images Inside Cards) */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 boutique-stagger">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 boutique-scroll-elem">
               {nearbyOutlets.map((nearby) => {
                 const nearbyDisplay = nearby.outletName || nearby.name.replace(/^CakeStory Desserts\s*—\s*/i, "");
                 return (
@@ -743,7 +766,7 @@ export default function OutletDetail() {
         ========================================================= */}
         <section className="w-full pb-10 pt-10 sm:pb-12 sm:pt-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="boutique-stagger rounded-3xl sm:rounded-[2.5rem] p-8 sm:p-12 lg:p-14 bg-gradient-to-r from-[#b31b51] via-[#e63971] to-amber-500 text-white shadow-2xl relative overflow-hidden">
+            <div className="boutique-scroll-elem rounded-3xl sm:rounded-[2.5rem] p-8 sm:p-12 lg:p-14 bg-gradient-to-r from-[#b31b51] via-[#e63971] to-amber-500 text-white shadow-2xl relative overflow-hidden">
               <div className="relative z-10 max-w-3xl">
 
                 {/* Yellow Tag */}
@@ -793,25 +816,6 @@ export default function OutletDetail() {
             </div>
           </div>
         </section>
-
-        {/* =========================================================
-            5. ACTIVE FLOATING WHATSAPP WIDGET (BOTTOM-RIGHT)
-        ========================================================= */}
-        <div className="fixed bottom-6 right-6 z-50">
-          <a
-            href={whatsappOrderUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-2xl shadow-emerald-950/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all relative group"
-            title={t("outletDetail.floatingWhatsAppTitle")}
-            aria-label={t("outletDetail.floatingWhatsAppTitle")}
-          >
-            <WhatsAppIcon className="w-7 h-7 text-white" />
-
-            {/* Live Pulsing Dot */}
-            <span className="absolute top-1 right-1 w-3.5 h-3.5 rounded-full bg-amber-400 ring-2 ring-white animate-pulse" />
-          </a>
-        </div>
 
       </div>
     </PageShell>

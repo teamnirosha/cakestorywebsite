@@ -252,16 +252,17 @@ export default function FranchiseModelSection() {
       if (bgLayerRef.current) {
         gsap.fromTo(
           bgLayerRef.current,
-          { scale: 1.05, opacity: 0.75 },
+          { scale: 1.04, opacity: 0.8 },
           {
             scale: 1.0,
             opacity: 1,
-            duration: 1.2,
+            duration: 1.0,
             ease: "power2.out",
             scrollTrigger: {
               trigger: sectionRef.current,
               start: "top 85%",
-              once: true,
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );
@@ -272,18 +273,18 @@ export default function FranchiseModelSection() {
       if (headerElems && headerElems.length > 0) {
         gsap.fromTo(
           headerElems,
-          { opacity: 0, y: 22 },
+          { opacity: 0, y: 16 },
           {
             opacity: 1,
             y: 0,
             duration: MOTION.duration.reveal,
-            stagger: 0.12,
+            stagger: 0.1,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: sectionRef.current,
-              start: "top 80%",
-              once: true,
+              start: "top 82%",
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );
@@ -294,18 +295,18 @@ export default function FranchiseModelSection() {
       if (flagships && flagships.length > 0) {
         gsap.fromTo(
           flagships,
-          { opacity: 0, y: 24 },
+          { opacity: 0, y: 18 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.65,
-            stagger: 0.15,
+            duration: 0.7,
+            stagger: 0.12,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: ".model-flagship-grid",
               start: "top 82%",
-              once: true,
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );
@@ -316,18 +317,18 @@ export default function FranchiseModelSection() {
       if (supportCards && supportCards.length > 0) {
         gsap.fromTo(
           supportCards,
-          { opacity: 0, y: 20 },
+          { opacity: 0, y: 16 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.5,
+            duration: 0.6,
             stagger: 0.08,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: ".model-support-grid",
               start: "top 84%",
-              once: true,
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );
@@ -340,21 +341,21 @@ export default function FranchiseModelSection() {
           scrollTrigger: {
             trigger: journeyPanel,
             start: "top 82%",
-            once: true,
+            end: "bottom top",
+            toggleActions: "play reverse play reverse",
           },
         });
 
         // Eyebrow, Title, Subtitle reveal
         journeyTL.fromTo(
           journeyPanel.querySelectorAll(".journey-header-item"),
-          { opacity: 0, y: 18 },
+          { opacity: 0, y: 16 },
           {
             opacity: 1,
             y: 0,
             duration: 0.6,
             stagger: 0.1,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
           }
         );
 
@@ -400,14 +401,13 @@ export default function FranchiseModelSection() {
         if (milestoneMarkers.length > 0) {
           journeyTL.fromTo(
             milestoneMarkers,
-            { scale: 0.7, opacity: 0 },
+            { scale: 0.9, opacity: 0 },
             {
               scale: 1,
               opacity: 1,
-              duration: 0.45,
+              duration: 0.5,
               stagger: 0.08,
-              ease: "back.out(1.5)",
-              clearProps: "opacity,transform",
+              ease: "power2.out",
             },
             "-=0.6"
           );
@@ -418,14 +418,13 @@ export default function FranchiseModelSection() {
         if (milestoneCards.length > 0) {
           journeyTL.fromTo(
             milestoneCards,
-            { opacity: 0, y: 16 },
+            { opacity: 0, y: 14 },
             {
               opacity: 1,
               y: 0,
-              duration: 0.45,
+              duration: 0.5,
               stagger: 0.08,
               ease: MOTION.ease.default,
-              clearProps: "opacity,transform",
             },
             "<"
           );
@@ -436,13 +435,12 @@ export default function FranchiseModelSection() {
         if (detailCard) {
           journeyTL.fromTo(
             detailCard,
-            { opacity: 0, y: 16 },
+            { opacity: 0, y: 14 },
             {
               opacity: 1,
               y: 0,
               duration: 0.5,
               ease: MOTION.ease.default,
-              clearProps: "opacity,transform",
             },
             "-=0.2"
           );
@@ -453,13 +451,12 @@ export default function FranchiseModelSection() {
         if (ctaArea) {
           journeyTL.fromTo(
             ctaArea,
-            { opacity: 0, y: 16 },
+            { opacity: 0, y: 14 },
             {
               opacity: 1,
               y: 0,
               duration: 0.5,
               ease: MOTION.ease.default,
-              clearProps: "opacity,transform",
             },
             "-=0.2"
           );

@@ -40,13 +40,13 @@ export default function FranchiseFaqSection() {
             opacity: 1,
             y: 0,
             duration: MOTION.duration.reveal,
-            stagger: 0.12,
+            stagger: 0.1,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: sectionRef.current,
               start: "top 85%",
-              once: true,
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );
@@ -62,13 +62,13 @@ export default function FranchiseFaqSection() {
             opacity: 1,
             y: 0,
             duration: MOTION.duration.reveal,
-            stagger: 0.07,
+            stagger: 0.08,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: ".faq-accordion-list",
               start: "top 88%",
-              once: true,
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );

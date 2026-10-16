@@ -100,13 +100,13 @@ export default function OutletsMapSection() {
             opacity: 1,
             y: 0,
             duration: MOTION.duration.reveal,
-            stagger: 0.12,
+            stagger: 0.1,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: sectionRef.current,
               start: "top 85%",
-              once: true,
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );
@@ -124,11 +124,11 @@ export default function OutletsMapSection() {
             duration: MOTION.duration.reveal,
             stagger: 0.06,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: ".zone-summary-grid",
-              start: "top 90%",
-              once: true,
+              start: "top 88%",
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );

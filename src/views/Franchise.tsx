@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -6,10 +6,12 @@ import PageShell from "../components/layout/PageShell";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
 import { franchiseService, contentService, SiteContent } from "../services/data";
 import CakeImage from "../components/common/CakeImage";
+import { prefersReducedMotion, MOTION } from "../utils/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Franchise() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const { openModal } = useFranchiseModal();
   const [siteContent, setSiteContent] = useState<SiteContent>(() => contentService.get());
   const totalOutlets = franchiseService.countActive();
@@ -21,12 +23,33 @@ export default function Franchise() {
   }, []);
 
   useEffect(() => {
+    if (prefersReducedMotion() || !containerRef.current) return;
+
     const ctx = gsap.context(() => {
-      gsap.from(".reveal-hero", { opacity: 0, y: 30, duration: 0.8, ease: "power3.out" });
+      gsap.fromTo(
+        ".reveal-hero",
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.8, ease: MOTION.ease.default }
+      );
       gsap.utils.toArray<HTMLElement>(".reveal-card").forEach((el) => {
-        gsap.from(el, { opacity: 0, y: 30, duration: 0.6, scrollTrigger: { trigger: el, start: "top 88%" } });
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 18 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: MOTION.duration.reveal,
+            ease: MOTION.ease.default,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
+            },
+          }
+        );
       });
-    });
+    }, containerRef);
     return () => ctx.revert();
   }, []);
 
@@ -42,6 +65,7 @@ export default function Franchise() {
 
   return (
     <PageShell>
+      <div ref={containerRef}>
       {/* 1. FRANCHISE HERO */}
       <section className="px-6 relative pt-4 pb-16">
         <div className="blob" style={{ width: 400, height: 400, top: -50, left: -100, background: "radial-gradient(circle, #ffd3e2, transparent)" }} />
@@ -295,6 +319,7 @@ export default function Franchise() {
           </button>
         </div>
       </section>
+      </div>
     </PageShell>
   );
 }

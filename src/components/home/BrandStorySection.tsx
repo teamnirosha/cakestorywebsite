@@ -125,13 +125,13 @@ export default function BrandStorySection() {
             opacity: 1,
             y: 0,
             duration: MOTION.duration.reveal,
-            stagger: 0.12,
+            stagger: 0.1,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: sectionRef.current,
-              start: "top 82%",
-              once: true,
+              start: "top 85%",
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );
@@ -142,18 +142,18 @@ export default function BrandStorySection() {
       if (nodes && nodes.length > 0) {
         gsap.fromTo(
           nodes,
-          { opacity: 0, y: 18 },
+          { opacity: 0, y: 16 },
           {
             opacity: 1,
             y: 0,
             duration: MOTION.duration.reveal,
             stagger: 0.08,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: ".story-timeline-container",
               start: "top 85%",
-              once: true,
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );
@@ -171,11 +171,11 @@ export default function BrandStorySection() {
             duration: MOTION.duration.reveal,
             stagger: 0.08,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: ".story-stats-grid",
               start: "top 88%",
-              once: true,
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );
@@ -189,17 +189,20 @@ export default function BrandStorySection() {
   useEffect(() => {
     if (prefersReducedMotion() || !panelRef.current) return;
 
-    gsap.fromTo(
+    const tween = gsap.fromTo(
       panelRef.current,
-      { opacity: 0.82, y: 5 },
+      { opacity: 0.85, y: 4 },
       {
         opacity: 1,
         y: 0,
         duration: MOTION.duration.interaction,
         ease: MOTION.ease.default,
-        clearProps: "opacity,transform",
       }
     );
+
+    return () => {
+      tween.kill();
+    };
   }, [activePhase]);
 
   const milestones = [

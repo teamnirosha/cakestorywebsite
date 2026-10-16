@@ -47,16 +47,17 @@ export default function ImageReveal({
       if (revealVariant === "fade-scale") {
         gsap.fromTo(
           imgEl,
-          { opacity: 0, scale: 1.05 },
+          { opacity: 0, scale: 1.04 },
           {
             opacity: 1,
             scale: 1,
-            duration: 1.1,
+            duration: 0.85,
             ease: "power2.out",
             scrollTrigger: {
               trigger: el,
               start: "top 88%",
-              once: true,
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );
@@ -67,29 +68,31 @@ export default function ImageReveal({
           {
             clipPath: "inset(0% 0% 0% 0% round 1.5rem)",
             opacity: 1,
-            duration: 1.2,
+            duration: 0.9,
             ease: "power3.out",
             scrollTrigger: {
               trigger: el,
               start: "top 85%",
-              once: true,
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );
       } else if (revealVariant === "soft-blur") {
         gsap.fromTo(
           imgEl,
-          { filter: "blur(12px)", opacity: 0, scale: 1.04 },
+          { filter: "blur(8px)", opacity: 0, scale: 1.03 },
           {
             filter: "blur(0px)",
             opacity: 1,
             scale: 1,
-            duration: 1,
+            duration: 0.85,
             ease: "power2.out",
             scrollTrigger: {
               trigger: el,
               start: "top 88%",
-              once: true,
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );

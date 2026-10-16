@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useFranchiseModal } from "../common/FranchiseModal";
 import CakeImage from "../common/CakeImage";
+import { prefersReducedMotion } from "../../utils/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -50,32 +51,43 @@ export default function CustomizationExperience() {
 
   // Mouse Parallax Effect for Desktop
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (window.matchMedia("(pointer: coarse)").matches || !imageContainerRef.current) return;
+    if (prefersReducedMotion() || window.matchMedia("(pointer: coarse)").matches || !imageContainerRef.current || !sectionRef.current) return;
     const rect = imageContainerRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-    gsap.to(".editorial-cake-image", {
-      x: x * 10,
-      y: y * 10,
-      duration: 0.8,
-      ease: "power2.out",
-    });
-    gsap.to(".editorial-tag-node", {
-      x: x * -8,
-      y: y * -8,
-      duration: 0.9,
-      ease: "power2.out",
-    });
+    const cakeImg = sectionRef.current.querySelector(".editorial-cake-image");
+    const tagNodes = sectionRef.current.querySelectorAll(".editorial-tag-node");
+
+    if (cakeImg) {
+      gsap.to(cakeImg, {
+        x: x * 10,
+        y: y * 10,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+    }
+    if (tagNodes.length > 0) {
+      gsap.to(tagNodes, {
+        x: x * -8,
+        y: y * -8,
+        duration: 0.9,
+        ease: "power2.out",
+      });
+    }
   };
 
   const handleMouseLeave = () => {
-    gsap.to([".editorial-cake-image", ".editorial-tag-node"], {
-      x: 0,
-      y: 0,
-      duration: 0.9,
-      ease: "power2.out",
-    });
+    if (prefersReducedMotion() || !sectionRef.current) return;
+    const targets = sectionRef.current.querySelectorAll(".editorial-cake-image, .editorial-tag-node");
+    if (targets.length > 0) {
+      gsap.to(targets, {
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+    }
   };
 
   useEffect(() => {
@@ -88,39 +100,39 @@ export default function CustomizationExperience() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 82%",
-          end: "bottom 85%",
-          toggleActions: "play none none reverse",
+          end: "bottom top",
+          toggleActions: "play reverse play reverse",
         },
       });
 
       tl.fromTo(
         ".editorial-eyebrow",
         { opacity: 0, y: -10 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", clearProps: "opacity,transform" }
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
       )
         .fromTo(
           headlineRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", clearProps: "opacity,transform" },
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
           "-=0.4"
         )
         .fromTo(
           subRef.current,
-          { opacity: 0, y: 15 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", clearProps: "opacity,transform" },
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
           "-=0.4"
         )
         .fromTo(
           maskRef.current,
           { clipPath: "circle(20% at 50% 50%)", opacity: 0.6 },
-          { clipPath: "circle(75% at 50% 50%)", opacity: 1, duration: 1.1, ease: "power3.inOut", clearProps: "opacity" },
-          "-=0.5"
+          { clipPath: "circle(75% at 50% 50%)", opacity: 1, duration: 1.0, ease: "power2.inOut" },
+          "-=0.4"
         )
         .fromTo(
           ".editorial-tag-node",
-          { opacity: 0, y: 15, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, stagger: 0.12, duration: 0.6, ease: "power2.out", clearProps: "opacity,transform" },
-          "-=0.6"
+          { opacity: 0, y: 14, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 0.6, ease: "power2.out" },
+          "-=0.5"
         );
     }, sectionRef);
 

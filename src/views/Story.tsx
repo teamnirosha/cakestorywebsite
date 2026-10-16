@@ -47,17 +47,17 @@ export default function Story() {
       sections.forEach((sec) => {
         gsap.fromTo(
           sec,
-          { opacity: 0, y: 25 },
+          { opacity: 0, y: 20 },
           {
             opacity: 1,
             y: 0,
             duration: 0.75,
             ease: "power2.out",
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: sec,
-              start: "top 88%",
-              once: true,
+              start: "top 85%",
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );

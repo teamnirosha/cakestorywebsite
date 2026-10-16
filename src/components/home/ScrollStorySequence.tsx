@@ -76,14 +76,53 @@ export default function ScrollStorySequence() {
     if (prefersReducedMotion || !containerRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Animate chapter items smoothly as they come into view
+      // 1. Section Header Reveal
+      const header = containerRef.current?.querySelector(".story-sequence-header");
+      if (header) {
+        gsap.fromTo(
+          header,
+          { opacity: 0, y: 16 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: header,
+              start: "top 85%",
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
+            },
+          }
+        );
+      }
+
+      // 2. Animate chapter cards entrance and track active chapter on scroll
       const chapterCards = containerRef.current?.querySelectorAll(".story-chapter-card");
       if (chapterCards && chapterCards.length > 0) {
+        gsap.fromTo(
+          chapterCards,
+          { opacity: 0, y: 16 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            stagger: 0.08,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: chapterCards[0],
+              start: "top 85%",
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
+            },
+          }
+        );
+
         chapterCards.forEach((card, idx) => {
           ScrollTrigger.create({
             trigger: card,
-            start: "top 70%",
-            end: "bottom 30%",
+            start: "top 65%",
+            end: "bottom 35%",
             onEnter: () => setActiveChapter(idx),
             onEnterBack: () => setActiveChapter(idx),
           });
@@ -103,7 +142,7 @@ export default function ScrollStorySequence() {
     >
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <div className="story-sequence-header text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="eyebrow mb-3">
             <span className="w-2 h-2 rounded-full bg-[#e63971]" />
             The CakeStory Narrative

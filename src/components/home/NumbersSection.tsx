@@ -135,8 +135,9 @@ function StatCard({ stat, idx }: { stat: StatItem; idx: number }) {
   useEffect(() => {
     if (!numberRef.current) return;
     const cleanup = setupCounterAnimation(numberRef.current, stat.val, {
-      duration: 1.4,
+      duration: 1.3,
       delay: idx * 0.08,
+      start: "top 86%",
     });
     return cleanup;
   }, [stat.val, idx]);
@@ -187,13 +188,13 @@ export default function NumbersSection() {
             opacity: 1,
             y: 0,
             duration: MOTION.duration.reveal,
-            stagger: 0.12,
+            stagger: 0.1,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: sectionRef.current,
               start: "top 85%",
-              once: true,
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );
@@ -211,11 +212,11 @@ export default function NumbersSection() {
             duration: MOTION.duration.reveal,
             stagger: 0.08,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: ".numbers-grid",
-              start: "top 88%",
-              once: true,
+              start: "top 86%",
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );
@@ -232,11 +233,11 @@ export default function NumbersSection() {
             y: 0,
             duration: MOTION.duration.reveal,
             ease: MOTION.ease.default,
-            clearProps: "opacity,transform",
             scrollTrigger: {
               trigger: banner,
-              start: "top 90%",
-              once: true,
+              start: "top 88%",
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
             },
           }
         );

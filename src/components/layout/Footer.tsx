@@ -173,11 +173,11 @@ export default function Footer() {
           y: 0,
           duration: MOTION.duration.section,
           ease: MOTION.ease.default,
-          clearProps: "opacity,transform",
           scrollTrigger: {
             trigger: footerRef.current,
             start: "top 95%",
-            once: true,
+            end: "bottom top",
+            toggleActions: "play reverse play reverse",
           },
         }
       );
@@ -208,6 +208,7 @@ export default function Footer() {
 
   return (
     <footer
+      id="site-footer"
       ref={footerRef}
       className="relative border-t border-stone-800/80 bg-gradient-to-b from-[#160f15] via-[#120a10] to-[#0d070b] text-stone-300"
     >
@@ -234,7 +235,7 @@ export default function Footer() {
       {/* 2. Main Footer Columns */}
       <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pt-14 sm:pt-16 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
-          
+
           {/* Column 1: Brand & Identity */}
           <div className="lg:col-span-5 space-y-4 sm:space-y-5">
             <div className="inline-block">
@@ -318,7 +319,7 @@ export default function Footer() {
             <h4 className="font-display text-xs sm:text-[13px] font-semibold text-[#e6ca9c] tracking-widest uppercase">
               {t("footer.commsHeading")}
             </h4>
-            
+
             <div className="space-y-3 text-xs sm:text-sm text-stone-300">
               {/* Phone Helpline Card */}
               <div className="p-3.5 rounded-2xl bg-[#1b1219]/90 border border-stone-800/90 hover:border-[#c9a46a]/30 transition-all">
@@ -369,23 +370,33 @@ export default function Footer() {
 
         </div>
 
-        {/* 3. Bottom Legal & Copyright Bar */}
-        <div className="mt-12 sm:mt-14 pt-6 border-t border-stone-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs sm:text-[13px] text-stone-400 text-center md:text-left">
-          <p>© {new Date().getFullYear()} CakeStory Desserts (cakestorydesserts.in). {t("footer.rights")}</p>
-          <p className="font-display text-stone-300">
+        {/* 3. Bottom Legal & Copyright Bar (Left, Center, Right) */}
+        <div className="mt-12 sm:mt-14 pt-6 border-t border-stone-800/80 grid grid-cols-1 md:grid-cols-3 items-center gap-4 text-xs sm:text-[13px] text-stone-400">
+          {/* Left: Copyright */}
+          <p className="text-center md:text-left">
+            © {new Date().getFullYear()} CakeStory Desserts{" "}. {t("footer.rights")}
+          </p>
+
+          {/* Center: Tagline */}
+          <p className="font-display text-stone-300 text-center font-medium">
             {t("footer.tagline")}
           </p>
-          <p className="flex items-center justify-center gap-1">
-            <span>{t("footer.devBy")}</span>{" "}
+
+          {/* Right: Design & Development by Team Nirosha */}
+          <div className="flex items-center justify-center md:justify-end gap-1.5 text-center md:text-right">
+            <span>{t("footer.devBy")}</span>
+            <span aria-hidden="true">:</span>
             <a
               href="https://nirosha.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-stone-300 hover:text-[#e6ca9c] transition-colors underline underline-offset-2"
+              className="inline-flex items-center gap-1 font-semibold text-amber-200 hover:text-amber-100 transition-colors underline underline-offset-2"
+              title="Team Nirosha - Website Architecture & Engineering"
             >
-              Team Nirosha
+              <span>Team Nirosha</span>
+              <span className="text-[11px] opacity-80" aria-hidden="true">↗</span>
             </a>
-          </p>
+          </div>
         </div>
       </div>
     </footer>
