@@ -14,7 +14,6 @@ import Franchise from "./views/Franchise";
 
 // Lazy Public Views (Loaded on demand)
 const FAQ = lazy(() => import("./views/FAQ"));
-const Outlets = lazy(() => import("./views/Outlets"));
 const OutletDetail = lazy(() => import("./views/OutletDetail"));
 const Contact = lazy(() => import("./views/Contact"));
 const Blog = lazy(() => import("./views/Blog"));
@@ -48,10 +47,13 @@ const AdminAccount = lazy(() => import("./views/admin/AdminAccount"));
 import { LanguageProvider } from "./context/LanguageContext";
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const location = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-  }, [pathname]);
+    const hasScrollTarget = (location.state as { scrollTo?: string })?.scrollTo || location.hash;
+    if (!hasScrollTarget) {
+      window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    }
+  }, [location.pathname, location.state]);
   return null;
 }
 
@@ -85,7 +87,7 @@ export default function App() {
             <Route path="/story" element={<Navigate to="/our-story" replace />} />
             <Route path="/franchise" element={<PublicLayout><Franchise /></PublicLayout>} />
             <Route path="/faq" element={<PublicLayout><FAQ /></PublicLayout>} />
-            <Route path="/outlets" element={<PublicLayout><Outlets /></PublicLayout>} />
+            <Route path="/outlets" element={<Navigate to="/" state={{ scrollTo: "outlets" }} replace />} />
             <Route path="/outlets/:id" element={<PublicLayout><OutletDetail /></PublicLayout>} />
             <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
             <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />

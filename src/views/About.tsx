@@ -56,7 +56,7 @@ export default function About() {
               Connect with our franchise expansion team at <a href="mailto:franchise@cakestory.com" className="text-[#ff5c97] font-semibold">franchise@cakestory.com</a>
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <Link to="/outlets" className="btn-ghost text-xs">Explore Outlets Directory</Link>
+              <Link to="/" state={{ scrollTo: "outlets" }} className="btn-ghost text-xs">Explore Outlets Directory</Link>
               <button onClick={openModal} className="btn-primary text-xs">Start Franchise Enquiry →</button>
             </div>
           </div>

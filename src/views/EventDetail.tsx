@@ -51,7 +51,7 @@ export default function EventDetail() {
                 ))}
               </ul>
               <div className="mt-6 flex gap-3">
-                <Link to="/outlets" className="btn-ghost">Find Nearest Outlet</Link>
+                <Link to="/" state={{ scrollTo: "outlets" }} className="btn-ghost">Find Nearest Outlet</Link>
                 <Link to="/custom-cake" className="btn-primary">Plan Now →</Link>
               </div>
             </div>

@@ -44,7 +44,8 @@ export default function OutletDiscoveryPreview() {
 
           <div className="flex items-center gap-3">
             <Link
-              to="/outlets"
+              to="/"
+              state={{ scrollTo: "outlets" }}
               className="btn-primary !py-3 !px-6 text-xs sm:text-sm font-bold shadow-md whitespace-nowrap"
             >
               <span>Explore Interactive Map</span>
@@ -126,7 +127,8 @@ export default function OutletDiscoveryPreview() {
         {/* View All Outlets Bottom Link */}
         <div className="mt-10 text-center">
           <Link
-            to="/outlets"
+            to="/"
+            state={{ scrollTo: "outlets" }}
             className="inline-flex items-center gap-2 text-xs font-bold text-[#2a1d2e] hover:text-[#e63971] transition-colors bg-white/80 px-5 py-2.5 rounded-full border border-rose-100 shadow-2xs"
           >
             <span>View All 12 Outlets Across Pune Directory</span>

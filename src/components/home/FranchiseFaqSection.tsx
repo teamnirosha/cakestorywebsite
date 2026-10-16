@@ -1,9 +1,82 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import { useLanguage } from "../../context/LanguageContext";
+import { prefersReducedMotion, MOTION } from "../../utils/motion";
+import faqBg from "../../assets/faq/patisserie-counter.jpg";
+
+function ChevronDownIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
 
 export default function FranchiseFaqSection() {
   const { language, t } = useLanguage();
   const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (prefersReducedMotion() || !sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // 1. Header elements sequential reveal
+      const headerElems = sectionRef.current?.querySelectorAll(".faq-header-elem");
+      if (headerElems && headerElems.length > 0) {
+        gsap.fromTo(
+          headerElems,
+          { opacity: 0, y: 16 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: MOTION.duration.reveal,
+            stagger: 0.12,
+            ease: MOTION.ease.default,
+            clearProps: "opacity,transform",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 85%",
+              once: true,
+            },
+          }
+        );
+      }
+
+      // 2. Accordion items staggered reveal
+      const items = sectionRef.current?.querySelectorAll(".faq-accordion-item");
+      if (items && items.length > 0) {
+        gsap.fromTo(
+          items,
+          { opacity: 0, y: 14 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: MOTION.duration.reveal,
+            stagger: 0.07,
+            ease: MOTION.ease.default,
+            clearProps: "opacity,transform",
+            scrollTrigger: {
+              trigger: ".faq-accordion-list",
+              start: "top 88%",
+              once: true,
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const faqs = [
     {
@@ -39,23 +112,46 @@ export default function FranchiseFaqSection() {
   ];
 
   return (
-    <section id="faq" className="py-20 px-4 sm:px-6 lg:px-8 bg-white border-t border-slate-100">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-pink-50 text-pink-600 text-xs font-bold uppercase tracking-wider mb-3 border border-pink-100">
-            {t("faq.tag")}
+    <section
+      ref={sectionRef}
+      id="faq"
+      className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#faf7f2] border-t border-stone-200/60 overflow-hidden"
+    >
+      {/* 1. Dedicated Patisserie Counter Background Layer with Single Warm-Ivory Gradient */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <img
+          src={faqBg}
+          alt=""
+          role="presentation"
+          loading="lazy"
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Single controlled warm-ivory gradient overlay allowing the cake display counter to be visibly perceptible while keeping all text easily readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#faf7f2]/86 via-[#faf7f2]/74 to-[#faf7f2]/88" />
+      </div>
+
+      <div className="max-w-3xl mx-auto relative z-10">
+        {/* 2. Section Header: Refined Editorial Typography & Subtle Eyebrow Label */}
+        <div className="text-center mb-12 sm:mb-14">
+          <div className="faq-header-elem inline-flex items-center gap-2.5 px-4.5 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/95 backdrop-blur-md border border-stone-200/90 shadow-[0_2px_12px_-2px_rgba(181,31,80,0.12)] text-xs sm:text-[13.5px] font-bold tracking-[0.12em] uppercase text-stone-700 hover:text-stone-900 hover:border-rose-300/80 hover:shadow-[0_4px_16px_-2px_rgba(181,31,80,0.18)] hover:-translate-y-0.5 transition-all duration-300 cursor-default select-none mb-5 group">
+            <span className="relative flex h-2 sm:h-2.5 w-2 sm:w-2.5 shrink-0 items-center justify-center">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 sm:h-2.5 w-2 sm:w-2.5 bg-[#b51f50] shadow-[0_0_8px_rgba(181,31,80,0.6)]" />
+            </span>
+            <span className="transition-colors">{t("faq.tag")}</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+
+          <h2 className="faq-header-elem font-display text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-medium text-stone-900 leading-[1.25] tracking-tight">
             {t("faq.title")}
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-slate-500">
+
+          <p className="faq-header-elem mt-3.5 text-base sm:text-lg text-stone-600 leading-relaxed font-normal max-w-xl mx-auto">
             {t("faq.subtitle")}
           </p>
         </div>
 
-        {/* Accordion */}
-        <div className="space-y-3">
+        {/* 3. Accordion List with High-Contrast Readable Cards */}
+        <div className="faq-accordion-list space-y-3.5 sm:space-y-4">
           {faqs.map((faq, idx) => {
             const isOpen = openIdx === idx;
             const q = language === "mr" ? faq.qMr : faq.qEn;
@@ -64,22 +160,53 @@ export default function FranchiseFaqSection() {
             return (
               <div
                 key={idx}
-                className="rounded-2xl border border-slate-200/80 bg-slate-50/50 overflow-hidden transition-all duration-200"
+                className={`faq-accordion-item rounded-2xl border transition-all duration-200 overflow-hidden ${
+                  isOpen
+                    ? "bg-white border-stone-300 shadow-sm"
+                    : "bg-white/95 backdrop-blur-xs border-stone-200/90 shadow-2xs hover:border-stone-300 hover:bg-white"
+                }`}
               >
                 <button
+                  type="button"
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 font-display font-bold text-sm sm:text-base text-slate-900 hover:text-pink-600 transition-colors cursor-pointer"
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${idx}`}
+                  id={`faq-question-${idx}`}
+                  className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 font-display font-medium text-[15px] sm:text-base md:text-[17px] text-stone-900 group cursor-pointer"
                 >
-                  <span>{q}</span>
-                  <span className={`w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-xs shrink-0 transition-transform ${isOpen ? "rotate-180 bg-pink-50 text-pink-600 border-pink-200" : ""}`}>
-                    ▼
+                  <span
+                    className={`transition-colors duration-150 break-words flex-1 ${
+                      isOpen ? "text-[#961b3c]" : "group-hover:text-[#961b3c]"
+                    }`}
+                  >
+                    {q}
+                  </span>
+                  <span
+                    className={`w-7 h-7 rounded-full border flex items-center justify-center shrink-0 transition-transform duration-200 motion-reduce:transition-none ${
+                      isOpen
+                        ? "rotate-180 bg-[#faf2f5] text-[#961b3c] border-[#f3d9e2]"
+                        : "bg-stone-50 text-stone-500 border-stone-200 group-hover:bg-stone-100 group-hover:text-stone-800"
+                    }`}
+                  >
+                    <ChevronDownIcon className="w-4 h-4" />
                   </span>
                 </button>
-                {isOpen && (
-                  <div className="px-5 sm:px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200/40 bg-white">
-                    {a}
+
+                {/* Smooth CSS Grid Transition for Answer Body */}
+                <div
+                  id={`faq-answer-${idx}`}
+                  role="region"
+                  aria-labelledby={`faq-question-${idx}`}
+                  className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-5 sm:px-6 pb-6 pt-0 text-sm sm:text-base text-stone-700 leading-relaxed font-normal border-t border-stone-100/90 bg-white">
+                      <p className="pt-3.5 break-words">{a}</p>
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}

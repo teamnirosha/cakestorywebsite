@@ -67,7 +67,7 @@ export default function Franchise() {
               <button onClick={openModal} className="btn-primary !py-3.5 !px-8 text-base font-bold shadow-xl">
                 Start Your Franchise Journey →
               </button>
-              <Link to="/outlets" className="btn-ghost !py-3.5 !px-6 text-base font-semibold bg-white/70">
+              <Link to="/" state={{ scrollTo: "outlets" }} className="btn-ghost !py-3.5 !px-6 text-base font-semibold bg-white/70">
                 View Our Outlets
               </Link>
             </div>

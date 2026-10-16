@@ -86,7 +86,11 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-bold text-[#2a1d2e] mb-0.5">Franchise Desk</h4>
-                      <p>+91 98230 45600 / +91 20 6789 0123</p>
+                      <p>
+                        <a href="tel:+918623940744" className="hover:text-pink-600 transition font-semibold">
+                          +91 86239 40744
+                        </a>
+                      </p>
                     </div>
                   </div>
 
@@ -96,7 +100,11 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-bold text-[#2a1d2e] mb-0.5">Official Communications</h4>
-                      <p>franchise@cakestory.com • corporate@cakestory.com</p>
+                      <p>
+                        <a href="mailto:contact@cakestorydesserts.in" className="hover:text-pink-600 transition">
+                          contact@cakestorydesserts.in
+                        </a> • cakestorydesserts.in
+                      </p>
                     </div>
                   </div>
                 </div>

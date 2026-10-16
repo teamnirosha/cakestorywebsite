@@ -112,7 +112,7 @@ export type Franchise = {
   established?: string;
 };
 
-const FRANCHISE_INIT_KEY = "__cs_franchises_official_branding_v7__";
+const FRANCHISE_INIT_KEY = "__cs_franchises_verified_official_v9__";
 
 function getFranchisesRaw(): Franchise[] {
   if (!localStorage.getItem(PREFIX + FRANCHISE_INIT_KEY)) {
@@ -146,7 +146,22 @@ export const franchiseService = {
     return getFranchisesRaw().filter((f) => f.active);
   },
   get(idOrSlug: string): Franchise | undefined {
-    return getFranchisesRaw().find((f) => f.id === idOrSlug || f.slug === idOrSlug);
+    const raw = getFranchisesRaw();
+    const found = raw.find((f) => f.id === idOrSlug || f.slug === idOrSlug);
+    if (found) return found;
+
+    // Graceful backward compatibility mapping for legacy/test slugs
+    const legacyAliases: Record<string, string> = {
+      "cakestory-hinjewadi": "cakestory-wakad",
+      "cakestory-kalyani-nagar": "cakestory-viman-nagar",
+      "cakestory-satara": "cakestory-saswad",
+      "cakestory-hadapsar": "cakestory-phursungi",
+    };
+    const mappedSlug = legacyAliases[idOrSlug];
+    if (mappedSlug) {
+      return raw.find((f) => f.slug === mappedSlug || f.id === mappedSlug);
+    }
+    return undefined;
   },
   create(data: Omit<Franchise, "id">): Franchise {
     const all = getFranchisesRaw();

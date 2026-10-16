@@ -1,15 +1,72 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
+import { gsap } from "gsap";
 import { franchiseService, Franchise } from "../../services/data";
 import { useLanguage } from "../../context/LanguageContext";
+import { prefersReducedMotion, MOTION } from "../../utils/motion";
+import bakeryBg from "../../assets/hero/cakestory-hero.jpg";
+
+// Clean SVG Vector Icons
+function SearchIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.35-4.35" />
+    </svg>
+  );
+}
+
+function MapPinIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
+
+function PhoneIcon({ className = "w-3 h-3" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  );
+}
 
 const customIcon = (active: boolean) =>
   L.divIcon({
     className: "cs-marker-wrap",
     html: `<div class="cs-marker" style="${
-      active ? "transform: rotate(-45deg) scale(1.2); box-shadow: 0 12px 28px -4px rgba(230,57,113,0.8);" : ""
+      active ? "transform: rotate(-45deg) scale(1.2); box-shadow: 0 12px 28px -4px rgba(150,27,60,0.8);" : ""
     }"><span>🎂</span></div>`,
     iconSize: [36, 36],
     iconAnchor: [18, 36],
@@ -27,6 +84,59 @@ export default function OutletsMapSection() {
   const [query, setQuery] = useState("");
   const [selectedOutlet, setSelectedOutlet] = useState<Franchise | null>(null);
   const [flyPos, setFlyPos] = useState<[number, number] | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (prefersReducedMotion() || !sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // 1. Header elements sequential reveal
+      const headerElems = sectionRef.current?.querySelectorAll(".outlets-header-elem");
+      if (headerElems && headerElems.length > 0) {
+        gsap.fromTo(
+          headerElems,
+          { opacity: 0, y: 16 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: MOTION.duration.reveal,
+            stagger: 0.12,
+            ease: MOTION.ease.default,
+            clearProps: "opacity,transform",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 85%",
+              once: true,
+            },
+          }
+        );
+      }
+
+      // 2. Zone summary cards reveal
+      const zoneCards = sectionRef.current?.querySelectorAll(".zone-summary-card");
+      if (zoneCards && zoneCards.length > 0) {
+        gsap.fromTo(
+          zoneCards,
+          { opacity: 0, y: 14 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: MOTION.duration.reveal,
+            stagger: 0.06,
+            ease: MOTION.ease.default,
+            clearProps: "opacity,transform",
+            scrollTrigger: {
+              trigger: ".zone-summary-grid",
+              start: "top 90%",
+              once: true,
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const allOutlets = franchiseService.listActive();
   const zones = ["all", "West Pune", "South Pune", "East Pune", "PCMC", "Satara"];
@@ -55,34 +165,59 @@ export default function OutletsMapSection() {
     setFlyPos([o.latitude, o.longitude]);
   };
 
-  // Zone counts for summary bottom cards (like Screenshot 5)
+  // Zone counts for summary bottom cards
   const zoneSummary = [
-    { zone: "West Pune", count: allOutlets.filter((o) => o.zone === "West Pune").length, color: "text-amber-500", dot: "bg-amber-500" },
-    { zone: "South Pune", count: allOutlets.filter((o) => o.zone === "South Pune").length, color: "text-purple-500", dot: "bg-purple-500" },
-    { zone: "East Pune", count: allOutlets.filter((o) => o.zone === "East Pune").length, color: "text-rose-500", dot: "bg-rose-500" },
-    { zone: "PCMC", count: allOutlets.filter((o) => o.zone === "PCMC").length, color: "text-blue-500", dot: "bg-blue-500" },
-    { zone: "Satara", count: allOutlets.filter((o) => o.zone === "Satara" || o.city.toLowerCase().includes("satara")).length, color: "text-red-500", dot: "bg-red-500" },
+    { zone: "West Pune", count: allOutlets.filter((o) => o.zone === "West Pune").length, dot: "bg-amber-600" },
+    { zone: "South Pune", count: allOutlets.filter((o) => o.zone === "South Pune").length, dot: "bg-rose-700" },
+    { zone: "East Pune", count: allOutlets.filter((o) => o.zone === "East Pune").length, dot: "bg-rose-900" },
+    { zone: "PCMC", count: allOutlets.filter((o) => o.zone === "PCMC").length, dot: "bg-stone-700" },
+    { zone: "Satara", count: allOutlets.filter((o) => o.zone === "Satara" || o.city.toLowerCase().includes("satara")).length, dot: "bg-amber-700" },
   ];
 
   return (
-    <section id="outlets" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50/60 border-t border-slate-100">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-3 border border-blue-100">
-            {t("outlets.tag")}
+    <section
+      ref={sectionRef}
+      id="outlets"
+      aria-label="Explore Outlet Locations"
+      className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf7f2] text-stone-800 border-t border-[#eee6dc] relative overflow-hidden"
+    >
+      {/* 1. Context-Relevant Photographic Background with Soft Warm Ivory Overlay */}
+      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+        <img
+          src={bakeryBg}
+          alt=""
+          role="presentation"
+          loading="lazy"
+          className="w-full h-full object-cover object-[center_35%] filter blur-[1px] opacity-35 scale-105"
+        />
+        {/* Soft Warm Ivory/Cream Gradient Overlays (80-92% opacity) for Pristine Readability */}
+        <div className="absolute inset-0 bg-[#faf7f2]/88" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#faf7f2] via-[#faf7f2]/82 to-[#faf7f2]" />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* 2. Section Header: Refined Editorial Typography & Subtle Eyebrow Label */}
+        <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
+          <div className="outlets-header-elem inline-flex items-center gap-2.5 px-4.5 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/95 backdrop-blur-md border border-stone-200/90 shadow-[0_2px_12px_-2px_rgba(181,31,80,0.12)] text-xs sm:text-[13.5px] font-bold tracking-[0.12em] uppercase text-stone-700 hover:text-stone-900 hover:border-rose-300/80 hover:shadow-[0_4px_16px_-2px_rgba(181,31,80,0.18)] hover:-translate-y-0.5 transition-all duration-300 cursor-default select-none mb-5 group">
+            <span className="relative flex h-2 sm:h-2.5 w-2 sm:w-2.5 shrink-0 items-center justify-center">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 sm:h-2.5 w-2 sm:w-2.5 bg-[#b51f50] shadow-[0_0_8px_rgba(181,31,80,0.6)]" />
+            </span>
+            <span className="transition-colors">{t("outlets.tag")}</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight">
+
+          <h2 className="outlets-header-elem font-display text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-medium text-stone-900 leading-[1.25] tracking-tight">
             {t("outlets.title")}
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-slate-500">
+
+          <p className="outlets-header-elem mt-3.5 text-base sm:text-lg text-stone-600 leading-relaxed font-normal max-w-xl mx-auto">
             {t("outlets.subtitle")}
           </p>
         </div>
 
-        {/* Zone Filters & Search Bar Strip (Screenshot 5) */}
+        {/* 3. Zone Filters & Search Bar Strip */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
-          {/* Zone Chips */}
+          {/* Zone Filter Chips */}
           <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
             {zones.map((z) => {
               const isSelected = activeZone === z;
@@ -90,47 +225,53 @@ export default function OutletsMapSection() {
                 <button
                   key={z}
                   onClick={() => setActiveZone(z)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                  aria-pressed={isSelected}
+                  className={`px-3.5 py-1.5 rounded-full text-xs sm:text-[13.5px] font-medium transition-all cursor-pointer ${
                     isSelected
-                      ? "bg-slate-900 text-white shadow-sm"
-                      : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
+                      ? "bg-stone-900 text-white shadow-2xs"
+                      : "bg-white/95 text-stone-700 border border-stone-200/90 hover:bg-stone-50"
                   }`}
                 >
-                  {z === "all" ? t("outlets.allZones") : z}
+                  {z === "all" ? t("outlets.allZones") : t(`outlets.zone_${z.replace(/\s+/g, "")}`, z)}
                 </button>
               );
             })}
           </div>
 
-          {/* Search Box */}
+          {/* Search Input Box */}
           <div className="w-full md:w-72 relative">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs">🔍</span>
+            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400">
+              <SearchIcon className="w-4 h-4" />
+            </span>
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={t("outlets.search")}
-              className="w-full pl-9 pr-4 py-2 text-xs rounded-full bg-white border border-slate-200 focus:outline-none focus:border-pink-500 transition shadow-2xs"
+              aria-label={t("outlets.search")}
+              className="w-full pl-9 pr-4 py-2 text-xs sm:text-sm rounded-full bg-white/95 border border-stone-200/90 text-stone-800 placeholder-stone-400 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500/30 transition shadow-2xs"
             />
           </div>
         </div>
 
-        {/* Side-by-Side Interactive Experience (Screenshot 5) */}
-        <div className="grid lg:grid-cols-12 gap-6 bg-white rounded-3xl border border-slate-200/80 shadow-xl overflow-hidden p-3.5 sm:p-5">
-          {/* Left: Scrollable Outlets List Card */}
-          <div className="lg:col-span-5 flex flex-col h-[460px] bg-slate-50/60 rounded-2xl border border-slate-100 overflow-hidden">
-            {/* Header */}
-            <div className="p-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white flex items-center justify-between shrink-0 shadow-xs">
+        {/* 4. Side-by-Side Interactive Outlets Showcase Card */}
+        <div className="grid lg:grid-cols-12 gap-5 sm:gap-6 bg-white/95 rounded-3xl border border-stone-200/90 shadow-md p-3.5 sm:p-5">
+          {/* Left Column: Scrollable Outlets List */}
+          <div className="lg:col-span-5 flex flex-col h-[460px] bg-stone-50/80 rounded-2xl border border-stone-200/80 overflow-hidden">
+            {/* Header: Signature CakeStory Deep Berry Banner */}
+            <div className="p-4 bg-[#8a1836] text-white flex items-center justify-between shrink-0 shadow-2xs">
               <div className="flex items-center gap-2">
-                <span>📍</span>
-                <span className="font-display font-bold text-sm tracking-wide">{t("outlets.listTitle")}</span>
+                <MapPinIcon className="w-4 h-4 text-rose-200" />
+                <span className="font-display font-medium text-sm sm:text-base tracking-wide">
+                  {t("outlets.listTitle")}
+                </span>
               </div>
-              <span className="text-[11px] bg-white/20 px-2.5 py-0.5 rounded-full font-semibold">
-                {filtered.length} Locations
+              <span className="text-xs bg-white/20 px-2.5 py-0.5 rounded-full font-medium">
+                {filtered.length} {t("outlets.locations")}
               </span>
             </div>
 
-            {/* List */}
+            {/* Scrollable Outlets List */}
             <div className="flex-1 overflow-y-auto p-3 space-y-2.5 scrollbar-thin">
               {filtered.map((outlet) => {
                 const isSelected = selectedOutlet?.id === outlet.id;
@@ -138,35 +279,40 @@ export default function OutletsMapSection() {
                   <div
                     key={outlet.id}
                     onClick={() => selectOutlet(outlet)}
-                    className={`p-3 rounded-xl transition-all cursor-pointer border flex flex-col justify-between ${
+                    className={`p-3.5 rounded-xl transition-all cursor-pointer border flex flex-col justify-between ${
                       isSelected
-                        ? "bg-white border-pink-500 shadow-md translate-x-1"
-                        : "bg-white/90 border-slate-200/80 hover:border-pink-300 hover:bg-white"
+                        ? "bg-[#faf2f5] border-[#961b3c] shadow-xs translate-x-0.5"
+                        : "bg-white border-stone-200/80 hover:border-stone-300 hover:bg-stone-50/60"
                     }`}
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <span className="w-2 h-2 rounded-full bg-pink-500 shrink-0" />
-                          <h4 className="font-display font-bold text-xs sm:text-sm text-slate-900 truncate">
+                          <span
+                            className={`w-2 h-2 rounded-full shrink-0 ${
+                              isSelected ? "bg-[#961b3c]" : "bg-rose-500"
+                            }`}
+                          />
+                          <h4 className="font-display font-medium text-sm sm:text-[15px] text-stone-900 truncate">
                             {outlet.name}
                           </h4>
                         </div>
-                        <p className="text-[11px] text-slate-500 truncate mt-0.5 pl-3.5">
-                          📞 {outlet.phone}
+                        <p className="text-xs sm:text-[13px] text-stone-600 truncate mt-1 pl-3.5 flex items-center gap-1">
+                          <PhoneIcon className="w-3.5 h-3.5 text-stone-400 shrink-0" />
+                          <span>{outlet.phone}</span>
                         </p>
                       </div>
 
                       <Link
                         to={`/outlets/${outlet.slug || outlet.id}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="text-[10px] font-bold text-pink-600 hover:underline uppercase tracking-wider shrink-0 bg-pink-50 px-2 py-1 rounded-md border border-pink-100"
+                        className="text-xs font-semibold text-[#961b3c] hover:underline uppercase tracking-wider shrink-0 bg-[#faf2f5] px-2.5 py-1 rounded-md border border-[#f3d9e2]"
                       >
                         {t("outlets.viewDetails")} →
                       </Link>
                     </div>
 
-                    <p className="text-[10px] text-slate-400 truncate mt-1.5 pl-3.5">
+                    <p className="text-xs sm:text-[13px] text-stone-600 truncate mt-1.5 pl-3.5">
                       {outlet.address}
                     </p>
                   </div>
@@ -175,8 +321,8 @@ export default function OutletsMapSection() {
             </div>
           </div>
 
-          {/* Right: Leaflet Map Container */}
-          <div className="lg:col-span-7 h-[360px] sm:h-[460px] rounded-2xl overflow-hidden border border-slate-200 relative shadow-inner">
+          {/* Right Column: Leaflet Map Container */}
+          <div className="lg:col-span-7 h-[360px] sm:h-[460px] rounded-2xl overflow-hidden border border-stone-200 relative shadow-inner">
             <MapContainer
               center={[18.5204, 73.8567]}
               zoom={11}
@@ -198,15 +344,15 @@ export default function OutletsMapSection() {
                   }}
                 >
                   <Popup>
-                    <div className="p-1 text-slate-900">
-                      <h4 className="font-bold text-xs">{o.name}</h4>
-                      <p className="text-[10px] text-slate-600 mt-0.5">{o.address}</p>
-                      <p className="text-[10px] text-pink-600 font-semibold mt-0.5">📞 {o.phone}</p>
+                    <div className="p-1 text-stone-900">
+                      <h4 className="font-display font-medium text-sm text-stone-900">{o.name}</h4>
+                      <p className="text-xs text-stone-600 mt-0.5">{o.address}</p>
+                      <p className="text-xs text-[#961b3c] font-medium mt-0.5">📞 {o.phone}</p>
                       <Link
                         to={`/outlets/${o.slug || o.id}`}
-                        className="inline-block text-[10px] font-bold text-white bg-pink-600 px-2 py-0.5 rounded mt-1.5"
+                        className="inline-block text-xs font-semibold text-white bg-[#961b3c] px-3 py-1 rounded mt-1.5 hover:bg-[#7d1430] transition-colors"
                       >
-                        View Store Page →
+                        {t("outlets.viewStore")} →
                       </Link>
                     </div>
                   </Popup>
@@ -216,19 +362,23 @@ export default function OutletsMapSection() {
           </div>
         </div>
 
-        {/* Zone Count Summary Cards (Screenshot 5) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 mt-8">
+        {/* 5. Regional Zone Count Summary Cards */}
+        <div className="zone-summary-grid grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 mt-8">
           {zoneSummary.map((z) => (
             <div
               key={z.zone}
               onClick={() => setActiveZone(z.zone)}
-              className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:shadow-md transition text-center cursor-pointer hover:border-pink-300"
+              className="zone-summary-card p-4 rounded-2xl bg-white/95 border border-stone-200/90 shadow-2xs hover:border-stone-300 hover:shadow-xs transition text-center cursor-pointer"
             >
               <div className="flex items-center justify-center gap-1.5 mb-1">
                 <span className={`w-2 h-2 rounded-full ${z.dot}`} />
-                <span className={`font-display text-2xl font-bold ${z.color}`}>{z.count}</span>
+                <span className="font-display text-2xl font-medium text-stone-900">
+                  {z.count}
+                </span>
               </div>
-              <div className="text-xs font-semibold text-slate-700">{z.zone}</div>
+              <div className="text-xs sm:text-sm font-medium text-stone-700">
+                {t(`outlets.zone_${z.zone.replace(/\s+/g, "")}`, z.zone)}
+              </div>
             </div>
           ))}
         </div>

@@ -91,7 +91,7 @@ export default function CakeDetail() {
 
                 {/* CTAs */}
                 <div className="pt-3 flex flex-wrap gap-3">
-                  <Link to="/outlets" className="btn-primary text-xs !py-3 !px-6 font-bold shadow-md">
+                  <Link to="/" state={{ scrollTo: "outlets" }} className="btn-primary text-xs !py-3 !px-6 font-bold shadow-md">
                     Find Outlets Serving This Creation 📍
                   </Link>
                   <button onClick={openModal} className="btn-ghost text-xs !py-3 !px-6 font-semibold">

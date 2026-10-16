@@ -10,7 +10,7 @@ import FranchiseLeadSection from "../components/home/FranchiseLeadSection";
 
 export default function Home() {
   return (
-    <PageShell>
+    <PageShell noTopPadding>
       {/* 1. Animated Preloader inspired by reference screenshot */}
       <Preloader />
 

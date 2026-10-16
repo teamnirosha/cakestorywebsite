@@ -64,7 +64,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Fraunces', Georgia, serif;
   letter-spacing: -0.015em;
   font-weight: 600;
-  color: var(--cs-ink);
   font-optical-sizing: auto;
 }
 
@@ -77,6 +76,31 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Fraunces', Georgia, serif;
   font-style: italic;
   font-weight: 400;
+}
+
+/* Regal, Stylish Marathi & Devanagari Typography */
+.lang-mr,
+[lang="mr"] {
+  font-family: 'Noto Serif Devanagari', 'Mukta', serif;
+}
+
+.lang-mr h1,
+.lang-mr h2,
+.lang-mr h3,
+.lang-mr h4,
+.lang-mr .font-display {
+  font-family: 'Rozha One', 'Noto Serif Devanagari', serif !important;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  line-height: 1.25;
+}
+
+.lang-mr p,
+.lang-mr span,
+.lang-mr a,
+.lang-mr button,
+.lang-mr div {
+  font-family: 'Noto Serif Devanagari', 'Mukta', sans-serif;
 }
 
 .eyebrow {
@@ -407,3 +431,100 @@ textarea.input-field {
     animation: none !important;
   }
 }
+
+/* Premium Devanagari Typography for Marathi (Noto Sans Devanagari + Mukta + Poppins) */
+html.lang-mr {
+  font-size: 102%;
+}
+
+html.lang-mr,
+html.lang-mr body,
+html.lang-mr h1,
+html.lang-mr h2,
+html.lang-mr h3,
+html.lang-mr h4,
+html.lang-mr h5,
+html.lang-mr h6,
+html.lang-mr p,
+html.lang-mr span,
+html.lang-mr button,
+html.lang-mr input,
+html.lang-mr select,
+html.lang-mr textarea,
+html.lang-mr .font-display {
+  font-family: 'Noto Sans Devanagari', 'Mukta', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  letter-spacing: 0.005em;
+  word-spacing: 0.02em;
+}
+
+html.lang-mr h1 {
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+}
+
+html.lang-mr h2 {
+  font-weight: 600 !important;
+  line-height: 1.38 !important;
+}
+
+html.lang-mr h3 {
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+}
+
+html.lang-mr h4,
+html.lang-mr h5,
+html.lang-mr h6 {
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+}
+
+html.lang-mr p,
+html.lang-mr li,
+html.lang-mr label {
+  font-weight: 400;
+  line-height: 1.65 !important;
+}
+
+html.lang-mr button,
+html.lang-mr input,
+html.lang-mr select {
+  line-height: 1.5 !important;
+}
+
+/* Modal Entrance & Motion Tokens */
+@keyframes modalBackdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalContentPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-backdrop-anim {
+  animation: modalBackdropFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal-card-anim {
+  animation: modalContentPopIn 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-backdrop-anim,
+  .modal-card-anim {
+    animation: none !important;
+  }
+}
+
