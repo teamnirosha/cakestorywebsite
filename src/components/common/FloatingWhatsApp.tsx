@@ -3,7 +3,8 @@ import { useLocation } from "react-router-dom";
 import { franchiseService } from "../../services/data";
 import { useLanguage } from "../../context/LanguageContext";
 
-const CENTRAL_WHATSAPP_PHONE = "919823045671";
+// Official CakeStory Owner & Franchise Management Team Helpline
+const OWNER_FRANCHISE_WHATSAPP_PHONE = "918623940744"; // +91 86239 40744
 
 function WhatsAppIcon({ className = "w-7 h-7" }: { className?: string }) {
   return (
@@ -21,10 +22,11 @@ function WhatsAppIcon({ className = "w-7 h-7" }: { className?: string }) {
 /**
  * FloatingWhatsApp — Active, responsive, context-aware WhatsApp chat widget.
  * Features:
- * - Active radar ping and online status badge
- * - Smart vertical lifting when scrolled into footer (never obscures Team Nirosha credit)
- * - Interactive greeting tooltip
- * - Context-aware messaging for outlet pages vs. general inquiry
+ * - On main & brand pages: Maps directly to the CakeStory Owner & Franchise Team helpline (+91 86239 40744).
+ * - On store/outlet pages: Dynamically switches to that specific store's / franchise owner's phone number.
+ * - Active radar ping & online status indicator.
+ * - Smart vertical lifting when scrolled into footer (never obscures Team Nirosha credit).
+ * - Bilingual support (English & Marathi).
  */
 export default function FloatingWhatsApp() {
   const { pathname } = useLocation();
@@ -33,17 +35,19 @@ export default function FloatingWhatsApp() {
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
 
-  // Detect current outlet if on outlet page
+  // Detect current outlet if on store/outlet page (supports /outlets/:id and /stores/:id)
   const currentOutlet = useMemo(() => {
-    const match = pathname.match(/\/outlets\/([^/]+)/);
+    const match = pathname.match(/\/(?:outlets|stores|store)\/([^/]+)/);
     if (!match) return null;
     const slugOrId = decodeURIComponent(match[1]);
     return franchiseService.get(slugOrId) || null;
   }, [pathname]);
 
-  // Compute clean WhatsApp destination URL
+  // Compute clean WhatsApp destination URL & prefilled context message
   const whatsappUrl = useMemo(() => {
-    let digits = CENTRAL_WHATSAPP_PHONE;
+    let digits = OWNER_FRANCHISE_WHATSAPP_PHONE;
+
+    // If on a specific store/outlet page, dynamically map to that store's phone number
     if (currentOutlet && currentOutlet.phone) {
       const clean = currentOutlet.phone.replace(/\D/g, "");
       if (clean.length >= 10) {
@@ -53,11 +57,11 @@ export default function FloatingWhatsApp() {
 
     const message = currentOutlet
       ? language === "mr"
-        ? `नमस्कार CakeStory Desserts (${currentOutlet.outletName || currentOutlet.name}), मला ताज्या सेलिब्रेशन केकबद्दल चौकशी करायची आहे.`
+        ? `नमस्कार CakeStory Desserts (${currentOutlet.outletName || currentOutlet.name}), मला ताज्या सेलिब्रेशन केकबद्दल चौकशी व ऑर्डर करायची आहे.`
         : `Hello CakeStory Desserts (${currentOutlet.outletName || currentOutlet.name}), I would like to order fresh celebration cakes.`
       : language === "mr"
-      ? `नमस्कार CakeStory Desserts, मला सेलिब्रेशन केक्स आणि ऑर्डरबद्दल चौकशी करायची आहे.`
-      : `Hello CakeStory Desserts, I would like to enquire about ordering fresh celebration cakes.`;
+      ? `नमस्कार CakeStory Desserts मालक आणि फ्रँचायझी टीम, मला अधिक माहितीसाठी संपर्क करायचा आहे.`
+      : `Hello CakeStory Desserts Owner & Franchise Team, I would like to enquire about CakeStory.`;
 
     return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
   }, [currentOutlet, language]);
@@ -99,13 +103,13 @@ export default function FloatingWhatsApp() {
   }, [hasInteracted]);
 
   const targetTitle = currentOutlet
-    ? `Order from CakeStory ${currentOutlet.outletName || currentOutlet.name}`
-    : "Chat with CakeStory Desserts on WhatsApp";
+    ? `Order from CakeStory ${currentOutlet.outletName || currentOutlet.name} on WhatsApp`
+    : "Chat with CakeStory Owner & Franchise Team on WhatsApp (+91 86239 40744)";
 
   return (
     <div
-      className={`fixed right-5 sm:right-7 z-50 flex flex-col items-end transition-all duration-300 ease-out pointer-events-none ${
-        isNearFooter ? "bottom-24 sm:bottom-28" : "bottom-6 sm:bottom-7"
+      className={`fixed right-3.5 xs:right-5 sm:right-7 z-50 flex flex-col items-end transition-all duration-300 ease-out pointer-events-none ${
+        isNearFooter ? "bottom-24 sm:bottom-28" : "bottom-5 sm:bottom-7"
       }`}
       aria-live="polite"
     >
@@ -117,36 +121,68 @@ export default function FloatingWhatsApp() {
             : "opacity-0 scale-95 translate-y-2 pointer-events-none"
         }`}
       >
-        <div className="bg-white dark:bg-[#1c121e] rounded-2xl p-3.5 shadow-2xl border border-emerald-100 dark:border-white/10 text-slate-900 dark:text-white text-xs max-w-[230px] relative backdrop-blur-md">
+        <div className="bg-white dark:bg-[#1c121e] rounded-2xl p-3.5 shadow-2xl border border-emerald-100 dark:border-white/10 text-slate-900 dark:text-white text-xs max-w-[245px] relative backdrop-blur-md">
           <div className="flex items-center justify-between gap-2 mb-1.5">
             <div className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Online • Instant Reply</span>
+              <span>
+                {currentOutlet
+                  ? language === "mr"
+                    ? "ऑनलाइन • स्टोअर काउंटर"
+                    : "Online • Store Counter"
+                  : language === "mr"
+                  ? "ऑनलाइन • फ्रँचायझी टीम"
+                  : "Online • Franchise Team"}
+              </span>
             </div>
             <button
               onClick={() => {
                 setIsTooltipOpen(false);
                 setHasInteracted(true);
               }}
-              className="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 text-xs px-1"
+              className="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 text-xs px-1 cursor-pointer"
               aria-label="Dismiss tooltip"
             >
               ✕
             </button>
           </div>
+
           <p className="font-semibold text-[13px] leading-snug">
             {currentOutlet
-              ? `Chat with ${currentOutlet.outletName || currentOutlet.name}`
-              : "Order Fresh Celebration Cakes"}
+              ? language === "mr"
+                ? `केकस्टोरी ${currentOutlet.outletName || currentOutlet.name}`
+                : `Chat with CakeStory ${currentOutlet.outletName || currentOutlet.name}`
+              : language === "mr"
+              ? "केकस्टोरी मालक व फ्रँचायझी टीम"
+              : "CakeStory Owner & Franchise Team"}
           </p>
+
+          <p className="text-[11px] text-stone-500 dark:text-stone-300 mt-0.5 leading-tight">
+            {currentOutlet
+              ? language === "mr"
+                ? "स्थानिक आऊटलेटवरून थेट ताजे केक्स ऑर्डर करा."
+                : "Order fresh celebration cakes directly from this outlet."
+              : language === "mr"
+              ? "थेट फ्रँचायझी मॅनेजमेंट आणि मालकांशी बोला."
+              : "Chat directly for franchise & business queries."}
+          </p>
+
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setHasInteracted(true)}
-            className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-[11px] shadow-sm transition-colors"
+            className="mt-2.5 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-[11px] shadow-sm transition-colors cursor-pointer"
           >
-            <span>Start WhatsApp Chat</span>
+            <span>
+              {currentOutlet
+                ? language === "mr"
+                  ? "व्हॉट्सॲपवर ऑर्डर करा"
+                  : "Order on WhatsApp"
+                : language === "mr"
+                ? "फ्रँचायझी टीमशी बोला"
+                : "Chat with Franchise Team"}
+            </span>
             <span aria-hidden="true">→</span>
           </a>
           {/* Tooltip Tail */}
@@ -166,11 +202,11 @@ export default function FloatingWhatsApp() {
           onClick={() => setHasInteracted(true)}
           onMouseEnter={() => setIsTooltipOpen(true)}
           onMouseLeave={() => setIsTooltipOpen(false)}
-          className="relative w-14 h-14 sm:w-15 sm:h-15 rounded-full bg-gradient-to-tr from-[#1ea94e] via-[#25D366] to-[#34e77b] text-white shadow-xl shadow-emerald-950/40 hover:shadow-2xl hover:shadow-emerald-500/50 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-emerald-400/50 cursor-pointer"
+          className="relative w-13 h-13 sm:w-15 sm:h-15 rounded-full bg-gradient-to-tr from-[#1ea94e] via-[#25D366] to-[#34e77b] text-white shadow-xl shadow-emerald-950/40 hover:shadow-2xl hover:shadow-emerald-500/50 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-emerald-400/50 cursor-pointer"
           title={targetTitle}
           aria-label={targetTitle}
         >
-          <WhatsAppIcon className="w-7 h-7 sm:w-8 sm:h-8 text-white drop-shadow-xs" />
+          <WhatsAppIcon className="w-6.5 h-6.5 sm:w-8 sm:h-8 text-white drop-shadow-xs" />
 
           {/* Active Status Jewel Badge */}
           <span className="absolute top-0 right-0 flex h-4 w-4">

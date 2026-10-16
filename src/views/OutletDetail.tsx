@@ -299,7 +299,7 @@ export default function OutletDetail() {
     <PageShell noTopPadding>
       <div
         ref={containerRef}
-        className="w-full bg-[#fdfaf7] dark:bg-[#0c0810] text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-300 overflow-x-hidden"
+        className="w-full bg-[#fdfaf7] dark:bg-[#0c0810] text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-300"
       >
         {/* =========================================================
             1. SEAMLESS ROYAL HERO (ZERO GAP BELOW FLOATING NAVBAR)
@@ -386,12 +386,12 @@ export default function OutletDetail() {
                 </p>
 
                 {/* 3 Active Interactive Action Buttons */}
-                <div className="flex flex-wrap items-center gap-3.5 pt-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3.5 pt-2 w-full sm:w-auto">
 
                   {/* Button 1: Call Store (Glowing Royal Blue / Rose) */}
                   <a
                     href={`tel:${cleanPhoneDigits}`}
-                    className="group relative px-6 py-3.5 rounded-full bg-gradient-to-r from-[#e63971] via-[#d42d65] to-[#b31b51] hover:from-[#ff4a86] hover:to-[#c7225c] text-white font-bold text-sm sm:text-base flex items-center gap-2.5 shadow-xl shadow-rose-950/50 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                    className="group relative w-full sm:w-auto justify-center px-6 py-3.5 rounded-full bg-gradient-to-r from-[#e63971] via-[#d42d65] to-[#b31b51] hover:from-[#ff4a86] hover:to-[#c7225c] text-white font-bold text-sm sm:text-base flex items-center gap-2.5 shadow-xl shadow-rose-950/50 hover:scale-105 active:scale-95 transition-all cursor-pointer"
                   >
                     <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:rotate-12 transition-transform">
                       <PhoneIcon className="w-3.5 h-3.5 text-white" />
@@ -404,7 +404,7 @@ export default function OutletDetail() {
                     href={whatsappOrderUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group px-6 py-3.5 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-bold text-sm sm:text-base flex items-center gap-2.5 shadow-xl shadow-emerald-950/40 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                    className="group w-full sm:w-auto justify-center px-6 py-3.5 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-bold text-sm sm:text-base flex items-center gap-2.5 shadow-xl shadow-emerald-950/40 hover:scale-105 active:scale-95 transition-all cursor-pointer"
                   >
                     <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                       <WhatsAppIcon className="w-3.5 h-3.5 text-white" />
@@ -417,7 +417,7 @@ export default function OutletDetail() {
                     href={directionsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-amber-200 border border-amber-300/40 font-bold text-sm sm:text-base flex items-center gap-2.5 hover:text-white hover:border-amber-300 transition-all cursor-pointer backdrop-blur-md"
+                    className="w-full sm:w-auto justify-center px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-amber-200 border border-amber-300/40 font-bold text-sm sm:text-base flex items-center gap-2.5 hover:text-white hover:border-amber-300 transition-all cursor-pointer backdrop-blur-md"
                   >
                     <NavigationIcon className="w-4 h-4 text-amber-300" />
                     <span>{t("outletDetail.getDirectionsBtn")}</span>

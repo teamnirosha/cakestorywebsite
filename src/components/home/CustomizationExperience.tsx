@@ -178,7 +178,7 @@ export default function CustomizationExperience() {
 
           <h2
             ref={headlineRef}
-            className="font-display text-3.5xl sm:text-5xl lg:text-6xl text-[#2a1d2e] font-bold leading-tight tracking-tight break-words"
+            className="font-display text-2xl sm:text-4xl lg:text-5xl text-[#2a1d2e] font-bold leading-tight tracking-tight break-words"
           >
             IF YOU CAN IMAGINE IT, <span className="gradient-text italic">WE WILL CREATE IT.</span>
           </h2>
@@ -317,16 +317,16 @@ export default function CustomizationExperience() {
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 shrink-0 w-full sm:w-auto">
             <button
               onClick={openModal}
-              className="btn-primary glass-shine !py-3.5 !px-7 text-xs sm:text-sm font-bold shadow-lg shadow-pink-300/50"
+              className="btn-primary glass-shine w-full sm:w-auto justify-center !py-3.5 !px-7 text-xs sm:text-sm font-bold shadow-lg shadow-pink-300/50"
             >
               EXPLORE FRANCHISE →
             </button>
             <Link
               to="/franchise"
-              className="btn-ghost !py-3.5 !px-6 text-xs sm:text-sm font-semibold border border-pink-200"
+              className="btn-ghost w-full sm:w-auto justify-center !py-3.5 !px-6 text-xs sm:text-sm font-semibold border border-pink-200"
             >
               Learn Partner System
             </Link>

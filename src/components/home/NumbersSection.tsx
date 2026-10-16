@@ -143,7 +143,7 @@ function StatCard({ stat, idx }: { stat: StatItem; idx: number }) {
   }, [stat.val, idx]);
 
   return (
-    <div className="number-card-item p-6 sm:p-7 rounded-2xl bg-white border border-stone-200/90 shadow-2xs hover:border-stone-300 hover:-translate-y-0.5 transition-all text-center flex flex-col items-center justify-between">
+    <div className="number-card-item p-4 sm:p-7 rounded-2xl bg-white border border-stone-200/90 shadow-2xs hover:border-stone-300 hover:-translate-y-0.5 transition-all text-center flex flex-col items-center justify-between">
       {/* Subtle Icon Container */}
       <div className="w-10 h-10 rounded-xl bg-stone-100/70 border border-stone-200/80 flex items-center justify-center text-rose-900 mb-4">
         <IconComponent className="w-5 h-5" />

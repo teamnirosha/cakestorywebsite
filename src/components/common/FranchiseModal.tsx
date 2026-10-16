@@ -263,7 +263,7 @@ export function FranchiseModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
     >
       {/* Modal Card: Warm Ivory Surface (#FFFAF4) with Fine Border (#E8DED4) & Dark Plum Text (#21161D) */}
       <div
-        className="relative w-full max-w-2xl lg:max-w-[760px] bg-[#FFFAF4] rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-9 shadow-2xl border border-[#E8DED4] my-auto modal-card-anim max-h-[92vh] overflow-y-auto"
+        className="relative w-full max-w-2xl lg:max-w-[760px] bg-[#FFFAF4] rounded-2xl sm:rounded-3xl p-4.5 xs:p-6 sm:p-8 lg:p-9 shadow-2xl border border-[#E8DED4] my-auto modal-card-anim max-h-[92vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button: Subtle & Accessible with Visible Berry Focus State */}

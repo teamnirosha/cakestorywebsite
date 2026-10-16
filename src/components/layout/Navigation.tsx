@@ -277,7 +277,7 @@ export default function Navigation() {
         }`}
       >
         <div
-          className={`w-full mx-auto px-4 sm:px-6 transition-all duration-500 ease-out ${
+          className={`w-full mx-auto px-2.5 xs:px-3.5 sm:px-6 transition-all duration-500 ease-out ${
             scrolled ? "max-w-5xl lg:max-w-6xl" : "max-w-7xl"
           }`}
         >
@@ -285,19 +285,19 @@ export default function Navigation() {
             aria-label="Main Navigation"
             className={`pointer-events-auto rounded-full flex items-center justify-between transition-all duration-500 ease-out ${
               scrolled
-                ? "px-3.5 sm:px-4.5 py-1.5 bg-[#120516]/92 backdrop-blur-2xl border border-white/25 shadow-[0_16px_45px_-5px_rgba(0,0,0,0.65)] ring-1 ring-white/10"
-                : "px-4 sm:px-6 py-2 bg-black/55 backdrop-blur-xl border border-white/20 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.35)]"
+                ? "px-2.5 xs:px-3 sm:px-4.5 py-1.5 bg-[#120516]/92 backdrop-blur-2xl border border-white/25 shadow-[0_16px_45px_-5px_rgba(0,0,0,0.65)] ring-1 ring-white/10"
+                : "px-2.5 xs:px-3.5 sm:px-6 py-1.5 sm:py-2 bg-black/55 backdrop-blur-xl border border-white/20 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.35)]"
             }`}
           >
             {/* Brand Logo & Refined Typographic Wordmark */}
-            <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
               <Link
                 to="/"
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavClick("home");
                 }}
-                className="flex items-center gap-2.5 sm:gap-3 group py-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-2xl"
+                className="flex items-center gap-1.5 sm:gap-3 group py-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-2xl"
                 aria-label="CakeStory Desserts Homepage"
               >
                 <div className="relative transition-transform duration-300 group-hover:scale-105 flex items-center py-0.5 shrink-0">
@@ -305,7 +305,7 @@ export default function Navigation() {
                     src="/assets/logo/cs-logo.png"
                     alt="CakeStory Desserts - Every Flavour Has A Story"
                     className={`w-auto object-contain drop-shadow-md transition-all duration-500 ease-out ${
-                      scrolled ? "h-7.5 sm:h-8 lg:h-8.5" : "h-9 sm:h-9.5 lg:h-10"
+                      scrolled ? "h-6.5 xs:h-7 sm:h-8 lg:h-8.5" : "h-7.5 xs:h-8 sm:h-9.5 lg:h-10"
                     }`}
                   />
                 </div>
@@ -313,22 +313,22 @@ export default function Navigation() {
                 {/* Refined Brand Wordmark Beside Logo */}
                 <div className="flex flex-col justify-center select-none text-left">
                   <span
-                    className={`font-display font-medium uppercase tracking-[0.18em] leading-none text-[#fffaf4] transition-all duration-500 ease-out ${
+                    className={`font-display font-medium uppercase tracking-[0.15em] sm:tracking-[0.18em] leading-none text-[#fffaf4] transition-all duration-500 ease-out ${
                       scrolled
-                        ? "text-[11.5px] sm:text-[12px] lg:text-[12.5px]"
-                        : "text-[12.5px] sm:text-[13.5px] lg:text-[14.5px]"
+                        ? "text-[10.5px] xs:text-[11.5px] sm:text-[12px] lg:text-[12.5px]"
+                        : "text-[11.5px] xs:text-[12px] sm:text-[13.5px] lg:text-[14.5px]"
                     }`}
                   >
                     CAKESTORY
                   </span>
                   <div
-                    className={`flex items-center gap-1.5 transition-all duration-500 ease-out ${
+                    className={`flex items-center gap-1 sm:gap-1.5 transition-all duration-500 ease-out ${
                       scrolled ? "mt-0.5" : "mt-0.5 sm:mt-1"
                     }`}
                   >
                     <span
-                      className={`font-sans font-medium uppercase tracking-[0.26em] leading-none text-[#e88d9f] transition-all duration-500 ease-out ${
-                        scrolled ? "text-[7px] sm:text-[8px]" : "text-[8px] sm:text-[9px]"
+                      className={`font-sans font-medium uppercase tracking-[0.22em] sm:tracking-[0.26em] leading-none text-[#e88d9f] transition-all duration-500 ease-out ${
+                        scrolled ? "text-[6.5px] sm:text-[8px]" : "text-[7px] sm:text-[9px]"
                       }`}
                     >
                       DESSERTS
@@ -383,22 +383,23 @@ export default function Navigation() {
             </div>
 
             {/* Action Group */}
-            <div className="flex items-center gap-2 sm:gap-2.5">
+            <div className="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5 shrink-0">
               {/* Marathi / English Language Toggle Button */}
               <button
                 id="lang-toggle-btn"
                 onClick={toggleLanguage}
                 title="Toggle Language (मराठी / English)"
                 aria-label="Toggle Language (मराठी / English)"
-                className={`rounded-full font-semibold transition-all duration-500 ease-out flex items-center gap-1.5 cursor-pointer shadow-xs hover:scale-105 active:scale-95 bg-white/10 hover:bg-white/20 border border-white/25 text-white ${
+                className={`rounded-full font-semibold transition-all duration-500 ease-out flex items-center gap-1 sm:gap-1.5 cursor-pointer shadow-xs hover:scale-105 active:scale-95 bg-white/10 hover:bg-white/20 border border-white/25 text-white ${
                   scrolled
-                    ? "px-2.5 py-1 text-[11px] sm:text-xs"
-                    : "px-3 py-1.5 text-xs sm:text-[13px]"
+                    ? "px-2 xs:px-2.5 py-1 text-[10.5px] sm:text-xs"
+                    : "px-2 xs:px-2.5 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-[13px]"
                 }`}
               >
-                <span className="text-xs font-mono opacity-70">文A</span>
+                <span className="text-[10px] sm:text-xs font-mono opacity-70">文A</span>
                 <span className="font-bold text-amber-300">
-                  {language === "en" ? "मराठी" : "English"}
+                  {language === "en" ? "मराठी" : "EN"}
+                  <span className="hidden sm:inline">{language === "mr" ? "glish" : ""}</span>
                 </span>
               </button>
 
@@ -406,15 +407,16 @@ export default function Navigation() {
               <button
                 id="nav-franchise-cta"
                 onClick={openModal}
-                className={`btn-primary whitespace-nowrap shadow-md shadow-rose-950/20 rounded-full cursor-pointer hover:scale-105 active:scale-95 transition-all duration-500 ease-out ${
+                className={`btn-primary whitespace-nowrap shadow-md shadow-rose-950/20 rounded-full cursor-pointer hover:scale-105 active:scale-95 transition-all duration-500 ease-out shrink-0 ${
                   scrolled
-                    ? "!py-1.5 sm:!py-1.5 !px-3.5 !text-xs !font-bold"
-                    : "!py-2 !px-4.5 !text-xs sm:!text-[13px] !font-bold"
+                    ? "!py-1 sm:!py-1.5 !px-2.5 sm:!px-3.5 !text-[11px] sm:!text-xs !font-bold"
+                    : "!py-1 sm:!py-2 !px-2.5 xs:!px-3 sm:!px-4.5 !text-[11px] sm:!text-[13px] !font-bold"
                 }`}
                 aria-label="Open Franchise Enquiry Form"
               >
-                <span>{t("nav.enquiry")}</span>
-                <span aria-hidden="true" className="ml-1 font-bold">
+                <span className="inline sm:hidden">{language === "mr" ? "चौकशी" : "Enquire"}</span>
+                <span className="hidden sm:inline">{t("nav.enquiry")}</span>
+                <span aria-hidden="true" className="ml-0.5 sm:ml-1 font-bold">
                   →
                 </span>
               </button>
@@ -423,24 +425,24 @@ export default function Navigation() {
               <button
                 id="nav-mobile-toggle"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`lg:hidden rounded-full flex flex-col items-center justify-center gap-1 transition-all duration-500 cursor-pointer bg-white/15 hover:bg-white/25 border border-white/20 text-white ${
-                  scrolled ? "w-8 h-8" : "w-8.5 h-8.5 sm:w-9 sm:h-9"
+                className={`lg:hidden rounded-full flex flex-col items-center justify-center gap-1 transition-all duration-500 cursor-pointer bg-white/15 hover:bg-white/25 border border-white/20 text-white shrink-0 ${
+                  scrolled ? "w-7.5 h-7.5 sm:w-8 sm:h-8" : "w-8 h-8 sm:w-9 sm:h-9"
                 }`}
                 aria-expanded={mobileMenuOpen}
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               >
                 <span
-                  className={`w-4 h-0.5 transition-all duration-300 origin-center bg-white ${
+                  className={`w-3.5 sm:w-4 h-0.5 transition-all duration-300 origin-center bg-white ${
                     mobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
                   }`}
                 />
                 <span
-                  className={`w-4 h-0.5 transition-all duration-200 bg-white ${
+                  className={`w-3.5 sm:w-4 h-0.5 transition-all duration-200 bg-white ${
                     mobileMenuOpen ? "opacity-0" : ""
                   }`}
                 />
                 <span
-                  className={`w-4 h-0.5 transition-all duration-300 origin-center bg-white ${
+                  className={`w-3.5 sm:w-4 h-0.5 transition-all duration-300 origin-center bg-white ${
                     mobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
                   }`}
                 />

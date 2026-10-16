@@ -207,27 +207,27 @@ export default function StorefrontHero() {
           {/* 3 Core Trust Dots */}
           <div
             ref={trustRef}
-            className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm sm:text-base font-medium text-stone-200/95 drop-shadow-md"
+            className="flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-2 text-xs sm:text-base font-medium text-stone-200/95 drop-shadow-md"
           >
-            <span className="hero-trust-item inline-flex items-center gap-2">
-              <span className="text-amber-400 text-sm">●</span>
+            <span className="hero-trust-item inline-flex items-center gap-1.5 sm:gap-2">
+              <span className="text-amber-400 text-xs sm:text-sm">●</span>
               <span>{t("hero.trust1")}</span>
             </span>
-            <span className="hero-trust-item inline-flex items-center gap-2">
-              <span className="text-amber-400 text-sm">●</span>
+            <span className="hero-trust-item inline-flex items-center gap-1.5 sm:gap-2">
+              <span className="text-amber-400 text-xs sm:text-sm">●</span>
               <span>{t("hero.trust2")}</span>
             </span>
-            <span className="hero-trust-item inline-flex items-center gap-2">
-              <span className="text-amber-400 text-sm">●</span>
+            <span className="hero-trust-item inline-flex items-center gap-1.5 sm:gap-2">
+              <span className="text-amber-400 text-xs sm:text-sm">●</span>
               <span>{t("hero.trust3")}</span>
             </span>
           </div>
 
           {/* High-Converting CTA Buttons */}
-          <div ref={ctaRef} className="flex flex-wrap items-center gap-4 pt-2">
+          <div ref={ctaRef} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
             <button
               onClick={() => scrollToSection("story")}
-              className="px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-stone-950 font-semibold text-sm sm:text-base shadow-xl shadow-amber-500/25 transform hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center gap-2 cursor-pointer border border-amber-300"
+              className="w-full sm:w-auto justify-center px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-stone-950 font-semibold text-sm sm:text-base shadow-xl shadow-amber-500/25 transform hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center gap-2 cursor-pointer border border-amber-300"
             >
               <span>▷</span>
               <span>{t("hero.ctaSecondary")}</span>
@@ -235,7 +235,7 @@ export default function StorefrontHero() {
 
             <button
               onClick={openModal}
-              className="px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white font-semibold text-sm sm:text-base border border-white/40 hover:border-white transition-all flex items-center gap-2 cursor-pointer hover:-translate-y-0.5 shadow-lg"
+              className="w-full sm:w-auto justify-center px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white font-semibold text-sm sm:text-base border border-white/40 hover:border-white transition-all flex items-center gap-2 cursor-pointer hover:-translate-y-0.5 shadow-lg"
             >
               <span>{t("hero.ctaPrimary")}</span>
               <span aria-hidden="true">→</span>

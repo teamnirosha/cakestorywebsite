@@ -753,7 +753,7 @@ export default function FranchiseModelSection() {
           const ActiveMilestoneIcon = currentMilestone.icon;
 
           return (
-            <div className="journey-panel-card rounded-3xl p-6 sm:p-9 lg:p-12 bg-gradient-to-b from-[#180e16] via-[#140b12] to-[#180e16] border border-[#c9a46a]/30 text-white shadow-2xl relative overflow-hidden backdrop-blur-md">
+            <div className="journey-panel-card rounded-3xl p-4.5 xs:p-6 sm:p-9 lg:p-12 bg-gradient-to-b from-[#180e16] via-[#140b12] to-[#180e16] border border-[#c9a46a]/30 text-white shadow-2xl relative overflow-hidden backdrop-blur-md">
               {/* Subtle Plum & Champagne Ambient Depth Lighting */}
               <div className="absolute -top-24 right-1/4 w-96 h-96 bg-[#c9a46a]/5 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute -bottom-24 left-1/4 w-96 h-96 bg-[#961b3c]/10 rounded-full blur-3xl pointer-events-none" />
