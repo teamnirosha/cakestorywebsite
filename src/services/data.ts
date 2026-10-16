@@ -32,14 +32,21 @@ export type FranchiseEnquiry = {
   notes?: string;
 };
 
-const ENQUIRY_INIT_KEY = "__cs_enquiries_seeded__";
+const ENQUIRY_INIT_KEY = "__cs_enquiries_seeded_v3__";
 
 function getEnquiriesRaw(): FranchiseEnquiry[] {
-  if (!localStorage.getItem(PREFIX + ENQUIRY_INIT_KEY)) {
-    storage.set(STORAGE_KEYS.ENQUIRIES, seedEnquiries as FranchiseEnquiry[]);
+  let items = storage.get<FranchiseEnquiry[] | null>(STORAGE_KEYS.ENQUIRIES, null);
+  if (!items || items.length === 0 || !localStorage.getItem(PREFIX + ENQUIRY_INIT_KEY)) {
+    const seeded = (seedEnquiries as FranchiseEnquiry[]).map((enq, idx) => {
+      const daysAgo = [2, 6, 13, 19, 26][idx % 5] || ((idx * 5) + 2);
+      const date = new Date(Date.now() - daysAgo * 24 * 60 * 60 * 1000).toISOString();
+      return { ...enq, submittedAt: date };
+    });
+    storage.set(STORAGE_KEYS.ENQUIRIES, seeded);
     localStorage.setItem(PREFIX + ENQUIRY_INIT_KEY, "1");
+    return seeded;
   }
-  return storage.get<FranchiseEnquiry[]>(STORAGE_KEYS.ENQUIRIES, seedEnquiries as FranchiseEnquiry[]);
+  return items;
 }
 
 export const enquiryService = {
@@ -96,6 +103,15 @@ export const enquiryService = {
   },
   countNew(): number {
     return getEnquiriesRaw().filter((e) => e.status === "new").length;
+  },
+  resetSeed(): FranchiseEnquiry[] {
+    const seeded = (seedEnquiries as FranchiseEnquiry[]).map((enq, idx) => {
+      const daysAgo = [2, 6, 13, 19, 26][idx % 5] || ((idx * 5) + 2);
+      const date = new Date(Date.now() - daysAgo * 24 * 60 * 60 * 1000).toISOString();
+      return { ...enq, submittedAt: date };
+    });
+    storage.set(STORAGE_KEYS.ENQUIRIES, seeded);
+    return seeded;
   },
 };
 
@@ -443,11 +459,29 @@ export type AdminCredentials = {
   isInitial: boolean;
 };
 
-const INITIAL_USERNAME = "cakestory&desserts.in";
-const INITIAL_PASSWORD = "cakestory@123";
+const ADMIN_INIT_KEY = "__cs_admin_auth_v5__";
+const INITIAL_USERNAME = "admin";
+const INITIAL_PASSWORD = "CakeStory@Admin2026";
 
 function getAdminCredentials(): AdminCredentials {
+  const needsInit = !localStorage.getItem(PREFIX + ADMIN_INIT_KEY);
   const existing = storage.get<AdminCredentials | null>(STORAGE_KEYS.ADMIN_CREDENTIALS, null);
+
+  if (needsInit) {
+    localStorage.setItem(PREFIX + ADMIN_INIT_KEY, "1");
+    // If not customized yet, seed with initial secure credentials
+    if (!existing || existing.isInitial) {
+      const initial: AdminCredentials = {
+        username: INITIAL_USERNAME,
+        passwordHash: INITIAL_PASSWORD,
+        updatedAt: new Date().toISOString(),
+        isInitial: true,
+      };
+      storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, initial);
+      return initial;
+    }
+  }
+
   if (!existing) {
     const initial: AdminCredentials = {
       username: INITIAL_USERNAME,
@@ -458,6 +492,7 @@ function getAdminCredentials(): AdminCredentials {
     storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, initial);
     return initial;
   }
+
   return existing;
 }
 
@@ -475,16 +510,16 @@ export const authService = {
     const inputUser = identifierInput.trim().toLowerCase();
     const targetUser = creds.username.trim().toLowerCase();
 
-    // Allow username or email match (also fallback for initial admin email / username)
-    const matchesUser = inputUser === targetUser || (creds.isInitial && (inputUser === "admin@cakestory.com" || inputUser === "admin"));
-    const matchesPass = passwordInput === creds.passwordHash || (creds.isInitial && passwordInput === "admin123");
+    // STRICT AUTHENTICATION: Strictly match configured username and exact password
+    const matchesUser = inputUser === targetUser;
+    const matchesPass = passwordInput === creds.passwordHash;
 
     if (matchesUser && matchesPass) {
       const authUser: AuthUser = {
         id: "admin-master",
         name: "CakeStory Operations Lead",
         username: creds.username,
-        email: creds.username.includes("@") ? creds.username : "admin@cakestory.com",
+        email: creds.username.includes("@") ? creds.username : "admin@cakestorydesserts.in",
         role: "admin",
         avatar: "https://i.pravatar.cc/120?img=68",
         isInitialCredentials: creds.isInitial,
@@ -512,7 +547,7 @@ export const authService = {
 
   verifyCurrentPassword(passwordInput: string): boolean {
     const creds = getAdminCredentials();
-    return passwordInput === creds.passwordHash || (creds.isInitial && passwordInput === "admin123");
+    return passwordInput === creds.passwordHash;
   },
 
   changeUsername(newUsername: string): { success: boolean; error?: string } {
@@ -527,6 +562,7 @@ export const authService = {
     const updated: AdminCredentials = {
       ...creds,
       username: trimmed,
+      isInitial: false,
       updatedAt: new Date().toISOString(),
     };
     storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, updated);
@@ -539,15 +575,13 @@ export const authService = {
 
   changePassword(currentPasswordInput: string, newPasswordInput: string): { success: boolean; error?: string } {
     const creds = getAdminCredentials();
-    const isCurrentValid =
-      currentPasswordInput === creds.passwordHash || (creds.isInitial && currentPasswordInput === "admin123");
-    if (!isCurrentValid) {
+    if (currentPasswordInput !== creds.passwordHash) {
       return { success: false, error: "Current password is incorrect." };
     }
     if (!newPasswordInput || newPasswordInput.length < 6) {
       return { success: false, error: "New password must be at least 6 characters long." };
     }
-    if (newPasswordInput === creds.passwordHash || (creds.isInitial && newPasswordInput === "admin123")) {
+    if (newPasswordInput === creds.passwordHash) {
       return { success: false, error: "New password must be different from your current password." };
     }
 
