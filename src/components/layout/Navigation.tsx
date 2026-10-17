@@ -398,7 +398,7 @@ export default function Navigation() {
               >
                 <span className="text-[10px] sm:text-xs font-mono opacity-70">文A</span>
                 <span className="font-bold text-amber-300">
-                  {language === "en" ? "मराठी" : "EN"}
+                  {language === "en" ? "मराठी" : "En"}
                   <span className="hidden sm:inline">{language === "mr" ? "glish" : ""}</span>
                 </span>
               </button>
