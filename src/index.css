@@ -401,6 +401,10 @@ textarea.input-field {
   background: rgba(255, 255, 255, 0.96);
 }
 
+.leaflet-popup-content a {
+  text-decoration: none;
+}
+
 .cs-marker {
   width: 38px;
   height: 38px;

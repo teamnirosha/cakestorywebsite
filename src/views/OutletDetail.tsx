@@ -325,8 +325,15 @@ export default function OutletDetail() {
     );
   }
 
-  const destinationQuery = encodeURIComponent(`CakeStory Desserts, ${outlet.address}`);
-  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destinationQuery}`;
+  // Display location title & locality
+  const locality = getOutletLocality(outlet);
+  const heroLocation = formatHeroLocation(outlet, language);
+  const displayLocation = locality;
+
+  // Google Maps Outlet Place Page: drops pin on store with place card and "Directions" button
+  const mapsPlaceUrl = `https://www.google.com/maps?q=${outlet.latitude},${outlet.longitude}+(${encodeURIComponent(`CakeStory Desserts — ${displayLocation}`)})&z=17`;
+  const directionsUrl = mapsPlaceUrl;
+
   const cleanPhoneDigits = outlet.phone ? outlet.phone.replace(/\D/g, "") : "";
   const whatsappDigits = cleanPhoneDigits.startsWith("91") ? cleanPhoneDigits : `91${cleanPhoneDigits}`;
   const whatsappOrderUrl = `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(
@@ -335,11 +342,6 @@ export default function OutletDetail() {
   const franchiseWhatsappUrl = `https://wa.me/918623940744?text=${encodeURIComponent(
     `Hello CakeStory Franchise Team, I am interested in opening a franchise in ${outlet.zone || outlet.city}.`
   )}`;
-
-  // Display location title & locality
-  const locality = getOutletLocality(outlet);
-  const heroLocation = formatHeroLocation(outlet, language);
-  const displayLocation = locality;
 
   return (
     <PageShell noTopPadding>
@@ -708,10 +710,11 @@ export default function OutletDetail() {
                                 href={directionsUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#e63971] to-[#b31b51] text-white text-[11px] font-bold shadow-sm hover:opacity-90 transition-all cursor-pointer"
+                                style={{ color: "#ffffff", textDecoration: "none" }}
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#e63971] to-[#b31b51] text-white !text-white text-[11px] font-bold shadow-sm hover:opacity-90 transition-all cursor-pointer"
                               >
-                                <span>Get Directions</span>
-                                <span>↗</span>
+                                <span style={{ color: "#ffffff" }}>Get Directions</span>
+                                <span style={{ color: "#ffffff" }}>↗</span>
                               </a>
                             </div>
                           </div>
