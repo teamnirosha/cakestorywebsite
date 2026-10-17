@@ -6,6 +6,7 @@ import { franchiseService, Franchise } from "../services/data";
 import { EmptyState } from "../components/common/Loading";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
 import OutletCard from "../components/common/OutletCard";
+import { getOutletUrl } from "../utils/outletRouting";
 
 const customIcon = (active: boolean) =>
   L.divIcon({
@@ -226,7 +227,7 @@ export default function Outlets() {
                           <div style={{ fontSize: 11, color: "#5a4a5e" }}>🕐 {f.openingHours}</div>
                           <div style={{ marginTop: 8 }}>
                             <a
-                              href={`/outlets/${f.slug || f.id}`}
+                              href={getOutletUrl(f)}
                               target="_blank"
                               rel="noopener noreferrer"
                               style={{

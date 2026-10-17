@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AdminLayout from "../../components/admin/AdminLayout";
 import { franchiseService, Franchise } from "../../services/data";
 import { useToast } from "../../components/common/Toast";
+import { getOutletUrl } from "../../utils/outletRouting";
 
 export default function AdminFranchises() {
   const [query, setQuery] = useState("");
@@ -237,7 +238,7 @@ export default function AdminFranchises() {
                         <div className="flex items-center justify-end gap-1.5">
                           {/* Live Link Button */}
                           <a
-                            href={`/outlets/${f.slug || f.id}`}
+                            href={getOutletUrl(f)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-8 h-8 rounded-lg border border-slate-200 bg-white hover:bg-blue-50 hover:border-blue-200 text-slate-500 hover:text-[#2563eb] flex items-center justify-center transition shadow-2xs"

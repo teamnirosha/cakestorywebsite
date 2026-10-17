@@ -1,0 +1,8 @@
+2026/10/17-12:11:12.876 5db0 Reusing MANIFEST d:\CakeStory - Website\scripts\output\chrome_admin_session_data\Default\Local Storage\leveldb/MANIFEST-000001
+2026/10/17-12:11:12.883 5db0 Recovering log #4
+2026/10/17-12:11:12.884 5db0 Level-0 table #7: started
+2026/10/17-12:11:12.892 5db0 Level-0 table #7: 26572 bytes OK
+2026/10/17-12:11:12.893 5db0 Recovering log #7
+2026/10/17-12:11:12.901 5db0 Reusing old log d:\CakeStory - Website\scripts\output\chrome_admin_session_data\Default\Local Storage\leveldb/000007.log 
+2026/10/17-12:11:12.909 5db0 Delete type=0 #4
+2026/10/17-12:11:12.909 5db0 Delete type=2 #8

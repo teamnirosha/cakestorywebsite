@@ -90,7 +90,8 @@ export default function App() {
             <Route path="/franchise" element={<PublicLayout><Franchise /></PublicLayout>} />
             <Route path="/faq" element={<PublicLayout><FAQ /></PublicLayout>} />
             <Route path="/outlets" element={<Navigate to="/" state={{ scrollTo: "outlets" }} replace />} />
-            <Route path="/outlets/:id" element={<PublicLayout><OutletDetail /></PublicLayout>} />
+            <Route path="/outlets/:citySlug/:areaSlug" element={<PublicLayout><OutletDetail /></PublicLayout>} />
+            <Route path="/outlets/:legacyParam" element={<PublicLayout><OutletDetail /></PublicLayout>} />
             <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
             <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
             <Route path="/blog/:id" element={<PublicLayout><BlogDetail /></PublicLayout>} />

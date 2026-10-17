@@ -120,6 +120,9 @@ export const enquiryService = {
 export type Franchise = {
   id: string;
   slug: string;
+  citySlug?: string;
+  locality?: string;
+  legacySlugs?: string[];
   name: string;
   outletName: string;
   zone: string;
@@ -140,10 +143,16 @@ export type Franchise = {
   established?: string;
 };
 
-const FRANCHISE_INIT_KEY = "__cs_franchises_verified_official_v9__";
+const FRANCHISE_INIT_KEY = "__cs_franchises_verified_official_v14__";
 
 function getFranchisesRaw(): Franchise[] {
-  if (!localStorage.getItem(PREFIX + FRANCHISE_INIT_KEY)) {
+  const cached = storage.get<Franchise[]>(STORAGE_KEYS.FRANCHISES, []);
+  const needsHydration =
+    !localStorage.getItem(PREFIX + FRANCHISE_INIT_KEY) ||
+    cached.length < (seedFranchises as Franchise[]).length ||
+    cached.some((c) => !c.citySlug || !c.locality);
+
+  if (needsHydration) {
     storage.set(STORAGE_KEYS.FRANCHISES, seedFranchises as Franchise[]);
     localStorage.setItem(PREFIX + FRANCHISE_INIT_KEY, "1");
   }
@@ -175,21 +184,57 @@ export const franchiseService = {
   },
   get(idOrSlug: string): Franchise | undefined {
     const raw = getFranchisesRaw();
-    const found = raw.find((f) => f.id === idOrSlug || f.slug === idOrSlug);
+    const clean = idOrSlug.toLowerCase().trim();
+
+    const found = raw.find(
+      (f) =>
+        f.id.toLowerCase() === clean ||
+        f.slug.toLowerCase() === clean ||
+        f.legacySlugs?.some((ls) => ls.toLowerCase() === clean)
+    );
     if (found) return found;
 
     // Graceful backward compatibility mapping for legacy/test slugs
     const legacyAliases: Record<string, string> = {
-      "cakestory-hinjewadi": "cakestory-wakad",
-      "cakestory-kalyani-nagar": "cakestory-viman-nagar",
-      "cakestory-satara": "cakestory-saswad",
-      "cakestory-hadapsar": "cakestory-phursungi",
+      "cakestory-hinjewadi": "wakad",
+      "cakestory-kalyani-nagar": "viman-nagar",
+      "cakestory-satara": "powai-naka",
+      "cakestory-hadapsar": "phursungi",
+      "cakestory-saswad": "saswad",
+      "anand-plaza": "saswad",
     };
-    const mappedSlug = legacyAliases[idOrSlug];
+    const mappedSlug = legacyAliases[clean];
     if (mappedSlug) {
       return raw.find((f) => f.slug === mappedSlug || f.id === mappedSlug);
     }
     return undefined;
+  },
+  getByRoute(citySlug: string, areaSlug: string): Franchise | undefined {
+    const raw = getFranchisesRaw();
+    const cleanCity = citySlug.toLowerCase().trim();
+    const cleanArea = areaSlug.toLowerCase().trim();
+
+    return raw.find((f) => {
+      const fCitySlug = (f.citySlug || f.city.toLowerCase().replace(/[^a-z0-9]+/g, "-")).toLowerCase();
+      const cityMatches =
+        fCitySlug === cleanCity ||
+        (cleanCity === "pcmc" && fCitySlug === "pimpri-chinchwad") ||
+        (cleanCity === "pimpri-chinchwad" && fCitySlug === "pcmc") ||
+        (cleanCity === "saswad" && (f.slug === "saswad" || f.id === "franchise-016"));
+
+      if (!cityMatches) return false;
+
+      const areaMatches =
+        f.slug.toLowerCase() === cleanArea ||
+        f.legacySlugs?.some((ls) => ls.toLowerCase() === cleanArea) ||
+        (f.locality && f.locality.toLowerCase().replace(/[^a-z0-9]+/g, "-") === cleanArea) ||
+        (f.id === "franchise-016" && (cleanArea === "saswad" || cleanArea === "anand-plaza"));
+
+      return areaMatches;
+    });
+  },
+  getByLegacy(slugOrId: string): Franchise | undefined {
+    return this.get(slugOrId);
   },
   create(data: Omit<Franchise, "id">): Franchise {
     const all = getFranchisesRaw();

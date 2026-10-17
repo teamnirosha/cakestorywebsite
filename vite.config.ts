@@ -20,6 +20,7 @@ export default defineConfig({
       ignored: [
         "**/assets/**",
         "**/public/**",
+        "**/scripts/**",
         "**/*.jpg",
         "**/*.JPG",
         "**/*.jpeg",

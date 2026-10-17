@@ -246,14 +246,14 @@ export default function AdminFranchiseForm() {
                 <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                   URL Slug{" "}
                   <span className="text-[11px] font-normal text-slate-400">
-                    (/outlets/<span className="text-[#2563eb] font-mono font-bold">{form.slug || "slug"}</span>)
+                    (/outlets/{form.citySlug || (form.city ? form.city.toLowerCase().replace(/[^a-z0-9]+/g, "-") : "pune")}/<span className="text-[#2563eb] font-mono font-bold">{form.slug || "area"}</span>)
                   </span>
                 </label>
                 <input
                   type="text"
                   value={form.slug}
                   onChange={(e) => update("slug", e.target.value)}
-                  placeholder="cakestory-kothrud"
+                  placeholder="anand-nagar"
                   className="w-full text-xs px-3.5 py-2 rounded-lg border border-slate-200 font-mono bg-slate-50/50 focus:bg-white focus:outline-none focus:border-[#2563eb] transition text-slate-800"
                 />
               </div>

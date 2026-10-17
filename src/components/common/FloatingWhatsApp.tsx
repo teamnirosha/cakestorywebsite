@@ -35,12 +35,16 @@ export default function FloatingWhatsApp() {
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
 
-  // Detect current outlet if on store/outlet page (supports /outlets/:id and /stores/:id)
+  // Detect current outlet if on store/outlet page (supports /outlets/:citySlug/:areaSlug and legacy /outlets/:id)
   const currentOutlet = useMemo(() => {
-    const match = pathname.match(/\/(?:outlets|stores|store)\/([^/]+)/);
+    const match = pathname.match(/\/(?:outlets|stores|store)\/([^/]+)(?:\/([^/]+))?/);
     if (!match) return null;
-    const slugOrId = decodeURIComponent(match[1]);
-    return franchiseService.get(slugOrId) || null;
+    const seg1 = decodeURIComponent(match[1]);
+    const seg2 = match[2] ? decodeURIComponent(match[2]) : undefined;
+    if (seg2) {
+      return franchiseService.getByRoute(seg1, seg2) || null;
+    }
+    return franchiseService.get(seg1) || null;
   }, [pathname]);
 
   // Compute clean WhatsApp destination URL & prefilled context message

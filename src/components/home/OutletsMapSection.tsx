@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { franchiseService, Franchise } from "../../services/data";
 import { useLanguage } from "../../context/LanguageContext";
 import { prefersReducedMotion, MOTION } from "../../utils/motion";
+import { getOutletUrl } from "../../utils/outletRouting";
 import bakeryBg from "../../assets/hero/cakestory-hero.jpg";
 
 // Clean SVG Vector Icons
@@ -304,7 +305,7 @@ export default function OutletsMapSection() {
                       </div>
 
                       <Link
-                        to={`/outlets/${outlet.slug || outlet.id}`}
+                        to={getOutletUrl(outlet)}
                         onClick={(e) => e.stopPropagation()}
                         className="text-xs font-semibold text-[#961b3c] hover:underline uppercase tracking-wider shrink-0 bg-[#faf2f5] px-2.5 py-1 rounded-md border border-[#f3d9e2]"
                       >
@@ -349,7 +350,7 @@ export default function OutletsMapSection() {
                       <p className="text-xs text-stone-600 mt-0.5">{o.address}</p>
                       <p className="text-xs text-[#961b3c] font-medium mt-0.5">📞 {o.phone}</p>
                       <Link
-                        to={`/outlets/${o.slug || o.id}`}
+                        to={getOutletUrl(o)}
                         className="inline-block text-xs font-semibold text-white bg-[#961b3c] px-3 py-1 rounded mt-1.5 hover:bg-[#7d1430] transition-colors"
                       >
                         {t("outlets.viewStore")} →

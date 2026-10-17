@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Franchise } from "../../services/data";
+import { getOutletUrl } from "../../utils/outletRouting";
 
 interface OutletCardProps {
   outlet: Franchise;
@@ -20,7 +21,7 @@ export default function OutletCard({
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const outletUrl = `/outlets/${outlet.slug || outlet.id}`;
+  const outletUrl = getOutletUrl(outlet);
   const hasImage = Boolean(outlet.image) && !imageError;
 
   return (

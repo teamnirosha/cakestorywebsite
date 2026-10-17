@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { authService } from "../../services/data";
 import { useToast } from "../../components/common/Toast";
@@ -12,6 +12,12 @@ export default function AdminLogin() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const { show } = useToast();
+
+  useEffect(() => {
+    if (authService.isAuthed()) {
+      navigate("/admin/dashboard", { replace: true });
+    }
+  }, [navigate]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

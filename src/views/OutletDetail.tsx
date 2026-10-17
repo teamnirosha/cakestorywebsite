@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useMemo } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import PageShell from "../components/layout/PageShell";
@@ -7,6 +7,7 @@ import { franchiseService } from "../services/data";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
 import { useLanguage } from "../context/LanguageContext";
 import { prefersReducedMotion, MOTION } from "../utils/motion";
+import { getOutletUrl, getOutletLocality, formatHeroLocation } from "../utils/outletRouting";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -111,13 +112,37 @@ function SparklesIcon({ className = "w-4 h-4" }: { className?: string }) {
 // ---------- Main Outlet Detail Component ----------
 
 export default function OutletDetail() {
-  const { id } = useParams();
+  const { citySlug, areaSlug, legacyParam, id } = useParams<{
+    citySlug?: string;
+    areaSlug?: string;
+    legacyParam?: string;
+    id?: string;
+  }>();
   const { t, language } = useLanguage();
   const { openModal } = useFranchiseModal();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Dynamic Outlet Lookup
-  const outlet = id ? franchiseService.get(id) : undefined;
+  // If accessed via legacy flat route (/outlets/:legacyParam or /outlets/:id), redirect to canonical city-based route
+  const legacyTarget = legacyParam || id;
+  const legacyOutlet = legacyTarget ? franchiseService.getByLegacy(legacyTarget) : undefined;
+  if (legacyTarget && legacyOutlet) {
+    return <Navigate to={getOutletUrl(legacyOutlet)} replace />;
+  }
+
+  // Dynamic Outlet Lookup via citySlug and areaSlug
+  const outlet = citySlug && areaSlug
+    ? franchiseService.getByRoute(citySlug, areaSlug)
+    : (legacyOutlet || undefined);
+
+  // If accessed via non-canonical or legacy 2-segment route (e.g. /outlets/saswad/anand-plaza),
+  // automatically redirect to the canonical URL (e.g. /outlets/pune/saswad)
+  if (outlet && citySlug && areaSlug) {
+    const canonical = getOutletUrl(outlet);
+    const current = `/outlets/${citySlug}/${areaSlug}`;
+    if (canonical.toLowerCase() !== current.toLowerCase()) {
+      return <Navigate to={canonical} replace />;
+    }
+  }
 
   // Nearby Outlets (Fetch 3 other outlets)
   const nearbyOutlets = useMemo(() => {
@@ -145,8 +170,8 @@ export default function OutletDetail() {
   useEffect(() => {
     if (!outlet) return;
 
-    const displayArea = outlet.outletName || outlet.name.replace(/^CakeStory Desserts\s*—\s*/i, "");
-    const baseTitle = `${t("outletDetail.bestCakesIn", "Best Cakes in")} ${displayArea}, Pune | CakeStory Desserts`;
+    const locality = getOutletLocality(outlet);
+    const baseTitle = `${t("outletDetail.bestCakesIn", "Best Cakes in")} ${locality}, ${outlet.city} | CakeStory Desserts`;
     const metaDescription = `${outlet.description || t("outletDetail.newDesc")} ${outlet.address}. Call ${outlet.phone}.`;
 
     document.title = baseTitle;
@@ -289,8 +314,10 @@ export default function OutletDetail() {
     `Hello CakeStory Franchise Team, I am interested in opening a franchise in ${outlet.zone || outlet.city}.`
   )}`;
 
-  // Display location title
-  const displayLocation = outlet.outletName || outlet.name.replace(/^CakeStory Desserts\s*—\s*/i, "");
+  // Display location title & locality
+  const locality = getOutletLocality(outlet);
+  const heroLocation = formatHeroLocation(outlet, language);
+  const displayLocation = locality;
 
   // Google Maps Embed (100% Free, Zero API Key Required)
   const googleMapsEmbedUrl = `https://maps.google.com/maps?q=${outlet.latitude},${outlet.longitude}&hl=en&z=15&output=embed`;
@@ -312,7 +339,7 @@ export default function OutletDetail() {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-            {/* Direct 2-Tier Breadcrumb: Our Outlets > Current Outlet */}
+            {/* Direct 3-Tier Breadcrumb: Our Outlets > City > Locality */}
             <nav
               aria-label="Breadcrumb"
               className="boutique-hero-elem flex items-center gap-2 mb-6 sm:mb-8 text-xs sm:text-sm font-medium text-rose-200/80"
@@ -325,8 +352,10 @@ export default function OutletDetail() {
                 <span>{t("outletDetail.ourOutlets")}</span>
               </Link>
               <span className="text-rose-400/50">&gt;</span>
+              <span className="text-rose-200/90">{outlet.city}</span>
+              <span className="text-rose-400/50">&gt;</span>
               <span className="text-amber-300 font-semibold truncate max-w-[240px] sm:max-w-none">
-                {displayLocation}
+                {locality}
               </span>
             </nav>
 
@@ -361,19 +390,19 @@ export default function OutletDetail() {
                     {language === "mr" ? (
                       <>
                         <span className="bg-gradient-to-r from-amber-100 via-rose-100 to-amber-200 bg-clip-text text-transparent font-medium text-sm sm:text-base lg:text-lg font-display tracking-wide">
-                          {displayLocation}, {outlet.city || "पुणे"}
+                          {heroLocation.locationText}
                         </span>
                         <span className="text-rose-100/90 font-light text-sm sm:text-base lg:text-lg font-display">
-                          मधील आपला आवडता डेझर्ट स्पॉट.
+                          {heroLocation.trailText}
                         </span>
                       </>
                     ) : (
                       <>
                         <span className="text-rose-100/90 font-light text-sm sm:text-base lg:text-lg font-display">
-                          Your Sweet Spot in
+                          {heroLocation.leadText}
                         </span>
                         <span className="bg-gradient-to-r from-amber-100 via-amber-200 to-rose-200 bg-clip-text text-transparent font-medium text-sm sm:text-base lg:text-lg font-display tracking-wide">
-                          {displayLocation}, {outlet.city || "Pune"}.
+                          {heroLocation.locationText}
                         </span>
                       </>
                     )}
@@ -442,7 +471,7 @@ export default function OutletDetail() {
                   {/* Interactive Location Badge in Bottom-Left */}
                   <div className="absolute bottom-4 left-4 px-4 py-2 rounded-full bg-black/75 backdrop-blur-md text-amber-200 text-xs font-bold border border-amber-400/30 shadow-lg flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                    <span className="text-white">📍 {displayLocation}, {outlet.city || "Pune"}</span>
+                    <span className="text-white">📍 {locality}, {outlet.city}</span>
                   </div>
 
                   {/* Pure Veg Emblem in Top-Right */}
@@ -748,7 +777,7 @@ export default function OutletDetail() {
 
                     {/* Interactive Explore Link */}
                     <Link
-                      to={`/outlets/${nearby.slug || nearby.id}`}
+                      to={getOutletUrl(nearby)}
                       className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-rose-500/30 to-[#e63971]/40 hover:from-[#e63971] hover:to-rose-600 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-rose-300/30 hover:border-rose-400 transition-all shadow-md group-hover:shadow-lg"
                     >
                       <span>{t("outletDetail.viewBoutique", "Explore Boutique")}</span>
