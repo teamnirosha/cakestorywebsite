@@ -14,14 +14,13 @@ export default function AdminLogin() {
   const { show } = useToast();
 
   useEffect(() => {
+    authService.syncWithCloud();
     if (authService.isAuthed()) {
       navigate("/admin/dashboard", { replace: true });
     }
   }, [navigate]);
 
-  const isInitial = authService.isInitialCredentials();
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!username.trim() || !password) {
       setErrorMessage("Please enter both username and password.");
@@ -31,7 +30,10 @@ export default function AdminLogin() {
     setLoading(true);
     setErrorMessage("");
 
-    setTimeout(() => {
+    try {
+      // Sync cloud credentials across all devices before verifying
+      await authService.syncWithCloud();
+
       const user = authService.login(username, password);
       if (user) {
         show("Authenticated — Welcome to CakeStory Admin Portal", "success");
@@ -40,8 +42,11 @@ export default function AdminLogin() {
         setErrorMessage("Invalid username or password. Please try again.");
         show("Invalid username or password.", "error");
       }
+    } catch {
+      setErrorMessage("Authentication encountered an issue. Please try again.");
+    } finally {
       setLoading(false);
-    }, 400);
+    }
   };
 
   return (
@@ -146,29 +151,6 @@ export default function AdminLogin() {
                 ✕
               </span>
               <span>{errorMessage}</span>
-            </div>
-          )}
-
-          {/* Default Access Credential Pill — ONLY visible in initial factory setup */}
-          {isInitial && (
-            <div className="mb-6 p-3.5 rounded-2xl bg-amber-50/90 border border-amber-200/90 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs">
-              <div className="flex items-center gap-2 text-amber-950 font-medium">
-                <span className="text-base">🔑</span>
-                <span>
-                  Initial Setup Login: <strong className="font-bold text-amber-900 font-mono">admin</strong> &bull; <strong className="font-bold text-amber-900 font-mono">CakeStory@Admin2026</strong>
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setUsername("admin");
-                  setPassword("CakeStory@Admin2026");
-                  if (errorMessage) setErrorMessage("");
-                }}
-                className="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-[11px] tracking-wide transition shadow-xs cursor-pointer self-start sm:self-auto shrink-0"
-              >
-                Fill Credentials
-              </button>
             </div>
           )}
 

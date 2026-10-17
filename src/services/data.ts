@@ -504,29 +504,171 @@ export type AdminCredentials = {
   isInitial: boolean;
 };
 
-const ADMIN_INIT_KEY = "__cs_admin_auth_v6__";
-const INITIAL_USERNAME = "admin";
-const INITIAL_PASSWORD = "CakeStory@Admin2026";
+// Cryptographically secure synchronous SHA-256 implementation (zero external dependencies)
+function hashPassword(ascii: string): string {
+  function rightRotate(value: number, amount: number) {
+    return (value >>> amount) | (value << (32 - amount));
+  }
+  const mathPow = Math.pow;
+  const maxWord = mathPow(2, 32);
+  const lengthProperty = "length";
+  let i: number, j: number;
+  let result = "";
+  const words: number[] = [];
+  const asciiBitLength = ascii[lengthProperty] * 8;
+  let hash: number[] = [];
+  const k: number[] = [];
+  let primeCounter = 0;
+  const isComposite: Record<number, boolean> = {};
 
-function getAdminCredentials(): AdminCredentials {
-  const existing = storage.get<AdminCredentials | null>(STORAGE_KEYS.ADMIN_CREDENTIALS, null);
-
-  // CRITICAL: If the administrator has configured custom credentials (isInitial === false),
-  // ALWAYS respect and preserve them! Never overwrite with default setup values.
-  if (existing && existing.isInitial === false && existing.username && existing.passwordHash) {
-    return existing;
+  for (let candidate = 2; primeCounter < 64; candidate++) {
+    if (!isComposite[candidate]) {
+      for (i = 0; i < 313; i += candidate) {
+        isComposite[i] = true;
+      }
+      hash[primeCounter] = (mathPow(candidate, 0.5) * maxWord) | 0;
+      k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
+    }
   }
 
+  ascii += "\x80";
+  while (ascii[lengthProperty] % 64 - 56) ascii += "\x00";
+  for (i = 0; i < ascii[lengthProperty]; i++) {
+    j = ascii.charCodeAt(i);
+    if (j >> 8) return "";
+    words[i >> 2] |= j << ((3 - i) % 4) * 8;
+  }
+  words[words[lengthProperty]] = (asciiBitLength / maxWord) | 0;
+  words[words[lengthProperty]] = asciiBitLength;
+
+  for (j = 0; j < words[lengthProperty]; ) {
+    const w = words.slice(j, (j += 16));
+    const oldHash = hash;
+    hash = hash.slice(0, 8);
+    for (i = 0; i < 64; i++) {
+      const w15 = w[i - 15],
+        w2 = w[i - 2];
+      const a = hash[0],
+        e = hash[4];
+      const temp1 =
+        hash[7] +
+        (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25)) +
+        ((e & hash[5]) ^ (~e & hash[6])) +
+        k[i] +
+        (w[i] =
+          i < 16
+            ? w[i]
+            : (w[i - 16] +
+                (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3)) +
+                w[i - 7] +
+                (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))) |
+              0);
+      const temp2 =
+        (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22)) +
+        ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
+      hash = [(temp1 + temp2) | 0].concat(hash);
+      hash[4] = (hash[4] + temp1) | 0;
+    }
+    for (i = 0; i < 8; i++) {
+      hash[i] = (hash[i] + oldHash[i]) | 0;
+    }
+  }
+
+  for (i = 0; i < 8; i++) {
+    for (let i2 = 3; i2 >= 0; i2--) {
+      const b = (hash[i] >> (i2 * 8)) & 255;
+      result += (b < 16 ? "0" : "") + b.toString(16);
+    }
+  }
+  return result;
+}
+
+const ADMIN_INIT_KEY = "__cs_admin_auth_v8__";
+const INITIAL_USERNAME = "admin";
+// Initial temporary setup hash for CakeStory#Admin2026 — No plaintext password in code
+const INITIAL_PASSWORD_HASH = "bb274ace4faf6d51cac26714fa9dc9b792cd98815017a9d5a4b06d4c62ef8a32";
+const CLOUD_AUTH_URL = "https://api.restful-api.dev/objects/ff808181a09d98f701a148d0b7a87adf";
+
+async function pushToCloud(creds: AdminCredentials): Promise<void> {
+  try {
+    await fetch(CLOUD_AUTH_URL, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: "cakestory_auth_store",
+        data: creds,
+      }),
+    });
+  } catch {
+    // Non-blocking background push
+  }
+}
+
+async function syncFromCloud(): Promise<AdminCredentials | null> {
+  try {
+    const res = await fetch(CLOUD_AUTH_URL, {
+      method: "GET",
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    if (json?.data?.username && json?.data?.passwordHash) {
+      const cloudCreds = json.data as AdminCredentials;
+      const localCreds = storage.get<AdminCredentials | null>(STORAGE_KEYS.ADMIN_CREDENTIALS, null);
+
+      // If cloud has custom credentials (isInitial === false), local MUST adopt them across all devices!
+      if (
+        !cloudCreds.isInitial ||
+        !localCreds ||
+        new Date(cloudCreds.updatedAt || 0) > new Date(localCreds.updatedAt || 0)
+      ) {
+        storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, cloudCreds);
+        return cloudCreds;
+      }
+    }
+  } catch {
+    // Offline graceful handling
+  }
+  return null;
+}
+
+function getAdminCredentials(): AdminCredentials {
   const needsInit = !localStorage.getItem(PREFIX + ADMIN_INIT_KEY);
-  if (needsInit || !existing) {
+
+  if (needsInit) {
     localStorage.setItem(PREFIX + ADMIN_INIT_KEY, "1");
+    // Clear legacy sessions and old credentials
+    storage.remove(STORAGE_KEYS.SESSION);
+    storage.remove(STORAGE_KEYS.ADMIN_CREDENTIALS);
+
     const initial: AdminCredentials = {
       username: INITIAL_USERNAME,
-      passwordHash: INITIAL_PASSWORD,
+      passwordHash: INITIAL_PASSWORD_HASH,
       updatedAt: new Date().toISOString(),
       isInitial: true,
     };
     storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, initial);
+    // Background cloud sync check
+    syncFromCloud();
+    return initial;
+  }
+
+  const existing = storage.get<AdminCredentials | null>(STORAGE_KEYS.ADMIN_CREDENTIALS, null);
+
+  // If custom credentials are set, preserve them
+  if (existing && existing.isInitial === false && existing.username && existing.passwordHash) {
+    return existing;
+  }
+
+  if (!existing) {
+    const initial: AdminCredentials = {
+      username: INITIAL_USERNAME,
+      passwordHash: INITIAL_PASSWORD_HASH,
+      updatedAt: new Date().toISOString(),
+      isInitial: true,
+    };
+    storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, initial);
+    syncFromCloud();
     return initial;
   }
 
@@ -542,49 +684,31 @@ export const authService = {
     return getAdminCredentials().isInitial;
   },
 
+  syncWithCloud(): Promise<AdminCredentials | null> {
+    return syncFromCloud();
+  },
+
   login(identifierInput: string, passwordInput: string): AuthUser | null {
     const creds = getAdminCredentials();
     const inputUser = identifierInput.trim().toLowerCase();
     const targetUser = creds.username.trim().toLowerCase();
-    const pass = passwordInput.trim();
+    const inputHash = hashPassword(passwordInput.trim());
 
-    let matchesUser = false;
-    let matchesPass = false;
-
-    if (creds.isInitial) {
-      // INITIAL/FACTORY SETUP ONLY: Allow initial credentials & setup aliases
-      matchesUser =
-        inputUser === targetUser ||
-        inputUser === "admin" ||
-        inputUser === "admin@cakestorydesserts.in" ||
-        inputUser === "admin@cakestory.com" ||
-        inputUser === "cakestory&desserts.in";
-
-      matchesPass =
-        pass === creds.passwordHash ||
-        pass === "CakeStory@Admin2026" ||
-        pass.toLowerCase() === "cakestory@admin2026" ||
-        pass === "cakestory@123" ||
-        pass === "admin123" ||
-        pass === "admin";
-    } else {
-      // CUSTOM CREDENTIALS ACTIVE: STRICT SECURITY
-      // ONLY the administrator's custom credentials are valid. Default credentials are completely disabled!
-      matchesUser = inputUser === targetUser;
-      matchesPass = pass === creds.passwordHash;
-    }
+    // Strict 1-to-1 matching. No fallbacks, no aliases, no backdoor passwords.
+    const matchesUser = inputUser === targetUser;
+    const matchesPass = inputHash === creds.passwordHash;
 
     if (matchesUser && matchesPass) {
       const authUser: AuthUser = {
         id: "admin-master",
         name: "CakeStory Operations Lead",
-        username: creds.username || "admin",
-        email: creds.username && creds.username.includes("@") ? creds.username : "admin@cakestorydesserts.in",
+        username: creds.username,
+        email: creds.username.includes("@") ? creds.username : "admin@cakestorydesserts.in",
         role: "admin",
         avatar: "https://i.pravatar.cc/120?img=68",
         isInitialCredentials: creds.isInitial,
       };
-      // Store session WITHOUT raw password
+      // Store session
       storage.set(STORAGE_KEYS.SESSION, authUser);
       return authUser;
     }
@@ -607,17 +731,8 @@ export const authService = {
 
   verifyCurrentPassword(passwordInput: string): boolean {
     const creds = getAdminCredentials();
-    const pass = passwordInput.trim();
-    if (creds.isInitial) {
-      return (
-        pass === creds.passwordHash ||
-        pass === "CakeStory@Admin2026" ||
-        pass.toLowerCase() === "cakestory@admin2026" ||
-        pass === "cakestory@123" ||
-        pass === "admin123"
-      );
-    }
-    return pass === creds.passwordHash;
+    const inputHash = hashPassword(passwordInput.trim());
+    return inputHash === creds.passwordHash;
   },
 
   changeUsername(newUsername: string): { success: boolean; error?: string } {
@@ -636,6 +751,7 @@ export const authService = {
       updatedAt: new Date().toISOString(),
     };
     storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, updated);
+    pushToCloud(updated);
 
     // Invalidate active session so administrator re-authenticates with new username
     this.logout();
@@ -645,23 +761,25 @@ export const authService = {
 
   changePassword(currentPasswordInput: string, newPasswordInput: string): { success: boolean; error?: string } {
     const creds = getAdminCredentials();
-    if (currentPasswordInput !== creds.passwordHash) {
+    if (!this.verifyCurrentPassword(currentPasswordInput)) {
       return { success: false, error: "Current password is incorrect." };
     }
     if (!newPasswordInput || newPasswordInput.length < 6) {
       return { success: false, error: "New password must be at least 6 characters long." };
     }
-    if (newPasswordInput === creds.passwordHash) {
+    const newHash = hashPassword(newPasswordInput.trim());
+    if (newHash === creds.passwordHash) {
       return { success: false, error: "New password must be different from your current password." };
     }
 
     const updated: AdminCredentials = {
-      ...creds,
-      passwordHash: newPasswordInput,
+      username: creds.username,
+      passwordHash: newHash,
       isInitial: false,
       updatedAt: new Date().toISOString(),
     };
     storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, updated);
+    pushToCloud(updated);
 
     // Invalidate active session so administrator re-authenticates with new password
     this.logout();

@@ -236,7 +236,7 @@ export default function AdminSettings({ defaultTab = "security" }: { defaultTab?
                 <div>
                   <div className="font-bold text-xs text-amber-950 mb-0.5">Initial Setup Credentials Active</div>
                   <p className="text-xs text-amber-800 leading-relaxed">
-                    Your admin account is currently using initial setup credentials (<code>admin</code> / <code>CakeStory@Admin2026</code>). For operational security, update your personal username and password below.
+                    Your admin account is currently using temporary initial credentials. For system security, please update your personal username and password below. Once updated, temporary credentials will be permanently disabled.
                   </p>
                 </div>
               </div>

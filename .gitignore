@@ -42,3 +42,6 @@ desktop.ini
 
 # TypeScript build info (if ever introduced)
 *.tsbuildinfo
+
+# Test outputs and browser sessions
+scripts/output/
