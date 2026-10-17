@@ -164,9 +164,7 @@ export default function AdminSettings({ defaultTab = "security" }: { defaultTab?
               d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
             />
           </svg>
-          <Link to="/admin/dashboard" className="hover:text-slate-800 transition">
-            CakeStory ERP
-          </Link>
+
           <span className="text-slate-400">&gt;</span>
           <span className="text-[#2563eb] font-semibold tracking-wide uppercase">
             Settings & Preferences
@@ -197,15 +195,7 @@ export default function AdminSettings({ defaultTab = "security" }: { defaultTab?
             </div>
           </div>
 
-          <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200/70 text-xs font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Role: Super Admin
-            </span>
-            <span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 border border-slate-200 text-xs font-mono font-medium">
-              ERP v2.4
-            </span>
-          </div>
+
         </div>
 
         {/* ----------------- ENTERPRISE TAB SWITCHER ----------------- */}
@@ -213,11 +203,10 @@ export default function AdminSettings({ defaultTab = "security" }: { defaultTab?
           <button
             type="button"
             onClick={() => handleTabChange("security")}
-            className={`flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center justify-center gap-2 ${
-              activeTab === "security"
-                ? "bg-white text-[#2563eb] shadow-xs"
-                : "text-slate-600 hover:text-slate-900"
-            }`}
+            className={`flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center justify-center gap-2 ${activeTab === "security"
+              ? "bg-white text-[#2563eb] shadow-xs"
+              : "text-slate-600 hover:text-slate-900"
+              }`}
           >
             <span>🔒</span>
             <span>Security & Credentials</span>
@@ -225,11 +214,10 @@ export default function AdminSettings({ defaultTab = "security" }: { defaultTab?
           <button
             type="button"
             onClick={() => handleTabChange("data")}
-            className={`flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center justify-center gap-2 ${
-              activeTab === "data"
-                ? "bg-white text-[#2563eb] shadow-xs"
-                : "text-slate-600 hover:text-slate-900"
-            }`}
+            className={`flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center justify-center gap-2 ${activeTab === "data"
+              ? "bg-white text-[#2563eb] shadow-xs"
+              : "text-slate-600 hover:text-slate-900"
+              }`}
           >
             <span>🗄️</span>
             <span>Database & Storage</span>
