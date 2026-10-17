@@ -2,6 +2,8 @@ import { useEffect, useState, useRef, useMemo } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import L from "leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import PageShell from "../components/layout/PageShell";
 import { franchiseService } from "../services/data";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
@@ -10,6 +12,25 @@ import { prefersReducedMotion, MOTION } from "../utils/motion";
 import { getOutletUrl, getOutletLocality, formatHeroLocation } from "../utils/outletRouting";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const customIcon = (active: boolean) =>
+  L.divIcon({
+    className: "cs-marker-wrap",
+    html: `<div class="cs-marker" style="${
+      active ? "transform: rotate(-45deg) scale(1.15); box-shadow: 0 12px 28px -4px rgba(230,57,113,0.75);" : ""
+    }"><span>🎂</span></div>`,
+    iconSize: [38, 38],
+    iconAnchor: [19, 38],
+    popupAnchor: [0, -38],
+  });
+
+function MapCenterUpdater({ center }: { center: [number, number] }) {
+  const map = useMap();
+  useEffect(() => {
+    map.setView(center, 16);
+  }, [center, map]);
+  return null;
+}
 
 // ---------- Animated / Active SVG Vector Icons ----------
 
@@ -304,7 +325,8 @@ export default function OutletDetail() {
     );
   }
 
-  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${outlet.latitude},${outlet.longitude}`;
+  const destinationQuery = encodeURIComponent(`CakeStory Desserts, ${outlet.address}`);
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destinationQuery}`;
   const cleanPhoneDigits = outlet.phone ? outlet.phone.replace(/\D/g, "") : "";
   const whatsappDigits = cleanPhoneDigits.startsWith("91") ? cleanPhoneDigits : `91${cleanPhoneDigits}`;
   const whatsappOrderUrl = `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(
@@ -318,9 +340,6 @@ export default function OutletDetail() {
   const locality = getOutletLocality(outlet);
   const heroLocation = formatHeroLocation(outlet, language);
   const displayLocation = locality;
-
-  // Google Maps Embed (Clean, Zero-Key, Suppressing Place Info popup with iwloc=)
-  const googleMapsEmbedUrl = `https://maps.google.com/maps?q=${outlet.latitude},${outlet.longitude}&hl=en&z=16&t=m&iwloc=&output=embed`;
 
   return (
     <PageShell noTopPadding>
@@ -648,36 +667,74 @@ export default function OutletDetail() {
 
                 </div>
 
-                {/* Right Column (7 Cols): Expansive Full-Height Interactive Map */}
+                {/* Right Column (7 Cols): Expansive Full-Height Interactive Leaflet Map */}
                 <div className="lg:col-span-7 flex flex-col">
-                  <div className="relative w-full h-[360px] sm:h-[420px] lg:h-full min-h-[420px] rounded-3xl overflow-hidden border border-rose-100 dark:border-white/10 shadow-lg group">
-                    <iframe
-                      title={`Google Map - CakeStory ${displayLocation}`}
-                      src={googleMapsEmbedUrl}
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      className="w-full h-full"
-                    />
+                  <div className="relative w-full h-[380px] sm:h-[440px] lg:h-full min-h-[440px] rounded-3xl overflow-hidden border border-rose-100 dark:border-white/10 shadow-lg group">
+                    <MapContainer
+                      center={[outlet.latitude, outlet.longitude]}
+                      zoom={16}
+                      scrollWheelZoom={false}
+                      style={{ width: "100%", height: "100%" }}
+                      className="w-full h-full z-0"
+                    >
+                      <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      />
+                      <MapCenterUpdater center={[outlet.latitude, outlet.longitude]} />
+                      <Marker
+                        position={[outlet.latitude, outlet.longitude]}
+                        icon={customIcon(true)}
+                      >
+                        <Popup autoPan={false}>
+                          <div style={{ minWidth: 220, fontFamily: "inherit" }} className="p-1">
+                            <div className="font-extrabold text-sm text-[#2a1d2e]">
+                              CakeStory Desserts — {displayLocation}
+                            </div>
+                            <div className="text-[10px] font-bold text-[#e63971] uppercase tracking-wider mt-0.5">
+                              {outlet.zone || outlet.city} • 100% Pure Veg
+                            </div>
+                            <div className="text-xs text-slate-600 mt-2 leading-snug">
+                              📍 {outlet.address}
+                            </div>
+                            <div className="text-xs text-slate-600 mt-1">
+                              📞 {outlet.phone}
+                            </div>
+                            <div className="text-xs text-slate-600 mt-0.5">
+                              🕒 {outlet.openingHours}
+                            </div>
+                            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+                              <a
+                                href={directionsUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#e63971] to-[#b31b51] text-white text-[11px] font-bold shadow-sm hover:opacity-90 transition-all cursor-pointer"
+                              >
+                                <span>Get Directions</span>
+                                <span>↗</span>
+                              </a>
+                            </div>
+                          </div>
+                        </Popup>
+                      </Marker>
+                    </MapContainer>
 
                     {/* Floating Map Pin Glass Badge */}
-                    <div className="absolute bottom-4 left-4 right-4 sm:right-auto px-4 py-2.5 rounded-2xl bg-white/95 dark:bg-[#180e1c]/95 backdrop-blur-md border border-rose-100/80 dark:border-white/15 shadow-xl flex items-center justify-between sm:justify-start gap-3">
+                    <div className="absolute bottom-4 left-4 right-4 sm:right-auto px-4 py-2.5 rounded-2xl bg-white/95 dark:bg-[#180e1c]/95 backdrop-blur-md border border-rose-100/80 dark:border-white/15 shadow-xl flex items-center justify-between sm:justify-start gap-3 z-[1000] pointer-events-auto">
                       <div className="flex items-center gap-2">
                         <span className="w-2.5 h-2.5 rounded-full bg-[#e63971] animate-ping" />
                         <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
-                          📍 {displayLocation}, {outlet.city || "Pune"}
+                          📍 CakeStory {displayLocation}, {outlet.city || "Pune"}
                         </span>
                       </div>
                       <a
                         href={directionsUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs font-bold text-[#e63971] hover:underline cursor-pointer"
+                        className="text-xs font-bold text-[#e63971] hover:underline cursor-pointer flex items-center gap-1"
                       >
-                        Navigate →
+                        <span>Navigate</span>
+                        <span>→</span>
                       </a>
                     </div>
                   </div>
@@ -734,7 +791,7 @@ export default function OutletDetail() {
             {/* 3 Frosted Glass Boutique Cards (No Images Inside Cards) */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 boutique-scroll-elem">
               {nearbyOutlets.map((nearby) => {
-                const nearbyDisplay = nearby.outletName || nearby.name.replace(/^CakeStory Desserts\s*—\s*/i, "");
+                const nearbyLocality = getOutletLocality(nearby);
                 return (
                   <div
                     key={nearby.id}
@@ -753,9 +810,14 @@ export default function OutletDetail() {
                       </div>
 
                       {/* Outlet Name */}
-                      <h3 className="text-xl sm:text-2xl font-bold font-display text-white group-hover:text-amber-300 transition-colors mb-2.5">
-                        CakeStory {nearbyDisplay}
+                      <h3 className="text-xl sm:text-2xl font-bold font-display text-white group-hover:text-amber-300 transition-colors mb-1">
+                        CakeStory {nearbyLocality}
                       </h3>
+                      {nearby.outletName && nearby.outletName !== nearbyLocality && (
+                        <p className="text-xs text-amber-200/90 font-medium mb-3">
+                          {nearby.outletName}
+                        </p>
+                      )}
 
                       {/* Address */}
                       <p className="text-xs sm:text-sm text-rose-100/75 leading-relaxed mb-6 line-clamp-2">
