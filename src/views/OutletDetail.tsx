@@ -9,7 +9,7 @@ import { franchiseService } from "../services/data";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
 import { useLanguage } from "../context/LanguageContext";
 import { prefersReducedMotion, MOTION } from "../utils/motion";
-import { getOutletUrl, getOutletLocality, formatHeroLocation } from "../utils/outletRouting";
+import { getOutletUrl, getOutletLocality, getOutletCity, getOutletZone, formatHeroLocation } from "../utils/outletRouting";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -191,8 +191,9 @@ export default function OutletDetail() {
   useEffect(() => {
     if (!outlet) return;
 
-    const locality = getOutletLocality(outlet);
-    const baseTitle = `${t("outletDetail.bestCakesIn", "Best Cakes in")} ${locality}, ${outlet.city} | CakeStory Desserts`;
+    const loc = getOutletLocality(outlet, language);
+    const cit = getOutletCity(outlet.city, language);
+    const baseTitle = `${t("outletDetail.bestCakesIn", "Best Cakes in")} ${loc}, ${cit} | CakeStory Desserts`;
     const metaDescription = `${outlet.description || t("outletDetail.newDesc")} ${outlet.address}. Call ${outlet.phone}.`;
 
     document.title = baseTitle;
@@ -325,13 +326,15 @@ export default function OutletDetail() {
     );
   }
 
-  // Display location title & locality
-  const locality = getOutletLocality(outlet);
+  // Display location title & locality (localized based on active language)
+  const displayLocation = getOutletLocality(outlet, language);
+  const displayCity = getOutletCity(outlet.city, language);
+  const displayZone = getOutletZone(outlet.zone, language);
   const heroLocation = formatHeroLocation(outlet, language);
-  const displayLocation = locality;
+  const enLocality = getOutletLocality(outlet, "en");
 
   // Google Maps Outlet Place Page: drops pin on store with place card and "Directions" button
-  const mapsPlaceUrl = `https://www.google.com/maps?q=${outlet.latitude},${outlet.longitude}+(${encodeURIComponent(`CakeStory Desserts — ${displayLocation}`)})&z=17`;
+  const mapsPlaceUrl = `https://www.google.com/maps?q=${outlet.latitude},${outlet.longitude}+(${encodeURIComponent(`CakeStory Desserts — ${enLocality}`)})&z=17`;
   const directionsUrl = mapsPlaceUrl;
 
   const cleanPhoneDigits = outlet.phone ? outlet.phone.replace(/\D/g, "") : "";
@@ -373,10 +376,10 @@ export default function OutletDetail() {
                 <span>{t("outletDetail.ourOutlets")}</span>
               </Link>
               <span className="text-rose-400/50">&gt;</span>
-              <span className="text-rose-200/90">{outlet.city}</span>
+              <span className="text-rose-200/90">{displayCity}</span>
               <span className="text-rose-400/50">&gt;</span>
               <span className="text-amber-300 font-semibold truncate max-w-[240px] sm:max-w-none">
-                {locality}
+                {displayLocation}
               </span>
             </nav>
 
@@ -492,7 +495,7 @@ export default function OutletDetail() {
                   {/* Interactive Location Badge in Bottom-Left */}
                   <div className="absolute bottom-4 left-4 px-4 py-2 rounded-full bg-black/75 backdrop-blur-md text-amber-200 text-xs font-bold border border-amber-400/30 shadow-lg flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                    <span className="text-white">📍 {locality}, {outlet.city}</span>
+                    <span className="text-white">📍 {displayLocation}, {displayCity}</span>
                   </div>
 
                   {/* Pure Veg Emblem in Top-Right */}
@@ -525,7 +528,9 @@ export default function OutletDetail() {
                     {t("outletDetail.storeLocationTimings")}
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-xl">
-                    Experience handcrafted 100% pure vegetarian celebration cakes, fresh desserts, and counter specials daily at CakeStory {displayLocation}.
+                    {language === "mr"
+                      ? `केकस्टोरी ${displayLocation} येथे रोज ताजे १००% शुद्ध शाकाहारी केक्स, खास पेस्ट्रीज आणि अप्रतिम डेझर्ट्सचा आनंद घ्या.`
+                      : `Experience handcrafted 100% pure vegetarian celebration cakes, fresh desserts, and counter specials daily at CakeStory ${displayLocation}.`}
                   </p>
                 </div>
 
@@ -691,10 +696,10 @@ export default function OutletDetail() {
                         <Popup autoPan={false}>
                           <div style={{ minWidth: 220, fontFamily: "inherit" }} className="p-1">
                             <div className="font-extrabold text-sm text-[#2a1d2e]">
-                              CakeStory Desserts — {displayLocation}
+                              {language === "mr" ? `केकस्टोरी डेझर्ट्स — ${displayLocation}` : `CakeStory Desserts — ${displayLocation}`}
                             </div>
                             <div className="text-[10px] font-bold text-[#e63971] uppercase tracking-wider mt-0.5">
-                              {outlet.zone || outlet.city} • 100% Pure Veg
+                              {displayZone || displayCity} • {language === "mr" ? "१००% शुद्ध शाकाहारी" : "100% Pure Veg"}
                             </div>
                             <div className="text-xs text-slate-600 mt-2 leading-snug">
                               📍 {outlet.address}
@@ -713,7 +718,9 @@ export default function OutletDetail() {
                                 style={{ color: "#ffffff", textDecoration: "none" }}
                                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#e63971] to-[#b31b51] text-white !text-white text-[11px] font-bold shadow-sm hover:opacity-90 transition-all cursor-pointer"
                               >
-                                <span style={{ color: "#ffffff" }}>Get Directions</span>
+                                <span style={{ color: "#ffffff" }}>
+                                  {language === "mr" ? "दिशा-मार्ग पहा" : "Get Directions"}
+                                </span>
                                 <span style={{ color: "#ffffff" }}>↗</span>
                               </a>
                             </div>
@@ -727,7 +734,7 @@ export default function OutletDetail() {
                       <div className="flex items-center gap-2">
                         <span className="w-2.5 h-2.5 rounded-full bg-[#e63971] animate-ping" />
                         <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
-                          📍 CakeStory {displayLocation}, {outlet.city || "Pune"}
+                          📍 {language === "mr" ? `केकस्टोरी ${displayLocation}, ${displayCity}` : `CakeStory ${displayLocation}, ${displayCity}`}
                         </span>
                       </div>
                       <a
@@ -736,7 +743,7 @@ export default function OutletDetail() {
                         rel="noopener noreferrer"
                         className="text-xs font-bold text-[#e63971] hover:underline cursor-pointer flex items-center gap-1"
                       >
-                        <span>Navigate</span>
+                        <span>{language === "mr" ? "रस्ता पहा" : "Navigate"}</span>
                         <span>→</span>
                       </a>
                     </div>
@@ -794,7 +801,9 @@ export default function OutletDetail() {
             {/* 3 Frosted Glass Boutique Cards (No Images Inside Cards) */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 boutique-scroll-elem">
               {nearbyOutlets.map((nearby) => {
-                const nearbyLocality = getOutletLocality(nearby);
+                const nearbyLocality = getOutletLocality(nearby, language);
+                const nearbyCity = getOutletCity(nearby.city, language);
+                const nearbyZone = getOutletZone(nearby.zone, language);
                 return (
                   <div
                     key={nearby.id}
@@ -804,7 +813,7 @@ export default function OutletDetail() {
                       {/* Zone & Status Badges */}
                       <div className="flex items-center justify-between gap-2 mb-4">
                         <span className="px-3 py-1 rounded-full bg-white/10 text-rose-200 text-xs font-bold border border-white/15">
-                          📍 {nearby.zone || nearby.city || "Pune"}
+                          📍 {nearbyZone || nearbyCity}
                         </span>
                         <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -814,9 +823,9 @@ export default function OutletDetail() {
 
                       {/* Outlet Name */}
                       <h3 className="text-xl sm:text-2xl font-bold font-display text-white group-hover:text-amber-300 transition-colors mb-1">
-                        CakeStory {nearbyLocality}
+                        {language === "mr" ? `केकस्टोरी ${nearbyLocality}` : `CakeStory ${nearbyLocality}`}
                       </h3>
-                      {nearby.outletName && nearby.outletName !== nearbyLocality && (
+                      {nearby.outletName && nearby.outletName !== getOutletLocality(nearby, "en") && (
                         <p className="text-xs text-amber-200/90 font-medium mb-3">
                           {nearby.outletName}
                         </p>
@@ -835,7 +844,7 @@ export default function OutletDetail() {
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="text-emerald-400">🌱</span>
-                          <span>100% Pure Veg & Eggless</span>
+                          <span>{language === "mr" ? "१००% शुद्ध शाकाहारी" : "100% Pure Veg & Eggless"}</span>
                         </div>
                       </div>
                     </div>

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Franchise } from "../../services/data";
-import { getOutletUrl } from "../../utils/outletRouting";
+import { getOutletUrl, getOutletLocality, getOutletZone } from "../../utils/outletRouting";
+import { useLanguage } from "../../context/LanguageContext";
 
 interface OutletCardProps {
   outlet: Franchise;
@@ -18,11 +19,14 @@ export default function OutletCard({
   onClick,
   isSelected = false,
 }: OutletCardProps) {
+  const { language } = useLanguage();
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const outletUrl = getOutletUrl(outlet);
   const hasImage = Boolean(outlet.image) && !imageError;
+  const locality = getOutletLocality(outlet, language);
+  const zone = getOutletZone(outlet.zone, language);
 
   return (
     <div
@@ -75,8 +79,12 @@ export default function OutletCard({
               </div>
             </div>
 
-            <div className="relative z-10 text-xs font-bold text-white tracking-tight drop-shadow-xs">{outlet.name}</div>
-            <div className="relative z-10 text-[10px] text-pink-200/90 font-medium mt-0.5">Physical Retail Outlet • {outlet.zone || "Pune Network"}</div>
+            <div className="relative z-10 text-xs font-bold text-white tracking-tight drop-shadow-xs">
+              {language === "mr" ? `केकस्टोरी ${locality}` : outlet.name}
+            </div>
+            <div className="relative z-10 text-[10px] text-pink-200/90 font-medium mt-0.5">
+              {language === "mr" ? "अधिकृत आऊटलेट" : "Physical Retail Outlet"} • {zone || "Pune Network"}
+            </div>
           </div>
         )}
 
@@ -89,14 +97,16 @@ export default function OutletCard({
                 : "bg-rose-500/90 text-white"
             }`}
           >
-            {outlet.active ? "● Operational" : "○ Temporarily Closed"}
+            {outlet.active
+              ? (language === "mr" ? "● सुरू आहे" : "● Operational")
+              : (language === "mr" ? "○ तात्पुरते बंद" : "○ Temporarily Closed")}
           </span>
         </div>
 
         {/* Pune Zone Tag Overlay */}
         <div className="absolute top-3 right-3 z-10">
           <span className="text-[10px] font-bold px-2 py-0.8 rounded-md bg-slate-900/80 text-pink-200 border border-white/20 backdrop-blur-md uppercase tracking-wide">
-            {outlet.zone || outlet.city}
+            {zone || outlet.city}
           </span>
         </div>
       </div>
@@ -106,10 +116,12 @@ export default function OutletCard({
         {/* Outlet Identity */}
         <div className="mb-2">
           <h3 className="font-display font-bold text-base sm:text-lg text-[#2a1d2e] leading-snug group-hover:text-[#ff5c97] transition-colors truncate">
-            <Link to={outletUrl}>{outlet.name}</Link>
+            <Link to={outletUrl}>
+              {language === "mr" ? `केकस्टोरी ${locality}` : `CakeStory ${locality}`}
+            </Link>
           </h3>
           <div className="text-[11px] font-semibold text-[#ff5c97] truncate">
-            {outlet.outletName} • Pune Network
+            {outlet.outletName} • {zone || "Pune"}
           </div>
         </div>
 
@@ -121,7 +133,7 @@ export default function OutletCard({
         {/* Operating Hours */}
         <div className="text-[11px] text-slate-500 flex items-center gap-1.5 mb-4 border-t border-slate-100 pt-2.5">
           <span>🕐</span>
-          <span>Open Daily: <strong className="text-slate-700 font-semibold">{outlet.openingHours}</strong></span>
+          <span>{language === "mr" ? "दररोज:" : "Open Daily:"} <strong className="text-slate-700 font-semibold">{outlet.openingHours}</strong></span>
         </div>
 
         {/* 3. CARD FOOTER & ACTIONS */}
@@ -139,7 +151,7 @@ export default function OutletCard({
             to={outletUrl}
             className="btn-ghost !text-xs !py-1.5 !px-3 font-semibold text-[#ff5c97] group-hover:bg-pink-50 transition-colors shrink-0"
           >
-            View Page →
+            {language === "mr" ? "पेज पहा →" : "View Page →"}
           </Link>
         </div>
       </div>

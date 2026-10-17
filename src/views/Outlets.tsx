@@ -6,7 +6,8 @@ import { franchiseService, Franchise } from "../services/data";
 import { EmptyState } from "../components/common/Loading";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
 import OutletCard from "../components/common/OutletCard";
-import { getOutletUrl } from "../utils/outletRouting";
+import { getOutletUrl, getOutletLocality, getOutletZone, getOutletCity } from "../utils/outletRouting";
+import { useLanguage } from "../context/LanguageContext";
 
 const customIcon = (active: boolean) =>
   L.divIcon({
@@ -25,6 +26,7 @@ function FlyTo({ pos, zoom = 13 }: { pos: [number, number] | null; zoom?: number
 }
 
 export default function Outlets() {
+  const { language } = useLanguage();
   const { openModal } = useFranchiseModal();
   const [query, setQuery] = useState("");
   const [zoneFilter, setZoneFilter] = useState("all");
@@ -93,13 +95,15 @@ export default function Outlets() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pink-100 text-[#ff5c97] text-xs font-bold uppercase tracking-wider mb-3">
-                📍 PUNE OUTLET DIRECTORY
+                {language === "mr" ? "📍 पुणे आऊटलेट्स डिरेक्टरी" : "📍 PUNE OUTLET DIRECTORY"}
               </div>
               <h1 className="font-display text-4xl md:text-5xl text-[#2a1d2e] font-bold">
-                Growing Across Pune
+                {language === "mr" ? "पुणे आणि उपनगरांमध्ये विस्तार" : "Growing Across Pune"}
               </h1>
               <p className="text-sm text-[#5a4a5e] mt-1">
-                "Every outlet is another chapter in the CakeStory Desserts journey." {all.length} franchise locations across Pune & regional corridors.
+                {language === "mr"
+                  ? `"प्रत्येक आऊटलेट म्हणजे केकस्टोरी प्रवासातील नवा गोड अध्याय." पुणे व परिसरामध्ये ${all.length} फ्रँचायझी आऊटलेट्स.`
+                  : `"Every outlet is another chapter in the CakeStory Desserts journey." ${all.length} franchise locations across Pune & regional corridors.`}
               </p>
             </div>
             <div>
@@ -107,7 +111,7 @@ export default function Outlets() {
                 onClick={openModal}
                 className="btn-primary text-xs sm:text-sm whitespace-nowrap shadow-lg shadow-pink-300/40"
               >
-                Start Your Franchise Journey +
+                {language === "mr" ? "फ्रँचायझी प्रवास सुरू करा +" : "Start Your Franchise Journey +"}
               </button>
             </div>
           </div>
@@ -119,7 +123,7 @@ export default function Outlets() {
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search by outlet name, area, or locality..."
+                placeholder={language === "mr" ? "आऊटलेटचे नाव, पत्ता किंवा परिसर शोधा..." : "Search by outlet name, area, or locality..."}
                 className="input-field pl-11"
               />
             </div>
@@ -128,10 +132,12 @@ export default function Outlets() {
               onChange={(e) => setZoneFilter(e.target.value)}
               className="input-field md:w-56 cursor-pointer font-semibold text-slate-700"
             >
-              <option value="all">All Pune Zones ({all.length})</option>
+              <option value="all">
+                {language === "mr" ? `सर्व भाग (${all.length})` : `All Pune Zones (${all.length})`}
+              </option>
               {zones.filter((z) => z !== "all").map((z) => (
                 <option key={z} value={z}>
-                  {z}
+                  {getOutletZone(z, language)}
                 </option>
               ))}
             </select>
@@ -139,16 +145,20 @@ export default function Outlets() {
               onClick={() => setActiveOnly(!activeOnly)}
               className={`chip whitespace-nowrap px-4 py-2 text-xs font-semibold ${activeOnly ? "chip-active" : ""}`}
             >
-              {activeOnly ? "✓ Operational Only" : "Show All Status"}
+              {activeOnly
+                ? (language === "mr" ? "✓ फक्त सुरू आऊटलेट्स" : "✓ Operational Only")
+                : (language === "mr" ? "सर्व आऊटलेट्स दाखवा" : "Show All Status")}
             </button>
             <button onClick={focusNearest} className="btn-ghost text-xs whitespace-nowrap font-semibold">
-              📍 Nearest Outlet
+              {language === "mr" ? "📍 जवळचे आऊटलेट" : "📍 Nearest Outlet"}
             </button>
             <button
               onClick={() => setShowMapMobile(!showMapMobile)}
               className="lg:hidden btn-ghost text-xs whitespace-nowrap"
             >
-              {showMapMobile ? "📋 View List" : "🗺️ View Map"}
+              {showMapMobile
+                ? (language === "mr" ? "📋 यादी पहा" : "📋 View List")
+                : (language === "mr" ? "🗺️ नकाशा पहा" : "🗺️ View Map")}
             </button>
           </div>
 
@@ -161,8 +171,12 @@ export default function Outlets() {
               } h-auto lg:h-[720px] lg:max-h-[calc(100vh-210px)] min-h-0`}
             >
               <div className="flex items-center justify-between text-xs font-semibold text-[#5a4a5e] px-1 pb-2 mb-1 flex-shrink-0">
-                <span>{filtered.length} Outlets Found</span>
-                {zoneFilter !== "all" && <span className="font-bold text-[#ff5c97]">Zone: {zoneFilter}</span>}
+                <span>{language === "mr" ? `${filtered.length} आऊटलेट्स उपलब्ध` : `${filtered.length} Outlets Found`}</span>
+                {zoneFilter !== "all" && (
+                  <span className="font-bold text-[#ff5c97]">
+                    {language === "mr" ? `भाग: ${getOutletZone(zoneFilter, language)}` : `Zone: ${zoneFilter}`}
+                  </span>
+                )}
               </div>
 
               {filtered.length === 0 ? (
@@ -216,9 +230,11 @@ export default function Outlets() {
                     >
                       <Popup>
                         <div style={{ minWidth: 220, fontFamily: "sans-serif" }}>
-                          <div style={{ fontWeight: 800, fontSize: 14, color: "#2a1d2e" }}>{f.name}</div>
+                          <div style={{ fontWeight: 800, fontSize: 14, color: "#2a1d2e" }}>
+                            {language === "mr" ? `केकस्टोरी डेझर्ट्स — ${getOutletLocality(f, language)}` : f.name}
+                          </div>
                           <div style={{ fontSize: 10, fontWeight: 700, color: "#ff5c97", textTransform: "uppercase", marginTop: 2 }}>
-                            {f.zone} • {f.city}
+                            {getOutletZone(f.zone, language)} • {getOutletCity(f.city, language)}
                           </div>
                           <div style={{ fontSize: 11, color: "#5a4a5e", marginTop: 4 }}>
                             📍 {f.address}
@@ -241,7 +257,7 @@ export default function Outlets() {
                                 textDecoration: "none",
                               }}
                             >
-                              View Outlet Page ↗
+                              {language === "mr" ? "आऊटलेट पेज पहा ↗" : "View Outlet Page ↗"}
                             </a>
                           </div>
                         </div>
