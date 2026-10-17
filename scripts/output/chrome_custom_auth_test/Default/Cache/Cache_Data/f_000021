@@ -1,0 +1,309 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/components/common/BakeryBackgroundDecor.tsx");import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=ac8303ce"; const Fragment = __vite__cjsImport0_react_jsxDevRuntime["Fragment"]; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+import { twMerge } from "/node_modules/.vite/deps/tailwind-merge.js?v=ac8303ce";
+export default function BakeryBackgroundDecor({
+  variant = "hero",
+  className = ""
+}) {
+  return /* @__PURE__ */ jsxDEV(
+    "div",
+    {
+      "aria-hidden": "true",
+      className: twMerge(
+        "absolute inset-0 pointer-events-none select-none overflow-hidden z-0 opacity-40 sm:opacity-60 transition-opacity duration-700",
+        className
+      ),
+      children: [
+        variant === "hero" && /* @__PURE__ */ jsxDEV(Fragment, { children: [
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute top-[12%] left-[8%] w-3 h-3 rounded-full bg-pink-300/40 blur-[1px] float-y", style: { animationDuration: "7s" } }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 29,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute top-[28%] left-[18%] w-2 h-2 rounded-full bg-blue-300/40 blur-[1px] float-y", style: { animationDuration: "9s", animationDelay: "1s" } }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 30,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute top-[65%] left-[12%] w-4 h-4 rounded-full bg-amber-200/50 blur-[2px] float-y", style: { animationDuration: "11s", animationDelay: "2s" } }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 31,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute top-[20%] right-[14%] w-3.5 h-3.5 rounded-full bg-rose-300/40 blur-[1px] float-y", style: { animationDuration: "8s", animationDelay: "1.5s" } }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 32,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute top-[75%] right-[22%] w-2.5 h-2.5 rounded-full bg-purple-200/40 blur-[1px] float-y", style: { animationDuration: "10s", animationDelay: "0.5s" } }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 33,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("svg", { className: "absolute top-[6%] left-[4%] w-28 h-28 text-pink-300/20 float-y", viewBox: "0 0 100 100", fill: "none", stroke: "currentColor", strokeWidth: "1.5", style: { animationDuration: "12s" }, children: /* @__PURE__ */ jsxDEV("path", { d: "M50 15 C 20 20, 10 50, 35 75 C 60 100, 90 70, 75 40 C 65 20, 40 30, 45 50 C 50 65, 65 60, 60 50 C 55 42, 45 45, 50 50" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 37,
+            columnNumber: 13
+          }, this) }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 36,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("svg", { className: "absolute bottom-[10%] right-[6%] w-24 h-24 text-rose-300/25 float-y", viewBox: "0 0 64 64", fill: "currentColor", style: { animationDuration: "14s", animationDelay: "3s" }, children: /* @__PURE__ */ jsxDEV("path", { d: "M32 6C24 6 12 18 12 34C12 48 22 58 32 58C42 58 52 48 52 34C52 18 40 6 32 6ZM26 22A2 2 0 1 1 26 18A2 2 0 0 1 26 22ZM38 22A2 2 0 1 1 38 18A2 2 0 0 1 38 22ZM20 34A2 2 0 1 1 20 30A2 2 0 0 1 20 34ZM32 34A2 2 0 1 1 32 30A2 2 0 0 1 32 34ZM44 34A2 2 0 1 1 44 30A2 2 0 0 1 44 34ZM26 46A2 2 0 1 1 26 42A2 2 0 0 1 26 46ZM38 46A2 2 0 1 1 38 42A2 2 0 0 1 38 46Z", opacity: "0.4" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 42,
+            columnNumber: 13
+          }, this) }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 41,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-200/20 to-transparent" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 46,
+            columnNumber: 11
+          }, this)
+        ] }, void 0, true, {
+          fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+          lineNumber: 27,
+          columnNumber: 7
+        }, this),
+        variant === "strengths" && /* @__PURE__ */ jsxDEV(Fragment, { children: [
+          /* @__PURE__ */ jsxDEV("svg", { className: "absolute top-8 left-10 w-32 h-32 text-pink-300/15 float-y", viewBox: "0 0 100 100", fill: "none", stroke: "currentColor", strokeWidth: "1.2", children: [
+            /* @__PURE__ */ jsxDEV("circle", { cx: "50", cy: "50", r: "35", strokeDasharray: "4 4" }, void 0, false, {
+              fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+              lineNumber: 54,
+              columnNumber: 13
+            }, this),
+            /* @__PURE__ */ jsxDEV("circle", { cx: "50", cy: "50", r: "20", strokeDasharray: "2 4" }, void 0, false, {
+              fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+              lineNumber: 55,
+              columnNumber: 13
+            }, this)
+          ] }, void 0, true, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 53,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("svg", { className: "absolute bottom-10 right-12 w-36 h-36 text-blue-300/15 float-y", viewBox: "0 0 100 100", fill: "none", stroke: "currentColor", strokeWidth: "1.2", style: { animationDelay: "2s" }, children: [
+            /* @__PURE__ */ jsxDEV("path", { d: "M20 50 Q 50 10, 80 50 Q 50 90, 20 50 Z" }, void 0, false, {
+              fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+              lineNumber: 58,
+              columnNumber: 13
+            }, this),
+            /* @__PURE__ */ jsxDEV("circle", { cx: "50", cy: "50", r: "8" }, void 0, false, {
+              fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+              lineNumber: 59,
+              columnNumber: 13
+            }, this)
+          ] }, void 0, true, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 57,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute top-[40%] right-[15%] w-3 h-3 rounded-full bg-amber-300/40 blur-[1px]" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 61,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute bottom-[30%] left-[20%] w-2 h-2 rounded-full bg-pink-300/40 blur-[1px]" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 62,
+            columnNumber: 11
+          }, this)
+        ] }, void 0, true, {
+          fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+          lineNumber: 51,
+          columnNumber: 7
+        }, this),
+        variant === "timeline" && /* @__PURE__ */ jsxDEV(Fragment, { children: [
+          /* @__PURE__ */ jsxDEV("svg", { className: "absolute top-1/4 -left-12 w-72 h-72 text-pink-200/20 pointer-events-none", viewBox: "0 0 200 200", fill: "none", stroke: "currentColor", strokeWidth: "1.5", children: /* @__PURE__ */ jsxDEV("path", { d: "M10 100 Q 100 20, 190 100 T 370 100" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 70,
+            columnNumber: 13
+          }, this) }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 69,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute bottom-16 right-8 w-4 h-4 rounded-full bg-rose-200/50 blur-[2px] float-y" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 72,
+            columnNumber: 11
+          }, this)
+        ] }, void 0, true, {
+          fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+          lineNumber: 67,
+          columnNumber: 7
+        }, this),
+        variant === "hygiene" && /* @__PURE__ */ jsxDEV(Fragment, { children: [
+          /* @__PURE__ */ jsxDEV("svg", { className: "absolute top-12 right-16 w-20 h-20 text-emerald-300/20 float-y", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.5", children: /* @__PURE__ */ jsxDEV("path", { d: "M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 80,
+            columnNumber: 13
+          }, this) }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 79,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("svg", { className: "absolute bottom-16 left-12 w-16 h-16 text-blue-300/20 float-y", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.5", style: { animationDelay: "1.5s" }, children: /* @__PURE__ */ jsxDEV("path", { d: "M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 83,
+            columnNumber: 13
+          }, this) }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 82,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute top-1/2 left-1/3 w-3 h-3 rounded-full bg-emerald-200/40 blur-[1px]" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 85,
+            columnNumber: 11
+          }, this)
+        ] }, void 0, true, {
+          fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+          lineNumber: 77,
+          columnNumber: 7
+        }, this),
+        variant === "outlets" && /* @__PURE__ */ jsxDEV(Fragment, { children: [
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute inset-0 bg-[radial-gradient(#ff8fb1_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.07]" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 92,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("svg", { className: "absolute top-10 right-10 w-40 h-40 text-pink-300/15 float-y", viewBox: "0 0 100 100", fill: "none", stroke: "currentColor", strokeWidth: "1", children: [
+            /* @__PURE__ */ jsxDEV("circle", { cx: "50", cy: "50", r: "45", strokeDasharray: "3 3" }, void 0, false, {
+              fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+              lineNumber: 94,
+              columnNumber: 13
+            }, this),
+            /* @__PURE__ */ jsxDEV("circle", { cx: "50", cy: "50", r: "30", strokeDasharray: "2 2" }, void 0, false, {
+              fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+              lineNumber: 95,
+              columnNumber: 13
+            }, this)
+          ] }, void 0, true, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 93,
+            columnNumber: 11
+          }, this)
+        ] }, void 0, true, {
+          fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+          lineNumber: 90,
+          columnNumber: 7
+        }, this),
+        variant === "cta" && /* @__PURE__ */ jsxDEV(Fragment, { children: [
+          /* @__PURE__ */ jsxDEV("svg", { className: "absolute top-6 left-12 w-20 h-20 text-white/30 float-y", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsxDEV("path", { d: "M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 104,
+            columnNumber: 13
+          }, this) }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 103,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("svg", { className: "absolute bottom-8 right-14 w-16 h-16 text-amber-200/40 float-y", viewBox: "0 0 24 24", fill: "currentColor", style: { animationDelay: "2s" }, children: /* @__PURE__ */ jsxDEV("path", { d: "M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 107,
+            columnNumber: 13
+          }, this) }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 106,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute top-1/3 right-1/4 w-3 h-3 rounded-full bg-white/50 blur-[1px]" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 109,
+            columnNumber: 11
+          }, this)
+        ] }, void 0, true, {
+          fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+          lineNumber: 101,
+          columnNumber: 7
+        }, this),
+        variant === "franchise" && /* @__PURE__ */ jsxDEV(Fragment, { children: [
+          /* @__PURE__ */ jsxDEV("svg", { className: "absolute inset-0 w-full h-full text-pink-400/15 pointer-events-none", viewBox: "0 0 800 400", fill: "none", stroke: "currentColor", strokeWidth: "1.2", children: [
+            /* @__PURE__ */ jsxDEV("path", { d: "M 50 350 Q 250 150 450 250 T 750 80", strokeDasharray: "4 4" }, void 0, false, {
+              fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+              lineNumber: 117,
+              columnNumber: 13
+            }, this),
+            /* @__PURE__ */ jsxDEV("path", { d: "M 100 80 Q 300 280 600 120", strokeDasharray: "3 3", stroke: "#6fa8f5", strokeOpacity: "0.2" }, void 0, false, {
+              fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+              lineNumber: 118,
+              columnNumber: 13
+            }, this),
+            /* @__PURE__ */ jsxDEV("circle", { cx: "250", cy: "190", r: "4", fill: "#ff5c97" }, void 0, false, {
+              fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+              lineNumber: 119,
+              columnNumber: 13
+            }, this),
+            /* @__PURE__ */ jsxDEV("circle", { cx: "450", cy: "250", r: "6", fill: "#6fa8f5" }, void 0, false, {
+              fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+              lineNumber: 120,
+              columnNumber: 13
+            }, this),
+            /* @__PURE__ */ jsxDEV("circle", { cx: "600", cy: "120", r: "5", fill: "#ff7eb3" }, void 0, false, {
+              fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+              lineNumber: 121,
+              columnNumber: 13
+            }, this)
+          ] }, void 0, true, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 116,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute top-10 left-16 w-36 h-36 rounded-full bg-emerald-100/30 blur-2xl float-y" }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 123,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { className: "absolute bottom-12 right-20 w-44 h-44 rounded-full bg-pink-200/30 blur-2xl float-y", style: { animationDelay: "2s" } }, void 0, false, {
+            fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+            lineNumber: 124,
+            columnNumber: 11
+          }, this)
+        ] }, void 0, true, {
+          fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+          lineNumber: 114,
+          columnNumber: 7
+        }, this)
+      ]
+    },
+    void 0,
+    true,
+    {
+      fileName: "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx",
+      lineNumber: 19,
+      columnNumber: 5
+    },
+    this
+  );
+}
+_c = BakeryBackgroundDecor;
+var _c;
+$RefreshReg$(_c, "BakeryBackgroundDecor");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) {
+  return RefreshRuntime.register(type, "D:/CakeStory - Website/src/components/common/BakeryBackgroundDecor.tsx " + id);
+}
+function $RefreshSig$() {
+  return RefreshRuntime.createSignatureFunctionForTransform();
+}
+
+//# sourceMappingURL=data:application/json;base64,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T0FDdko7QUFBQSxtQ0FBQyxVQUFLLEdBQUUsdUNBQXNDLGlCQUFnQixTQUE5RDtBQUFBO0FBQUE7QUFBQTtBQUFBLG1CQUFtRTtBQUFBLFlBQ25FLHVCQUFDLFVBQUssR0FBRSw4QkFBNkIsaUJBQWdCLE9BQU0sUUFBTyxXQUFVLGVBQWMsU0FBMUY7QUFBQTtBQUFBO0FBQUE7QUFBQSxtQkFBK0Y7QUFBQSxZQUMvRix1QkFBQyxZQUFPLElBQUcsT0FBTSxJQUFHLE9BQU0sR0FBRSxLQUFJLE1BQUssYUFBckM7QUFBQTtBQUFBO0FBQUE7QUFBQSxtQkFBOEM7QUFBQSxZQUM5Qyx1QkFBQyxZQUFPLElBQUcsT0FBTSxJQUFHLE9BQU0sR0FBRSxLQUFJLE1BQUssYUFBckM7QUFBQTtBQUFBO0FBQUE7QUFBQSxtQkFBOEM7QUFBQSxZQUM5Qyx1QkFBQyxZQUFPLElBQUcsT0FBTSxJQUFHLE9BQU0sR0FBRSxLQUFJLE1BQUssYUFBckM7QUFBQTtBQUFBO0FBQUE7QUFBQSxtQkFBOEM7QUFBQSxlQUxoRDtBQUFBO0FBQUE7QUFBQTtBQUFBLGlCQU1BO0FBQUEsVUFDQSx1QkFBQyxTQUFJLFdBQVUsdUZBQWY7QUFBQTtBQUFBO0FBQUE7QUFBQSxpQkFBa0c7QUFBQSxVQUNsRyx1QkFBQyxTQUFJLFdBQVUsc0ZBQXFGLE9BQU8sRUFBRUcsZ0JBQWdCLEtBQUssS0FBbEk7QUFBQTtBQUFBO0FBQUE7QUFBQSxpQkFBb0k7QUFBQSxhQVZ0STtBQUFBO0FBQUE7QUFBQTtBQUFBLGVBV0E7QUFBQTtBQUFBO0FBQUEsSUExR0o7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLEVBNEdBO0FBRUo7QUFBQ0MsS0FuSHVCTDtBQUFxQixJQUFBSztBQUFBLGFBQUFBLElBQUEiLCJuYW1lcyI6WyJ0d01lcmdlIiwiQmFrZXJ5QmFja2dyb3VuZERlY29yIiwidmFyaWFudCIsImNsYXNzTmFtZSIsImFuaW1hdGlvbkR1cmF0aW9uIiwiYW5pbWF0aW9uRGVsYXkiLCJfYyJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJCYWtlcnlCYWNrZ3JvdW5kRGVjb3IudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHR3TWVyZ2UgfSBmcm9tIFwidGFpbHdpbmQtbWVyZ2VcIjtcblxuaW50ZXJmYWNlIEJha2VyeUJhY2tncm91bmREZWNvclByb3BzIHtcbiAgdmFyaWFudD86IFwiaGVyb1wiIHwgXCJzdHJlbmd0aHNcIiB8IFwidGltZWxpbmVcIiB8IFwiaHlnaWVuZVwiIHwgXCJvdXRsZXRzXCIgfCBcImN0YVwiIHwgXCJmcmFuY2hpc2VcIjtcbiAgY2xhc3NOYW1lPzogc3RyaW5nO1xufVxuXG4vKipcbiAqIEJha2VyeUJhY2tncm91bmREZWNvciDigJQgQXRtb3NwaGVyaWMgYmFja2dyb3VuZCBlbGVtZW50cyBmb3IgQ2FrZVN0b3J5IERlc3NlcnRzLlxuICogRGlzcGxheXMgdWx0cmEtc3VidGxlLCBub24tZGlzdHJhY3RpbmcgU1ZHIGlsbHVzdHJhdGlvbnMgJiBiYWtlcnktaW5zcGlyZWQgdmVjdG9yc1xuICogKGZsb3VyIGR1c3QsIGNyZWFtIHN3aXJscywgc3RyYXdiZXJyeSBzaWxob3VldHRlcywgY3J1bWIgYWNjZW50cykuXG4gKiBPcGVyYXRlcyBhdCBsb3cgb3BhY2l0eSBiZWhpbmQgY29udGVudC5cbiAqL1xuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gQmFrZXJ5QmFja2dyb3VuZERlY29yKHtcbiAgdmFyaWFudCA9IFwiaGVyb1wiLFxuICBjbGFzc05hbWUgPSBcIlwiLFxufTogQmFrZXJ5QmFja2dyb3VuZERlY29yUHJvcHMpIHtcbiAgcmV0dXJuIChcbiAgICA8ZGl2XG4gICAgICBhcmlhLWhpZGRlbj1cInRydWVcIlxuICAgICAgY2xhc3NOYW1lPXt0d01lcmdlKFxuICAgICAgICBcImFic29sdXRlIGluc2V0LTAgcG9pbnRlci1ldmVudHMtbm9uZSBzZWxlY3Qtbm9uZSBvdmVyZmxvdy1oaWRkZW4gei0wIG9wYWNpdHktNDAgc206b3BhY2l0eS02MCB0cmFuc2l0aW9uLW9wYWNpdHkgZHVyYXRpb24tNzAwXCIsXG4gICAgICAgIGNsYXNzTmFtZVxuICAgICAgKX1cbiAgICA+XG4gICAgICB7dmFyaWFudCA9PT0gXCJoZXJvXCIgJiYgKFxuICAgICAgICA8PlxuICAgICAgICAgIHsvKiBGbG91ciAmIFBvd2RlciBEdXN0IFBhcnRpY2xlcyAqL31cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIHRvcC1bMTIlXSBsZWZ0LVs4JV0gdy0zIGgtMyByb3VuZGVkLWZ1bGwgYmctcGluay0zMDAvNDAgYmx1ci1bMXB4XSBmbG9hdC15XCIgc3R5bGU9e3sgYW5pbWF0aW9uRHVyYXRpb246IFwiN3NcIiB9fSAvPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgdG9wLVsyOCVdIGxlZnQtWzE4JV0gdy0yIGgtMiByb3VuZGVkLWZ1bGwgYmctYmx1ZS0zMDAvNDAgYmx1ci1bMXB4XSBmbG9hdC15XCIgc3R5bGU9e3sgYW5pbWF0aW9uRHVyYXRpb246IFwiOXNcIiwgYW5pbWF0aW9uRGVsYXk6IFwiMXNcIiB9fSAvPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgdG9wLVs2NSVdIGxlZnQtWzEyJV0gdy00IGgtNCByb3VuZGVkLWZ1bGwgYmctYW1iZXItMjAwLzUwIGJsdXItWzJweF0gZmxvYXQteVwiIHN0eWxlPXt7IGFuaW1hdGlvbkR1cmF0aW9uOiBcIjExc1wiLCBhbmltYXRpb25EZWxheTogXCIyc1wiIH19IC8+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJhYnNvbHV0ZSB0b3AtWzIwJV0gcmlnaHQtWzE0JV0gdy0zLjUgaC0zLjUgcm91bmRlZC1mdWxsIGJnLXJvc2UtMzAwLzQwIGJsdXItWzFweF0gZmxvYXQteVwiIHN0eWxlPXt7IGFuaW1hdGlvbkR1cmF0aW9uOiBcIjhzXCIsIGFuaW1hdGlvbkRlbGF5OiBcIjEuNXNcIiB9fSAvPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgdG9wLVs3NSVdIHJpZ2h0LVsyMiVdIHctMi41IGgtMi41IHJvdW5kZWQtZnVsbCBiZy1wdXJwbGUtMjAwLzQwIGJsdXItWzFweF0gZmxvYXQteVwiIHN0eWxlPXt7IGFuaW1hdGlvbkR1cmF0aW9uOiBcIjEwc1wiLCBhbmltYXRpb25EZWxheTogXCIwLjVzXCIgfX0gLz5cblxuICAgICAgICAgIHsvKiBDcmVhbSBTd2lybCBPdXRsaW5lIFZlY3RvciAtIFRvcCBMZWZ0ICovfVxuICAgICAgICAgIDxzdmcgY2xhc3NOYW1lPVwiYWJzb2x1dGUgdG9wLVs2JV0gbGVmdC1bNCVdIHctMjggaC0yOCB0ZXh0LXBpbmstMzAwLzIwIGZsb2F0LXlcIiB2aWV3Qm94PVwiMCAwIDEwMCAxMDBcIiBmaWxsPVwibm9uZVwiIHN0cm9rZT1cImN1cnJlbnRDb2xvclwiIHN0cm9rZVdpZHRoPVwiMS41XCIgc3R5bGU9e3sgYW5pbWF0aW9uRHVyYXRpb246IFwiMTJzXCIgfX0+XG4gICAgICAgICAgICA8cGF0aCBkPVwiTTUwIDE1IEMgMjAgMjAsIDEwIDUwLCAzNSA3NSBDIDYwIDEwMCwgOTAgNzAsIDc1IDQwIEMgNjUgMjAsIDQwIDMwLCA0NSA1MCBDIDUwIDY1LCA2NSA2MCwgNjAgNTAgQyA1NSA0MiwgNDUgNDUsIDUwIDUwXCIgLz5cbiAgICAgICAgICA8L3N2Zz5cblxuICAgICAgICAgIHsvKiBTdHJhd2JlcnJ5IFNpbGhvdWV0dGUgVmVjdG9yIC0gQm90dG9tIFJpZ2h0ICovfVxuICAgICAgICAgIDxzdmcgY2xhc3NOYW1lPVwiYWJzb2x1dGUgYm90dG9tLVsxMCVdIHJpZ2h0LVs2JV0gdy0yNCBoLTI0IHRleHQtcm9zZS0zMDAvMjUgZmxvYXQteVwiIHZpZXdCb3g9XCIwIDAgNjQgNjRcIiBmaWxsPVwiY3VycmVudENvbG9yXCIgc3R5bGU9e3sgYW5pbWF0aW9uRHVyYXRpb246IFwiMTRzXCIsIGFuaW1hdGlvbkRlbGF5OiBcIjNzXCIgfX0+XG4gICAgICAgICAgICA8cGF0aCBkPVwiTTMyIDZDMjQgNiAxMiAxOCAxMiAzNEMxMiA0OCAyMiA1OCAzMiA1OEM0MiA1OCA1MiA0OCA1MiAzNEM1MiAxOCA0MCA2IDMyIDZaTTI2IDIyQTIgMiAwIDEgMSAyNiAxOEEyIDIgMCAwIDEgMjYgMjJaTTM4IDIyQTIgMiAwIDEgMSAzOCAxOEEyIDIgMCAwIDEgMzggMjJaTTIwIDM0QTIgMiAwIDEgMSAyMCAzMEEyIDIgMCAwIDEgMjAgMzRaTTMyIDM0QTIgMiAwIDEgMSAzMiAzMEEyIDIgMCAwIDEgMzIgMzRaTTQ0IDM0QTIgMiAwIDEgMSA0NCAzMEEyIDIgMCAwIDEgNDQgMzRaTTI2IDQ2QTIgMiAwIDEgMSAyNiA0MkEyIDIgMCAwIDEgMjYgNDZaTTM4IDQ2QTIgMiAwIDEgMSAzOCA0MkEyIDIgMCAwIDEgMzggNDZaXCIgb3BhY2l0eT1cIjAuNFwiIC8+XG4gICAgICAgICAgPC9zdmc+XG5cbiAgICAgICAgICB7LyogRGVsaWNhdGUgTGluZSBHcmlkIEFjY2VudCAqL31cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIHRvcC0xLzIgbGVmdC0wIHJpZ2h0LTAgaC1weCBiZy1ncmFkaWVudC10by1yIGZyb20tdHJhbnNwYXJlbnQgdmlhLXBpbmstMjAwLzIwIHRvLXRyYW5zcGFyZW50XCIgLz5cbiAgICAgICAgPC8+XG4gICAgICApfVxuXG4gICAgICB7dmFyaWFudCA9PT0gXCJzdHJlbmd0aHNcIiAmJiAoXG4gICAgICAgIDw+XG4gICAgICAgICAgey8qIFN1YnRsZSBXaGlzay9XaGVhdCAmIFBhc3RyeSBGbG91ciBBY2NlbnRzICovfVxuICAgICAgICAgIDxzdmcgY2xhc3NOYW1lPVwiYWJzb2x1dGUgdG9wLTggbGVmdC0xMCB3LTMyIGgtMzIgdGV4dC1waW5rLTMwMC8xNSBmbG9hdC15XCIgdmlld0JveD1cIjAgMCAxMDAgMTAwXCIgZmlsbD1cIm5vbmVcIiBzdHJva2U9XCJjdXJyZW50Q29sb3JcIiBzdHJva2VXaWR0aD1cIjEuMlwiPlxuICAgICAgICAgICAgPGNpcmNsZSBjeD1cIjUwXCIgY3k9XCI1MFwiIHI9XCIzNVwiIHN0cm9rZURhc2hhcnJheT1cIjQgNFwiIC8+XG4gICAgICAgICAgICA8Y2lyY2xlIGN4PVwiNTBcIiBjeT1cIjUwXCIgcj1cIjIwXCIgc3Ryb2tlRGFzaGFycmF5PVwiMiA0XCIgLz5cbiAgICAgICAgICA8L3N2Zz5cbiAgICAgICAgICA8c3ZnIGNsYXNzTmFtZT1cImFic29sdXRlIGJvdHRvbS0xMCByaWdodC0xMiB3LTM2IGgtMzYgdGV4dC1ibHVlLTMwMC8xNSBmbG9hdC15XCIgdmlld0JveD1cIjAgMCAxMDAgMTAwXCIgZmlsbD1cIm5vbmVcIiBzdHJva2U9XCJjdXJyZW50Q29sb3JcIiBzdHJva2VXaWR0aD1cIjEuMlwiIHN0eWxlPXt7IGFuaW1hdGlvbkRlbGF5OiBcIjJzXCIgfX0+XG4gICAgICAgICAgICA8cGF0aCBkPVwiTTIwIDUwIFEgNTAgMTAsIDgwIDUwIFEgNTAgOTAsIDIwIDUwIFpcIiAvPlxuICAgICAgICAgICAgPGNpcmNsZSBjeD1cIjUwXCIgY3k9XCI1MFwiIHI9XCI4XCIgLz5cbiAgICAgICAgICA8L3N2Zz5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIHRvcC1bNDAlXSByaWdodC1bMTUlXSB3LTMgaC0zIHJvdW5kZWQtZnVsbCBiZy1hbWJlci0zMDAvNDAgYmx1ci1bMXB4XVwiIC8+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJhYnNvbHV0ZSBib3R0b20tWzMwJV0gbGVmdC1bMjAlXSB3LTIgaC0yIHJvdW5kZWQtZnVsbCBiZy1waW5rLTMwMC80MCBibHVyLVsxcHhdXCIgLz5cbiAgICAgICAgPC8+XG4gICAgICApfVxuXG4gICAgICB7dmFyaWFudCA9PT0gXCJ0aW1lbGluZVwiICYmIChcbiAgICAgICAgPD5cbiAgICAgICAgICB7LyogQ3VydmVkIEZyb3N0aW5nIFN0cm9rZSBCYWNrZ3JvdW5kICovfVxuICAgICAgICAgIDxzdmcgY2xhc3NOYW1lPVwiYWJzb2x1dGUgdG9wLTEvNCAtbGVmdC0xMiB3LTcyIGgtNzIgdGV4dC1waW5rLTIwMC8yMCBwb2ludGVyLWV2ZW50cy1ub25lXCIgdmlld0JveD1cIjAgMCAyMDAgMjAwXCIgZmlsbD1cIm5vbmVcIiBzdHJva2U9XCJjdXJyZW50Q29sb3JcIiBzdHJva2VXaWR0aD1cIjEuNVwiPlxuICAgICAgICAgICAgPHBhdGggZD1cIk0xMCAxMDAgUSAxMDAgMjAsIDE5MCAxMDAgVCAzNzAgMTAwXCIgLz5cbiAgICAgICAgICA8L3N2Zz5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIGJvdHRvbS0xNiByaWdodC04IHctNCBoLTQgcm91bmRlZC1mdWxsIGJnLXJvc2UtMjAwLzUwIGJsdXItWzJweF0gZmxvYXQteVwiIC8+XG4gICAgICAgIDwvPlxuICAgICAgKX1cblxuICAgICAge3ZhcmlhbnQgPT09IFwiaHlnaWVuZVwiICYmIChcbiAgICAgICAgPD5cbiAgICAgICAgICB7LyogU3BhcmtsZSBDbGVhbiBEaXNjaXBsaW5lIFZlY3RvcnMgKi99XG4gICAgICAgICAgPHN2ZyBjbGFzc05hbWU9XCJhYnNvbHV0ZSB0b3AtMTIgcmlnaHQtMTYgdy0yMCBoLTIwIHRleHQtZW1lcmFsZC0zMDAvMjAgZmxvYXQteVwiIHZpZXdCb3g9XCIwIDAgMjQgMjRcIiBmaWxsPVwibm9uZVwiIHN0cm9rZT1cImN1cnJlbnRDb2xvclwiIHN0cm9rZVdpZHRoPVwiMS41XCI+XG4gICAgICAgICAgICA8cGF0aCBkPVwiTTEyIDJMMTQuNSA5LjVMMjIgMTJMMTQuNSAxNC41TDEyIDIyTDkuNSAxNC41TDIgMTJMOS41IDkuNUwxMiAyWlwiIC8+XG4gICAgICAgICAgPC9zdmc+XG4gICAgICAgICAgPHN2ZyBjbGFzc05hbWU9XCJhYnNvbHV0ZSBib3R0b20tMTYgbGVmdC0xMiB3LTE2IGgtMTYgdGV4dC1ibHVlLTMwMC8yMCBmbG9hdC15XCIgdmlld0JveD1cIjAgMCAyNCAyNFwiIGZpbGw9XCJub25lXCIgc3Ryb2tlPVwiY3VycmVudENvbG9yXCIgc3Ryb2tlV2lkdGg9XCIxLjVcIiBzdHlsZT17eyBhbmltYXRpb25EZWxheTogXCIxLjVzXCIgfX0+XG4gICAgICAgICAgICA8cGF0aCBkPVwiTTEyIDJMMTQuNSA5LjVMMjIgMTJMMTQuNSAxNC41TDEyIDIyTDkuNSAxNC41TDIgMTJMOS41IDkuNUwxMiAyWlwiIC8+XG4gICAgICAgICAgPC9zdmc+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJhYnNvbHV0ZSB0b3AtMS8yIGxlZnQtMS8zIHctMyBoLTMgcm91bmRlZC1mdWxsIGJnLWVtZXJhbGQtMjAwLzQwIGJsdXItWzFweF1cIiAvPlxuICAgICAgICA8Lz5cbiAgICAgICl9XG5cbiAgICAgIHt2YXJpYW50ID09PSBcIm91dGxldHNcIiAmJiAoXG4gICAgICAgIDw+XG4gICAgICAgICAgey8qIFN1YnRsZSBNYXAgTG9jYXRpb24gR3JpZCBEb3RzICovfVxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgaW5zZXQtMCBiZy1bcmFkaWFsLWdyYWRpZW50KCNmZjhmYjFfMXB4LHRyYW5zcGFyZW50XzFweCldIFtiYWNrZ3JvdW5kLXNpemU6MjhweF8yOHB4XSBvcGFjaXR5LVswLjA3XVwiIC8+XG4gICAgICAgICAgPHN2ZyBjbGFzc05hbWU9XCJhYnNvbHV0ZSB0b3AtMTAgcmlnaHQtMTAgdy00MCBoLTQwIHRleHQtcGluay0zMDAvMTUgZmxvYXQteVwiIHZpZXdCb3g9XCIwIDAgMTAwIDEwMFwiIGZpbGw9XCJub25lXCIgc3Ryb2tlPVwiY3VycmVudENvbG9yXCIgc3Ryb2tlV2lkdGg9XCIxXCI+XG4gICAgICAgICAgICA8Y2lyY2xlIGN4PVwiNTBcIiBjeT1cIjUwXCIgcj1cIjQ1XCIgc3Ryb2tlRGFzaGFycmF5PVwiMyAzXCIgLz5cbiAgICAgICAgICAgIDxjaXJjbGUgY3g9XCI1MFwiIGN5PVwiNTBcIiByPVwiMzBcIiBzdHJva2VEYXNoYXJyYXk9XCIyIDJcIiAvPlxuICAgICAgICAgIDwvc3ZnPlxuICAgICAgICA8Lz5cbiAgICAgICl9XG5cbiAgICAgIHt2YXJpYW50ID09PSBcImN0YVwiICYmIChcbiAgICAgICAgPD5cbiAgICAgICAgICB7LyogSGlnaCBEZXB0aCBGbG9hdGluZyBTdGFyYnVyc3RzICovfVxuICAgICAgICAgIDxzdmcgY2xhc3NOYW1lPVwiYWJzb2x1dGUgdG9wLTYgbGVmdC0xMiB3LTIwIGgtMjAgdGV4dC13aGl0ZS8zMCBmbG9hdC15XCIgdmlld0JveD1cIjAgMCAyNCAyNFwiIGZpbGw9XCJjdXJyZW50Q29sb3JcIj5cbiAgICAgICAgICAgIDxwYXRoIGQ9XCJNMTIgMEwxNC41OSA5LjQxTDI0IDEyTDE0LjU5IDE0LjU5TDEyIDI0TDkuNDEgMTQuNTlMMCAxMkw5LjQxIDkuNDFMMTIgMFpcIiAvPlxuICAgICAgICAgIDwvc3ZnPlxuICAgICAgICAgIDxzdmcgY2xhc3NOYW1lPVwiYWJzb2x1dGUgYm90dG9tLTggcmlnaHQtMTQgdy0xNiBoLTE2IHRleHQtYW1iZXItMjAwLzQwIGZsb2F0LXlcIiB2aWV3Qm94PVwiMCAwIDI0IDI0XCIgZmlsbD1cImN1cnJlbnRDb2xvclwiIHN0eWxlPXt7IGFuaW1hdGlvbkRlbGF5OiBcIjJzXCIgfX0+XG4gICAgICAgICAgICA8cGF0aCBkPVwiTTEyIDBMMTQuNTkgOS40MUwyNCAxMkwxNC41OSAxNC41OUwxMiAyNEw5LjQxIDE0LjU5TDAgMTJMOS40MSA5LjQxTDEyIDBaXCIgLz5cbiAgICAgICAgICA8L3N2Zz5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIHRvcC0xLzMgcmlnaHQtMS80IHctMyBoLTMgcm91bmRlZC1mdWxsIGJnLXdoaXRlLzUwIGJsdXItWzFweF1cIiAvPlxuICAgICAgICA8Lz5cbiAgICAgICl9XG5cbiAgICAgIHt2YXJpYW50ID09PSBcImZyYW5jaGlzZVwiICYmIChcbiAgICAgICAgPD5cbiAgICAgICAgICB7LyogQWJzdHJhY3QgQnVzaW5lc3MgTmV0d29yayBHcm93dGggTGluZXMgJiBMb2NhdGlvbiBOb2RlcyAqL31cbiAgICAgICAgICA8c3ZnIGNsYXNzTmFtZT1cImFic29sdXRlIGluc2V0LTAgdy1mdWxsIGgtZnVsbCB0ZXh0LXBpbmstNDAwLzE1IHBvaW50ZXItZXZlbnRzLW5vbmVcIiB2aWV3Qm94PVwiMCAwIDgwMCA0MDBcIiBmaWxsPVwibm9uZVwiIHN0cm9rZT1cImN1cnJlbnRDb2xvclwiIHN0cm9rZVdpZHRoPVwiMS4yXCI+XG4gICAgICAgICAgICA8cGF0aCBkPVwiTSA1MCAzNTAgUSAyNTAgMTUwIDQ1MCAyNTAgVCA3NTAgODBcIiBzdHJva2VEYXNoYXJyYXk9XCI0IDRcIiAvPlxuICAgICAgICAgICAgPHBhdGggZD1cIk0gMTAwIDgwIFEgMzAwIDI4MCA2MDAgMTIwXCIgc3Ryb2tlRGFzaGFycmF5PVwiMyAzXCIgc3Ryb2tlPVwiIzZmYThmNVwiIHN0cm9rZU9wYWNpdHk9XCIwLjJcIiAvPlxuICAgICAgICAgICAgPGNpcmNsZSBjeD1cIjI1MFwiIGN5PVwiMTkwXCIgcj1cIjRcIiBmaWxsPVwiI2ZmNWM5N1wiIC8+XG4gICAgICAgICAgICA8Y2lyY2xlIGN4PVwiNDUwXCIgY3k9XCIyNTBcIiByPVwiNlwiIGZpbGw9XCIjNmZhOGY1XCIgLz5cbiAgICAgICAgICAgIDxjaXJjbGUgY3g9XCI2MDBcIiBjeT1cIjEyMFwiIHI9XCI1XCIgZmlsbD1cIiNmZjdlYjNcIiAvPlxuICAgICAgICAgIDwvc3ZnPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgdG9wLTEwIGxlZnQtMTYgdy0zNiBoLTM2IHJvdW5kZWQtZnVsbCBiZy1lbWVyYWxkLTEwMC8zMCBibHVyLTJ4bCBmbG9hdC15XCIgLz5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIGJvdHRvbS0xMiByaWdodC0yMCB3LTQ0IGgtNDQgcm91bmRlZC1mdWxsIGJnLXBpbmstMjAwLzMwIGJsdXItMnhsIGZsb2F0LXlcIiBzdHlsZT17eyBhbmltYXRpb25EZWxheTogXCIyc1wiIH19IC8+XG4gICAgICAgIDwvPlxuICAgICAgKX1cbiAgICA8L2Rpdj5cbiAgKTtcbn1cbiJdLCJmaWxlIjoiRDovQ2FrZVN0b3J5IC0gV2Vic2l0ZS9zcmMvY29tcG9uZW50cy9jb21tb24vQmFrZXJ5QmFja2dyb3VuZERlY29yLnRzeCJ9

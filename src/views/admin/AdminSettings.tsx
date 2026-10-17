@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import AdminLayout from "../../components/admin/AdminLayout";
 import { authService, franchiseService, enquiryService, contentService } from "../../services/data";
 import { useToast } from "../../components/common/Toast";
@@ -229,14 +229,24 @@ export default function AdminSettings({ defaultTab = "security" }: { defaultTab?
         {/* ============================================================== */}
         {activeTab === "security" && (
           <div className="space-y-4">
-            {/* Initial Credentials Callout */}
-            {isInitial && (
+            {/* Initial / Custom Credentials Status Callout */}
+            {isInitial ? (
               <div className="rounded-xl p-4 bg-amber-50 border border-amber-200 text-amber-900 shadow-xs flex items-start gap-3">
                 <span className="text-lg shrink-0">⚠️</span>
                 <div>
                   <div className="font-bold text-xs text-amber-950 mb-0.5">Initial Setup Credentials Active</div>
                   <p className="text-xs text-amber-800 leading-relaxed">
-                    Your admin account is currently using initial setup credentials (<code>admin</code> / <code>admin123</code>). For operational security, update your personal username and password below.
+                    Your admin account is currently using initial setup credentials (<code>admin</code> / <code>CakeStory@Admin2026</code>). For operational security, update your personal username and password below.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="rounded-xl p-4 bg-emerald-50 border border-emerald-200 text-emerald-900 shadow-xs flex items-start gap-3">
+                <span className="text-lg shrink-0">🛡️</span>
+                <div>
+                  <div className="font-bold text-xs text-emerald-950 mb-0.5">Custom Administrator Credentials Active</div>
+                  <p className="text-xs text-emerald-800 leading-relaxed">
+                    Your personal administrator credentials are active. Default credentials have been disabled and will not grant access.
                   </p>
                 </div>
               </div>

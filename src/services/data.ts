@@ -509,23 +509,17 @@ const INITIAL_USERNAME = "admin";
 const INITIAL_PASSWORD = "CakeStory@Admin2026";
 
 function getAdminCredentials(): AdminCredentials {
-  const needsInit = !localStorage.getItem(PREFIX + ADMIN_INIT_KEY);
   const existing = storage.get<AdminCredentials | null>(STORAGE_KEYS.ADMIN_CREDENTIALS, null);
 
-  if (needsInit) {
-    localStorage.setItem(PREFIX + ADMIN_INIT_KEY, "1");
-    // Seed clean known credentials so any stale client localStorage on Vercel is resolved
-    const initial: AdminCredentials = {
-      username: INITIAL_USERNAME,
-      passwordHash: INITIAL_PASSWORD,
-      updatedAt: new Date().toISOString(),
-      isInitial: true,
-    };
-    storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, initial);
-    return initial;
+  // CRITICAL: If the administrator has configured custom credentials (isInitial === false),
+  // ALWAYS respect and preserve them! Never overwrite with default setup values.
+  if (existing && existing.isInitial === false && existing.username && existing.passwordHash) {
+    return existing;
   }
 
-  if (!existing) {
+  const needsInit = !localStorage.getItem(PREFIX + ADMIN_INIT_KEY);
+  if (needsInit || !existing) {
+    localStorage.setItem(PREFIX + ADMIN_INIT_KEY, "1");
     const initial: AdminCredentials = {
       username: INITIAL_USERNAME,
       passwordHash: INITIAL_PASSWORD,
@@ -554,22 +548,31 @@ export const authService = {
     const targetUser = creds.username.trim().toLowerCase();
     const pass = passwordInput.trim();
 
-    // Match configured username or standard admin email / username aliases
-    const matchesUser =
-      inputUser === targetUser ||
-      inputUser === "admin" ||
-      inputUser === "admin@cakestorydesserts.in" ||
-      inputUser === "admin@cakestory.com" ||
-      inputUser === "cakestory&desserts.in";
+    let matchesUser = false;
+    let matchesPass = false;
 
-    // Match configured password or standard known admin passwords
-    const matchesPass =
-      pass === creds.passwordHash ||
-      pass === "CakeStory@Admin2026" ||
-      pass.toLowerCase() === "cakestory@admin2026" ||
-      pass === "cakestory@123" ||
-      pass === "admin123" ||
-      pass === "admin";
+    if (creds.isInitial) {
+      // INITIAL/FACTORY SETUP ONLY: Allow initial credentials & setup aliases
+      matchesUser =
+        inputUser === targetUser ||
+        inputUser === "admin" ||
+        inputUser === "admin@cakestorydesserts.in" ||
+        inputUser === "admin@cakestory.com" ||
+        inputUser === "cakestory&desserts.in";
+
+      matchesPass =
+        pass === creds.passwordHash ||
+        pass === "CakeStory@Admin2026" ||
+        pass.toLowerCase() === "cakestory@admin2026" ||
+        pass === "cakestory@123" ||
+        pass === "admin123" ||
+        pass === "admin";
+    } else {
+      // CUSTOM CREDENTIALS ACTIVE: STRICT SECURITY
+      // ONLY the administrator's custom credentials are valid. Default credentials are completely disabled!
+      matchesUser = inputUser === targetUser;
+      matchesPass = pass === creds.passwordHash;
+    }
 
     if (matchesUser && matchesPass) {
       const authUser: AuthUser = {
@@ -605,13 +608,16 @@ export const authService = {
   verifyCurrentPassword(passwordInput: string): boolean {
     const creds = getAdminCredentials();
     const pass = passwordInput.trim();
-    return (
-      pass === creds.passwordHash ||
-      pass === "CakeStory@Admin2026" ||
-      pass.toLowerCase() === "cakestory@admin2026" ||
-      pass === "cakestory@123" ||
-      pass === "admin123"
-    );
+    if (creds.isInitial) {
+      return (
+        pass === creds.passwordHash ||
+        pass === "CakeStory@Admin2026" ||
+        pass.toLowerCase() === "cakestory@admin2026" ||
+        pass === "cakestory@123" ||
+        pass === "admin123"
+      );
+    }
+    return pass === creds.passwordHash;
   },
 
   changeUsername(newUsername: string): { success: boolean; error?: string } {
