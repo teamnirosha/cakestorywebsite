@@ -4,6 +4,7 @@ import heroBg from "../../assets/hero/cakestory-hero.jpg";
 import { useFranchiseModal } from "../common/FranchiseModal";
 import { useLanguage } from "../../context/LanguageContext";
 import { prefersReducedMotion, MOTION } from "../../utils/motion";
+import GoldEmblemHeroVisual from "./GoldEmblemHeroVisual";
 
 export default function StorefrontHero() {
   const { openModal } = useFranchiseModal();
@@ -175,72 +176,81 @@ export default function StorefrontHero() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
       </div>
 
-      {/* 2. Left-Aligned Content Overlay (Directly Over Background Image) */}
+      {/* 2. Content Overlay with 2-Column Desktop Composition */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-auto py-8 sm:py-12">
-        <div className="max-w-xl lg:max-w-2xl text-left flex flex-col items-start space-y-5 sm:space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 xl:gap-8 items-center">
           
-          {/* Status Pill Badge */}
-          <div
-            ref={badgeRef}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-semibold text-white shadow-lg"
-          >
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse motion-reduce:animate-none" />
-            <span className="tracking-wide">{t("hero.badge")}</span>
+          {/* Left Column: Franchise messaging & CTAs */}
+          <div className="lg:col-span-6 xl:col-span-6 text-left flex flex-col items-start space-y-5 sm:space-y-6">
+            {/* Status Pill Badge */}
+            <div
+              ref={badgeRef}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-semibold text-white shadow-lg"
+            >
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse motion-reduce:animate-none" />
+              <span className="tracking-wide">{t("hero.badge")}</span>
+            </div>
+
+            {/* Punchy Headline Directly Over Image with Refined Editorial Typography */}
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[54px] tracking-tight leading-[1.18] sm:leading-[1.16] drop-shadow-xl flex flex-col gap-2 sm:gap-2.5">
+              <span
+                ref={titlePrefixRef}
+                className="font-normal text-white drop-shadow-md tracking-tight"
+              >
+                {t("hero.titlePrefix")}
+              </span>
+              <span
+                ref={titleHighlightRef}
+                className="font-medium text-[#f3ca85] drop-shadow-md tracking-tight"
+              >
+                {t("hero.titleHighlight")}
+              </span>
+            </h1>
+
+            {/* 3 Core Trust Dots */}
+            <div
+              ref={trustRef}
+              className="flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-2 text-xs sm:text-base font-medium text-stone-200/95 drop-shadow-md"
+            >
+              <span className="hero-trust-item inline-flex items-center gap-1.5 sm:gap-2">
+                <span className="text-amber-400 text-xs sm:text-sm">●</span>
+                <span>{t("hero.trust1")}</span>
+              </span>
+              <span className="hero-trust-item inline-flex items-center gap-1.5 sm:gap-2">
+                <span className="text-amber-400 text-xs sm:text-sm">●</span>
+                <span>{t("hero.trust2")}</span>
+              </span>
+              <span className="hero-trust-item inline-flex items-center gap-1.5 sm:gap-2">
+                <span className="text-amber-400 text-xs sm:text-sm">●</span>
+                <span>{t("hero.trust3")}</span>
+              </span>
+            </div>
+
+            {/* High-Converting CTA Buttons */}
+            <div ref={ctaRef} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
+              <button
+                onClick={() => scrollToSection("story")}
+                className="w-full sm:w-auto justify-center px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-stone-950 font-semibold text-sm sm:text-base shadow-[0_10px_25px_-4px_rgba(245,158,11,0.45)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center gap-2.5 cursor-pointer border border-amber-300"
+              >
+                <span className="text-xs">▶</span>
+                <span>{t("hero.ctaSecondary")}</span>
+              </button>
+
+              <button
+                onClick={openModal}
+                className="w-full sm:w-auto justify-center px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white font-semibold text-sm sm:text-base border border-white/40 hover:border-white transition-all flex items-center gap-2 cursor-pointer hover:-translate-y-0.5 shadow-lg"
+              >
+                <span>{t("hero.ctaPrimary")}</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
           </div>
 
-          {/* Punchy Headline Directly Over Image with Refined Editorial Typography */}
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[50px] xl:text-[56px] tracking-tight leading-[1.18] sm:leading-[1.16] drop-shadow-xl flex flex-col gap-2 sm:gap-2.5">
-            <span
-              ref={titlePrefixRef}
-              className="font-normal text-white drop-shadow-md tracking-tight"
-            >
-              {t("hero.titlePrefix")}
-            </span>
-            <span
-              ref={titleHighlightRef}
-              className="font-medium text-[#f3ca85] drop-shadow-md tracking-tight"
-            >
-              {t("hero.titleHighlight")}
-            </span>
-          </h1>
-
-          {/* 3 Core Trust Dots */}
-          <div
-            ref={trustRef}
-            className="flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-2 text-xs sm:text-base font-medium text-stone-200/95 drop-shadow-md"
-          >
-            <span className="hero-trust-item inline-flex items-center gap-1.5 sm:gap-2">
-              <span className="text-amber-400 text-xs sm:text-sm">●</span>
-              <span>{t("hero.trust1")}</span>
-            </span>
-            <span className="hero-trust-item inline-flex items-center gap-1.5 sm:gap-2">
-              <span className="text-amber-400 text-xs sm:text-sm">●</span>
-              <span>{t("hero.trust2")}</span>
-            </span>
-            <span className="hero-trust-item inline-flex items-center gap-1.5 sm:gap-2">
-              <span className="text-amber-400 text-xs sm:text-sm">●</span>
-              <span>{t("hero.trust3")}</span>
-            </span>
+          {/* Right Column: Animated Gold 3D Emblem Hero Visual */}
+          <div className="lg:col-span-6 xl:col-span-6 flex items-center justify-center lg:justify-end mt-4 lg:mt-0">
+            <GoldEmblemHeroVisual heroRef={sectionRef} />
           </div>
 
-          {/* High-Converting CTA Buttons */}
-          <div ref={ctaRef} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
-            <button
-              onClick={() => scrollToSection("story")}
-              className="w-full sm:w-auto justify-center px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-stone-950 font-semibold text-sm sm:text-base shadow-xl shadow-amber-500/25 transform hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center gap-2 cursor-pointer border border-amber-300"
-            >
-              <span>▷</span>
-              <span>{t("hero.ctaSecondary")}</span>
-            </button>
-
-            <button
-              onClick={openModal}
-              className="w-full sm:w-auto justify-center px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white font-semibold text-sm sm:text-base border border-white/40 hover:border-white transition-all flex items-center gap-2 cursor-pointer hover:-translate-y-0.5 shadow-lg"
-            >
-              <span>{t("hero.ctaPrimary")}</span>
-              <span aria-hidden="true">→</span>
-            </button>
-          </div>
         </div>
       </div>
 
