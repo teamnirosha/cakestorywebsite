@@ -9,7 +9,6 @@ import seedEvents from "../data/events.json";
 import seedCategories from "../data/categories.json";
 import seedTestimonials from "../data/testimonials.json";
 import seedSiteContent from "../data/siteContent.json";
-import seedEnquiries from "../data/enquiries.json";
 import seedFaq from "../data/faq.json";
 import seedBlog from "../data/blog.json";
 import seedRecipes from "../data/recipes.json";
@@ -32,21 +31,16 @@ export type FranchiseEnquiry = {
   notes?: string;
 };
 
-const ENQUIRY_INIT_KEY = "__cs_enquiries_seeded_v3__";
+const ENQUIRY_INIT_KEY = "__cs_enquiries_live_v4__";
 
 function getEnquiriesRaw(): FranchiseEnquiry[] {
-  let items = storage.get<FranchiseEnquiry[] | null>(STORAGE_KEYS.ENQUIRIES, null);
-  if (!items || items.length === 0 || !localStorage.getItem(PREFIX + ENQUIRY_INIT_KEY)) {
-    const seeded = (seedEnquiries as FranchiseEnquiry[]).map((enq, idx) => {
-      const daysAgo = [2, 6, 13, 19, 26][idx % 5] || ((idx * 5) + 2);
-      const date = new Date(Date.now() - daysAgo * 24 * 60 * 60 * 1000).toISOString();
-      return { ...enq, submittedAt: date };
-    });
-    storage.set(STORAGE_KEYS.ENQUIRIES, seeded);
+  if (!localStorage.getItem(PREFIX + ENQUIRY_INIT_KEY)) {
+    // Switch to clean live mode: remove all legacy test leads
+    storage.set(STORAGE_KEYS.ENQUIRIES, []);
     localStorage.setItem(PREFIX + ENQUIRY_INIT_KEY, "1");
-    return seeded;
+    return [];
   }
-  return items;
+  return storage.get<FranchiseEnquiry[]>(STORAGE_KEYS.ENQUIRIES, []);
 }
 
 export const enquiryService = {
@@ -104,14 +98,12 @@ export const enquiryService = {
   countNew(): number {
     return getEnquiriesRaw().filter((e) => e.status === "new").length;
   },
+  clearAll(): void {
+    storage.set(STORAGE_KEYS.ENQUIRIES, []);
+  },
   resetSeed(): FranchiseEnquiry[] {
-    const seeded = (seedEnquiries as FranchiseEnquiry[]).map((enq, idx) => {
-      const daysAgo = [2, 6, 13, 19, 26][idx % 5] || ((idx * 5) + 2);
-      const date = new Date(Date.now() - daysAgo * 24 * 60 * 60 * 1000).toISOString();
-      return { ...enq, submittedAt: date };
-    });
-    storage.set(STORAGE_KEYS.ENQUIRIES, seeded);
-    return seeded;
+    storage.set(STORAGE_KEYS.ENQUIRIES, []);
+    return [];
   },
 };
 
@@ -998,6 +990,13 @@ function getSiteContentRaw(): SiteContent {
       imageAsset: "/images/franchise-hero.png",
       caption: "CakeStory Desserts Premium Packaged Treats & Festive Retail Collection",
     };
+  }
+  // Sync dynamic outlet count according to backend
+  if (content.homeHero?.statistics?.[0]) {
+    const activeOutlets = franchiseService.countActive();
+    if (activeOutlets > 0) {
+      content.homeHero.statistics[0].value = `${activeOutlets}+`;
+    }
   }
   return content;
 }

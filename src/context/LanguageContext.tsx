@@ -1,6 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { franchiseService } from "../services/data";
 
 export type Language = "en" | "mr";
+
+export function toMarathiDigits(num: number | string): string {
+  const marathiDigits = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
+  return String(num).replace(/[0-9]/g, (d) => marathiDigits[Number(d)]);
+}
 
 interface LanguageContextType {
   language: Language;
@@ -35,7 +41,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Story & Timeline Graph
     "story.tag": "Growth Journey",
     "story.title": "One Dream. Countless Celebrations. A Story Still Growing.",
-    "story.subtitle": "From a visionary centralized kitchen in Pune to 12+ high-performing franchise outlets",
+    "story.subtitle": "From a visionary centralized kitchen in Pune to 62+ high-performing franchise outlets",
     "story.graphTitle": "CakeStory Expansion & Scale Timeline (2020 – 2026)",
     "story.graphSubtitle": "Click any milestone node to view the operational breakthroughs behind each phase",
     "story.t1Year": "2020",
@@ -47,7 +53,7 @@ const translations: Record<Language, Record<string, string>> = {
     "story.t2Tag": "Phase 2: Product Love",
     "story.t2Title": "Pune Customer Word-of-Mouth",
     "story.t2Desc": "Explosive demand for celebration cakes and desserts across Pune neighborhoods driven entirely by genuine organic customer recommendations.",
-    "story.t2Stat": "50,000+ Celebrations",
+    "story.t2Stat": "50,00,00+ Celebrations",
     "story.t3Year": "2023",
     "story.t3Tag": "Phase 3: Franchise Launch",
     "story.t3Title": "Turnkey Franchise Model Rollout",
@@ -60,12 +66,12 @@ const translations: Record<Language, Record<string, string>> = {
     "story.t4Stat": "Daily 6 AM Dispatches",
     "story.t5Year": "2026",
     "story.t5Tag": "Phase 5: Maharashtra Scale",
-    "story.t5Title": "12+ Outlets & Regional Leadership",
+    "story.t5Title": "62+ Outlets & Regional Leadership",
     "story.t5Desc": "Established presence across Baner, PCMC, Kothrud, Hadapsar, Sinhagad Road, and Satara, with sustained profitability and zero store shutdowns.",
-    "story.t5Stat": "12+ Operational Outlets",
+    "story.t5Stat": "62+ Operational Outlets",
 
     // Timeline Summary Stats
-    "story.statOutlets": "12+",
+    "story.statOutlets": "62+",
     "story.statOutletsLabel": "Successful Outlets",
     "story.statCelebrations": "5,00,000+",
     "story.statCelebrationsLabel": "Happy Celebrations Served",
@@ -84,7 +90,7 @@ const translations: Record<Language, Record<string, string>> = {
     "numbers.tag": "100% Organic Growth",
     "numbers.title": "Growth That Builds Confidence",
     "numbers.subtitle": "Growth driven by customer love, repeat celebrations, and trusted franchise partners",
-    "numbers.stat1Val": "12+",
+    "numbers.stat1Val": "62+",
     "numbers.stat1Label": "Operational Outlets",
     "numbers.stat1Sub": "Pune, PCMC & Satara",
     "numbers.stat2Val": "5,00,000+",
@@ -300,7 +306,7 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.tagline": "Every Flavour Has A Story • Pune Franchise Network",
     "footer.devBy": "Designed & developed by",
     "footer.featVeg": "100% Pure Vegetarian Formulations",
-    "footer.featDelivery": "Daily 6 AM Cold-Chain Dispatch to 12+ Stores",
+    "footer.featDelivery": "Daily 6 AM Cold-Chain Dispatch to 62+ Stores",
     "footer.featModel": "Turnkey Zero In-Store Baking Model",
     "footer.desc": "CakeStory Desserts brings centralized cleanroom manufacturing and turnkey store support to high-growth neighborhood franchise partners across Pune, PCMC & Satara.",
     "footer.ctaProspectus": "Request Franchise Prospectus",
@@ -336,7 +342,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Story & Timeline Graph
     "story.tag": "आमचा प्रवास",
     "story.title": "एक स्वप्न, असंख्य उत्सव आणि सतत वाढणारी यशोगाथा.",
-    "story.subtitle": "पुण्यातील एका मध्यवर्ती किचनपासून ते १२+ यशस्वी आऊटलेट्सचा प्रेरणादायी प्रवास",
+    "story.subtitle": "पुण्यातील एका मध्यवर्ती किचनपासून ते ६२+ यशस्वी आऊटलेट्सचा प्रेरणादायी प्रवास",
     "story.graphTitle": "केकस्टोरी विस्तार आणि प्रगतीचा आलेख (२०२० – २०२६)",
     "story.graphSubtitle": "प्रत्येक टप्प्यावर क्लिक करून आमच्या यशाचे टप्पे जाणून घ्या",
     "story.t1Year": "२०२०",
@@ -361,12 +367,12 @@ const translations: Record<Language, Record<string, string>> = {
     "story.t4Stat": "सकाळी ६ वा. पुरवठा",
     "story.t5Year": "२०२६",
     "story.t5Tag": "टप्पा ५: महाराष्ट्रभर विस्तार",
-    "story.t5Title": "१२+ आऊटलेट्स व अग्रगण्य स्थान",
-    "story.t5Desc": "बाणेर, कोथरूड, हडपसर, सिंहगड रोड, पिंपरी-चिंचवड आणि साताऱ्यात १२+ कार्यरत आणि फायदेशीर आऊटलेट्स.",
-    "story.t5Stat": "१२+ कार्यरत आऊटलेट्स",
+    "story.t5Title": "६२+ आऊटलेट्स व अग्रगण्य स्थान",
+    "story.t5Desc": "बाणेर, कोथरूड, हडपसर, सिंहगड रोड, पिंपरी-चिंचवड आणि साताऱ्यात ६२+ कार्यरत आणि फायदेशीर आऊटलेट्स.",
+    "story.t5Stat": "६२+ कार्यरत आऊटलेट्स",
 
     // Timeline Summary Stats
-    "story.statOutlets": "१२+",
+    "story.statOutlets": "६२+",
     "story.statOutletsLabel": "यशस्वी आऊटलेट्स",
     "story.statCelebrations": "५,००,०००+",
     "story.statCelebrationsLabel": "आनंदी सेलिब्रेशन्स",
@@ -385,7 +391,7 @@ const translations: Record<Language, Record<string, string>> = {
     "numbers.tag": "१००% सेंद्रिय प्रगती",
     "numbers.title": "आमची आकडेवारीच सर्व काही सांगते",
     "numbers.subtitle": "ग्राहकांचे प्रेम, पुन्हा पुन्हा होणारी सेलिब्रेशन्स आणि पार्टनर्सचा विश्वास",
-    "numbers.stat1Val": "१२+",
+    "numbers.stat1Val": "६२+",
     "numbers.stat1Label": "कार्यरत आऊटलेट्स",
     "numbers.stat1Sub": "पुणे, पिंपरी-चिंचवड व सातारा",
     "numbers.stat2Val": "५,००,०००+",
@@ -601,7 +607,7 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.tagline": "प्रत्येक चवीची एक सुंदर गोष्ट • पुणे फ्रँचायझी नेटवर्क",
     "footer.devBy": "डिझाईन व डेव्हलपमेंट",
     "footer.featVeg": "१००% शुद्ध शाकाहारी रेसिपीज",
-    "footer.featDelivery": "दररोज सकाळी ६ वाजता १२+ स्टोअर्सना ताजी डिलिव्हरी",
+    "footer.featDelivery": "दररोज सकाळी ६ वाजता ६२+ स्टोअर्सना ताजी डिलिव्हरी",
     "footer.featModel": "टर्नकी शून्य इन-स्टोअर बेकिंग मॉडेल",
     "footer.desc": "केकस्टोरी डेझर्ट्स अत्याधुनिक सेंट्रलाइज्ड मॅन्युफॅक्चरिंग आणि टर्नकी सपोर्टसह पुणे, पिंपरी-चिंचवड आणि साताऱ्यातील फ्रँचायझी पार्टनर्सना स्थिर व्यवसायाची संधी देते.",
     "footer.ctaProspectus": "फ्रँचायझी माहिती पुस्तिका मिळवा",
@@ -649,6 +655,35 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const t = (key: string, defaultVal?: string): string => {
+    // Dynamic values according to backend
+    const count = franchiseService.countActive() || 62;
+    const mrCount = toMarathiDigits(count);
+
+    if (key === "story.statOutlets" || key === "numbers.stat1Val") {
+      return language === "mr" ? `${mrCount}+` : `${count}+`;
+    }
+    if (key === "story.t5Title") {
+      return language === "mr" ? `${mrCount}+ आऊटलेट्स व अग्रगण्य स्थान` : `${count}+ Outlets & Regional Leadership`;
+    }
+    if (key === "story.t5Stat") {
+      return language === "mr" ? `${mrCount}+ कार्यरत आऊटलेट्स` : `${count}+ Operational Outlets`;
+    }
+    if (key === "story.subtitle") {
+      return language === "mr"
+        ? `पुण्यातील एका मध्यवर्ती किचनपासून ते ${mrCount}+ यशस्वी आऊटलेट्सचा प्रेरणादायी प्रवास`
+        : `From a visionary centralized kitchen in Pune to ${count}+ high-performing franchise outlets`;
+    }
+    if (key === "footer.featDelivery") {
+      return language === "mr"
+        ? `दररोज सकाळी ६ वाजता ${mrCount}+ स्टोअर्सना ताजी डिलिव्हरी`
+        : `Daily 6 AM Cold-Chain Dispatch to ${count}+ Stores`;
+    }
+    if (key === "story.t5Desc") {
+      return language === "mr"
+        ? `बाणेर, कोथरूड, हडपसर, सिंहगड रोड, पिंपरी-चिंचवड आणि साताऱ्यात ${mrCount}+ कार्यरत आणि फायदेशीर आऊटलेट्स.`
+        : `Established presence across Baner, PCMC, Kothrud, Hadapsar, Sinhagad Road, and Satara, with sustained profitability and zero store shutdowns.`;
+    }
+
     return translations[language]?.[key] || translations.en?.[key] || defaultVal || key;
   };
 

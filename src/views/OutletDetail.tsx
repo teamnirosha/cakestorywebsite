@@ -310,7 +310,7 @@ export default function OutletDetail() {
   const whatsappOrderUrl = `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(
     `Hello CakeStory Desserts (${outlet.outletName || outlet.name}), I would like to order fresh celebration cakes.`
   )}`;
-  const franchiseWhatsappUrl = `https://wa.me/919823045671?text=${encodeURIComponent(
+  const franchiseWhatsappUrl = `https://wa.me/918623940744?text=${encodeURIComponent(
     `Hello CakeStory Franchise Team, I am interested in opening a franchise in ${outlet.zone || outlet.city}.`
   )}`;
 
@@ -319,8 +319,8 @@ export default function OutletDetail() {
   const heroLocation = formatHeroLocation(outlet, language);
   const displayLocation = locality;
 
-  // Google Maps Embed (100% Free, Zero API Key Required)
-  const googleMapsEmbedUrl = `https://maps.google.com/maps?q=${outlet.latitude},${outlet.longitude}&hl=en&z=15&output=embed`;
+  // Google Maps Embed (Clean, Zero-Key, Suppressing Place Info popup with iwloc=)
+  const googleMapsEmbedUrl = `https://maps.google.com/maps?q=${outlet.latitude},${outlet.longitude}&hl=en&z=16&t=m&iwloc=&output=embed`;
 
   return (
     <PageShell noTopPadding>
