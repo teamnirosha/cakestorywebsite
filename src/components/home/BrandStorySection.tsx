@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { useLanguage } from "../../context/LanguageContext";
 import { prefersReducedMotion, MOTION } from "../../utils/motion";
+import MilestoneModal from "../story/MilestoneModal";
 
 // Handcrafted SVG vector icons with consistent 24x24 viewBox and 1.75 stroke-width
 function SproutIcon({ className = "w-5 h-5" }: { className?: string }) {
@@ -106,9 +107,42 @@ function RocketIcon({ className = "w-5 h-5" }: { className?: string }) {
 export default function BrandStorySection() {
   const { t } = useLanguage();
   const [activePhase, setActivePhase] = useState<number>(4); // Default to current phase (2026)
+  const [isMobileModalOpen, setIsMobileModalOpen] = useState<boolean>(false);
 
   const sectionRef = useRef<HTMLElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
+  const triggerButtonsRef = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // Automatically close mobile modal if viewport resizes to desktop (>= 768px)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mql = window.matchMedia("(min-width: 768px)");
+    const handleResize = (e: MediaQueryListEvent | MediaQueryList) => {
+      if (e.matches) {
+        setIsMobileModalOpen(false);
+      }
+    };
+    if (mql.addEventListener) {
+      mql.addEventListener("change", handleResize);
+    } else {
+      mql.addListener(handleResize);
+    }
+    return () => {
+      if (mql.removeEventListener) {
+        mql.removeEventListener("change", handleResize);
+      } else {
+        mql.removeListener(handleResize);
+      }
+    };
+  }, []);
+
+  const handleMilestoneClick = (idx: number) => {
+    setActivePhase(idx);
+    // On mobile (< 768px), open the mobile modal
+    if (typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches) {
+      setIsMobileModalOpen(true);
+    }
+  };
 
   // Entrance reveals with GSAP context
   useEffect(() => {
@@ -312,8 +346,11 @@ export default function BrandStorySection() {
                 return (
                   <button
                     key={idx}
+                    ref={(el) => {
+                      triggerButtonsRef.current[idx] = el;
+                    }}
                     type="button"
-                    onClick={() => setActivePhase(idx)}
+                    onClick={() => handleMilestoneClick(idx)}
                     aria-pressed={isActive}
                     aria-label={`Milestone ${item.year}: ${item.title}`}
                     className={`story-node-item text-left p-4 sm:p-5 rounded-2xl transition-all duration-200 cursor-pointer flex flex-col justify-between min-h-[185px] sm:min-h-[195px] border focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 ${
@@ -379,10 +416,10 @@ export default function BrandStorySection() {
             </div>
           </div>
 
-          {/* 3. Refined Selected Milestone Detail Panel */}
+          {/* 3. Refined Selected Milestone Detail Panel (Desktop Only) */}
           <div
             ref={panelRef}
-            className="mt-8 p-6 sm:p-8 rounded-2xl bg-stone-900 text-white border border-stone-800 shadow-md transition-all duration-300"
+            className="hidden md:block mt-8 p-6 sm:p-8 rounded-2xl bg-stone-900 text-white border border-stone-800 shadow-md transition-all duration-300"
           >
             <div className="grid md:grid-cols-12 gap-6 items-center">
               {/* Left Column: Heading & Description */}
@@ -477,6 +514,16 @@ export default function BrandStorySection() {
           </div>
         </div>
       </div>
+
+      {/* Mobile Milestone Detail Modal */}
+      <MilestoneModal
+        isOpen={isMobileModalOpen}
+        onClose={() => setIsMobileModalOpen(false)}
+        milestones={milestones}
+        currentIndex={activePhase}
+        onSelectIndex={(newIdx) => setActivePhase(newIdx)}
+        triggerElement={triggerButtonsRef.current[activePhase]}
+      />
     </section>
   );
 }
