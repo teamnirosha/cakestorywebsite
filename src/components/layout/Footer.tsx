@@ -291,6 +291,13 @@ export default function Footer() {
               </button>
               <button
                 type="button"
+                onClick={() => handleScrollTo("gallery")}
+                className="text-left hover:text-[#faf7f2] transition-colors cursor-pointer py-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c9a46a]"
+              >
+                {t("nav.gallery")}
+              </button>
+              <button
+                type="button"
                 onClick={() => handleScrollTo("outlets")}
                 className="text-left hover:text-[#faf7f2] transition-colors cursor-pointer py-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c9a46a]"
               >

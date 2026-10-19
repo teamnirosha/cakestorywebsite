@@ -4,6 +4,7 @@ import StorefrontHero from "../components/home/StorefrontHero";
 import BrandStorySection from "../components/home/BrandStorySection";
 import NumbersSection from "../components/home/NumbersSection";
 import FranchiseModelSection from "../components/home/FranchiseModelSection";
+import InstagramGallerySection from "../components/home/InstagramGallerySection";
 import OutletsMapSection from "../components/home/OutletsMapSection";
 import FranchiseFaqSection from "../components/home/FranchiseFaqSection";
 import FranchiseLeadSection from "../components/home/FranchiseLeadSection";
@@ -26,7 +27,10 @@ export default function Home() {
       {/* 5. Franchise Business Model: Zero Baking, Compact Store & 4 Steps */}
       <FranchiseModelSection />
 
-      {/* 6. Outlets Discovery: Zone Filters, Leaflet Map, Outlet Directory List */}
+      {/* 6. Instagram Reel Gallery: Perspective 3D Carousel & Highlights */}
+      <InstagramGallerySection />
+
+      {/* 7. Outlets Discovery: Zone Filters, Leaflet Map, Outlet Directory List */}
       <OutletsMapSection />
 
       {/* 7. Franchise FAQs: Accordion answers */}

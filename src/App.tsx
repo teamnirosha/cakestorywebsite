@@ -44,6 +44,7 @@ const AdminOrders = lazy(() => import("./views/admin/AdminOrders"));
 const AdminEvents = lazy(() => import("./views/admin/AdminEvents"));
 const AdminSettings = lazy(() => import("./views/admin/AdminSettings"));
 const AdminAccount = lazy(() => import("./views/admin/AdminAccount"));
+const AdminGallery = lazy(() => import("./views/admin/AdminGallery"));
 
 import { LanguageProvider } from "./context/LanguageContext";
 
@@ -121,6 +122,7 @@ export default function App() {
             <Route path="/admin/orders" element={<RequireAuth><AdminOrders /></RequireAuth>} />
             <Route path="/admin/events" element={<RequireAuth><AdminEvents /></RequireAuth>} />
             <Route path="/admin/settings" element={<RequireAuth><AdminSettings /></RequireAuth>} />
+            <Route path="/admin/gallery" element={<RequireAuth><AdminGallery /></RequireAuth>} />
             <Route path="/admin/account" element={<RequireAuth><AdminAccount /></RequireAuth>} />
 
             <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />

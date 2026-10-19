@@ -180,7 +180,7 @@ export default function OutletsMapSection() {
       ref={sectionRef}
       id="outlets"
       aria-label="Explore Outlet Locations"
-      className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf7f2] text-stone-800 border-t border-[#eee6dc] relative overflow-hidden"
+      className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf7f2] text-stone-800 relative overflow-hidden"
     >
       {/* 1. Context-Relevant Photographic Background with Soft Warm Ivory Overlay */}
       <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">

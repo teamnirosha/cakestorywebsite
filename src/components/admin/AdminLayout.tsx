@@ -91,6 +91,17 @@ export default function AdminLayout({
         </svg>
       ),
     },
+    {
+      to: "/admin/gallery",
+      label: "Sweet Scenes",
+      icon: (
+        <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <rect width="20" height="20" x="2" y="2" rx="5" ry="5" strokeWidth="1.8" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" strokeWidth="1.8" />
+          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" strokeWidth="2.5" />
+        </svg>
+      ),
+    },
   ];
 
   const logout = () => {
@@ -103,6 +114,7 @@ export default function AdminLayout({
   const getBreadcrumbTitle = () => {
     if (location.pathname.startsWith("/admin/franchises")) return "Outlets Network";
     if (location.pathname.startsWith("/admin/enquiries")) return "Lead Management";
+    if (location.pathname.startsWith("/admin/gallery")) return "Sweet Scenes & Reels";
     if (location.pathname.startsWith("/admin/account") || location.pathname.startsWith("/admin/settings")) return "Settings";
     return "Dashboard";
   };

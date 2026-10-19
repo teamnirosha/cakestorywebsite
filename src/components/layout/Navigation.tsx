@@ -8,6 +8,7 @@ export const NAV_ITEMS = [
   { id: "home", labelKey: "nav.home" },
   { id: "story", labelKey: "nav.story" },
   { id: "franchise", labelKey: "nav.franchise" },
+  { id: "gallery", labelKey: "nav.gallery" },
   { id: "outlets", labelKey: "nav.outlets" },
   { id: "faq", labelKey: "nav.faq" },
   { id: "contact", labelKey: "nav.contact" },
@@ -111,6 +112,7 @@ export default function Navigation() {
 
       const storyEl = document.getElementById("story");
       const franchiseEl = document.getElementById("franchise");
+      const galleryEl = document.getElementById("gallery");
       const outletsEl = document.getElementById("outlets");
       const faqEl = document.getElementById("faq");
       const contactEl = document.getElementById("contact");
@@ -120,6 +122,7 @@ export default function Navigation() {
 
       const storyTop = getTop(storyEl);
       const franchiseTop = getTop(franchiseEl);
+      const galleryTop = getTop(galleryEl);
       const outletsTop = getTop(outletsEl);
       const faqTop = getTop(faqEl);
       const contactTop = getTop(contactEl);
@@ -130,8 +133,10 @@ export default function Navigation() {
       } else if (activationY < franchiseTop) {
         // Encompasses BrandStorySection and NumbersSection seamlessly
         setActiveSection("story");
-      } else if (activationY < outletsTop) {
+      } else if (activationY < galleryTop) {
         setActiveSection("franchise");
+      } else if (activationY < outletsTop) {
+        setActiveSection("gallery");
       } else if (activationY < faqTop) {
         setActiveSection("outlets");
       } else if (activationY < contactTop) {

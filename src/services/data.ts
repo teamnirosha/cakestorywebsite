@@ -12,6 +12,7 @@ import seedSiteContent from "../data/siteContent.json";
 import seedFaq from "../data/faq.json";
 import seedBlog from "../data/blog.json";
 import seedRecipes from "../data/recipes.json";
+import seedGalleryReels from "../data/galleryReels.json";
 
 import { sendLeadToWebhook } from "./webhook";
 
@@ -1089,3 +1090,193 @@ export const blogService = {
   list: () => seedBlog as BlogPost[],
   get: (idOrSlug: string) => (seedBlog as BlogPost[]).find((b) => b.id === idOrSlug || b.slug === idOrSlug),
 };
+
+// ---------- Instagram Gallery & Reels Service ----------
+export interface GalleryReelItem {
+  id: string;
+  reelUrl: string;
+  title: string;
+  marathiTitle?: string;
+  videoUrl: string;
+  thumbnail?: string;
+  category?: string;
+  categoryLabel?: string;
+  duration?: string;
+  description: string;
+  order: number;
+  enabled: boolean;
+  featured?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface GallerySectionSettings {
+  enabled: boolean;
+  eyebrow: string;
+  eyebrowMarathi?: string;
+  heading: string;
+  headingMarathi?: string;
+  subtitle: string;
+  subtitleMarathi?: string;
+  decorativePhrase?: string;
+  instagramUrl: string;
+  showCategories: boolean;
+  showHighlights: boolean;
+  ctaLabel?: string;
+  autoplay: boolean;
+  defaultMuted: boolean;
+}
+
+const DEFAULT_GALLERY_SETTINGS: GallerySectionSettings = {
+  enabled: true,
+  eyebrow: "INSTAGRAM",
+  eyebrowMarathi: "इन्स्टाग्राम",
+  heading: "Moments That Make Life Sweeter",
+  headingMarathi: "आयुष्याला अधिक गोड बनवणारे खास क्षण",
+  subtitle: "From custom creations to happy celebrations — catch the latest from CakeStory Desserts on Instagram.",
+  subtitleMarathi: "कस्टम केक्सपासून ते प्रत्येक आनंदाच्या क्षणांपर्यंत — पहा केक स्टोरीचे ताजे रील्स आणि सेलिब्रेशन्स.",
+  decorativePhrase: "Real Stories, Real Celebrations",
+  instagramUrl: "https://www.instagram.com/cakestorydesserts/",
+  showCategories: false,
+  showHighlights: true,
+  ctaLabel: "Follow @cakestorydesserts",
+  autoplay: true,
+  defaultMuted: true,
+};
+
+function dispatchGalleryUpdate() {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("cakestory:gallery_updated"));
+  }
+}
+
+export const galleryService = {
+  getSettings(): GallerySectionSettings {
+    const custom = storage.get<GallerySectionSettings | null>(STORAGE_KEYS.GALLERY_SETTINGS, null);
+    return {
+      ...DEFAULT_GALLERY_SETTINGS,
+      ...(custom || {}),
+    };
+  },
+
+  updateSettings(settings: Partial<GallerySectionSettings>): GallerySectionSettings {
+    const current = this.getSettings();
+    const updated: GallerySectionSettings = { ...current, ...settings };
+    storage.set(STORAGE_KEYS.GALLERY_SETTINGS, updated);
+    dispatchGalleryUpdate();
+    return updated;
+  },
+
+  listReels(includeDisabled = false): GalleryReelItem[] {
+    const reels = storage.get<GalleryReelItem[] | null>(STORAGE_KEYS.GALLERY_REELS, null);
+    let all: GalleryReelItem[] = [];
+    if (reels && Array.isArray(reels) && reels.length > 0) {
+      all = reels.map((r, i) => {
+        if (!r.videoUrl) {
+          const seed = (seedGalleryReels as any)[i];
+          return {
+            ...r,
+            videoUrl: seed?.videoUrl || `/videos/reels/reel-${(i % 5) + 1}.mp4`,
+          };
+        }
+        return r;
+      });
+    } else {
+      all = (seedGalleryReels as unknown) as GalleryReelItem[];
+    }
+    const sorted = [...all].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    if (includeDisabled) {
+      return sorted;
+    }
+    return sorted.filter((r) => r.enabled !== false);
+  },
+
+  saveReels(reels: GalleryReelItem[]): void {
+    storage.set(STORAGE_KEYS.GALLERY_REELS, reels);
+    dispatchGalleryUpdate();
+  },
+
+  addReel(reel: Omit<GalleryReelItem, "id" | "order" | "createdAt" | "updatedAt">): GalleryReelItem {
+    const all = this.listReels(true);
+    const maxOrder = all.reduce((max, r) => Math.max(max, r.order ?? 0), 0);
+    const now = new Date().toISOString();
+    const newReel: GalleryReelItem = {
+      ...reel,
+      id: `reel-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      order: maxOrder + 1,
+      enabled: reel.enabled ?? true,
+      createdAt: now,
+      updatedAt: now,
+    };
+    const updated = [...all, newReel];
+    this.saveReels(updated);
+    return newReel;
+  },
+
+  updateReel(id: string, updates: Partial<GalleryReelItem>): GalleryReelItem | undefined {
+    const all = this.listReels(true);
+    const idx = all.findIndex((r) => r.id === id);
+    if (idx === -1) return undefined;
+    all[idx] = {
+      ...all[idx],
+      ...updates,
+      updatedAt: new Date().toISOString(),
+    };
+    this.saveReels(all);
+    return all[idx];
+  },
+
+  toggleEnabled(id: string): GalleryReelItem | undefined {
+    const all = this.listReels(true);
+    const idx = all.findIndex((r) => r.id === id);
+    if (idx === -1) return undefined;
+    all[idx].enabled = !all[idx].enabled;
+    all[idx].updatedAt = new Date().toISOString();
+    this.saveReels(all);
+    return all[idx];
+  },
+
+  deleteReel(id: string): boolean {
+    const all = this.listReels(true);
+    const updated = all.filter((r) => r.id !== id);
+    if (updated.length === all.length) return false;
+    // Re-index remaining orders
+    updated.forEach((r, i) => {
+      r.order = i + 1;
+    });
+    this.saveReels(updated);
+    return true;
+  },
+
+  moveReel(id: string, direction: "up" | "down"): boolean {
+    const all = this.listReels(true);
+    const idx = all.findIndex((r) => r.id === id);
+    if (idx === -1) return false;
+    const targetIdx = direction === "up" ? idx - 1 : idx + 1;
+    if (targetIdx < 0 || targetIdx >= all.length) return false;
+    const [item] = all.splice(idx, 1);
+    all.splice(targetIdx, 0, item);
+    all.forEach((r, i) => {
+      r.order = i + 1;
+    });
+    this.saveReels(all);
+    return true;
+  },
+
+  reorderReels(reels: GalleryReelItem[]): void {
+    const withUpdatedOrders = reels.map((r, i) => ({
+      ...r,
+      order: i + 1,
+      updatedAt: new Date().toISOString(),
+    }));
+    this.saveReels(withUpdatedOrders);
+  },
+
+  resetDefaults(): void {
+    storage.remove(STORAGE_KEYS.GALLERY_SETTINGS);
+    storage.remove(STORAGE_KEYS.GALLERY_REELS);
+    dispatchGalleryUpdate();
+  },
+};
+
+

@@ -222,6 +222,15 @@ export default function AdminSettings({ defaultTab = "security" }: { defaultTab?
             <span>🗄️</span>
             <span>Database & Storage</span>
           </button>
+          <button
+            type="button"
+            onClick={() => navigate("/admin/gallery")}
+            className="flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center justify-center gap-2 text-slate-600 hover:text-[#8c2243] hover:bg-white/80"
+            title="Open Sweet Scenes & Reels Management"
+          >
+            <span>📸</span>
+            <span>Sweet Scenes ↗</span>
+          </button>
         </div>
 
         {/* ============================================================== */}
