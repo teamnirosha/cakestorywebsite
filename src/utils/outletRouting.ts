@@ -72,6 +72,17 @@ export const MARATHI_LOCALITY_MAP: Record<string, string> = {
   "Wakad": "वाकड",
   "Wanowrie": "वानवडी",
   "Warje": "वारजे",
+  "Jejuri": "जेजुरी",
+  "Nasrapur": "नसरापूर",
+  "Uruli Kanchan": "उरुळी कांचन",
+  "Khandala": "खंडाळा",
+  "Khed Shivapur": "खेड शिवापूर",
+  "Lonand": "लोणंद",
+  "Shewalwadi": "शेवाळवाडी",
+  "Dange Chowk": "डांगे चौक",
+  "Gangadham Chowk": "गंगाधाम चौक",
+  "Malwadi": "माळवाडी",
+  "Kalewadi": "काळेवाडी",
   // Common compound variants
   "Baner Road": "बाणेर रोड",
   "Camp Pune": "कॅम्प",
@@ -100,6 +111,12 @@ export const MARATHI_CITY_MAP: Record<string, string> = {
   "Shirwal": "शिरवळ",
   "Talegaon": "तळेगाव",
   "Chakan": "चाकण",
+  "Jejuri": "जेजुरी",
+  "Nasrapur": "नसरापूर",
+  "Uruli Kanchan": "उरुळी कांचन",
+  "Khandala": "खंडाळा",
+  "Khed Shivapur": "खेड शिवापूर",
+  "Lonand": "लोणंद",
 };
 
 /**

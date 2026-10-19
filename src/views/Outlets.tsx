@@ -241,11 +241,9 @@ export default function Outlets() {
                           </div>
                           <div style={{ fontSize: 11, color: "#5a4a5e", marginTop: 2 }}>📞 {f.phone}</div>
                           <div style={{ fontSize: 11, color: "#5a4a5e" }}>🕐 {f.openingHours}</div>
-                          <div style={{ marginTop: 8 }}>
+                          <div style={{ marginTop: 8, display: "flex", gap: "6px", alignItems: "center" }}>
                             <a
                               href={getOutletUrl(f)}
-                              target="_blank"
-                              rel="noopener noreferrer"
                               style={{
                                 display: "inline-block",
                                 background: "linear-gradient(135deg, #ff7eb3, #ff5c97)",
@@ -257,7 +255,25 @@ export default function Outlets() {
                                 textDecoration: "none",
                               }}
                             >
-                              {language === "mr" ? "आऊटलेट पेज पहा ↗" : "View Outlet Page ↗"}
+                              {language === "mr" ? "आऊटलेट पेज ↗" : "View Page ↗"}
+                            </a>
+                            <a
+                              href={f.googleMapsUrl || `https://www.google.com/maps?q=${f.latitude},${f.longitude}+(${encodeURIComponent(`CakeStory Desserts — ${getOutletLocality(f, "en")}`)})`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{
+                                display: "inline-block",
+                                background: "#f1f5f9",
+                                color: "#334155",
+                                border: "1px solid #cbd5e1",
+                                padding: "5px 10px",
+                                borderRadius: "10px",
+                                fontSize: "11px",
+                                fontWeight: 700,
+                                textDecoration: "none",
+                              }}
+                            >
+                              {language === "mr" ? "दिशा-मार्ग ↗" : "Directions ↗"}
                             </a>
                           </div>
                         </div>

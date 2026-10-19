@@ -38,7 +38,7 @@
     "name": "CakeStory Desserts — Kothrud",
     "outletName": "Narang Corner / Bus Stand",
     "zone": "West Pune",
-    "address": "Shop No. 19, Shivtara Garden, New DP Road, Kothrud, Pune, Maharashtra 411038",
+    "address": "shop no  19,shivtara garden co, new D.P road,kothrud",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
@@ -47,7 +47,7 @@
     "phone": "+91 98505 48485",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 12:00 AM",
-    "manager": "Kothrud Boutique Team",
+    "manager": "Vijay Waghmare",
     "services": [
       "Celebration Cakes",
       "Fresh Desserts",
@@ -63,7 +63,8 @@
     "locality": "Kothrud",
     "legacySlugs": [
       "cakestory-kothrud"
-    ]
+    ],
+    "googleMapsUrl": "https://share.google/rBGWQ3ZGXGnhmgTJS"
   },
   {
     "id": "franchise-003",
@@ -71,16 +72,16 @@
     "name": "CakeStory Desserts — Karve Nagar",
     "outletName": "Kakade Plaza",
     "zone": "West Pune",
-    "address": "Survey 16/18/51, Wing B, Kakade Plaza, Karve Nagar, Pune, Maharashtra 411052",
+    "address": ":SHOP NO.22,KAKADE PLAZA WING-B, KARVE ROAD ,KARVENAGAR 411052",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.4908,
     "longitude": 73.8183,
-    "phone": "+91 74981 03122",
+    "phone": "+91 90113 00402",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:00 PM",
-    "manager": "Karve Nagar Team",
+    "manager": "gaurav",
     "services": [
       "Celebration Cakes",
       "Artisan Ice Creams",
@@ -95,7 +96,8 @@
     "locality": "Karve Nagar",
     "legacySlugs": [
       "cakestory-karve-nagar"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/aEb8KHvxw1stpMms6?g_st=awb"
   },
   {
     "id": "franchise-004",
@@ -103,16 +105,16 @@
     "name": "CakeStory Desserts — Wakad",
     "outletName": "Dange Chowk",
     "zone": "PCMC",
-    "address": "Shop No. 1, Dange Empire, Dange Chowk Road, Thergaon, Wakad, Pune, Maharashtra 411033",
+    "address": "shop no 1,Dange Empire,Near prerna Bank,Dange chowk",
     "city": "Pimpri-Chinchwad",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.6015,
     "longitude": 73.7661,
-    "phone": "+91 84829 95443",
+    "phone": "+91 78987 55656",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 12:00 AM",
-    "manager": "Wakad Boutique Team",
+    "manager": "Aditya Jadhav",
     "services": [
       "Designer Cakes",
       "Instant Takeaway",
@@ -127,7 +129,8 @@
     "locality": "Wakad",
     "legacySlugs": [
       "cakestory-wakad"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/Rhb3Yjo3iZNWz6DV7?g_st=awb"
   },
   {
     "id": "franchise-005",
@@ -167,16 +170,16 @@
     "name": "CakeStory Desserts — Chinchwad",
     "outletName": "Shridhar Nagar",
     "zone": "PCMC",
-    "address": "Survey No. 185, Shop No. CS2, Premsagar Society, Shridhar Nagar, Opposite Chawadi Hotel, Chinchwad, Pune, Maharashtra 411033",
+    "address": "Shop no 2,Premsagar Society,Shridhar nagar,Chinchwad",
     "city": "Pimpri-Chinchwad",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.6298,
     "longitude": 73.7997,
-    "phone": "+91 98819 14444",
+    "phone": "+91 84469 96488",
     "email": "care@cakestorydesserts.com",
     "openingHours": "9:30 AM - 10:30 PM",
-    "manager": "Chinchwad Team",
+    "manager": "Mayur Bhujbal",
     "services": [
       "Industrial Celebrations",
       "Celebration Cakes",
@@ -191,7 +194,8 @@
     "locality": "Chinchwad",
     "legacySlugs": [
       "cakestory-chinchwad"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/8qsK87tV7Rh3FDLZ6?g_st=awb"
   },
   {
     "id": "franchise-007",
@@ -199,16 +203,16 @@
     "name": "CakeStory Desserts — Ravet",
     "outletName": "SB Patil School Road",
     "zone": "PCMC",
-    "address": "Shop No. 12, Ranjan Heights, S.B. Patil School Road, Ravet, Pimpri-Chinchwad, Pune, Maharashtra 411044",
+    "address": "Ranjan Heights,S.B Patil School road,Ravet",
     "city": "Pimpri-Chinchwad",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.6534,
     "longitude": 73.7439,
-    "phone": "+91 89838 08148",
+    "phone": "+91 99606 93711",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "Ravet Team",
+    "manager": "Gayatri  A Ladhha",
     "services": [
       "Celebration Cakes",
       "Custom Themed Bakes",
@@ -223,7 +227,8 @@
     "locality": "Ravet",
     "legacySlugs": [
       "cakestory-ravet"
-    ]
+    ],
+    "googleMapsUrl": "https://share.google/8pV4vllbAbAS1nsNa"
   },
   {
     "id": "franchise-008",
@@ -231,16 +236,16 @@
     "name": "CakeStory Desserts — Camp",
     "outletName": "Pulgate Chowk",
     "zone": "East Pune",
-    "address": "Shop No. 4, Pulgate Chowk, Radiant Prime Arcade, East Street, Camp, Pune, Maharashtra 411001",
+    "address": "SHOP NO 4 RADIANT PRIME ARCADE PULGET CHOWK",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.5103,
     "longitude": 73.8824,
-    "phone": "+91 96073 32727",
+    "phone": "+91 70575 46970",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "Camp Boutique Team",
+    "manager": "Sunny Charles",
     "services": [
       "Signature Gateaux",
       "Fusion Pastries",
@@ -255,7 +260,8 @@
     "locality": "Camp",
     "legacySlugs": [
       "cakestory-camp"
-    ]
+    ],
+    "googleMapsUrl": "https://share.google/DVwvSN4qABCazQlec"
   },
   {
     "id": "franchise-009",
@@ -263,7 +269,7 @@
     "name": "CakeStory Desserts — Viman Nagar",
     "outletName": "Ganpati Chowk",
     "zone": "East Pune",
-    "address": "Shop No. 17, James Court C, Anand Vidya Niketan, Near Ganpati Chowk, High School Road, Viman Nagar, Pune, Maharashtra 411014",
+    "address": "Shop No. 17, Ridhi Enclave, Anand Vidhya Niketan High School Road, Near Ganpati Square, Viman Nagar, Pune,  411014",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
@@ -272,7 +278,7 @@
     "phone": "+91 72768 22006",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 12:30 AM",
-    "manager": "Viman Nagar Team",
+    "manager": "SWAPNIL NAVGHARE",
     "services": [
       "Designer Cakes",
       "Fusion Desserts",
@@ -287,7 +293,8 @@
     "locality": "Viman Nagar",
     "legacySlugs": [
       "cakestory-viman-nagar"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/q2aEAZfz7iASUtqb9?g_st=awb"
   },
   {
     "id": "franchise-010",
@@ -295,16 +302,16 @@
     "name": "CakeStory Desserts — Vadgaon Sheri",
     "outletName": "Old Mundhwa Road",
     "zone": "East Pune",
-    "address": "Old Mundhwa Road, Near Water Tank, Sai Nagari, Mathura Nagar, Vadgaon Sheri, Pune, Maharashtra 411014",
+    "address": "shop no 1,sagar plaza,old mundhwa road,sai nagari,wadgaon sheri",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.5492,
     "longitude": 73.9248,
-    "phone": "+91 91754 02369",
+    "phone": "+91 70388 28346",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "Vadgaon Sheri Team",
+    "manager": "Sarthak Choukhande",
     "services": [
       "Celebration Cakes",
       "Fresh Daily Bakes",
@@ -319,7 +326,8 @@
     "locality": "Vadgaon Sheri",
     "legacySlugs": [
       "cakestory-vadgaon-sheri"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/cZZCgTm5prjEVgeV9?g_st=awb"
   },
   {
     "id": "franchise-011",
@@ -327,16 +335,16 @@
     "name": "CakeStory Desserts — Kharadi",
     "outletName": "Rakshak Nagar / Zensar",
     "zone": "East Pune",
-    "address": "Shop No. 1, Raj Heights, Kharadi Road, near Zensar, Rakshak Nagar, Kharadi, Pune, Maharashtra 411014",
+    "address": "RAKSHANAGAR ,KHARADI",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.5529,
     "longitude": 73.9431,
-    "phone": "+91 88670 60404",
+    "phone": "+91 98601 44737",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "Kharadi Team",
+    "manager": "Avinash Pakhale",
     "services": [
       "Celebration Cakes",
       "Corporate Hampers",
@@ -351,7 +359,8 @@
     "locality": "Kharadi",
     "legacySlugs": [
       "cakestory-kharadi"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/9KpoWhSx3A8D2Qxq7?g_st=awb"
   },
   {
     "id": "franchise-012",
@@ -359,7 +368,7 @@
     "name": "CakeStory Desserts — Phursungi",
     "outletName": "Bhekrai Nagar",
     "zone": "East Pune",
-    "address": "Shop No. 01, Bus Stop, Opp. PNT, Bhekrai Nagar, Phursungi, Pune, Maharashtra 412308",
+    "address": "Jadhav & Saumya Complex.opp.Bhekrainagar Bus depo,Bhekrainagar",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
@@ -368,7 +377,7 @@
     "phone": "+91 99219 14444",
     "email": "care@cakestorydesserts.com",
     "openingHours": "9:00 AM - 11:30 PM",
-    "manager": "Phursungi Team",
+    "manager": "Santosh Choukhande",
     "services": [
       "Celebration Cakes",
       "Custom Cakes",
@@ -383,7 +392,8 @@
     "locality": "Phursungi",
     "legacySlugs": [
       "cakestory-phursungi"
-    ]
+    ],
+    "googleMapsUrl": "https://share.google/5jxmgkhQb8BfhoM2A"
   },
   {
     "id": "franchise-013",
@@ -391,16 +401,16 @@
     "name": "CakeStory Desserts — Wanwadi",
     "outletName": "Mayfair Eleganza",
     "zone": "South Pune",
-    "address": "5A/2A2B2, Mayfair Eleganza, Block 6, Wanowrie, Pune, Maharashtra 411040",
+    "address": "MAIYFAIR ELEGANZA SHOP NO 6,KONDHWA",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.4907,
     "longitude": 73.8969,
-    "phone": "+91 98813 90101",
+    "phone": "+91 98817 90101",
     "email": "care@cakestorydesserts.com",
     "openingHours": "9:00 AM - 12:00 AM",
-    "manager": "Wanwadi Team",
+    "manager": "Ajinkya Parkhe",
     "services": [
       "Signature Cakes",
       "Gourmet Pastries",
@@ -415,7 +425,8 @@
     "locality": "Wanowrie",
     "legacySlugs": [
       "cakestory-wanwadi"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/KKvuXNRaCEqWBd1F9?g_st=awb"
   },
   {
     "id": "franchise-014",
@@ -423,16 +434,16 @@
     "name": "CakeStory Desserts — Kondhwa",
     "outletName": "Gangadham / Aai Mata Chowk",
     "zone": "South Pune",
-    "address": "Ganesh Apartment, Aai Mata Chowk, Gangadham Market Yard, Kondhwa, Pune, Maharashtra 411037",
+    "address": "SHOP NO 20,GANESH MARKET,MARKET YARD PUNE",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.4812,
     "longitude": 73.8795,
-    "phone": "+91 85528 09191",
+    "phone": "+91 96573 59797",
     "email": "care@cakestorydesserts.com",
     "openingHours": "9:00 AM - 12:00 AM",
-    "manager": "Kondhwa Team",
+    "manager": "Chaitanya Gaikwad",
     "services": [
       "Family Celebration Cakes",
       "100% Pure Veg",
@@ -447,7 +458,8 @@
     "locality": "Kondhwa",
     "legacySlugs": [
       "cakestory-kondhwa"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/9RoAvuxWniSVeQzw7?g_st=awb"
   },
   {
     "id": "franchise-015",
@@ -455,7 +467,7 @@
     "name": "CakeStory Desserts — Bibwewadi",
     "outletName": "Balajinagar / Pune-Satara Road",
     "zone": "South Pune",
-    "address": "Tirupati Complex, Near Khushboo Hotel, Pune-Satara Road, Balajinagar, Bibwewadi, Pune, Maharashtra 411043",
+    "address": "Dhankwadi balaji nagar,near Khujbu Hotel,Balajinagar",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
@@ -464,7 +476,7 @@
     "phone": "+91 84838 00903",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 12:00 AM",
-    "manager": "Bibwewadi Team",
+    "manager": "Pankaj Mhaske",
     "services": [
       "Custom Celebration Cakes",
       "100% Pure Veg",
@@ -479,7 +491,8 @@
     "locality": "Bibwewadi",
     "legacySlugs": [
       "cakestory-bibwewadi"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/5rxuyq2r3nZMdtsH9?g_st=awb"
   },
   {
     "id": "franchise-016",
@@ -487,16 +500,16 @@
     "name": "CakeStory Desserts — Saswad",
     "outletName": "Mhetre Mala / Saswad Court",
     "zone": "South Pune",
-    "address": "Shop No. 15, Anand Plaza, near Corporation Bank, Saswad, Maharashtra 412301",
+    "address": "near saswad St stand,saswad",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.3444,
     "longitude": 74.0305,
-    "phone": "+91 80105 47012",
+    "phone": "+91 99212 94444",
     "email": "care@cakestorydesserts.com",
     "openingHours": "9:30 AM - 11:45 PM",
-    "manager": "Saswad Team",
+    "manager": "Shubham KAPRE",
     "services": [
       "Regional Franchise Hub",
       "Celebration Cakes",
@@ -512,7 +525,8 @@
     "legacySlugs": [
       "cakestory-saswad",
       "anand-plaza"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/KDSEzDFXCWGkT32c7?g_st=awb"
   },
   {
     "id": "franchise-017",
@@ -520,16 +534,16 @@
     "name": "Cakestory Desserts — Hadapsar (Sade Satra Nali)",
     "outletName": "Rohan Plaza / DP Road",
     "zone": "East Pune",
-    "address": "Rohan Plaza, 29, Sade Satra Nali, DP Road, Malwadi, Hadapsar, Pune, Maharashtra 411028",
+    "address": "OFFICE NO 28.29,SADE SATRA NALI,HADPSAR",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.5085,
     "longitude": 73.9482,
-    "phone": "+91 79729 14972",
+    "phone": "+91 93078 54425",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "Rohan Plaza Team",
+    "manager": "Pranay Kodre",
     "services": [
       "Celebration Cakes",
       "Fresh Pastries",
@@ -545,7 +559,8 @@
     "locality": "Hadapsar",
     "legacySlugs": [
       "cakestory-hadapsar-sade-satra-nali"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/daJufLyAnZ3LK9dRA?g_st=awb"
   },
   {
     "id": "franchise-018",
@@ -553,16 +568,16 @@
     "name": "CakeStory Desserts — Hadapsar (Magarpatta Road)",
     "outletName": "Magarpatta Road / Airtel Gallery",
     "zone": "East Pune",
-    "address": "Shop No. 14, Magarpatta Road, near Airtel Gallery, Hadapsar, Pune, Maharashtra 411028",
+    "address": "Sudarshan Heritage Shop No 14, Near Airtel Gallery Magarpatta City Road Hadapsar Pune 411028",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.5144,
     "longitude": 73.9312,
-    "phone": "+91 96579 91122",
+    "phone": "+91 84110 00994",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 12:00 AM",
-    "manager": "Magarpatta Road Team",
+    "manager": "sagar gupta",
     "services": [
       "Designer Cakes",
       "Midnight Delivery",
@@ -578,7 +593,8 @@
     "locality": "Hadapsar",
     "legacySlugs": [
       "cakestory-hadapsar-magarpatta"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/fhnrJv83hDcXqMPE7?g_st=awb"
   },
   {
     "id": "franchise-019",
@@ -586,16 +602,16 @@
     "name": "CakeStory Desserts — Lohegaon (Porwal Road)",
     "outletName": "Aeropolis / Porwal Road",
     "zone": "East Pune",
-    "address": "Shop No. 5, Aeropolis, Porwal Road, Lohegaon, Pune, Maharashtra 411047",
+    "address": "Shop No 5, Aeropolis, Porwal Rd, Kutwal Colony, Lohegaon, Pune, Maharashtra 411047",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.5985,
     "longitude": 73.9054,
-    "phone": "+91 81494 15063",
+    "phone": "+91 99221 40236",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 12:00 AM",
-    "manager": "Aeropolis Team",
+    "manager": "Omkar bhujbal",
     "services": [
       "Celebration Cakes",
       "Gourmet Pastries",
@@ -611,7 +627,8 @@
     "locality": "Lohegaon",
     "legacySlugs": [
       "cakestory-lohegaon-porwal"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/T6zYrTNBfGpF21Ci6?g_st=awb"
   },
   {
     "id": "franchise-020",
@@ -619,16 +636,16 @@
     "name": "CakeStory Desserts — Manjri (Shewalewadi Road)",
     "outletName": "Swapnashilp Complex",
     "zone": "East Pune",
-    "address": "Shop No. 5, Swapnashilp Complex, Shewalewadi Road, Manjri Budruk, Pune, Maharashtra 412307",
+    "address": "69/B1 SHOP NO 5,SWAPNSHIL COMPLEX",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.4988,
     "longitude": 73.9785,
-    "phone": "+91 70826 69708",
+    "phone": "+91 99707 23334",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 12:00 AM",
-    "manager": "Swapnashilp Complex Team",
+    "manager": "Yash Kodre",
     "services": [
       "Celebration Cakes",
       "Artisanal Pastries",
@@ -644,7 +661,8 @@
     "locality": "Manjri",
     "legacySlugs": [
       "cakestory-manjri-shewalewadi"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/kSstYn2id6j1adC98?g_st=awb"
   },
   {
     "id": "franchise-021",
@@ -652,16 +670,16 @@
     "name": "CakeStory Desserts — Wanowrie (Sacred Heart Town)",
     "outletName": "Sacred Heart Town / McDonald's",
     "zone": "South Pune",
-    "address": "Shop No. 13, Sacred Heart Town, opposite McDonald's, Wanowrie, Pune, Maharashtra 411040",
+    "address": "SHOP NO. 13 SACRED HEART TOWN , WANAWADI 411 040",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.4952,
     "longitude": 73.8998,
-    "phone": "+91 91464 52727",
+    "phone": "+91 70575 46970",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:00 PM",
-    "manager": "Sacred Heart Town Team",
+    "manager": "Sunny Charles",
     "services": [
       "Artisan Pastries",
       "Celebration Cakes",
@@ -677,7 +695,8 @@
     "locality": "Wanowrie",
     "legacySlugs": [
       "cakestory-wanowrie-sacred-heart"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/2CPUyP1ffr58Aa7R8?g_st=awb"
   },
   {
     "id": "franchise-022",
@@ -685,16 +704,16 @@
     "name": "CakeStory Desserts — Keshav Nagar (Mundhwa)",
     "outletName": "Pramiva / Manjari Road",
     "zone": "East Pune",
-    "address": "37 Pramiva, Manjari Road, near K.R.B. Workshop, Keshav Nagar, Mundhwa, Pune, Maharashtra 411036",
+    "address": "37 Pramiva, Manjari Rd, near K.R.B. Workshop, Sasane Colony, Keshav Nagar, Mundhwa, Keshvnagar, Pune, Maharashtra 411036",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.5372,
     "longitude": 73.9358,
-    "phone": "+91 98819 14444",
+    "phone": "+91 77448 47372",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "Pramiva Team",
+    "manager": "Kunal kodre",
     "services": [
       "Celebration Cakes",
       "Fresh Fruit Bakes",
@@ -710,7 +729,8 @@
     "locality": "Keshav Nagar",
     "legacySlugs": [
       "cakestory-keshav-nagar"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/roSbZgqwaXeMa6p19?g_st=ac"
   },
   {
     "id": "franchise-023",
@@ -718,7 +738,7 @@
     "name": "CakeStory Desserts — Hadapsar (Sasane Nagar)",
     "outletName": "Gandharv Geet / DP Road",
     "zone": "East Pune",
-    "address": "Shop No. 7, Gandharv Geet, near Pearl Hospital, Navanath Chowk, DP Road, Sasane Nagar, Hadapsar, Pune, Maharashtra 411028",
+    "address": "shop no 7,Gandharv Geet,Near Pearl hospital,Navnath Chowk",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
@@ -727,7 +747,7 @@
     "phone": "+91 98818 17785",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 12:00 AM",
-    "manager": "Gandharv Geet Team",
+    "manager": "Santosh Hole",
     "services": [
       "Celebration Cakes",
       "Custom Themed Bakes",
@@ -743,7 +763,8 @@
     "locality": "Hadapsar",
     "legacySlugs": [
       "cakestory-hadapsar-sasane-nagar"
-    ]
+    ],
+    "googleMapsUrl": "https://share.google/Zvz59mLcz7HUQiWuD"
   },
   {
     "id": "franchise-024",
@@ -751,16 +772,16 @@
     "name": "CakeStory Desserts — Rahatani (BRTS Road)",
     "outletName": "Shri Vitthal Rukhmini Colony",
     "zone": "PCMC",
-    "address": "Chikhali - Kaspate Vasti BRTS Road, Shri Vitthal Rukhmini Colony, Rahatani, Pimpri-Chinchwad, Maharashtra 411017",
+    "address": "JQ7P+V7J, Chikhali - Kaspate Vasti BRTS Rd, Shri Vitthal Rukhmini Colony, Rahatani, Pimpri-Chinchwad, Maharashtra 411017",
     "city": "Pimpri-Chinchwad",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.5985,
     "longitude": 73.7845,
-    "phone": "+91 89991 34016",
+    "phone": "+91 89994 13275",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 12:00 AM",
-    "manager": "Shri Vitthal Rukhmini Colony Team",
+    "manager": "PRAVIN RAUT",
     "services": [
       "Designer Cakes",
       "Pure Veg Pastries",
@@ -776,7 +797,8 @@
     "locality": "Rahatani",
     "legacySlugs": [
       "cakestory-rahatani"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/JiLrd3TEruFZgSaT7?g_st=awb"
   },
   {
     "id": "franchise-025",
@@ -784,16 +806,16 @@
     "name": "CakeStory Desserts — Undri (Euro School Road)",
     "outletName": "The Land Mark Society",
     "zone": "South Pune",
-    "address": "Shop No. 05, The Land Mark Society, near Euro School Undri, Undri, Pune, Maharashtra 411060",
+    "address": "shop no 5,near Euro school,Bellagio,undri",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.4623,
     "longitude": 73.9102,
-    "phone": "+91 73918 29999",
+    "phone": "+91 96573 59797",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "The Land Mark Society Team",
+    "manager": "Chaitanya Gaikwad",
     "services": [
       "Celebration Cakes",
       "Kids Party Bakes",
@@ -809,7 +831,8 @@
     "locality": "Undri",
     "legacySlugs": [
       "cakestory-undri"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/faYL37Z97oVftgpp7?g_st=awb"
   },
   {
     "id": "franchise-026",
@@ -817,7 +840,7 @@
     "name": "CakeStory Desserts — Loni Kalbhor (Kadamwak Wasti)",
     "outletName": "Nilesh Kunj / MIT Corner",
     "zone": "East Pune",
-    "address": "Shop No. 7, Nileshkunj, MIT Corner, near Latur Urban Bank, Kadamwak Wasti, Pune, Maharashtra 412201",
+    "address": "shop no 7,Nilesh Kunj,MIT Corner,Loni Kalbhor",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
@@ -826,7 +849,7 @@
     "phone": "+91 83086 15656",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "Nilesh Kunj Team",
+    "manager": "Ruturaj Gaikwad",
     "services": [
       "Student Specials",
       "Celebration Cakes",
@@ -842,7 +865,8 @@
     "locality": "Loni Kalbhor",
     "legacySlugs": [
       "cakestory-loni-kalbhor"
-    ]
+    ],
+    "googleMapsUrl": "https://share.google/PGrpF1s1aM5qR08zX"
   },
   {
     "id": "franchise-027",
@@ -850,16 +874,16 @@
     "name": "CakeStory Desserts — Moshi (Spine Road)",
     "outletName": "L-Axis Commercial Centre",
     "zone": "PCMC",
-    "address": "Shop No. 4, L-Axis Commercial Centre, Spine Road, Moshi, Pimpri-Chinchwad, Maharashtra 411070",
+    "address": "Shop No. 4, L-Axis Commercial Centre, Spine Road, Moshi Pradhikaran, PCMC, Pune- 412105",
     "city": "Pimpri-Chinchwad",
     "state": "Maharashtra",
     "country": "India",
-    "latitude": 18.6654,
-    "longitude": 73.8458,
+    "latitude": 18.648376199999998,
+    "longitude": 73.8432989,
     "phone": "+91 96099 92727",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 10:30 PM",
-    "manager": "L-Axis Commercial Centre Team",
+    "manager": "Kundan Gaikwad",
     "services": [
       "Signature Cakes",
       "Pastries & Brownies",
@@ -875,7 +899,8 @@
     "locality": "Moshi",
     "legacySlugs": [
       "cakestory-moshi-spine-road"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/QJ7cweJAjiZ8iwBn8?g_st=awb"
   },
   {
     "id": "franchise-028",
@@ -883,7 +908,7 @@
     "name": "CakeStory Desserts — Chikhali (Jadhav Wadi)",
     "outletName": "Kumar Pratham / Shiv Rasta",
     "zone": "PCMC",
-    "address": "Shop No. 5, Near Kumar Pratham Society, Jadhavwadi-Moshi, Shiv Rasta, Jadhav Wadi, Chikhali, Maharashtra 411062",
+    "address": "Shop no-,Behind Kumar pratham society,Jadhavwadi -moshi shiv road , jadhavwadi, chikhali,pune-411062.",
     "city": "Pimpri-Chinchwad",
     "state": "Maharashtra",
     "country": "India",
@@ -892,7 +917,7 @@
     "phone": "+91 90117 47485",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "Kumar Pratham Team",
+    "manager": "rushikesh jadhav",
     "services": [
       "Celebration Cakes",
       "100% Pure Veg",
@@ -908,7 +933,8 @@
     "locality": "Chikhali",
     "legacySlugs": [
       "cakestory-chikhali-jadhav-wadi"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/7nsPdCNDJMqv682G6?g_st=awb"
   },
   {
     "id": "franchise-029",
@@ -916,16 +942,16 @@
     "name": "CakeStory Desserts — New Sangavi (Krushna Chowk)",
     "outletName": "Radha Raman Complex",
     "zone": "PCMC",
-    "address": "Shop No. 6, Radha Raman Complex, Krushna Chowk, New Sangavi, Pimpri-Chinchwad, Maharashtra 411061",
+    "address": "Shop no 6,Radharaman Complex,Krushna chowk,navi sangavi",
     "city": "Pimpri-Chinchwad",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.5832,
     "longitude": 73.8124,
-    "phone": "+91 96895 18109",
+    "phone": "+91 95032 70027",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:00 PM",
-    "manager": "Radha Raman Complex Team",
+    "manager": "Kunal Jagdale",
     "services": [
       "Designer Cakes",
       "Dessert Cups",
@@ -941,7 +967,8 @@
     "locality": "New Sangavi",
     "legacySlugs": [
       "cakestory-new-sangavi"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/UefW8ZTWmCn9RExZ7?g_st=awb"
   },
   {
     "id": "franchise-030",
@@ -982,16 +1009,16 @@
     "name": "CakeStory Desserts — Narhe (Zeal College Road)",
     "outletName": "Malvika Arcade / Vetal Buwa Chowk",
     "zone": "South Pune",
-    "address": "Malvika Arcade, Vetal Buwa Chowk, Zeal College Road, Narhe, Pune, Maharashtra 411041",
+    "address": "malvika arcade,zeel college road,vetal buwa chowk, narhe",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.4485,
     "longitude": 73.8212,
-    "phone": "+91 93595 54425",
+    "phone": "+91 75888 74242",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 12:00 AM",
-    "manager": "Malvika Arcade Team",
+    "manager": "Avinash Tilekar",
     "services": [
       "Celebration Cakes",
       "Youth Party Specials",
@@ -1007,7 +1034,8 @@
     "locality": "Narhe",
     "legacySlugs": [
       "cakestory-narhe"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/UVG2Rz1oUpvHc2226?g_st=awb"
   },
   {
     "id": "franchise-032",
@@ -1048,16 +1076,16 @@
     "name": "CakeStory Desserts — Pimpri (Nehru Nagar)",
     "outletName": "Rajveer Imperia / Ajmera Road",
     "zone": "PCMC",
-    "address": "Shop No. 8, Rajveer Imperia, Ajmera Main Road, near Annasaheb Magar Stadium, Nehru Nagar, Pimpri Colony, Pune, Maharashtra 411018",
+    "address": "shop no 1,rajveer imperia,ajmera main road,nehrunagar,pimpari",
     "city": "Pimpri-Chinchwad",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.6341,
     "longitude": 73.8214,
-    "phone": "+91 90919 26600",
+    "phone": "+91 93393 30909",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 12:00 AM",
-    "manager": "Rajveer Imperia Team",
+    "manager": "Alpana.S.Bhamare",
     "services": [
       "Signature Cakes",
       "Custom Celebration Bakes",
@@ -1073,7 +1101,8 @@
     "locality": "Pimpri",
     "legacySlugs": [
       "cakestory-pimpri-nehru-nagar"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/8fffQNdXti2gD9Kg9?g_st=awb"
   },
   {
     "id": "franchise-034",
@@ -1081,16 +1110,16 @@
     "name": "CakeStory Desserts — Warje (Bypass / RMD Sinhgad)",
     "outletName": "Prestige Point / Aditya Garden City",
     "zone": "West Pune",
-    "address": "Shop No. 1 & 2, Prestige Point, beside Mumbai Pune Bypass Rd Flyover, RMD Sinhgad School, Aditya Garden City, Warje, Pune, Maharashtra 411058",
+    "address": "SHOP NO 1 , PRESTIGE POINT RMD COLLAGE ROAD ,WARJE 411058",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
-    "latitude": 18.4795,
-    "longitude": 73.7924,
-    "phone": "+91 73874 43545",
+    "latitude": 18.4890681,
+    "longitude": 73.7898927,
+    "phone": "+91 82756 15123",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:55 PM",
-    "manager": "Prestige Point Team",
+    "manager": "yogesh machinkar",
     "services": [
       "Celebration Cakes",
       "Artisanal Ice Creams",
@@ -1106,7 +1135,8 @@
     "locality": "Warje",
     "legacySlugs": [
       "cakestory-warje-bypass"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/e9gPBTu48yyY5UQP8"
   },
   {
     "id": "franchise-035",
@@ -1114,16 +1144,16 @@
     "name": "CakeStory Desserts — Anand Nagar (Sun City Road)",
     "outletName": "BG Arcade / Maruti Mandir",
     "zone": "South Pune",
-    "address": "BG Arcade, Dakshin Mukhi Maruti Mandir, Sun City Road, Anand Nagar, Pune, Maharashtra 411051",
+    "address": "shop no 4,Nirmal Township,Saraswat bank,Suncity,anand nagar",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
-    "latitude": 18.4821,
-    "longitude": 73.8256,
+    "latitude": 18.4773621,
+    "longitude": 73.81902529999999,
     "phone": "+91 96574 97858",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:00 PM",
-    "manager": "BG Arcade Team",
+    "manager": "Somnath Choukhande",
     "services": [
       "Signature Bakes",
       "Pastry Slices",
@@ -1139,7 +1169,8 @@
     "locality": "Anand Nagar",
     "legacySlugs": [
       "cakestory-anand-nagar-suncity"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/SQYFb4SSREVgDn617?g_st=awb"
   },
   {
     "id": "franchise-036",
@@ -1147,7 +1178,7 @@
     "name": "CakeStory Desserts — Kolhewadi (Sinhgad Road)",
     "outletName": "Amrut Vihar / Canara Bank",
     "zone": "South Pune",
-    "address": "Building B, Amrut Vihar Apartments, near Canara Bank, Kolhewadi, Pune, Maharashtra 411024",
+    "address": "Shop no 15,Amrut Vihar,opp to canara bank,Sinhagad road,Kirkatwadi",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
@@ -1156,7 +1187,7 @@
     "phone": "+91 81819 84444",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "Amrut Vihar Team",
+    "manager": "Dinesh Bhandalkar",
     "services": [
       "Celebration Cakes",
       "Fresh Desserts",
@@ -1172,7 +1203,8 @@
     "locality": "Kolhewadi",
     "legacySlugs": [
       "cakestory-kolhewadi"
-    ]
+    ],
+    "googleMapsUrl": "https://share.google/h6EnE0WWJwRt2O2wE"
   },
   {
     "id": "franchise-037",
@@ -1180,16 +1212,16 @@
     "name": "CakeStory Desserts — Shivane (Uttam Nagar)",
     "outletName": "Rajarshi Shahu Bank / Uttam Nagar",
     "zone": "South Pune",
-    "address": "Shop No. 7, opposite Rajarshi Shahu Bank, Uttam Nagar, Shivane, Pune, Maharashtra 411023",
+    "address": "shop no 7,opp to rajshri shahu bank,Uttam nagar,Yashwant nagar,Shivane",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.4621,
     "longitude": 73.7841,
-    "phone": "+91 90758 98444",
+    "phone": "+91 81819 84444",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "Rajarshi Shahu Bank Team",
+    "manager": "Dinesh Bhandalkar",
     "services": [
       "Designer Cakes",
       "Dessert Cups",
@@ -1205,7 +1237,8 @@
     "locality": "Shivane",
     "legacySlugs": [
       "cakestory-shivane"
-    ]
+    ],
+    "googleMapsUrl": "https://share.google/h6EnE0WWJwRt2O2wE"
   },
   {
     "id": "franchise-038",
@@ -1213,7 +1246,7 @@
     "name": "CakeStory Desserts — Nigdi (Sector 25)",
     "outletName": "Parveen Palace / Festival Chowk",
     "zone": "PCMC",
-    "address": "Shop No. 3, Parveen Palace, Festival Chowk, Sant Dnyaneshwar Chowk, Sector 25, Nigdi, Maharashtra 411044",
+    "address": "shop no 3,Praveen Palace,Festival Chowk,Near bhel chowk,nigdi",
     "city": "Pimpri-Chinchwad",
     "state": "Maharashtra",
     "country": "India",
@@ -1222,7 +1255,7 @@
     "phone": "+91 93739 94479",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "Parveen Palace Team",
+    "manager": "Yash ZENDE",
     "services": [
       "Celebration Cakes",
       "Party Catering",
@@ -1238,7 +1271,8 @@
     "locality": "Nigdi",
     "legacySlugs": [
       "cakestory-nigdi-sector-25"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/YDp7dnY5mbd5g7at9?g_st=awb"
   },
   {
     "id": "franchise-039",
@@ -1246,16 +1280,16 @@
     "name": "CakeStory Desserts — Nigdi (Yamuna Nagar)",
     "outletName": "Sant Krupa Complex",
     "zone": "PCMC",
-    "address": "Sant Krupa Complex, Yamuna Nagar, Nigdi, Pune, Maharashtra 411044",
+    "address": "Shop no 1,Santkrupa complex,Near LIC office,LIC corner,yamunanagar",
     "city": "Pimpri-Chinchwad",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.6578,
     "longitude": 73.7812,
-    "phone": "+91 98819 14444",
+    "phone": "+91 97677 75269",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 12:00 AM",
-    "manager": "Sant Krupa Complex Team",
+    "manager": "Rushikesh Wadhane",
     "services": [
       "Celebration Cakes",
       "Fresh Pastries",
@@ -1271,7 +1305,8 @@
     "locality": "Nigdi",
     "legacySlugs": [
       "cakestory-nigdi-yamuna-nagar"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/sE45NgpEDZWfSaGK8?g_st=awb"
   },
   {
     "id": "franchise-040",
@@ -1279,16 +1314,16 @@
     "name": "CakeStory Desserts — Dhayari (Ganpati Chowk)",
     "outletName": "Sterling Nisarga II / Ganpati Chowk",
     "zone": "South Pune",
-    "address": "Umbrya, Sterling Nisarga II, Ganpati Chowk, Dhayari, Pune, Maharashtra 411041",
+    "address": "near umbraya ganpati mandir,dhayari",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.4465,
     "longitude": 73.8091,
-    "phone": "+91 87599 41010",
+    "phone": "+91 88889 41010",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "Sterling Nisarga II Team",
+    "manager": "Sagar Sake",
     "services": [
       "Celebration Cakes",
       "Fresh Fruit Bakes",
@@ -1304,7 +1339,8 @@
     "locality": "Dhayari",
     "legacySlugs": [
       "cakestory-dhayari"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/aXRq4QGAbpDZdE6s7?g_st=iw"
   },
   {
     "id": "franchise-041",
@@ -1312,16 +1348,16 @@
     "name": "CakeStory Desserts — Kondhwa (Tilekar Nagar / ISKCON)",
     "outletName": "Gagan Unnati / Katraj-Kondhwa Road",
     "zone": "South Pune",
-    "address": "Shop No. 8, Gagan Unnati Building, Tilekar Nagar, Katraj - Kondhwa Road, near ISKCON Temple, Pune, Maharashtra 411048",
+    "address": "Shop no.8 Gagan Unnati building Katraj kondhwa road near iscon temple tilekar nagar Pune",
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.4612,
     "longitude": 73.8821,
-    "phone": "+91 96899 63535",
+    "phone": "+91 95636 43535",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "Gagan Unnati Team",
+    "manager": "vaishanv jagtap",
     "services": [
       "Celebration Cakes",
       "Temple & Festival Sweets",
@@ -1337,7 +1373,8 @@
     "locality": "Kondhwa",
     "legacySlugs": [
       "cakestory-kondhwa-tilekar-nagar"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/N5v6mzcjhPH8LjQXA?g_st=awb"
   },
   {
     "id": "franchise-042",
@@ -1378,7 +1415,7 @@
     "name": "CakeStory Desserts — Chikhali (Sane Chowk)",
     "outletName": "GMC Raj Palace / Sector 19",
     "zone": "PCMC",
-    "address": "Shop No. GMC Raj Palace, Sane Chowk, 4, Chikhali-Akurdi Road, Sudarshan Nagar, Sector 19, Chikhali, Pune, Maharashtra 411019",
+    "address": "Shop no 6,G.M.C, Raj Palace,Sane Chowk,Chikhali",
     "city": "Pimpri-Chinchwad",
     "state": "Maharashtra",
     "country": "India",
@@ -1387,7 +1424,7 @@
     "phone": "+91 88053 19464",
     "email": "care@cakestorydesserts.com",
     "openingHours": "10:00 AM - 11:30 PM",
-    "manager": "GMC Raj Palace Team",
+    "manager": "Ganesh Phadtare",
     "services": [
       "Celebration Cakes",
       "Custom Themed Bakes",
@@ -1403,7 +1440,8 @@
     "locality": "Chikhali",
     "legacySlugs": [
       "cakestory-chikhali-sane-chowk"
-    ]
+    ],
+    "googleMapsUrl": "https://share.google/strofgX3EiINnvMmc"
   },
   {
     "id": "franchise-044",
@@ -1861,16 +1899,16 @@
     "name": "CakeStory Desserts — Satara (Powai Naka)",
     "outletName": "Powai Naka Flagship Hub",
     "zone": "Satara",
-    "address": "Survey No. 142, Radhika Road, near Powai Naka, Satara, Maharashtra 415001",
+    "address": "shop 1 , Near By Rangoli Nursery, Kesarkar peth, Shahu Chouk, Satara -415 002, Satara, Maharashtra 415001",
     "city": "Satara",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 17.6854,
     "longitude": 73.9982,
-    "phone": "+91 95178 24444",
+    "phone": "+91 90965 17538",
     "email": "care@cakestorydesserts.com",
     "openingHours": "9:30 AM - 10:30 PM",
-    "manager": "Powai Naka Flagship Hub Team",
+    "manager": "Hemant Pakhale",
     "services": [
       "Regional Flagship",
       "Celebration Cakes",
@@ -1885,7 +1923,8 @@
     "locality": "Powai Naka",
     "legacySlugs": [
       "cakestory-satara-powai-naka"
-    ]
+    ],
+    "googleMapsUrl": "https://share.google/OV13EkVUXa6fdkKf7"
   },
   {
     "id": "franchise-059",
@@ -1893,16 +1932,16 @@
     "name": "CakeStory Desserts — Satara (Bombay Restaurant Chowk)",
     "outletName": "Highway Junction / NH48",
     "zone": "Satara",
-    "address": "Bombay Restaurant Chowk, Pune-Bangalore Highway, Satara, Maharashtra 415004",
+    "address": "Shop no.5 hotel pride executive jawal, Bombay Restorent Chowk, satara 415002",
     "city": "Satara",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 17.7012,
     "longitude": 74.0145,
-    "phone": "+91 95178 24444",
+    "phone": "+91 90965 17538",
     "email": "care@cakestorydesserts.com",
     "openingHours": "9:00 AM - 11:00 PM",
-    "manager": "Highway Junction Team",
+    "manager": "hemant pakhale",
     "services": [
       "Highway Gateway",
       "Celebration Cakes",
@@ -1917,7 +1956,8 @@
     "locality": "Highway Junction",
     "legacySlugs": [
       "cakestory-satara-highway"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/Tf8vyvdvxvia2zEK7?g_st=awb"
   },
   {
     "id": "franchise-060",
@@ -1925,16 +1965,16 @@
     "name": "CakeStory Desserts — Shirwal Corridor",
     "outletName": "Shirwal MIDC Hub",
     "zone": "Satara",
-    "address": "Main Chowk, Shirwal-Lonand Road, Shirwal, Satara District, Maharashtra 412801",
+    "address": "shop no 1,sajswar building,near st stand,shirwal",
     "city": "Shirwal",
     "state": "Maharashtra",
     "country": "India",
     "latitude": 18.1345,
     "longitude": 73.9875,
-    "phone": "+91 95178 24444",
+    "phone": "+91 99233 61189",
     "email": "care@cakestorydesserts.com",
     "openingHours": "9:30 AM - 10:00 PM",
-    "manager": "Shirwal MIDC Hub Team",
+    "manager": "Rushikesh Bhargude",
     "services": [
       "Industrial Hub",
       "Celebration Cakes",
@@ -1949,7 +1989,8 @@
     "locality": "Shirwal",
     "legacySlugs": [
       "cakestory-shirwal"
-    ]
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/DgNhwfsGug56yomw8?g_st=aw"
   },
   {
     "id": "franchise-061",
@@ -2014,5 +2055,209 @@
     "legacySlugs": [
       "cakestory-chakan"
     ]
+  },
+  {
+    "id": "franchise-063",
+    "slug": "jejuri",
+    "name": "CakeStory Desserts — Jejuri",
+    "outletName": "Jejuri",
+    "zone": "South-East Corridor",
+    "address": "sai sameer building,main peth,near talathi office,jejuri",
+    "city": "Jejuri",
+    "state": "Maharashtra",
+    "country": "India",
+    "latitude": 18.2778,
+    "longitude": 74.1594,
+    "phone": "+91 95035 29161",
+    "email": "care@cakestorydesserts.com",
+    "openingHours": "10:00 AM - 11:30 PM",
+    "manager": "Sourabh Thorat",
+    "services": [
+      "Celebration Cakes",
+      "Artisanal Pastries",
+      "100% Pure Veg",
+      "Custom Orders",
+      "Takeaway"
+    ],
+    "description": "Located in Main Peth near Talathi Office, Jejuri, offering fresh 100% pure veg cakes and custom celebration orders.",
+    "image": "/images/outlets/jejuri.jpg",
+    "active": true,
+    "established": "2023",
+    "citySlug": "pune-rural",
+    "locality": "Jejuri",
+    "legacySlugs": [
+      "cakestory-jejuri"
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/tjyDHkiLnxfiA9C87?g_st=awb"
+  },
+  {
+    "id": "franchise-064",
+    "slug": "nasrapur",
+    "name": "CakeStory Desserts — Nasrapur",
+    "outletName": "Nasrapur",
+    "zone": "South Corridor",
+    "address": "Near Swapnlok Soc.Gate,nasrapur",
+    "city": "Nasrapur",
+    "state": "Maharashtra",
+    "country": "India",
+    "latitude": 18.2562,
+    "longitude": 73.9189,
+    "phone": "+91 90964 35443",
+    "email": "care@cakestorydesserts.com",
+    "openingHours": "10:00 AM - 11:30 PM",
+    "manager": "Ajay Jagtap",
+    "services": [
+      "Celebration Cakes",
+      "Artisanal Pastries",
+      "100% Pure Veg",
+      "Custom Orders",
+      "Takeaway"
+    ],
+    "description": "Located near Swapnalok Society Gate, Nasrapur on the Pune-Satara highway corridor, serving fresh eggless celebration cakes.",
+    "image": "/images/outlets/nasrapur.jpg",
+    "active": true,
+    "established": "2023",
+    "citySlug": "pune-rural",
+    "locality": "Nasrapur",
+    "legacySlugs": [
+      "cakestory-nasrapur"
+    ],
+    "googleMapsUrl": ""
+  },
+  {
+    "id": "franchise-065",
+    "slug": "uruli-kanchan",
+    "name": "CakeStory Desserts — Uruli Kanchan",
+    "outletName": "Uruli Kanchan",
+    "zone": "East Corridor",
+    "address": "Sarvadnya Heights,Shop no-7,Ashram Road,Uruli Kanchan",
+    "city": "Uruli Kanchan",
+    "state": "Maharashtra",
+    "country": "India",
+    "latitude": 18.4839,
+    "longitude": 74.1345,
+    "phone": "+91 92090 76078",
+    "email": "care@cakestorydesserts.com",
+    "openingHours": "10:00 AM - 11:30 PM",
+    "manager": "Rishikesh kad",
+    "services": [
+      "Celebration Cakes",
+      "Artisanal Pastries",
+      "100% Pure Veg",
+      "Custom Orders",
+      "Takeaway"
+    ],
+    "description": "Situated at Sarvadnya Heights on Ashram Road, Uruli Kanchan, serving fresh artisanal cakes and desserts daily.",
+    "image": "/images/outlets/uruli-kanchan.jpg",
+    "active": true,
+    "established": "2023",
+    "citySlug": "pune-rural",
+    "locality": "Uruli Kanchan",
+    "legacySlugs": [
+      "cakestory-uruli-kanchan"
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/beuKSkBobokJAkwo8?g_st=awb"
+  },
+  {
+    "id": "franchise-066",
+    "slug": "khandala",
+    "name": "CakeStory Desserts — Khandala",
+    "outletName": "Khandala",
+    "zone": "Satara District",
+    "address": "DCC bank Khandala,Satara Road,Khandala Bavada",
+    "city": "Khandala",
+    "state": "Maharashtra",
+    "country": "India",
+    "latitude": 18.0667,
+    "longitude": 74.0278,
+    "phone": "+91 93073 45448",
+    "email": "care@cakestorydesserts.com",
+    "openingHours": "10:00 AM - 11:30 PM",
+    "manager": "Sachin Yadav",
+    "services": [
+      "Celebration Cakes",
+      "Artisanal Pastries",
+      "100% Pure Veg",
+      "Custom Orders",
+      "Takeaway"
+    ],
+    "description": "Located at DCC Bank, Satara Road, Khandala Bavada, bringing CakeStory's pure vegetarian desserts to Khandala.",
+    "image": "/images/outlets/khandala.jpg",
+    "active": true,
+    "established": "2023",
+    "citySlug": "satara",
+    "locality": "Khandala",
+    "legacySlugs": [
+      "cakestory-khandala"
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/x5C7FpuXS94GEigTA?g_st=aw"
+  },
+  {
+    "id": "franchise-067",
+    "slug": "khed-shivapur",
+    "name": "CakeStory Desserts — Khed Shivapur",
+    "outletName": "Khed Shivapur",
+    "zone": "South Corridor",
+    "address": "Shrikrushna Complex,Kondhanpur Phata,Shrimanagar,khed shivapur",
+    "city": "Khed Shivapur",
+    "state": "Maharashtra",
+    "country": "India",
+    "latitude": 18.3483637,
+    "longitude": 73.8506472,
+    "phone": "+91 90964 35443",
+    "email": "care@cakestorydesserts.com",
+    "openingHours": "10:00 AM - 11:30 PM",
+    "manager": "Ajay Jagtap",
+    "services": [
+      "Celebration Cakes",
+      "Artisanal Pastries",
+      "100% Pure Veg",
+      "Custom Orders",
+      "Takeaway"
+    ],
+    "description": "Situated at Shrikrushna Complex, Kondhanpur Phata, Shrimanagar, Khed Shivapur, serving fresh handcrafted cakes daily.",
+    "image": "/images/outlets/khed-shivapur.jpg",
+    "active": true,
+    "established": "2023",
+    "citySlug": "pune-rural",
+    "locality": "Khed Shivapur",
+    "legacySlugs": [
+      "cakestory-khed-shivapur"
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/h5E6c2ZJDFze9aEc8?g_st=awb"
+  },
+  {
+    "id": "franchise-068",
+    "slug": "lonand",
+    "name": "CakeStory Desserts — Lonand",
+    "outletName": "Lonand",
+    "zone": "Satara District",
+    "address": "SHOP NO.2,VIMALCHANDRA BUILDING LONAND SATARA ROAD, LONAND 415521",
+    "city": "Lonand",
+    "state": "Maharashtra",
+    "country": "India",
+    "latitude": 18.0417,
+    "longitude": 74.1925,
+    "phone": "+91 93721 47147",
+    "email": "care@cakestorydesserts.com",
+    "openingHours": "10:00 AM - 11:30 PM",
+    "manager": "Suraj kodre",
+    "services": [
+      "Celebration Cakes",
+      "Artisanal Pastries",
+      "100% Pure Veg",
+      "Custom Orders",
+      "Takeaway"
+    ],
+    "description": "Located in Vimalchandra Building on Lonand-Satara Road, Lonand, offering 100% pure vegetarian cakes and pastries.",
+    "image": "/images/outlets/lonand.jpg",
+    "active": true,
+    "established": "2023",
+    "citySlug": "satara",
+    "locality": "Lonand",
+    "legacySlugs": [
+      "cakestory-lonand"
+    ],
+    "googleMapsUrl": "https://maps.app.goo.gl/qTafQaNMz7cjgXbu7?g_st=awb"
   }
 ]

@@ -334,7 +334,7 @@ export default function OutletDetail() {
   const enLocality = getOutletLocality(outlet, "en");
 
   // Google Maps Outlet Place Page: drops pin on store with place card and "Directions" button
-  const mapsPlaceUrl = `https://www.google.com/maps?q=${outlet.latitude},${outlet.longitude}+(${encodeURIComponent(`CakeStory Desserts — ${enLocality}`)})&z=17`;
+  const mapsPlaceUrl = outlet.googleMapsUrl || `https://www.google.com/maps?q=${outlet.latitude},${outlet.longitude}+(${encodeURIComponent(`CakeStory Desserts — ${enLocality}`)})&z=17`;
   const directionsUrl = mapsPlaceUrl;
 
   const cleanPhoneDigits = outlet.phone ? outlet.phone.replace(/\D/g, "") : "";
@@ -485,6 +485,7 @@ export default function OutletDetail() {
                 <div className="relative rounded-[2rem] sm:rounded-[2.5rem] border-3 sm:border-4 border-amber-400/90 shadow-2xl shadow-rose-950/60 overflow-hidden aspect-[16/10] sm:aspect-[4/3] bg-stone-900 group">
                   <img
                     src={imgSrc}
+                    onError={() => setImgSrc("/images/outlets/baner.jpg")}
                     alt={`CakeStory Desserts ${displayLocation}`}
                     className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-108"
                   />
@@ -564,6 +565,14 @@ export default function OutletDetail() {
                         <p className="text-sm sm:text-base font-semibold text-slate-900 dark:text-white leading-snug">
                           {outlet.address}, {outlet.city}, {outlet.state}
                         </p>
+                        {outlet.manager && (
+                          <div className="flex items-center gap-1.5 mt-2 text-xs text-slate-600 dark:text-slate-300">
+                            <span className="font-bold text-slate-800 dark:text-white">
+                              {language === "mr" ? "स्टोअर संपर्क / व्यवस्थापक:" : "Store Contact / Manager:"}
+                            </span>
+                            <span className="font-medium text-[#e63971] dark:text-rose-300">{outlet.manager}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
 

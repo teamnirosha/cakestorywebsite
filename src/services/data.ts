@@ -133,9 +133,10 @@ export type Franchise = {
   image?: string;
   active: boolean;
   established?: string;
+  googleMapsUrl?: string;
 };
 
-const FRANCHISE_INIT_KEY = "__cs_franchises_verified_official_v14__";
+const FRANCHISE_INIT_KEY = "__cs_franchises_verified_official_v15__";
 
 function getFranchisesRaw(): Franchise[] {
   const cached = storage.get<Franchise[]>(STORAGE_KEYS.FRANCHISES, []);
@@ -147,15 +148,20 @@ function getFranchisesRaw(): Franchise[] {
   if (needsHydration) {
     storage.set(STORAGE_KEYS.FRANCHISES, seedFranchises as Franchise[]);
     localStorage.setItem(PREFIX + FRANCHISE_INIT_KEY, "1");
+    return seedFranchises as Franchise[];
   }
   const items = storage.get<Franchise[]>(STORAGE_KEYS.FRANCHISES, seedFranchises as Franchise[]);
   let needsUpdate = false;
   const migrated = items.map((item) => {
-    if (!item.image || !item.image.startsWith("/images/outlets/")) {
-      const match = (seedFranchises as Franchise[]).find((s) => s.id === item.id || s.slug === item.slug);
-      if (match && match.image) {
+    const match = (seedFranchises as Franchise[]).find((s) => s.id === item.id || s.slug === item.slug);
+    if (match) {
+      if (!item.image || !item.image.startsWith("/images/outlets/")) {
         needsUpdate = true;
-        return { ...item, image: match.image };
+        item = { ...item, image: match.image };
+      }
+      if (match.googleMapsUrl && item.googleMapsUrl !== match.googleMapsUrl) {
+        needsUpdate = true;
+        item = { ...item, googleMapsUrl: match.googleMapsUrl };
       }
     }
     return item;

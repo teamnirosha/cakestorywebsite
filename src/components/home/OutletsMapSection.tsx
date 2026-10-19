@@ -80,7 +80,7 @@ function FlyTo({ pos, zoom = 13 }: { pos: [number, number] | null; zoom?: number
 }
 
 export default function OutletsMapSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeZone, setActiveZone] = useState("all");
   const [query, setQuery] = useState("");
   const [selectedOutlet, setSelectedOutlet] = useState<Franchise | null>(null);
@@ -349,12 +349,22 @@ export default function OutletsMapSection() {
                       <h4 className="font-display font-medium text-sm text-stone-900">{o.name}</h4>
                       <p className="text-xs text-stone-600 mt-0.5">{o.address}</p>
                       <p className="text-xs text-[#961b3c] font-medium mt-0.5">📞 {o.phone}</p>
-                      <Link
-                        to={getOutletUrl(o)}
-                        className="inline-block text-xs font-semibold text-white bg-[#961b3c] px-3 py-1 rounded mt-1.5 hover:bg-[#7d1430] transition-colors"
-                      >
-                        {t("outlets.viewStore")} →
-                      </Link>
+                      <div className="flex items-center gap-2 mt-2">
+                        <Link
+                          to={getOutletUrl(o)}
+                          className="inline-block text-xs font-semibold text-white bg-[#961b3c] px-3 py-1 rounded hover:bg-[#7d1430] transition-colors"
+                        >
+                          {t("outlets.viewStore")} →
+                        </Link>
+                        <a
+                          href={o.googleMapsUrl || `https://www.google.com/maps?q=${o.latitude},${o.longitude}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-block text-xs font-semibold text-stone-700 bg-stone-100 hover:bg-stone-200 border border-stone-300 px-2.5 py-1 rounded transition-colors"
+                        >
+                          {language === "mr" ? "दिशा-मार्ग ↗" : "Directions ↗"}
+                        </a>
+                      </div>
                     </div>
                   </Popup>
                 </Marker>
