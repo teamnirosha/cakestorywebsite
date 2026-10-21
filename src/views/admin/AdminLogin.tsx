@@ -31,10 +31,8 @@ export default function AdminLogin() {
     setErrorMessage("");
 
     try {
-      // Sync cloud credentials across all devices before verifying
-      await authService.syncWithCloud();
-
-      const user = authService.login(username, password);
+      // Authenticate directly against Supabase admin_users
+      const user = await authService.login(username, password);
       if (user) {
         show("Authenticated — Welcome to CakeStory Admin Portal", "success");
         navigate("/admin/dashboard");

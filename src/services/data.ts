@@ -899,44 +899,49 @@ const INITIAL_PASSWORD_HASH = "bb274ace4faf6d51cac26714fa9dc9b792cd98815017a9d5a
 const CLOUD_AUTH_URL = "https://api.restful-api.dev/objects/ff808181a09d98f701a148d0b7a87adf";
 
 async function pushToCloud(creds: AdminCredentials): Promise<void> {
-  try {
-    await fetch(CLOUD_AUTH_URL, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: "cakestory_auth_store",
-        data: creds,
-      }),
-    });
-  } catch {
-    // Non-blocking background push
+  if (isSupabaseConfigured() && supabase) {
+    try {
+      await supabase.from("admin_users").upsert(
+        {
+          username: creds.username,
+          password: creds.passwordHash,
+          name: "CakeStory Administrator",
+          role: "admin",
+          active: true,
+          updated_at: creds.updatedAt || new Date().toISOString(),
+        },
+        { onConflict: "username" }
+      );
+    } catch (err) {
+      console.warn("[Supabase Auth] Failed to push credentials to cloud:", err);
+    }
   }
 }
 
 async function syncFromCloud(): Promise<AdminCredentials | null> {
-  try {
-    const res = await fetch(CLOUD_AUTH_URL, {
-      method: "GET",
-      headers: { Accept: "application/json" },
-    });
-    if (!res.ok) return null;
-    const json = await res.json();
-    if (json?.data?.username && json?.data?.passwordHash) {
-      const cloudCreds = json.data as AdminCredentials;
-      const localCreds = storage.get<AdminCredentials | null>(STORAGE_KEYS.ADMIN_CREDENTIALS, null);
+  if (isSupabaseConfigured() && supabase) {
+    try {
+      const { data, error } = await supabase
+        .from("admin_users")
+        .select("*")
+        .eq("active", true)
+        .order("created_at", { ascending: true })
+        .limit(1)
+        .maybeSingle();
 
-      // If cloud has custom credentials (isInitial === false), local MUST adopt them across all devices!
-      if (
-        !cloudCreds.isInitial ||
-        !localCreds ||
-        new Date(cloudCreds.updatedAt || 0) > new Date(localCreds.updatedAt || 0)
-      ) {
+      if (data && !error && data.username && data.password) {
+        const cloudCreds: AdminCredentials = {
+          username: data.username,
+          passwordHash: data.password,
+          updatedAt: data.updated_at || new Date().toISOString(),
+          isInitial: false,
+        };
         storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, cloudCreds);
         return cloudCreds;
       }
+    } catch (err) {
+      console.warn("[Supabase Auth] Failed to sync admin credentials from cloud:", err);
     }
-  } catch {
-    // Offline graceful handling
   }
   return null;
 }
@@ -993,19 +998,71 @@ export const authService = {
     return getAdminCredentials().isInitial;
   },
 
-  syncWithCloud(): Promise<AdminCredentials | null> {
+  async syncWithCloud(): Promise<AdminCredentials | null> {
     return syncFromCloud();
   },
 
-  login(identifierInput: string, passwordInput: string): AuthUser | null {
-    const creds = getAdminCredentials();
-    const inputUser = identifierInput.trim().toLowerCase();
-    const targetUser = creds.username.trim().toLowerCase();
-    const inputHash = hashPassword(passwordInput.trim());
+  async login(identifierInput: string, passwordInput: string): Promise<AuthUser | null> {
+    const inputUser = identifierInput.trim();
+    const inputPass = passwordInput.trim();
+    // Cryptographic SHA-256 hash computed from entered plain password
+    const inputHash = hashPassword(inputPass);
 
-    // Strict 1-to-1 matching. No fallbacks, no aliases, no backdoor passwords.
-    const matchesUser = inputUser === targetUser;
-    const matchesPass = inputHash === creds.passwordHash;
+    // 1. Primary Authentication: Directly check Supabase admin_users table
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        const { data, error } = await supabase
+          .from("admin_users")
+          .select("*")
+          .ilike("username", inputUser)
+          .eq("active", true)
+          .maybeSingle();
+
+        if (data && !error && data.password) {
+          const storedHash = data.password.trim();
+
+          // STRICT SECURITY RULE:
+          // 1. Passwords in DB are ALWAYS stored as cryptographic SHA-256 hashes.
+          // 2. Entering the stored hash directly at login is strictly REJECTED (hash-of-hash does not match).
+          // 3. Only an entered plain password whose computed SHA-256 hash matches storedHash will authenticate.
+          const passwordMatches = (storedHash.toLowerCase() === inputHash.toLowerCase());
+
+          if (passwordMatches) {
+            const authUser: AuthUser = {
+              id: data.id || "admin-master",
+              name: data.name || "CakeStory Administrator",
+              username: data.username,
+              email: data.email || (data.username.includes("@") ? data.username : "admin@cakestorydesserts.in"),
+              role: (data.role as "admin") || "admin",
+              avatar: data.avatar || "https://i.pravatar.cc/120?img=68",
+              isInitialCredentials: false,
+            };
+
+            // Cache credentials in local ERP session (strictly storing the hash)
+            storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, {
+              username: data.username,
+              passwordHash: storedHash,
+              updatedAt: data.updated_at || new Date().toISOString(),
+              isInitial: false,
+            });
+            storage.set(STORAGE_KEYS.SESSION, authUser);
+            return authUser;
+          }
+
+          // Username was found in Supabase but password hash did not match
+          return null;
+        }
+      } catch (err) {
+        console.warn("[Supabase Auth] Query error on admin_users, falling back to local credentials:", err);
+      }
+    }
+
+    // 2. Resilient local fallback (if table not created yet or offline)
+    const creds = getAdminCredentials();
+    const targetUser = creds.username.trim().toLowerCase();
+    const matchesUser = inputUser.toLowerCase() === targetUser;
+    // Strict hash verification: input plain password is hashed and compared to stored hash
+    const matchesPass = !!creds.passwordHash && (creds.passwordHash.toLowerCase() === inputHash.toLowerCase());
 
     if (matchesUser && matchesPass) {
       const authUser: AuthUser = {
@@ -1040,11 +1097,14 @@ export const authService = {
 
   verifyCurrentPassword(passwordInput: string): boolean {
     const creds = getAdminCredentials();
-    const inputHash = hashPassword(passwordInput.trim());
-    return inputHash === creds.passwordHash;
+    const inputPass = passwordInput.trim();
+    const inputHash = hashPassword(inputPass);
+    // Strict hash verification: input plain password is hashed and compared to stored hash.
+    // Entering stored hash directly is rejected.
+    return !!creds.passwordHash && (inputHash.toLowerCase() === creds.passwordHash.toLowerCase());
   },
 
-  changeUsername(newUsername: string): { success: boolean; error?: string } {
+  async changeUsername(newUsername: string): Promise<{ success: boolean; error?: string }> {
     const trimmed = newUsername.trim();
     if (!trimmed) {
       return { success: false, error: "Username cannot be empty." };
@@ -1053,6 +1113,7 @@ export const authService = {
       return { success: false, error: "Username must be at least 3 characters long." };
     }
     const creds = getAdminCredentials();
+    const oldUsername = creds.username;
     const updated: AdminCredentials = {
       ...creds,
       username: trimmed,
@@ -1060,7 +1121,18 @@ export const authService = {
       updatedAt: new Date().toISOString(),
     };
     storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, updated);
-    pushToCloud(updated);
+
+    // Update in Supabase admin_users table
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        await supabase
+          .from("admin_users")
+          .update({ username: trimmed, updated_at: updated.updatedAt })
+          .ilike("username", oldUsername);
+      } catch (err) {
+        console.warn("[Supabase Auth] Failed to update username:", err);
+      }
+    }
 
     // Invalidate active session so administrator re-authenticates with new username
     this.logout();
@@ -1068,7 +1140,7 @@ export const authService = {
     return { success: true };
   },
 
-  changePassword(currentPasswordInput: string, newPasswordInput: string): { success: boolean; error?: string } {
+  async changePassword(currentPasswordInput: string, newPasswordInput: string): Promise<{ success: boolean; error?: string }> {
     const creds = getAdminCredentials();
     if (!this.verifyCurrentPassword(currentPasswordInput)) {
       return { success: false, error: "Current password is incorrect." };
@@ -1076,19 +1148,31 @@ export const authService = {
     if (!newPasswordInput || newPasswordInput.length < 6) {
       return { success: false, error: "New password must be at least 6 characters long." };
     }
-    const newHash = hashPassword(newPasswordInput.trim());
-    if (newHash === creds.passwordHash) {
+    const newPass = newPasswordInput.trim();
+    const newHash = hashPassword(newPass);
+    if (creds.passwordHash && newHash.toLowerCase() === creds.passwordHash.toLowerCase()) {
       return { success: false, error: "New password must be different from your current password." };
     }
 
     const updated: AdminCredentials = {
       username: creds.username,
-      passwordHash: newHash,
+      passwordHash: newHash, // Strictly store cryptographic SHA-256 hash
       isInitial: false,
       updatedAt: new Date().toISOString(),
     };
     storage.set(STORAGE_KEYS.ADMIN_CREDENTIALS, updated);
-    pushToCloud(updated);
+
+    // Update in Supabase admin_users table with the cryptographic SHA-256 hash
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        await supabase
+          .from("admin_users")
+          .update({ password: newHash, updated_at: updated.updatedAt })
+          .ilike("username", creds.username);
+      } catch (err) {
+        console.warn("[Supabase Auth] Failed to update password in cloud:", err);
+      }
+    }
 
     // Invalidate active session so administrator re-authenticates with new password
     this.logout();

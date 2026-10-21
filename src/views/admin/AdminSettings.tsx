@@ -88,17 +88,18 @@ export default function AdminSettings({ defaultTab = "security" }: { defaultTab?
     }
 
     setUsernameLoading(true);
-    setTimeout(() => {
-      const res = authService.changeUsername(newUsername.trim());
+    authService.changeUsername(newUsername.trim()).then((res) => {
       setUsernameLoading(false);
-
       if (res.success) {
         show("Username updated successfully. Please sign in with your new username.", "success");
         navigate("/admin/login");
       } else {
         setUsernameError(res.error || "Failed to update username.");
       }
-    }, 400);
+    }).catch((err) => {
+      setUsernameLoading(false);
+      setUsernameError(err?.message || "Failed to update username.");
+    });
   };
 
   const handleChangePassword = (e: React.FormEvent) => {
@@ -127,17 +128,18 @@ export default function AdminSettings({ defaultTab = "security" }: { defaultTab?
     }
 
     setPasswordLoading(true);
-    setTimeout(() => {
-      const res = authService.changePassword(currentPassword, newPassword);
+    authService.changePassword(currentPassword, newPassword).then((res) => {
       setPasswordLoading(false);
-
       if (res.success) {
         show("Password changed successfully. Please sign in with your new password.", "success");
         navigate("/admin/login");
       } else {
         setPasswordError(res.error || "Failed to change password.");
       }
-    }, 400);
+    }).catch((err) => {
+      setPasswordLoading(false);
+      setPasswordError(err?.message || "Failed to change password.");
+    });
   };
 
   const handleExportSnapshot = () => {

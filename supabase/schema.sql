@@ -308,3 +308,46 @@ CREATE POLICY "Anon full access gallery_settings" ON public.gallery_settings FOR
 CREATE POLICY "Anon full access enquiries" ON public.enquiries FOR ALL TO anon USING (true) WITH CHECK (true);
 CREATE POLICY "Anon full access cakes" ON public.cakes FOR ALL TO anon USING (true) WITH CHECK (true);
 CREATE POLICY "Anon full access site_content" ON public.site_content FOR ALL TO anon USING (true) WITH CHECK (true);
+
+-- ------------------------------------------------------------------------
+-- 13. ADMIN USERS (Secure Portal Authentication)
+-- ------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS public.admin_users (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  name TEXT DEFAULT 'CakeStory Administrator',
+  email TEXT DEFAULT 'admin@cakestorydesserts.in',
+  role TEXT DEFAULT 'admin',
+  active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_admin_users_username ON public.admin_users(username);
+
+ALTER TABLE public.admin_users ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Allow anon read admin_users for login" ON public.admin_users FOR SELECT USING (true);
+CREATE POLICY "Allow anon update admin_users" ON public.admin_users FOR UPDATE TO anon USING (true) WITH CHECK (true);
+CREATE POLICY "Allow anon insert admin_users" ON public.admin_users FOR INSERT TO anon WITH CHECK (true);
+CREATE POLICY "Admin full access admin_users" ON public.admin_users FOR ALL TO authenticated USING (true) WITH CHECK (true);
+
+-- Automatic password hashing trigger (always stores passwords as 64-character SHA-256 hashes)
+CREATE OR REPLACE FUNCTION public.hash_admin_password()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF NEW.password IS NOT NULL AND NEW.password !~ '^[a-fA-F0-9]{64}$' THEN
+    NEW.password := encode(sha256(NEW.password::bytea), 'hex');
+  ELSE
+    NEW.password := lower(NEW.password);
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_hash_admin_password ON public.admin_users;
+CREATE TRIGGER trigger_hash_admin_password
+BEFORE INSERT OR UPDATE ON public.admin_users
+FOR EACH ROW
+EXECUTE FUNCTION public.hash_admin_password();
