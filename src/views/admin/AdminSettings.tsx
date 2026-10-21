@@ -1,7 +1,17 @@
 import { useState, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import AdminLayout from "../../components/admin/AdminLayout";
-import { authService, franchiseService, enquiryService, contentService } from "../../services/data";
+import {
+  authService,
+  franchiseService,
+  enquiryService,
+  contentService,
+  galleryService,
+  cakeService,
+  isSupabaseConfigured,
+  syncAllFromSupabase,
+  CloudSyncReport,
+} from "../../services/data";
 import { useToast } from "../../components/common/Toast";
 
 type SettingsTab = "security" | "data";
@@ -149,6 +159,31 @@ export default function AdminSettings({ defaultTab = "security" }: { defaultTab?
     a.click();
     URL.revokeObjectURL(url);
     show("System snapshot exported successfully", "success");
+  };
+
+  // Cloud Supabase Synchronization State
+  const [cloudSyncing, setCloudSyncing] = useState(false);
+  const [cloudReport, setCloudReport] = useState<CloudSyncReport | null>(null);
+  const isCloudConfigured = isSupabaseConfigured();
+
+  const handleCloudSync = async () => {
+    setCloudSyncing(true);
+    try {
+      const report = await syncAllFromSupabase();
+      setCloudReport(report);
+      if (report.success) {
+        show(
+          `Cloud Database Synchronized! Fetched ${report.counts.franchises} outlets, ${report.counts.galleryReels} dynamic reels, and ${report.counts.enquiries} enquiries.`,
+          "success"
+        );
+      } else {
+        show(report.error || "Supabase is unconfigured. Running in local fallback mode.", "info");
+      }
+    } catch (err: any) {
+      show(`Sync error: ${err?.message || "Unknown error"}`, "error");
+    } finally {
+      setCloudSyncing(false);
+    }
   };
 
   return (
@@ -486,12 +521,119 @@ export default function AdminSettings({ defaultTab = "security" }: { defaultTab?
         {/* ============================================================== */}
         {activeTab === "data" && (
           <div className="space-y-4">
-            {/* Section 1: Storage Diagnostics */}
+            {/* Section 1: Supabase Cloud Database (PostgreSQL) */}
+            <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs overflow-hidden">
+              <div className="px-5 py-3.5 border-b border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 text-[11px] font-bold flex items-center justify-center">
+                    ⚡
+                  </span>
+                  <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                    Supabase Cloud Database & Live Synchronizer
+                  </h2>
+                </div>
+                {isCloudConfigured ? (
+                  <span className="text-[11px] text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full font-semibold border border-emerald-200 flex items-center gap-1 self-start sm:self-auto">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Cloud Database Connected
+                  </span>
+                ) : (
+                  <span className="text-[11px] text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full font-semibold border border-amber-200 flex items-center gap-1 self-start sm:self-auto">
+                    <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+                    Resilient Local Fallback Active
+                  </span>
+                )}
+              </div>
+
+              <div className="p-5 space-y-4">
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  CakeStory employs a dual-tier architecture: queries render instantly via high-speed local cache, while enquiries, 68+ verified outlets, and dynamic Sweet Scenes reels synchronize seamlessly with your <strong>Supabase PostgreSQL</strong> cloud database.
+                </p>
+
+                {/* Cloud Database Diagnostic Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="p-3 rounded-lg border border-slate-100 bg-slate-50/60 text-center">
+                    <div className="text-xs font-semibold text-slate-500">Outlets Network</div>
+                    <div className="text-lg font-bold text-slate-900 mt-1">{franchises.length}</div>
+                    <div className="text-[10px] text-slate-400 mt-0.5">public.franchises</div>
+                  </div>
+                  <div className="p-3 rounded-lg border border-slate-100 bg-slate-50/60 text-center">
+                    <div className="text-xs font-semibold text-slate-500">Leads & Enquiries</div>
+                    <div className="text-lg font-bold text-slate-900 mt-1">{enquiries.length}</div>
+                    <div className="text-[10px] text-slate-400 mt-0.5">public.enquiries</div>
+                  </div>
+                  <div className="p-3 rounded-lg border border-slate-100 bg-slate-50/60 text-center">
+                    <div className="text-xs font-semibold text-slate-500">Sweet Scenes Reels</div>
+                    <div className="text-lg font-bold text-slate-900 mt-1">{galleryService.listReels(true).length}</div>
+                    <div className="text-[10px] text-slate-400 mt-0.5">public.gallery_reels</div>
+                  </div>
+                  <div className="p-3 rounded-lg border border-slate-100 bg-slate-50/60 text-center">
+                    <div className="text-xs font-semibold text-slate-500">Cake Menu</div>
+                    <div className="text-lg font-bold text-slate-900 mt-1">{cakeService.count()}</div>
+                    <div className="text-[10px] text-slate-400 mt-0.5">public.cakes</div>
+                  </div>
+                </div>
+
+                {/* Cloud Sync Action Bar */}
+                <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-slate-100">
+                  <div className="text-[11px] text-slate-500">
+                    {cloudReport?.timestamp ? (
+                      <span>Last synchronized: <strong className="text-slate-700">{new Date(cloudReport.timestamp).toLocaleTimeString()}</strong></span>
+                    ) : (
+                      <span>Ready to pull latest cloud records or push local updates.</span>
+                    )}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleCloudSync}
+                    disabled={cloudSyncing}
+                    className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-xs transition cursor-pointer shrink-0 inline-flex items-center gap-2 self-start sm:self-auto disabled:opacity-50"
+                  >
+                    {cloudSyncing ? (
+                      <>
+                        <svg className="w-3.5 h-3.5 animate-spin" viewBox="0 0 24 24" fill="none">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                        </svg>
+                        <span>Synchronizing Cloud...</span>
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        <span>Sync With Supabase Now</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* Setup & Configuration Details */}
+                <div className="p-3.5 rounded-lg bg-slate-50/80 border border-slate-200/80 text-xs space-y-2">
+                  <div className="font-semibold text-slate-800 flex items-center gap-1.5">
+                    <span>📋</span> Supabase SQL Setup Scripts Included:
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-2 text-[11px] text-slate-600">
+                    <div className="p-2 rounded bg-white border border-slate-200">
+                      <strong className="text-slate-800 block">1. supabase/schema.sql</strong>
+                      Creates all 13 PostgreSQL tables, constraints, indexes & Row-Level-Security (RLS) policies.
+                    </div>
+                    <div className="p-2 rounded bg-white border border-slate-200">
+                      <strong className="text-slate-800 block">2. supabase/seed.sql</strong>
+                      Seeds all 68+ verified outlets, Sweet Scenes reels, cakes, FAQs, testimonials & site content.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Section 2: Storage Diagnostics */}
             <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs overflow-hidden">
               <div className="px-5 py-3.5 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="w-5 h-5 rounded-md bg-blue-100 text-[#2563eb] text-[11px] font-bold flex items-center justify-center">
-                    1
+                    2
                   </span>
                   <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
                     Local Application Database Diagnostics
@@ -509,12 +651,12 @@ export default function AdminSettings({ defaultTab = "security" }: { defaultTab?
               </div>
             </div>
 
-            {/* Section 2: Backup Snapshot Export */}
+            {/* Section 3: Backup Snapshot Export */}
             <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs overflow-hidden">
               <div className="px-5 py-3.5 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="w-5 h-5 rounded-md bg-blue-100 text-[#2563eb] text-[11px] font-bold flex items-center justify-center">
-                    2
+                    3
                   </span>
                   <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
                     Data Portability & ERP Snapshot Export

@@ -6,7 +6,7 @@ import FloatingWhatsApp from "./components/common/FloatingWhatsApp";
 import { ToastProvider } from "./components/common/Toast";
 import { FranchiseModalProvider } from "./components/common/FranchiseModal";
 import { LoadingScreen } from "./components/common/Loading";
-import { authService } from "./services/data";
+import { authService, isSupabaseConfigured, syncAllFromSupabase } from "./services/data";
 
 // Core Public Views (Eager for instant First Contentful Paint)
 import Home from "./views/Home";
@@ -76,6 +76,14 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  useEffect(() => {
+    if (isSupabaseConfigured()) {
+      syncAllFromSupabase().catch((err) => {
+        console.warn("[CakeStory ERP] Background cloud sync notice:", err);
+      });
+    }
+  }, []);
+
   return (
     <LanguageProvider>
       <ToastProvider>

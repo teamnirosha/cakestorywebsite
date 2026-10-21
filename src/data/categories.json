@@ -12,5 +12,10 @@
   { "id": "cat-donuts", "name": "Donuts", "icon": "🍩", "color": "from-pink-200 to-amber-100" },
   { "id": "cat-cookies", "name": "Cookies", "icon": "🍪", "color": "from-amber-200 to-yellow-100" },
   { "id": "cat-brownies", "name": "Brownies", "icon": "🍫", "color": "from-amber-300 to-orange-200" },
-  { "id": "cat-bread", "name": "Bread", "icon": "🍞", "color": "from-orange-100 to-amber-100" }
+  { "id": "cat-bread", "name": "Bread", "icon": "🍞", "color": "from-orange-100 to-amber-100" },
+  { "id": "cat-signature", "name": "Signature Cakes", "icon": "👑", "color": "from-amber-200 to-yellow-100" },
+  { "id": "cat-celebration", "name": "Celebration Cakes", "icon": "🎉", "color": "from-pink-200 to-rose-200" },
+  { "id": "cat-fusion", "name": "Fusion Specials", "icon": "✨", "color": "from-purple-200 to-pink-200" },
+  { "id": "cat-pastries", "name": "Pastries & Slices", "icon": "🍰", "color": "from-amber-100 to-rose-100" },
+  { "id": "cat-classic", "name": "Classic Cakes", "icon": "🎂", "color": "from-amber-200 to-orange-100" }
 ]

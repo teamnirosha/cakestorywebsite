@@ -15,6 +15,9 @@ import seedRecipes from "../data/recipes.json";
 import seedGalleryReels from "../data/galleryReels.json";
 
 import { sendLeadToWebhook } from "./webhook";
+import { supabase, isSupabaseConfigured } from "../lib/supabase";
+
+export { supabase, isSupabaseConfigured };
 
 const PREFIX = "cakestory:";
 
@@ -31,6 +34,37 @@ export type FranchiseEnquiry = {
   email?: string;
   notes?: string;
 };
+
+// Database row <-> Model mappers for Enquiries
+export function mapDbEnquiryToModel(row: any): FranchiseEnquiry {
+  return {
+    id: row.id,
+    fullName: row.full_name,
+    mobile: row.mobile,
+    cityArea: row.city_area,
+    investmentReadiness: row.investment_readiness,
+    submittedAt: row.submitted_at || row.created_at,
+    status: row.status,
+    source: row.source,
+    email: row.email || undefined,
+    notes: row.notes || undefined,
+  };
+}
+
+export function mapModelToDbEnquiry(enquiry: FranchiseEnquiry) {
+  return {
+    id: enquiry.id,
+    full_name: enquiry.fullName,
+    mobile: enquiry.mobile,
+    city_area: enquiry.cityArea,
+    investment_readiness: enquiry.investmentReadiness,
+    submitted_at: enquiry.submittedAt,
+    status: enquiry.status,
+    source: enquiry.source,
+    email: enquiry.email || null,
+    notes: enquiry.notes || null,
+  };
+}
 
 const ENQUIRY_INIT_KEY = "__cs_enquiries_live_v4__";
 
@@ -63,7 +97,7 @@ export const enquiryService = {
     };
     storage.set(STORAGE_KEYS.ENQUIRIES, [newEnquiry, ...all]);
 
-    // Dump lead data to n8n webhook asynchronously
+    // 1. Dump lead data to n8n webhook asynchronously
     sendLeadToWebhook({
       id: newEnquiry.id,
       fullName: newEnquiry.fullName,
@@ -77,6 +111,18 @@ export const enquiryService = {
       message: newEnquiry.notes,
     });
 
+    // 2. Persist lead directly into Supabase cloud table
+    if (isSupabaseConfigured() && supabase) {
+      supabase
+        .from("enquiries")
+        .insert(mapModelToDbEnquiry(newEnquiry))
+        .then(({ error }) => {
+          if (error) console.warn("[Supabase] Failed to persist enquiry lead:", error.message);
+          else console.log("[Supabase] ✓ Enquiry successfully recorded in cloud:", newEnquiry.id);
+        })
+        .catch((err) => console.warn("[Supabase] Enquiry insertion error:", err));
+    }
+
     return newEnquiry;
   },
   updateStatus(id: string, status: FranchiseEnquiry["status"]): FranchiseEnquiry | undefined {
@@ -85,12 +131,36 @@ export const enquiryService = {
     if (idx === -1) return undefined;
     all[idx].status = status;
     storage.set(STORAGE_KEYS.ENQUIRIES, all);
+
+    if (isSupabaseConfigured() && supabase) {
+      supabase
+        .from("enquiries")
+        .update({ status })
+        .eq("id", id)
+        .then(({ error }) => {
+          if (error) console.warn("[Supabase] Failed to update enquiry status:", error.message);
+        })
+        .catch((err) => console.warn("[Supabase] Update status error:", err));
+    }
+
     return all[idx];
   },
   remove(id: string): boolean {
     const all = getEnquiriesRaw();
     const next = all.filter((e) => e.id !== id);
     storage.set(STORAGE_KEYS.ENQUIRIES, next);
+
+    if (isSupabaseConfigured() && supabase) {
+      supabase
+        .from("enquiries")
+        .delete()
+        .eq("id", id)
+        .then(({ error }) => {
+          if (error) console.warn("[Supabase] Failed to remove enquiry:", error.message);
+        })
+        .catch((err) => console.warn("[Supabase] Remove enquiry error:", err));
+    }
+
     return next.length < all.length;
   },
   count(): number {
@@ -105,6 +175,29 @@ export const enquiryService = {
   resetSeed(): FranchiseEnquiry[] {
     storage.set(STORAGE_KEYS.ENQUIRIES, []);
     return [];
+  },
+  async fetchFromSupabase(): Promise<FranchiseEnquiry[]> {
+    if (!isSupabaseConfigured() || !supabase) return this.list();
+    try {
+      const { data, error } = await supabase
+        .from("enquiries")
+        .select("*")
+        .order("submitted_at", { ascending: false });
+
+      if (error) {
+        console.warn("[Supabase] Failed to load enquiries from cloud:", error.message);
+        return this.list();
+      }
+      if (data && data.length > 0) {
+        const mapped = data.map(mapDbEnquiryToModel);
+        storage.set(STORAGE_KEYS.ENQUIRIES, mapped);
+        return mapped;
+      }
+      return this.list();
+    } catch (err) {
+      console.warn("[Supabase] fetchFromSupabase enquiries error:", err);
+      return this.list();
+    }
   },
 };
 
@@ -136,6 +229,70 @@ export type Franchise = {
   established?: string;
   googleMapsUrl?: string;
 };
+
+// Database row <-> Model mappers for Franchises
+export function mapDbFranchiseToModel(row: any): Franchise {
+  return {
+    id: row.id,
+    slug: row.slug,
+    name: row.name,
+    outletName: row.outlet_name || row.name,
+    zone: row.zone,
+    address: row.address,
+    city: row.city,
+    state: row.state || "Maharashtra",
+    country: row.country || "India",
+    latitude: Number(row.latitude),
+    longitude: Number(row.longitude),
+    phone: row.phone,
+    email: row.email || "care@cakestorydesserts.com",
+    openingHours: row.opening_hours || "10:00 AM - 11:30 PM",
+    manager: row.manager || undefined,
+    services: Array.isArray(row.services)
+      ? row.services
+      : typeof row.services === "string"
+      ? JSON.parse(row.services)
+      : ["Celebration Cakes", "Artisanal Pastries", "100% Pure Veg", "Takeaway"],
+    description: row.description || "",
+    image: row.image || undefined,
+    active: row.active ?? true,
+    established: row.established || "2021",
+    citySlug: row.city_slug || "pune",
+    locality: row.locality || "",
+    legacySlugs: Array.isArray(row.legacy_slugs) ? row.legacy_slugs : [],
+    googleMapsUrl: row.google_maps_url || undefined,
+  };
+}
+
+export function mapModelToDbFranchise(f: Franchise) {
+  return {
+    id: f.id,
+    slug: f.slug,
+    name: f.name,
+    outlet_name: f.outletName || f.name,
+    zone: f.zone,
+    address: f.address,
+    city: f.city,
+    state: f.state || "Maharashtra",
+    country: f.country || "India",
+    latitude: f.latitude,
+    longitude: f.longitude,
+    phone: f.phone,
+    email: f.email || "care@cakestorydesserts.com",
+    opening_hours: f.openingHours || "10:00 AM - 11:30 PM",
+    manager: f.manager || null,
+    services: f.services || [],
+    description: f.description || null,
+    image: f.image || null,
+    active: f.active ?? true,
+    established: f.established || "2021",
+    city_slug: f.citySlug || "pune",
+    locality: f.locality || null,
+    legacy_slugs: f.legacySlugs || [],
+    google_maps_url: f.googleMapsUrl || null,
+    updated_at: new Date().toISOString(),
+  };
+}
 
 const FRANCHISE_INIT_KEY = "__cs_franchises_verified_official_v15__";
 
@@ -241,6 +398,18 @@ export const franchiseService = {
     const slug = data.slug?.trim() || data.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
     const newFranchise: Franchise = { ...data, id, slug };
     storage.set(STORAGE_KEYS.FRANCHISES, [newFranchise, ...all]);
+
+    if (isSupabaseConfigured() && supabase) {
+      supabase
+        .from("franchises")
+        .insert(mapModelToDbFranchise(newFranchise))
+        .then(({ error }) => {
+          if (error) console.warn("[Supabase] Failed to create franchise:", error.message);
+          else console.log("[Supabase] ✓ Franchise created in cloud:", newFranchise.outletName);
+        })
+        .catch((err) => console.warn("[Supabase] Franchise create error:", err));
+    }
+
     return newFranchise;
   },
   update(id: string, data: Partial<Franchise>): Franchise | undefined {
@@ -250,6 +419,18 @@ export const franchiseService = {
     const updated = { ...all[idx], ...data, id };
     all[idx] = updated;
     storage.set(STORAGE_KEYS.FRANCHISES, all);
+
+    if (isSupabaseConfigured() && supabase) {
+      supabase
+        .from("franchises")
+        .update(mapModelToDbFranchise(updated))
+        .eq("id", id)
+        .then(({ error }) => {
+          if (error) console.warn("[Supabase] Failed to update franchise:", error.message);
+        })
+        .catch((err) => console.warn("[Supabase] Franchise update error:", err));
+    }
+
     return updated;
   },
   toggleActive(id: string): Franchise | undefined {
@@ -261,6 +442,18 @@ export const franchiseService = {
     const all = getFranchisesRaw();
     const next = all.filter((f) => f.id !== id);
     storage.set(STORAGE_KEYS.FRANCHISES, next);
+
+    if (isSupabaseConfigured() && supabase) {
+      supabase
+        .from("franchises")
+        .delete()
+        .eq("id", id)
+        .then(({ error }) => {
+          if (error) console.warn("[Supabase] Failed to delete franchise:", error.message);
+        })
+        .catch((err) => console.warn("[Supabase] Franchise delete error:", err));
+    }
+
     return next.length < all.length;
   },
   count(): number {
@@ -278,6 +471,25 @@ export const franchiseService = {
   },
   resetToSeed(): void {
     storage.set(STORAGE_KEYS.FRANCHISES, seedFranchises as Franchise[]);
+  },
+  async fetchFromSupabase(): Promise<Franchise[]> {
+    if (!isSupabaseConfigured() || !supabase) return this.list();
+    try {
+      const { data, error } = await supabase.from("franchises").select("*").order("name");
+      if (error) {
+        console.warn("[Supabase] Failed to fetch franchises:", error.message);
+        return this.list();
+      }
+      if (data && data.length > 0) {
+        const mapped = data.map(mapDbFranchiseToModel);
+        storage.set(STORAGE_KEYS.FRANCHISES, mapped);
+        return mapped;
+      }
+      return this.list();
+    } catch (err) {
+      console.warn("[Supabase] Error in fetchFromSupabase franchises:", err);
+      return this.list();
+    }
   },
 };
 
@@ -300,6 +512,49 @@ export type Cake = {
   color: string;
   status?: "active" | "inactive";
 };
+
+// Database row <-> Model mappers for Cakes
+export function mapDbCakeToModel(row: any): Cake {
+  return {
+    id: row.id,
+    name: row.name,
+    category: row.category,
+    categoryId: row.category_id,
+    description: row.description || "",
+    price: Number(row.price),
+    image: row.image,
+    ingredients: Array.isArray(row.ingredients) ? row.ingredients : [],
+    flavor: row.flavor || "",
+    size: row.size || "500g / 1kg",
+    availability: row.availability || "in-stock",
+    featured: Boolean(row.featured),
+    tags: Array.isArray(row.tags) ? row.tags : ["eggless"],
+    rating: Number(row.rating || 4.9),
+    color: row.color || "brown",
+    status: row.availability === "out-of-stock" ? "inactive" : "active",
+  };
+}
+
+export function mapModelToDbCake(c: Cake) {
+  return {
+    id: c.id,
+    name: c.name,
+    category: c.category,
+    category_id: c.categoryId,
+    description: c.description,
+    price: c.price,
+    image: c.image,
+    ingredients: c.ingredients || [],
+    flavor: c.flavor,
+    size: c.size,
+    availability: c.availability,
+    featured: Boolean(c.featured),
+    tags: c.tags || [],
+    rating: c.rating,
+    color: c.color,
+    updated_at: new Date().toISOString(),
+  };
+}
 
 const CAKE_INIT_KEY = "__cs_cakes_real_assets_v2__";
 
@@ -358,6 +613,18 @@ export const cakeService = {
       color: data.color || "pink",
     };
     storage.set(STORAGE_KEYS.CAKES, [newCake, ...all]);
+
+    if (isSupabaseConfigured() && supabase) {
+      supabase
+        .from("cakes")
+        .insert(mapModelToDbCake(newCake))
+        .then(({ error }) => {
+          if (error) console.warn("[Supabase] Failed to insert cake:", error.message);
+          else console.log("[Supabase] ✓ Cake saved to cloud:", newCake.name);
+        })
+        .catch((err) => console.warn("[Supabase] Cake insert error:", err));
+    }
+
     return newCake;
   },
   update(id: string, data: Partial<Cake>): Cake | undefined {
@@ -370,6 +637,18 @@ export const cakeService = {
     }
     all[idx] = updated;
     storage.set(STORAGE_KEYS.CAKES, all);
+
+    if (isSupabaseConfigured() && supabase) {
+      supabase
+        .from("cakes")
+        .update(mapModelToDbCake(updated))
+        .eq("id", id)
+        .then(({ error }) => {
+          if (error) console.warn("[Supabase] Failed to update cake:", error.message);
+        })
+        .catch((err) => console.warn("[Supabase] Cake update error:", err));
+    }
+
     return updated;
   },
   delete(id: string): boolean {
@@ -377,6 +656,18 @@ export const cakeService = {
     const filtered = all.filter((c) => c.id !== id);
     if (filtered.length === all.length) return false;
     storage.set(STORAGE_KEYS.CAKES, filtered);
+
+    if (isSupabaseConfigured() && supabase) {
+      supabase
+        .from("cakes")
+        .delete()
+        .eq("id", id)
+        .then(({ error }) => {
+          if (error) console.warn("[Supabase] Failed to delete cake:", error.message);
+        })
+        .catch((err) => console.warn("[Supabase] Cake delete error:", err));
+    }
+
     return true;
   },
   toggleStatus(id: string): Cake | undefined {
@@ -388,6 +679,25 @@ export const cakeService = {
       status: nextStatus,
       availability: nextStatus === "active" ? "in-stock" : "out-of-stock",
     });
+  },
+  async fetchFromSupabase(): Promise<Cake[]> {
+    if (!isSupabaseConfigured() || !supabase) return this.list();
+    try {
+      const { data, error } = await supabase.from("cakes").select("*").order("name");
+      if (error) {
+        console.warn("[Supabase] Failed to fetch cakes:", error.message);
+        return this.list();
+      }
+      if (data && data.length > 0) {
+        const mapped = data.map(mapDbCakeToModel);
+        storage.set(STORAGE_KEYS.CAKES, mapped);
+        return mapped;
+      }
+      return this.list();
+    } catch (err) {
+      console.warn("[Supabase] Error in fetchFromSupabase cakes:", err);
+      return this.list();
+    }
   },
 };
 
@@ -1144,6 +1454,86 @@ const DEFAULT_GALLERY_SETTINGS: GallerySectionSettings = {
   defaultMuted: true,
 };
 
+// Database row <-> Model mappers for Gallery & Sweet Scenes
+export function mapDbReelToModel(row: any): GalleryReelItem {
+  return {
+    id: row.id,
+    reelUrl: row.reel_url || "",
+    title: row.title,
+    marathiTitle: row.marathi_title || undefined,
+    videoUrl: row.video_url,
+    thumbnail: row.thumbnail || undefined,
+    category: row.category || "celebrations",
+    categoryLabel: row.category_label || "Celebrations",
+    duration: row.duration || "0:24",
+    description: row.description || "",
+    order: row.order_index ?? 0,
+    enabled: row.enabled ?? true,
+    featured: Boolean(row.featured),
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  };
+}
+
+export function mapModelToDbReel(r: GalleryReelItem) {
+  return {
+    id: r.id,
+    reel_url: r.reelUrl || null,
+    title: r.title,
+    marathi_title: r.marathiTitle || null,
+    video_url: r.videoUrl,
+    thumbnail: r.thumbnail || null,
+    category: r.category || "celebrations",
+    category_label: r.categoryLabel || "Celebrations",
+    duration: r.duration || "0:24",
+    description: r.description || null,
+    order_index: r.order ?? 0,
+    enabled: r.enabled ?? true,
+    featured: Boolean(r.featured),
+    updated_at: new Date().toISOString(),
+  };
+}
+
+export function mapDbSettingsToModel(row: any): GallerySectionSettings {
+  return {
+    enabled: row.enabled ?? true,
+    eyebrow: row.eyebrow || "INSTAGRAM",
+    eyebrowMarathi: row.eyebrow_marathi || "इन्स्टाग्राम",
+    heading: row.heading || "Moments That Make Life Sweeter",
+    headingMarathi: row.heading_marathi || "आयुष्याला अधिक गोड बनवणारे खास क्षण",
+    subtitle: row.subtitle || "From custom creations to happy celebrations — catch the latest from CakeStory Desserts on Instagram.",
+    subtitleMarathi: row.subtitle_marathi || "कस्टम केक्सपासून ते प्रत्येक आनंदाच्या क्षणांपर्यंत — पहा केक स्टोरीचे ताजे रील्स आणि सेलिब्रेशन्स.",
+    decorativePhrase: row.decorative_phrase || "Real Stories, Real Celebrations",
+    instagramUrl: row.instagram_url || "https://www.instagram.com/cakestorydesserts/",
+    showCategories: row.show_categories ?? false,
+    showHighlights: row.show_highlights ?? true,
+    ctaLabel: row.cta_label || "Follow @cakestorydesserts",
+    autoplay: row.autoplay ?? true,
+    defaultMuted: row.default_muted ?? true,
+  };
+}
+
+export function mapModelToDbSettings(s: GallerySectionSettings) {
+  return {
+    id: "default",
+    enabled: s.enabled,
+    eyebrow: s.eyebrow,
+    eyebrow_marathi: s.eyebrowMarathi || null,
+    heading: s.heading,
+    heading_marathi: s.headingMarathi || null,
+    subtitle: s.subtitle,
+    subtitle_marathi: s.subtitleMarathi || null,
+    decorative_phrase: s.decorativePhrase || null,
+    instagram_url: s.instagramUrl,
+    show_categories: s.showCategories,
+    show_highlights: s.showHighlights,
+    cta_label: s.ctaLabel || null,
+    autoplay: s.autoplay,
+    default_muted: s.defaultMuted,
+    updated_at: new Date().toISOString(),
+  };
+}
+
 function dispatchGalleryUpdate() {
   if (typeof window !== "undefined") {
     window.dispatchEvent(new CustomEvent("cakestory:gallery_updated"));
@@ -1164,6 +1554,17 @@ export const galleryService = {
     const updated: GallerySectionSettings = { ...current, ...settings };
     storage.set(STORAGE_KEYS.GALLERY_SETTINGS, updated);
     dispatchGalleryUpdate();
+
+    if (isSupabaseConfigured() && supabase) {
+      supabase
+        .from("gallery_settings")
+        .upsert(mapModelToDbSettings(updated), { onConflict: "id" })
+        .then(({ error }) => {
+          if (error) console.warn("[Supabase] Failed to update gallery settings:", error.message);
+        })
+        .catch((err) => console.warn("[Supabase] Gallery settings update error:", err));
+    }
+
     return updated;
   },
 
@@ -1194,6 +1595,17 @@ export const galleryService = {
   saveReels(reels: GalleryReelItem[]): void {
     storage.set(STORAGE_KEYS.GALLERY_REELS, reels);
     dispatchGalleryUpdate();
+
+    if (isSupabaseConfigured() && supabase) {
+      const rows = reels.map(mapModelToDbReel);
+      supabase
+        .from("gallery_reels")
+        .upsert(rows, { onConflict: "id" })
+        .then(({ error }) => {
+          if (error) console.warn("[Supabase] Failed to persist gallery reels:", error.message);
+        })
+        .catch((err) => console.warn("[Supabase] Gallery reels upsert error:", err));
+    }
   },
 
   addReel(reel: Omit<GalleryReelItem, "id" | "order" | "createdAt" | "updatedAt">): GalleryReelItem {
@@ -1245,6 +1657,18 @@ export const galleryService = {
       r.order = i + 1;
     });
     this.saveReels(updated);
+
+    if (isSupabaseConfigured() && supabase) {
+      supabase
+        .from("gallery_reels")
+        .delete()
+        .eq("id", id)
+        .then(({ error }) => {
+          if (error) console.warn("[Supabase] Failed to delete gallery reel:", error.message);
+        })
+        .catch((err) => console.warn("[Supabase] Gallery reel delete error:", err));
+    }
+
     return true;
   },
 
@@ -1277,6 +1701,111 @@ export const galleryService = {
     storage.remove(STORAGE_KEYS.GALLERY_REELS);
     dispatchGalleryUpdate();
   },
+
+  async fetchFromSupabase(): Promise<{ settings: GallerySectionSettings; reels: GalleryReelItem[] }> {
+    const localSettings = this.getSettings();
+    const localReels = this.listReels(true);
+
+    if (!isSupabaseConfigured() || !supabase) {
+      return { settings: localSettings, reels: localReels };
+    }
+
+    try {
+      const [settingsRes, reelsRes] = await Promise.all([
+        supabase.from("gallery_settings").select("*").eq("id", "default").maybeSingle(),
+        supabase.from("gallery_reels").select("*").order("order_index", { ascending: true }),
+      ]);
+
+      let settings = localSettings;
+      if (settingsRes.data) {
+        settings = mapDbSettingsToModel(settingsRes.data);
+        storage.set(STORAGE_KEYS.GALLERY_SETTINGS, settings);
+      }
+
+      let reels = localReels;
+      if (reelsRes.data && reelsRes.data.length > 0) {
+        reels = reelsRes.data.map(mapDbReelToModel);
+        storage.set(STORAGE_KEYS.GALLERY_REELS, reels);
+      }
+
+      dispatchGalleryUpdate();
+      return { settings, reels };
+    } catch (err) {
+      console.warn("[Supabase] Error fetching gallery data:", err);
+      return { settings: localSettings, reels: localReels };
+    }
+  },
 };
+
+// ============================================================================
+// Turnkey Cloud Synchronizer: Bi-directional Local Cache & Supabase Database
+// ============================================================================
+export type CloudSyncReport = {
+  success: boolean;
+  configured: boolean;
+  timestamp: string;
+  counts: {
+    franchises: number;
+    enquiries: number;
+    galleryReels: number;
+    cakes: number;
+  };
+  error?: string;
+};
+
+export async function syncAllFromSupabase(): Promise<CloudSyncReport> {
+  const timestamp = new Date().toISOString();
+
+  if (!isSupabaseConfigured() || !supabase) {
+    return {
+      success: false,
+      configured: false,
+      timestamp,
+      counts: {
+        franchises: franchiseService.count(),
+        enquiries: enquiryService.count(),
+        galleryReels: galleryService.listReels(true).length,
+        cakes: cakeService.count(),
+      },
+      error: "Supabase connection is unconfigured. Running in local resilient mode.",
+    };
+  }
+
+  try {
+    const [franchises, enquiries, galleryData, cakes] = await Promise.all([
+      franchiseService.fetchFromSupabase(),
+      enquiryService.fetchFromSupabase(),
+      galleryService.fetchFromSupabase(),
+      cakeService.fetchFromSupabase(),
+    ]);
+
+    return {
+      success: true,
+      configured: true,
+      timestamp,
+      counts: {
+        franchises: franchises.length,
+        enquiries: enquiries.length,
+        galleryReels: galleryData.reels.length,
+        cakes: cakes.length,
+      },
+    };
+  } catch (err: any) {
+    console.error("[Supabase] Failed to synchronize with cloud database:", err);
+    return {
+      success: false,
+      configured: true,
+      timestamp,
+      counts: {
+        franchises: franchiseService.count(),
+        enquiries: enquiryService.count(),
+        galleryReels: galleryService.listReels(true).length,
+        cakes: cakeService.count(),
+      },
+      error: err?.message || "Unknown error during cloud sync",
+    };
+  }
+}
+
 
 
