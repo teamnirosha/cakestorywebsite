@@ -33,6 +33,7 @@ export const MARATHI_LOCALITY_MAP: Record<string, string> = {
   "Chinchwad": "चिंचवड",
   "Dhanori": "धानोरी",
   "Dhayari": "धायरी",
+  "Dattanagar": "दत्तनगर",
   "Hadapsar": "हडपसर",
   "Highway Junction": "हायवे जंक्शन",
   "Hinjawadi": "हिंजवडी",

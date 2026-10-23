@@ -596,6 +596,13 @@ export default function OutletDetail() {
                         <span>{t("outletDetail.whatsAppOrderBtn")}</span>
                       </a>
                     </div>
+
+                    {!outlet.googleMapsUrl && (
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-300 text-xs font-semibold">
+                        <span>📍</span>
+                        <span>{language === "mr" ? "गुगल पिन (GMB) व्हेरिफिकेशन लवकरच उपलब्ध होईल" : "Google Business PIN (GMB) is in verification"}</span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Timings Table */}

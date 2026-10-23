@@ -2259,5 +2259,39 @@
       "cakestory-lonand"
     ],
     "googleMapsUrl": "https://maps.app.goo.gl/qTafQaNMz7cjgXbu7?g_st=awb"
+  },
+  {
+    "id": "franchise-069",
+    "slug": "dattanagar",
+    "name": "CakeStory Desserts — Dattanagar",
+    "outletName": "Dattanagar",
+    "zone": "South Pune",
+    "address": "Shop No. 5, Basil Chandrakant Building, Dattanagar, Dattanagar-Jambhulwadi Road, Tal. Haveli, Dist. Pune - 411046",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "country": "India",
+    "latitude": 18.4494,
+    "longitude": 73.846,
+    "phone": "+91 83808 61279",
+    "email": "care@cakestorydesserts.com",
+    "openingHours": "10:00 AM - 11:30 PM",
+    "manager": "Prathmesh Jagdale",
+    "services": [
+      "Celebration Cakes",
+      "Artisanal Pastries",
+      "100% Pure Veg",
+      "Custom Orders",
+      "Takeaway"
+    ],
+    "description": "Located at Basil Chandrakant Building on Dattanagar-Jambhulwadi Road, offering fresh 100% pure vegetarian handcrafted celebration cakes, pastries, and party desserts.",
+    "image": "/images/outlets/katraj.jpg",
+    "active": true,
+    "established": "2026",
+    "citySlug": "pune",
+    "locality": "Dattanagar",
+    "legacySlugs": [
+      "cakestory-dattanagar",
+      "cakestory-desserts-dattanagar"
+    ]
   }
 ]

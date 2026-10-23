@@ -294,7 +294,7 @@ export function mapModelToDbFranchise(f: Franchise) {
   };
 }
 
-const FRANCHISE_INIT_KEY = "__cs_franchises_verified_official_v15__";
+const FRANCHISE_INIT_KEY = "__cs_franchises_verified_official_v16__";
 
 function getFranchisesRaw(): Franchise[] {
   const cached = storage.get<Franchise[]>(STORAGE_KEYS.FRANCHISES, []);

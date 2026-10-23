@@ -2453,3 +2453,37 @@ VALUES (
   google_maps_url = EXCLUDED.google_maps_url,
   updated_at = NOW();
 
+INSERT INTO public.franchises (id, slug, name, outlet_name, zone, address, city, state, country, latitude, longitude, phone, email, opening_hours, manager, services, description, image, active, established, city_slug, locality, legacy_slugs, google_maps_url)
+VALUES (
+  'franchise-069',
+  'dattanagar',
+  'CakeStory Desserts — Dattanagar',
+  'Dattanagar',
+  'South Pune',
+  'Shop No. 5, Basil Chandrakant Building, Dattanagar, Dattanagar-Jambhulwadi Road, Tal. Haveli, Dist. Pune - 411046',
+  'Pune',
+  'Maharashtra',
+  'India',
+  18.4494,
+  73.8460,
+  '+91 83808 61279',
+  'care@cakestorydesserts.com',
+  '10:00 AM - 11:30 PM',
+  'Prathmesh Jagdale',
+  '["Celebration Cakes","Artisanal Pastries","100% Pure Veg","Custom Orders","Takeaway"]'::jsonb,
+  'Located at Basil Chandrakant Building on Dattanagar-Jambhulwadi Road, offering fresh 100% pure vegetarian handcrafted celebration cakes, pastries, and party desserts.',
+  '/images/outlets/katraj.jpg',
+  true,
+  '2026',
+  'pune',
+  'Dattanagar',
+  '["cakestory-dattanagar","cakestory-desserts-dattanagar"]'::jsonb,
+  NULL
+) ON CONFLICT (id) DO UPDATE SET
+  name = EXCLUDED.name,
+  address = EXCLUDED.address,
+  phone = EXCLUDED.phone,
+  google_maps_url = EXCLUDED.google_maps_url,
+  updated_at = NOW();
+
+
