@@ -455,60 +455,32 @@ export default function BrandStorySection() {
           </div>
         </div>
 
-        {/* 4. Statistics Row: 4 Clean, Balanced Metric Cards */}
-        <div className="story-stats-grid grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
-          <div className="story-stat-card p-5 sm:p-6 rounded-2xl bg-white border border-stone-200/90 shadow-2xs hover:border-stone-300 hover:-translate-y-0.5 transition-all text-center flex flex-col justify-between">
+        {/* 4. Statistics Row: 2 Key Benchmark Metric Cards Centered & Aligned */}
+        <div className="story-stats-grid grid grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto gap-4 sm:gap-6">
+          <div className="story-stat-card p-6 sm:p-7 rounded-2xl bg-white border border-stone-200/90 shadow-2xs hover:border-emerald-300 hover:shadow-md hover:-translate-y-0.5 transition-all text-center flex flex-col justify-between">
             <div>
-              <div className="font-display text-2xl sm:text-3xl lg:text-4xl font-medium text-stone-900 mb-1">
-                {t("story.statOutlets")}
-              </div>
-              <div className="text-sm sm:text-base font-semibold text-stone-800">
-                {t("story.statOutletsLabel")}
-              </div>
-            </div>
-            <div className="text-xs sm:text-sm text-stone-500 mt-2 font-normal">
-              {t("story.statOutletsSub")}
-            </div>
-          </div>
-
-          <div className="story-stat-card p-5 sm:p-6 rounded-2xl bg-white border border-stone-200/90 shadow-2xs hover:border-stone-300 hover:-translate-y-0.5 transition-all text-center flex flex-col justify-between">
-            <div>
-              <div className="font-display text-2xl sm:text-3xl lg:text-4xl font-medium text-rose-900 mb-1">
-                {t("story.statCelebrations")}
-              </div>
-              <div className="text-sm sm:text-base font-semibold text-stone-800">
-                {t("story.statCelebrationsLabel")}
-              </div>
-            </div>
-            <div className="text-xs sm:text-sm text-stone-500 mt-2 font-normal">
-              {t("story.statCelebrationsSub")}
-            </div>
-          </div>
-
-          <div className="story-stat-card p-5 sm:p-6 rounded-2xl bg-white border border-stone-200/90 shadow-2xs hover:border-stone-300 hover:-translate-y-0.5 transition-all text-center flex flex-col justify-between">
-            <div>
-              <div className="font-display text-2xl sm:text-3xl lg:text-4xl font-medium text-emerald-800 mb-1">
+              <div className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-emerald-800 mb-1.5">
                 {t("story.statVeg")}
               </div>
               <div className="text-sm sm:text-base font-semibold text-stone-800">
                 {t("story.statVegLabel")}
               </div>
             </div>
-            <div className="text-xs sm:text-sm text-stone-500 mt-2 font-normal">
+            <div className="text-xs sm:text-sm text-stone-500 mt-2.5 font-normal">
               {t("story.statVegSub")}
             </div>
           </div>
 
-          <div className="story-stat-card p-5 sm:p-6 rounded-2xl bg-white border border-stone-200/90 shadow-2xs hover:border-stone-300 hover:-translate-y-0.5 transition-all text-center flex flex-col justify-between">
+          <div className="story-stat-card p-6 sm:p-7 rounded-2xl bg-white border border-stone-200/90 shadow-2xs hover:border-rose-300 hover:shadow-md hover:-translate-y-0.5 transition-all text-center flex flex-col justify-between">
             <div>
-              <div className="font-display text-2xl sm:text-3xl lg:text-4xl font-medium text-stone-800 mb-1">
+              <div className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-[#8a1836] mb-1.5">
                 {t("story.statSuccess")}
               </div>
               <div className="text-sm sm:text-base font-semibold text-stone-800">
                 {t("story.statSuccessLabel")}
               </div>
             </div>
-            <div className="text-xs sm:text-sm text-stone-500 mt-2 font-normal">
+            <div className="text-xs sm:text-sm text-stone-500 mt-2.5 font-normal">
               {t("story.statSuccessSub")}
             </div>
           </div>
