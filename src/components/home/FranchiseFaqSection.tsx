@@ -115,10 +115,13 @@ export default function FranchiseFaqSection() {
     <section
       ref={sectionRef}
       id="faq"
-      className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#faf7f2] border-t border-stone-200/60 overflow-hidden"
+      className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#faf7f2] overflow-hidden"
     >
-      {/* 1. Dedicated Patisserie Counter Background Layer with Single Warm-Ivory Gradient */}
+      {/* 1. Dedicated Patisserie Counter Background Layer with Soft Seamless Top Transition */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        {/* Soft Top Inward Blend from Outlets Wave */}
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#faf7f2] via-[#faf7f2]/90 to-transparent z-1" />
+
         <img
           src={faqBg}
           alt=""
@@ -127,7 +130,7 @@ export default function FranchiseFaqSection() {
           className="w-full h-full object-cover object-center"
         />
         {/* Single controlled warm-ivory gradient overlay allowing the cake display counter to be visibly perceptible while keeping all text easily readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#faf7f2]/86 via-[#faf7f2]/74 to-[#faf7f2]/88" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#faf7f2]/90 via-[#faf7f2]/78 to-[#faf7f2]/90" />
       </div>
 
       <div className="max-w-3xl mx-auto relative z-10">

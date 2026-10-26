@@ -180,10 +180,13 @@ export default function OutletsMapSection() {
       ref={sectionRef}
       id="outlets"
       aria-label="Explore Outlet Locations"
-      className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#fbf8f4] via-[#f7f0e6] to-[#f4ebe0] text-stone-800 relative overflow-hidden border-t border-amber-200/50"
+      className="pt-20 sm:pt-28 pb-28 sm:pb-36 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#faf6f0] via-[#f7f0e6] to-[#f4ebe0] text-stone-800 relative overflow-hidden"
     >
       {/* 1. Multi-Layered Luxury Background: Photographic Atmosphere + Ambient Glows + SVG Topography & Dot Matrix */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        {/* Seamless Soft Feather at Top to Blend Completely with Sweet Scenes Gallery */}
+        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#faf6f0] via-[#faf6f0]/80 to-transparent z-10" />
+
         {/* Authentic Storefront Atmosphere with Warm Blend */}
         <img
           src={bakeryBg}
@@ -473,6 +476,35 @@ export default function OutletsMapSection() {
             </div>
           ))}
         </div>
+
+        {/* 6. Refined Luxury Transition Accent to FAQ */}
+        <div className="mt-12 sm:mt-14 flex flex-col items-center justify-center relative z-10">
+          <div className="flex items-center gap-3 w-full max-w-sm mx-auto opacity-80">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#b51f50]/30 to-[#b51f50]/50" />
+            <div className="flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-[#b51f50]/20 shadow-2xs">
+              <span className="text-[#b51f50] text-[10px]">✦</span>
+              <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase text-stone-600">
+                PUNE & REGIONAL HUBS
+              </span>
+              <span className="text-[#b51f50] text-[10px]">✦</span>
+            </div>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-[#b51f50]/30 to-[#b51f50]/50" />
+          </div>
+        </div>
+      </div>
+
+      {/* 7. Seamless Organic Curvature Transition to FAQ Section */}
+      <div className="absolute inset-x-0 bottom-0 pointer-events-none overflow-hidden leading-none z-10">
+        <svg
+          className="relative block w-full h-10 sm:h-14 lg:h-16 text-[#faf7f2]"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M 0,0 C 350,85 850,85 1200,0 L 1200,120 L 0,120 Z"
+            fill="currentColor"
+          />
+        </svg>
       </div>
     </section>
   );
