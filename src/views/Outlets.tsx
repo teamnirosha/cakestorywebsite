@@ -89,8 +89,45 @@ export default function Outlets() {
 
   return (
     <PageShell>
-      <section className="px-6 pt-4 pb-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="px-4 sm:px-6 pt-6 pb-24 bg-gradient-to-b from-[#fbf8f4] via-[#f7f0e6] to-[#f4ebe0] relative overflow-hidden min-h-screen">
+        {/* Luxury Background Ambient Glows & Topographic Contours */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_45%_at_15%_10%,rgba(245,175,45,0.18),transparent_65%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_85%_20%,rgba(181,31,80,0.14),transparent_65%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_90%,rgba(217,119,6,0.12),transparent_70%)]" />
+
+          {/* Luxury Dot Grid & Topographic Curves */}
+          <svg className="absolute inset-0 w-full h-full opacity-60" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="page-outlets-dots" width="32" height="32" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.1" fill="#8a1836" fillOpacity="0.08" />
+                <circle cx="18" cy="18" r="0.75" fill="#d97706" fillOpacity="0.07" />
+              </pattern>
+              <linearGradient id="pageTopoGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#b51f50" stopOpacity="0.14" />
+                <stop offset="50%" stopColor="#d97706" stopOpacity="0.18" />
+                <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.08" />
+              </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#page-outlets-dots)" />
+            <path
+              d="M -100 140 C 250 50, 550 200, 920 120 C 1220 60, 1460 170, 1720 100"
+              fill="none"
+              stroke="url(#pageTopoGold)"
+              strokeWidth="1.75"
+              strokeDasharray="4 4"
+            />
+            <path
+              d="M -60 360 C 340 240, 700 440, 1080 320 C 1360 220, 1580 340, 1760 280"
+              fill="none"
+              stroke="#8a1836"
+              strokeOpacity="0.12"
+              strokeWidth="2.2"
+            />
+          </svg>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>

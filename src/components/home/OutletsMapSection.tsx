@@ -180,20 +180,100 @@ export default function OutletsMapSection() {
       ref={sectionRef}
       id="outlets"
       aria-label="Explore Outlet Locations"
-      className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf7f2] text-stone-800 relative overflow-hidden"
+      className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#fbf8f4] via-[#f7f0e6] to-[#f4ebe0] text-stone-800 relative overflow-hidden border-t border-amber-200/50"
     >
-      {/* 1. Context-Relevant Photographic Background with Soft Warm Ivory Overlay */}
-      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+      {/* 1. Multi-Layered Luxury Background: Photographic Atmosphere + Ambient Glows + SVG Topography & Dot Matrix */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        {/* Authentic Storefront Atmosphere with Warm Blend */}
         <img
           src={bakeryBg}
           alt=""
           role="presentation"
           loading="lazy"
-          className="w-full h-full object-cover object-[center_35%] filter blur-[1px] opacity-35 scale-105"
+          className="w-full h-full object-cover object-[center_35%] filter blur-[1.5px] opacity-25 mix-blend-multiply scale-105"
         />
-        {/* Soft Warm Ivory/Cream Gradient Overlays (80-92% opacity) for Pristine Readability */}
-        <div className="absolute inset-0 bg-[#faf7f2]/88" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#faf7f2] via-[#faf7f2]/82 to-[#faf7f2]" />
+
+        {/* Ambient Radial Color Lighting Meshes */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_45%_at_12%_8%,rgba(245,175,45,0.22),transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_88%_15%,rgba(181,31,80,0.16),transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_95%,rgba(217,119,6,0.15),transparent_70%)]" />
+
+        {/* Crisp Luxury Architectural Dot Matrix Grid Pattern & Topographic Map Curves */}
+        <svg className="absolute inset-0 w-full h-full opacity-65" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="outlets-dot-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1.1" fill="#8a1836" fillOpacity="0.09" />
+              <circle cx="18" cy="18" r="0.75" fill="#d97706" fillOpacity="0.08" />
+            </pattern>
+            {/* Topographic Linear Gradients */}
+            <linearGradient id="topoGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#b51f50" stopOpacity="0.14" />
+              <stop offset="50%" stopColor="#d97706" stopOpacity="0.20" />
+              <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.10" />
+            </linearGradient>
+            <linearGradient id="topoRoseGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#8a1836" stopOpacity="0.16" />
+              <stop offset="60%" stopColor="#b51f50" stopOpacity="0.12" />
+              <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.06" />
+            </linearGradient>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#outlets-dot-grid)" />
+
+          {/* Sweeping Regional Topographic Contour Curves Tracing Pune Geography */}
+          <path
+            d="M -120 160 C 240 60, 520 220, 880 140 C 1180 70, 1420 180, 1680 120"
+            fill="none"
+            stroke="url(#topoGoldGrad)"
+            strokeWidth="1.75"
+            strokeDasharray="4 4"
+          />
+          <path
+            d="M -80 340 C 320 220, 680 420, 1040 300 C 1320 210, 1540 330, 1720 270"
+            fill="none"
+            stroke="url(#topoRoseGrad)"
+            strokeWidth="2.2"
+          />
+          <path
+            d="M -150 560 C 260 680, 620 480, 980 620 C 1280 730, 1500 580, 1750 640"
+            fill="none"
+            stroke="url(#topoGoldGrad)"
+            strokeWidth="1.8"
+            strokeDasharray="6 3"
+          />
+          <path
+            d="M -100 780 C 380 660, 740 860, 1100 740 C 1380 650, 1580 790, 1780 720"
+            fill="none"
+            stroke="url(#topoRoseGrad)"
+            strokeWidth="2"
+          />
+
+          {/* Luxury Cartographic Compass Rose Watermark (Top Right) */}
+          <g transform="translate(1080, 75) scale(0.85)" opacity="0.20">
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#b51f50" strokeWidth="1.2" strokeDasharray="3 3" />
+            <circle cx="100" cy="100" r="64" fill="none" stroke="#d97706" strokeWidth="1" />
+            <circle cx="100" cy="100" r="48" fill="none" stroke="#b51f50" strokeWidth="0.8" />
+            <polygon points="100,20 106,94 180,100 106,106 100,180 94,106 20,100 94,94" fill="#d97706" fillOpacity="0.45" />
+            <polygon points="100,20 104,96 100,100 96,96" fill="#8a1836" />
+            <polygon points="180,100 104,104 100,100 104,96" fill="#8a1836" />
+            <polygon points="100,180 96,104 100,100 104,104" fill="#8a1836" />
+            <polygon points="20,100 96,96 100,100 96,104" fill="#8a1836" />
+            <text x="100" y="13" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#8a1836" letterSpacing="1">N</text>
+            <text x="192" y="104" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#8a1836">E</text>
+            <text x="100" y="196" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#8a1836">S</text>
+            <text x="8" y="104" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#8a1836">W</text>
+          </g>
+
+          {/* Artisanal Sparkle Stars Floating in Background */}
+          <g opacity="0.25" fill="#d97706">
+            <path d="M 180 220 Q 180 235 165 235 Q 180 235 180 250 Q 180 235 195 235 Q 180 235 180 220 Z" />
+            <path d="M 980 260 Q 980 272 968 272 Q 980 272 980 284 Q 980 272 992 272 Q 980 272 980 260 Z" />
+            <path d="M 320 720 Q 320 735 305 735 Q 320 735 320 750 Q 320 735 335 735 Q 320 735 320 720 Z" />
+            <path d="M 1240 680 Q 1240 695 1225 695 Q 1240 695 1240 710 Q 1240 695 1255 695 Q 1240 695 1240 680 Z" />
+          </g>
+        </svg>
+
+        {/* Soft Vignette Edge Shadow for Content Framing */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#fbf8f4] via-transparent to-[#f4ebe0]/80" />
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -256,7 +336,7 @@ export default function OutletsMapSection() {
         </div>
 
         {/* 4. Side-by-Side Interactive Outlets Showcase Card */}
-        <div className="grid lg:grid-cols-12 gap-5 sm:gap-6 bg-white/95 rounded-3xl border border-stone-200/90 shadow-md p-3.5 sm:p-5">
+        <div className="grid lg:grid-cols-12 gap-5 sm:gap-6 bg-white/95 backdrop-blur-xl rounded-3xl border border-stone-200/90 shadow-[0_20px_50px_-15px_rgba(138,24,54,0.12),0_4px_16px_rgba(0,0,0,0.04)] ring-1 ring-amber-500/15 p-3.5 sm:p-5">
           {/* Left Column: Scrollable Outlets List */}
           <div className="lg:col-span-5 flex flex-col h-[460px] bg-stone-50/80 rounded-2xl border border-stone-200/80 overflow-hidden">
             {/* Header: Signature CakeStory Deep Berry Banner */}
@@ -379,7 +459,7 @@ export default function OutletsMapSection() {
             <div
               key={z.zone}
               onClick={() => setActiveZone(z.zone)}
-              className="zone-summary-card p-4 rounded-2xl bg-white/95 border border-stone-200/90 shadow-2xs hover:border-stone-300 hover:shadow-xs transition text-center cursor-pointer"
+              className="zone-summary-card p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-stone-200/90 shadow-[0_4px_14px_-2px_rgba(0,0,0,0.05)] hover:border-amber-300 hover:shadow-[0_8px_24px_-4px_rgba(181,31,80,0.12)] hover:-translate-y-0.5 transition-all text-center cursor-pointer group"
             >
               <div className="flex items-center justify-center gap-1.5 mb-1">
                 <span className={`w-2 h-2 rounded-full ${z.dot}`} />

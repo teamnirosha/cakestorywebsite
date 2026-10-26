@@ -368,7 +368,7 @@ export default function Footer() {
                   <MapPinIcon className="w-3.5 h-3.5 text-stone-500 shrink-0 mt-0.5" />
                   <div>
                     <span className="text-stone-400">{t("footer.hubLabel")} </span>
-                    <span className="text-stone-200">Baner, Pune, Maharashtra 411045</span>
+                    <span className="text-stone-200">Saswad, Pune, Maharashtra 412301</span>
                   </div>
                 </div>
               </div>

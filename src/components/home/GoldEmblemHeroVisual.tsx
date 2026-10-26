@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import goldLogoImg from "../../assets/logo/gold-logo-transparent.png";
+import csLogoImg from "../../assets/logo/cs-logo.png";
 import { prefersReducedMotion } from "../../utils/motion";
 
 interface GoldEmblemHeroVisualProps {
@@ -257,13 +257,13 @@ export default function GoldEmblemHeroVisual({ className = "", heroRef }: GoldEm
           />
         </svg>
 
-        {/* 5. Authentic 3D Gold CakeStory Emblem Image (Centered at z-10) */}
-        <div className="relative z-10 w-[86%] max-w-[500px] sm:max-w-[530px] lg:max-w-[560px] xl:max-w-[600px] flex items-center justify-center">
+        {/* 5. Authentic CakeStory Original Brand Logo (Centered at z-10) */}
+        <div className="relative z-10 w-[84%] max-w-[460px] sm:max-w-[490px] lg:max-w-[520px] xl:max-w-[550px] flex items-center justify-center p-2">
           <img
             ref={logoImgRef}
-            src={goldLogoImg}
-            alt="CakeStory Desserts Handcrafted Luxury Gold 3D Emblem"
-            className="w-full h-auto object-contain filter drop-shadow-[0_18px_32px_rgba(0,0,0,0.85)] drop-shadow-[0_0_38px_rgba(245,175,45,0.32)] transform hover:scale-[1.01] transition-transform duration-300 pointer-events-auto"
+            src={csLogoImg}
+            alt="CakeStory Desserts - Every Flavour Has A Story"
+            className="w-full h-auto object-contain filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.75)] drop-shadow-[0_0_45px_rgba(245,175,45,0.38)] drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] transform hover:scale-[1.02] transition-transform duration-300 pointer-events-auto select-none"
             draggable={false}
           />
         </div>
