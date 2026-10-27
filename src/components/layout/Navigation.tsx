@@ -356,7 +356,7 @@ export default function Navigation() {
             {/* Desktop Navigation Links with Smooth Animated Gliding Pill */}
             <div
               ref={navContainerRef}
-              className="hidden lg:flex items-center relative p-0.5 xl:p-1 rounded-full shrink min-w-0"
+              className="hidden lg:flex items-center relative p-0.5 xl:p-1 rounded-full shrink-0"
             >
               {/* Gliding Pill Active Indicator */}
               <div
@@ -379,8 +379,8 @@ export default function Navigation() {
                     onClick={() => handleNavClick(item.id)}
                     className={`relative z-10 rounded-full font-medium transition-all duration-300 cursor-pointer whitespace-nowrap text-center flex items-center justify-center ${
                       scrolled
-                        ? "px-2 lg:px-2.5 xl:px-3 2xl:px-3.5 py-1 text-[11px] lg:text-[11.5px] xl:text-[12.5px] 2xl:text-[13px]"
-                        : "px-2 lg:px-2.5 xl:px-3.5 2xl:px-4 py-1.5 text-[11.5px] lg:text-[12px] xl:text-[13px] 2xl:text-[14px]"
+                        ? "px-1.5 lg:px-2 xl:px-3 2xl:px-3.5 py-1 text-[10.5px] lg:text-[11px] xl:text-[12.5px] 2xl:text-[13px]"
+                        : "px-2 lg:px-2.5 xl:px-3.5 2xl:px-4 py-1.5 text-[11px] lg:text-[11.5px] xl:text-[13px] 2xl:text-[14px]"
                     } ${
                       isActive
                         ? "text-amber-300 font-semibold"
@@ -421,13 +421,13 @@ export default function Navigation() {
                 onClick={openModal}
                 className={`btn-primary whitespace-nowrap shadow-md shadow-rose-950/20 rounded-full cursor-pointer hover:scale-105 active:scale-95 transition-all duration-500 ease-out shrink-0 ${
                   scrolled
-                    ? "!py-1 sm:!py-1.5 !px-2.5 sm:!px-3.5 xl:!px-4 !text-[11px] sm:!text-xs xl:!text-[12.5px] !font-bold"
-                    : "!py-1 sm:!py-1.5 xl:!py-2 !px-2.5 xs:!px-3 sm:!px-4 xl:!px-5 !text-[11px] sm:!text-xs xl:!text-[13px] !font-bold"
+                    ? "!py-1 sm:!py-1.5 !px-2.5 sm:!px-3 xl:!px-4 !text-[11px] sm:!text-xs xl:!text-[12.5px] !font-bold"
+                    : "!py-1 sm:!py-1.5 xl:!py-2 !px-2.5 xs:!px-3 sm:!px-3.5 xl:!px-5 !text-[11px] sm:!text-xs xl:!text-[13px] !font-bold"
                 }`}
                 aria-label="Open Franchise Enquiry Form"
               >
-                <span className="inline sm:hidden">{language === "mr" ? "चौकशी" : "Enquire"}</span>
-                <span className="hidden sm:inline">{t("nav.enquiry")}</span>
+                <span className="inline xl:hidden">{language === "mr" ? "चौकशी" : "Enquire"}</span>
+                <span className="hidden xl:inline">{t("nav.enquiry")}</span>
                 <span aria-hidden="true" className="ml-0.5 sm:ml-1 font-bold">
                   →
                 </span>

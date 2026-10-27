@@ -385,7 +385,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.outlets": "आउटलेट्स",
     "nav.faq": "प्रश्नोत्तरे",
     "nav.contact": "संपर्क",
-    "nav.enquiry": "फ्रँचायझी चौकशी",
+    "nav.enquiry": "चौकशी",
     "nav.langSwitch": "English",
 
     // Hero
