@@ -66,11 +66,10 @@ function PhoneIcon({ className = "w-3 h-3" }: { className?: string }) {
 const customIcon = (active: boolean) =>
   L.divIcon({
     className: "cs-marker-wrap",
-    html: `<div class="cs-marker" style="${
-      active ? "transform: rotate(-45deg) scale(1.2); box-shadow: 0 12px 28px -4px rgba(150,27,60,0.8);" : ""
-    }"><span>🎂</span></div>`,
-    iconSize: [36, 36],
-    iconAnchor: [18, 36],
+    html: `<div class="cs-marker ${active ? "active" : ""}"><div class="cs-marker-badge"><img src="/assets/logo/cs-logo.png" alt="CakeStory" class="cs-marker-logo" /></div></div>`,
+    iconSize: [42, 42],
+    iconAnchor: [21, 42],
+    popupAnchor: [0, -42],
   });
 
 function FlyTo({ pos, zoom = 13 }: { pos: [number, number] | null; zoom?: number }) {
@@ -432,20 +431,24 @@ export default function OutletsMapSection() {
                       <h4 className="font-display font-medium text-sm text-stone-900">{o.name}</h4>
                       <p className="text-xs text-stone-600 mt-0.5">{o.address}</p>
                       <p className="text-xs text-[#961b3c] font-medium mt-0.5">📞 {o.phone}</p>
-                      <div className="flex items-center gap-2 mt-2">
+                      <div className="flex items-center gap-2 mt-2.5">
                         <Link
                           to={getOutletUrl(o)}
-                          className="inline-block text-xs font-semibold text-white bg-[#961b3c] px-3 py-1 rounded hover:bg-[#7d1430] transition-colors"
+                          className="popup-btn-store inline-flex items-center gap-1 text-xs font-semibold !text-white bg-[#8a1836] hover:bg-[#70122a] px-3.5 py-1.5 rounded-lg transition-all shadow-xs"
+                          style={{ color: "#ffffff" }}
                         >
-                          {t("outlets.viewStore")} →
+                          <span>{t("outlets.viewStore")}</span>
+                          <span aria-hidden="true">→</span>
                         </Link>
                         <a
                           href={o.googleMapsUrl || `https://www.google.com/maps?q=${o.latitude},${o.longitude}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-block text-xs font-semibold text-stone-700 bg-stone-100 hover:bg-stone-200 border border-stone-300 px-2.5 py-1 rounded transition-colors"
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-stone-700 hover:text-stone-900 bg-stone-100 hover:bg-stone-200 border border-stone-300 px-3 py-1.5 rounded-lg transition-colors"
+                          style={{ color: "#44403c" }}
                         >
-                          {language === "mr" ? "दिशा-मार्ग ↗" : "Directions ↗"}
+                          <span>{language === "mr" ? "दिशा-मार्ग" : "Directions"}</span>
+                          <span aria-hidden="true">↗</span>
                         </a>
                       </div>
                     </div>

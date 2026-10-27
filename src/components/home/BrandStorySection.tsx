@@ -389,7 +389,7 @@ export default function BrandStorySection() {
 
                       {/* Title */}
                       <div
-                        className={`text-sm sm:text-base font-semibold line-clamp-2 leading-snug ${
+                        className={`text-sm sm:text-base font-semibold line-clamp-3 leading-snug ${
                           isActive ? "text-white" : "text-stone-900"
                         }`}
                       >

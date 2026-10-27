@@ -12,11 +12,10 @@ import { useLanguage } from "../context/LanguageContext";
 const customIcon = (active: boolean) =>
   L.divIcon({
     className: "cs-marker-wrap",
-    html: `<div class="cs-marker" style="${
-      active ? "transform: rotate(-45deg) scale(1.2); box-shadow: 0 12px 28px -4px rgba(255,92,151,0.8);" : ""
-    }"><span>🎂</span></div>`,
-    iconSize: [38, 38],
-    iconAnchor: [19, 38],
+    html: `<div class="cs-marker ${active ? "active" : ""}"><div class="cs-marker-badge"><img src="/assets/logo/cs-logo.png" alt="CakeStory" class="cs-marker-logo" /></div></div>`,
+    iconSize: [42, 42],
+    iconAnchor: [21, 42],
+    popupAnchor: [0, -42],
   });
 
 function FlyTo({ pos, zoom = 13 }: { pos: [number, number] | null; zoom?: number }) {
@@ -281,12 +280,13 @@ export default function Outlets() {
                           <div style={{ marginTop: 8, display: "flex", gap: "6px", alignItems: "center" }}>
                             <a
                               href={getOutletUrl(f)}
+                              className="popup-btn-store"
                               style={{
                                 display: "inline-block",
-                                background: "linear-gradient(135deg, #ff7eb3, #ff5c97)",
+                                background: "#8a1836",
                                 color: "#ffffff",
-                                padding: "5px 12px",
-                                borderRadius: "10px",
+                                padding: "6px 14px",
+                                borderRadius: "8px",
                                 fontSize: "11px",
                                 fontWeight: 700,
                                 textDecoration: "none",
