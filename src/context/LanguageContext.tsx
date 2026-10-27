@@ -339,7 +339,7 @@ const translations: Record<Language, Record<string, string>> = {
     "gallery.viewAll": "View All Reels",
 
     // Why CakeStory / More Than Just Cakes
-    "why.eyebrow": "WHY CAKESTORY",
+    "why.eyebrow": "WHY CAKESTORY ?",
     "why.title": "More Than Just Cakes",
     "why.desc": "From custom creations to your everyday cravings — CakeStory is your one-stop destination for all things sweet.",
     "why.card1Title": "Custom Cakes",
@@ -417,7 +417,7 @@ const translations: Record<Language, Record<string, string>> = {
     "story.t3Tag": "टप्पा ३: फ्रँचायझी विस्तार",
     "story.t3Title": "सुलभ टर्नकी मॉडेलची सुरुवात",
     "story.t3Desc": "३००–४०० चौ.फूटाच्या कॉम्पॅक्ट आऊटलेटसह शून्य बेकिंग झंझट असलेले सुलभ फ्रँचायझी मॉडेल यशस्वीरित्या लाँच.",
-    "story.t3Stat": "६ यशस्वी आऊटलेट्स", 
+    "story.t3Stat": "६ यशस्वी आऊटलेट्स",
     "story.t4Year": "२०२१",
     "story.t4Tag": "टप्पा ४: विस्ताराच्या दिशेने",
     "story.t4Title": "वितरणातून गुणवत्तेचा वेगळा अनुभव",
@@ -697,7 +697,7 @@ const translations: Record<Language, Record<string, string>> = {
     "gallery.viewAll": "सर्व रील्स पहा",
 
     // Why CakeStory / More Than Just Cakes
-    "why.eyebrow": "केकस्टोरी का?",
+    "why.eyebrow": "केकस्टोरीचं का ?",
     "why.title": "केक्सपेक्षाही काहीतरी अधिक",
     "why.desc": "खास कस्टमाइज्ड केक्सपासून ते रोजच्या गोड क्षणांपर्यंत — केकस्टोरी आहे तुमची गोडवा देणारी हक्काची जागा.",
     "why.card1Title": "कस्टम केक्स",

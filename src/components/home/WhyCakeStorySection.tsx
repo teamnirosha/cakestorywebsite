@@ -475,7 +475,115 @@ export default function WhyCakeStorySection() {
     if (prefersReducedMotion() || !sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // 1. Header reveal
+      // 1. Luxury Eyebrow Divider Reveal (Outward hairlines, sparkle bloom, text lift, gold shimmer sweep)
+      const eyebrowContainer = sectionRef.current?.querySelector<HTMLElement>(".why-eyebrow-container");
+      if (eyebrowContainer) {
+        const lineLeft = eyebrowContainer.querySelector(".why-eyebrow-line-left");
+        const lineRight = eyebrowContainer.querySelector(".why-eyebrow-line-right");
+        const sparkleLeft = eyebrowContainer.querySelector(".why-eyebrow-sparkle-left");
+        const sparkleRight = eyebrowContainer.querySelector(".why-eyebrow-sparkle-right");
+        const eyebrowText = eyebrowContainer.querySelector(".why-eyebrow-text");
+        const eyebrowGlow = eyebrowContainer.querySelector(".why-eyebrow-glow");
+        const eyebrowSweep = eyebrowContainer.querySelector(".why-eyebrow-sweep");
+        const eyebrowSheen = eyebrowContainer.querySelector(".why-eyebrow-sheen");
+
+        if (
+          lineLeft &&
+          lineRight &&
+          sparkleLeft &&
+          sparkleRight &&
+          eyebrowText &&
+          eyebrowGlow &&
+          eyebrowSweep &&
+          eyebrowSheen
+        ) {
+          // Set initial states for smooth entrance animation
+          gsap.set([lineLeft, lineRight], { scaleX: 0 });
+          gsap.set([sparkleLeft, sparkleRight], { scale: 0, opacity: 0, rotate: -45 });
+          gsap.set(eyebrowText, { opacity: 0, y: 7 });
+          gsap.set(eyebrowGlow, { opacity: 0, scale: 0.85 });
+          gsap.set(eyebrowSweep, { opacity: 0 });
+          gsap.set(eyebrowSheen, { x: "-100%" });
+
+          const eyebrowTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: eyebrowContainer,
+              start: "top 85%",
+              toggleActions: "play none none none",
+              once: true,
+            },
+          });
+
+          eyebrowTL
+            // Label upward reveal & subtle radial glow bloom
+            .to(eyebrowText, {
+              opacity: 1,
+              y: 0,
+              duration: 0.65,
+              ease: "power2.out",
+            })
+            .to(
+              eyebrowGlow,
+              {
+                opacity: 1,
+                scale: 1,
+                duration: 0.75,
+                ease: "power2.out",
+              },
+              "<0.08"
+            )
+            // 4-Point sparkles bloom symmetrically
+            .to(
+              [sparkleLeft, sparkleRight],
+              {
+                scale: 1,
+                opacity: 1,
+                rotate: 0,
+                duration: 0.45,
+                ease: "back.out(1.8)",
+              },
+              "<0.15"
+            )
+            // Delicate champagne hairlines draw outward from the center
+            .to(
+              [lineLeft, lineRight],
+              {
+                scaleX: 1,
+                duration: 0.65,
+                ease: "power2.out",
+              },
+              "<0.1"
+            )
+            // Single refined gold shimmer highlight sweeps across the divider
+            .to(
+              eyebrowSweep,
+              {
+                opacity: 0.75,
+                duration: 0.2,
+              },
+              "-=0.25"
+            )
+            .to(
+              eyebrowSheen,
+              {
+                x: "100%",
+                duration: 0.85,
+                ease: "power1.inOut",
+              },
+              "<"
+            )
+            .to(
+              eyebrowSweep,
+              {
+                opacity: 0,
+                duration: 0.25,
+              },
+              "-=0.2"
+            );
+        }
+      }
+
+      // 2. Header Main Heading & Description reveal
       const headerElements = sectionRef.current?.querySelectorAll(".why-header-anim");
       if (headerElements && headerElements.length > 0) {
         gsap.fromTo(
@@ -585,13 +693,75 @@ export default function WhyCakeStorySection() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* 2. Editorial Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-          {/* Eyebrow flanked by delicate horizontal lines */}
-          <div className="why-header-anim inline-flex items-center justify-center gap-3 sm:gap-4 mb-3 sm:mb-3.5">
-            <span className="w-8 sm:w-12 h-px bg-[#D8A64E]/60 inline-block" />
-            <span className="text-[11px] sm:text-xs font-bold tracking-[0.22em] uppercase text-[#861B43]">
-              {t("why.eyebrow")}
-            </span>
-            <span className="w-8 sm:w-12 h-px bg-[#D8A64E]/60 inline-block" />
+          {/* Eyebrow: Luxury Brand Divider with Tapered Hairlines, 4-Point Sparkle Ornaments & Subtle Ambient Aura */}
+          <div className="relative flex items-center justify-center mb-3 sm:mb-3.5">
+            <div className="why-eyebrow-container relative inline-flex items-center justify-center gap-2 sm:gap-3.5 select-none overflow-visible">
+              {/* Soft Ambient Radial Warmth behind label (no visible pill/box/card) */}
+              <div
+                className="why-eyebrow-glow absolute -inset-x-8 -inset-y-3 pointer-events-none rounded-full"
+                style={{
+                  background:
+                    "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(216, 166, 78, 0.18) 0%, rgba(245, 221, 212, 0.10) 45%, transparent 75%)",
+                  filter: "blur(3px)",
+                }}
+                aria-hidden="true"
+              />
+
+              {/* Left Tapered Hairline (Draws outward to the left from origin: right) */}
+              <div className="relative flex items-center justify-end overflow-hidden">
+                <span
+                  className="why-eyebrow-line-left block h-[1px] w-7 sm:w-12 md:w-16 bg-gradient-to-r from-transparent via-[#D8A64E]/60 to-[#D8A64E]"
+                  style={{ transformOrigin: "right center" }}
+                />
+              </div>
+
+              {/* Left 4-Point Diamond Sparkle Ornament */}
+              <svg
+                viewBox="0 0 16 16"
+                className="why-eyebrow-sparkle-left w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#D8A64E] fill-current shrink-0 opacity-90 drop-shadow-[0_0_2px_rgba(216,166,78,0.4)]"
+                aria-hidden="true"
+              >
+                <path d="M8 0 C8 4 12 8 16 8 C12 8 8 12 8 16 C8 12 4 8 0 8 C4 8 8 4 8 0 Z" />
+              </svg>
+
+              {/* Eyebrow Label Typography */}
+              <span className="why-eyebrow-text relative z-10 text-[10.5px] sm:text-xs font-bold tracking-[0.22em] sm:tracking-[0.26em] uppercase text-[#861B43] px-1 sm:px-1.5 whitespace-nowrap">
+                {t("why.eyebrow")}
+              </span>
+
+              {/* Right 4-Point Diamond Sparkle Ornament */}
+              <svg
+                viewBox="0 0 16 16"
+                className="why-eyebrow-sparkle-right w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#D8A64E] fill-current shrink-0 opacity-90 drop-shadow-[0_0_2px_rgba(216,166,78,0.4)]"
+                aria-hidden="true"
+              >
+                <path d="M8 0 C8 4 12 8 16 8 C12 8 8 12 8 16 C8 12 4 8 0 8 C4 8 8 4 8 0 Z" />
+              </svg>
+
+              {/* Right Tapered Hairline (Draws outward to the right from origin: left) */}
+              <div className="relative flex items-center justify-start overflow-hidden">
+                <span
+                  className="why-eyebrow-line-right block h-[1px] w-7 sm:w-12 md:w-16 bg-gradient-to-r from-[#D8A64E] via-[#D8A64E]/60 to-transparent"
+                  style={{ transformOrigin: "left center" }}
+                />
+              </div>
+
+              {/* Soft gold highlight sweep (runs once during entrance) */}
+              <div
+                className="why-eyebrow-sweep absolute -inset-y-1 inset-x-0 pointer-events-none overflow-hidden rounded-full"
+                style={{ opacity: 0 }}
+                aria-hidden="true"
+              >
+                <div
+                  className="why-eyebrow-sheen w-full h-full"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, transparent 0%, rgba(255, 235, 180, 0.65) 50%, transparent 100%)",
+                    transform: "translateX(-100%)",
+                  }}
+                />
+              </div>
+            </div>
           </div>
 
           {/* Main Display Heading */}
