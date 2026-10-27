@@ -7,6 +7,7 @@ import { prefersReducedMotion } from "../../utils/motion";
 export const NAV_ITEMS = [
   { id: "home", labelKey: "nav.home" },
   { id: "story", labelKey: "nav.story" },
+  { id: "why-cakestory", labelKey: "nav.whyUs" },
   { id: "franchise", labelKey: "nav.franchise" },
   { id: "gallery", labelKey: "nav.gallery" },
   { id: "outlets", labelKey: "nav.outlets" },
@@ -111,6 +112,7 @@ export default function Navigation() {
       const activationY = scrollY + 140;
 
       const storyEl = document.getElementById("story");
+      const whyEl = document.getElementById("why-cakestory");
       const franchiseEl = document.getElementById("franchise");
       const galleryEl = document.getElementById("gallery");
       const outletsEl = document.getElementById("outlets");
@@ -121,6 +123,7 @@ export default function Navigation() {
         el ? el.getBoundingClientRect().top + scrollY : Infinity;
 
       const storyTop = getTop(storyEl);
+      const whyTop = getTop(whyEl);
       const franchiseTop = getTop(franchiseEl);
       const galleryTop = getTop(galleryEl);
       const outletsTop = getTop(outletsEl);
@@ -130,9 +133,11 @@ export default function Navigation() {
       // Continuous, gapless partition:
       if (activationY < storyTop) {
         setActiveSection("home");
-      } else if (activationY < franchiseTop) {
+      } else if (activationY < whyTop) {
         // Encompasses BrandStorySection and NumbersSection seamlessly
         setActiveSection("story");
+      } else if (activationY < franchiseTop) {
+        setActiveSection("why-cakestory");
       } else if (activationY < galleryTop) {
         setActiveSection("franchise");
       } else if (activationY < outletsTop) {
@@ -282,16 +287,18 @@ export default function Navigation() {
         }`}
       >
         <div
-          className={`w-full mx-auto px-2.5 xs:px-3.5 sm:px-6 transition-all duration-500 ease-out ${
-            scrolled ? "max-w-5xl lg:max-w-6xl" : "max-w-7xl"
+          className={`w-full mx-auto px-2 xs:px-3 sm:px-5 lg:px-6 transition-all duration-500 ease-out ${
+            scrolled
+              ? "max-w-[98%] xl:max-w-[1480px] 2xl:max-w-[1640px]"
+              : "max-w-[99%] xl:max-w-[1560px] 2xl:max-w-[1720px]"
           }`}
         >
           <nav
             aria-label="Main Navigation"
-            className={`pointer-events-auto rounded-full flex items-center justify-between transition-all duration-500 ease-out ${
+            className={`pointer-events-auto rounded-full flex items-center justify-between gap-1.5 sm:gap-2.5 lg:gap-3 transition-all duration-500 ease-out ${
               scrolled
-                ? "px-2.5 xs:px-3 sm:px-4.5 py-1.5 bg-[#120516]/92 backdrop-blur-2xl border border-white/25 shadow-[0_16px_45px_-5px_rgba(0,0,0,0.65)] ring-1 ring-white/10"
-                : "px-2.5 xs:px-3.5 sm:px-6 py-1.5 sm:py-2 bg-black/55 backdrop-blur-xl border border-white/20 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.35)]"
+                ? "px-2.5 xs:px-3 sm:px-4 lg:px-5 py-1.5 bg-[#120516]/92 backdrop-blur-2xl border border-white/25 shadow-[0_16px_45px_-5px_rgba(0,0,0,0.65)] ring-1 ring-white/10"
+                : "px-2.5 xs:px-3.5 sm:px-5 lg:px-6 py-1.5 sm:py-2 bg-black/55 backdrop-blur-xl border border-white/20 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.35)]"
             }`}
           >
             {/* Brand Logo & Refined Typographic Wordmark */}
@@ -338,7 +345,7 @@ export default function Navigation() {
                     >
                       DESSERTS
                     </span>
-                    <span className="text-[7px] sm:text-[7.5px] font-sans tracking-widest font-normal uppercase opacity-75 text-amber-200/80 hidden sm:inline">
+                    <span className="text-[7px] sm:text-[7.5px] font-sans tracking-widest font-normal uppercase opacity-75 text-amber-200/80 hidden xl:inline">
                       • PUNE
                     </span>
                   </div>
@@ -349,7 +356,7 @@ export default function Navigation() {
             {/* Desktop Navigation Links with Smooth Animated Gliding Pill */}
             <div
               ref={navContainerRef}
-              className="hidden lg:flex items-center relative p-1 rounded-full"
+              className="hidden lg:flex items-center relative p-0.5 xl:p-1 rounded-full shrink min-w-0"
             >
               {/* Gliding Pill Active Indicator */}
               <div
@@ -372,8 +379,8 @@ export default function Navigation() {
                     onClick={() => handleNavClick(item.id)}
                     className={`relative z-10 rounded-full font-medium transition-all duration-300 cursor-pointer whitespace-nowrap text-center flex items-center justify-center ${
                       scrolled
-                        ? "px-3 py-1 text-[12.5px] xl:text-[13px]"
-                        : "px-3.5 py-1.5 text-[13.5px] xl:text-[14px]"
+                        ? "px-2 lg:px-2.5 xl:px-3 2xl:px-3.5 py-1 text-[11px] lg:text-[11.5px] xl:text-[12.5px] 2xl:text-[13px]"
+                        : "px-2 lg:px-2.5 xl:px-3.5 2xl:px-4 py-1.5 text-[11.5px] lg:text-[12px] xl:text-[13px] 2xl:text-[14px]"
                     } ${
                       isActive
                         ? "text-amber-300 font-semibold"
@@ -388,17 +395,17 @@ export default function Navigation() {
             </div>
 
             {/* Action Group */}
-            <div className="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5 shrink-0">
+            <div className="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5 xl:gap-3 shrink-0">
               {/* Marathi / English Language Toggle Button */}
               <button
                 id="lang-toggle-btn"
                 onClick={toggleLanguage}
                 title="Toggle Language (मराठी / English)"
                 aria-label="Toggle Language (मराठी / English)"
-                className={`rounded-full font-semibold transition-all duration-500 ease-out flex items-center gap-1 sm:gap-1.5 cursor-pointer shadow-xs hover:scale-105 active:scale-95 bg-white/10 hover:bg-white/20 border border-white/25 text-white ${
+                className={`rounded-full font-semibold transition-all duration-500 ease-out flex items-center gap-1 sm:gap-1.5 cursor-pointer shadow-xs hover:scale-105 active:scale-95 bg-white/10 hover:bg-white/20 border border-white/25 text-white shrink-0 ${
                   scrolled
-                    ? "px-2 xs:px-2.5 py-1 text-[10.5px] sm:text-xs"
-                    : "px-2 xs:px-2.5 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-[13px]"
+                    ? "px-2 xs:px-2.5 sm:px-3 py-1 text-[10.5px] sm:text-xs"
+                    : "px-2 xs:px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-[11px] sm:text-xs xl:text-[13px]"
                 }`}
               >
                 <span className="text-[10px] sm:text-xs font-mono opacity-70">文A</span>
@@ -414,8 +421,8 @@ export default function Navigation() {
                 onClick={openModal}
                 className={`btn-primary whitespace-nowrap shadow-md shadow-rose-950/20 rounded-full cursor-pointer hover:scale-105 active:scale-95 transition-all duration-500 ease-out shrink-0 ${
                   scrolled
-                    ? "!py-1 sm:!py-1.5 !px-2.5 sm:!px-3.5 !text-[11px] sm:!text-xs !font-bold"
-                    : "!py-1 sm:!py-2 !px-2.5 xs:!px-3 sm:!px-4.5 !text-[11px] sm:!text-[13px] !font-bold"
+                    ? "!py-1 sm:!py-1.5 !px-2.5 sm:!px-3.5 xl:!px-4 !text-[11px] sm:!text-xs xl:!text-[12.5px] !font-bold"
+                    : "!py-1 sm:!py-1.5 xl:!py-2 !px-2.5 xs:!px-3 sm:!px-4 xl:!px-5 !text-[11px] sm:!text-xs xl:!text-[13px] !font-bold"
                 }`}
                 aria-label="Open Franchise Enquiry Form"
               >

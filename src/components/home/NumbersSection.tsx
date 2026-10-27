@@ -278,7 +278,7 @@ export default function NumbersSection() {
     <section
       ref={sectionRef}
       aria-label="Key Performance Statistics"
-      className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#faf7f2] text-stone-800 border-t border-stone-200/60"
+      className="pt-20 sm:pt-24 pb-14 sm:pb-18 px-4 sm:px-6 lg:px-8 bg-[#faf7f2] text-stone-800 border-t border-stone-200/60"
     >
       <div className="max-w-6xl mx-auto">
         {/* 1. Section Header: Refined Editorial Typography */}

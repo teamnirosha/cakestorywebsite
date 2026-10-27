@@ -665,7 +665,7 @@ export default function WhyCakeStorySection() {
       ref={sectionRef}
       id="why-cakestory"
       aria-label="Why CakeStory: More Than Just Cakes"
-      className="relative scroll-mt-28 sm:scroll-mt-32 pt-32 sm:pt-36 md:pt-40 pb-0 bg-[#FFF9F2] text-[#351522] overflow-hidden select-none transition-colors duration-700"
+      className="relative scroll-mt-24 sm:scroll-mt-28 pt-0 pb-0 bg-[#FFF9F2] text-[#351522] overflow-hidden select-none transition-colors duration-700"
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="region"
@@ -690,7 +690,31 @@ export default function WhyCakeStorySection() {
         aria-hidden="true"
       />
 
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* Top Decorative Sweeping Waves (Matching Bottom Divider) */}
+      <div className="relative w-full leading-none z-10" aria-hidden="true">
+        <svg
+          viewBox="0 0 1440 90"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          className="w-full h-12 sm:h-16 md:h-20 block"
+          style={{ transform: "scaleY(-1)" }}
+        >
+          {/* Subtle blush transitional wave */}
+          <path
+            d="M0 90C280 88 440 45 740 45C1040 45 1240 78 1440 68V90H0Z"
+            fill="#F5DDD4"
+            fillOpacity="0.85"
+          />
+          {/* Deep berry / burgundy top sweep */}
+          <path
+            d="M0 90C140 90 260 22 480 40C680 58 760 76 960 88L1040 90H0Z"
+            fill="#741334"
+          />
+        </svg>
+      </div>
+
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-8 sm:pt-12">
         {/* 2. Editorial Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
           {/* Eyebrow: Luxury Brand Divider with Tapered Hairlines, 4-Point Sparkle Ornaments & Subtle Ambient Aura */}

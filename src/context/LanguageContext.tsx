@@ -20,6 +20,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Nav
     "nav.home": "Home",
     "nav.story": "Our Story",
+    "nav.whyUs": "Why US ?",
     "nav.franchise": "Business Model",
     "nav.gallery": "Sweet Scenes",
     "nav.outlets": "Outlets",
@@ -378,6 +379,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Nav
     "nav.home": "मुख्यपृष्ठ",
     "nav.story": "आमची यशोगाथा",
+    "nav.whyUs": "केकस्टोरीचं का ?",
     "nav.franchise": "बिझनेस मॉडेल",
     "nav.gallery": "स्वीट सीन्स",
     "nav.outlets": "आउटलेट्स",
