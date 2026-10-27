@@ -3,6 +3,7 @@ import Preloader from "../components/common/Preloader";
 import StorefrontHero from "../components/home/StorefrontHero";
 import BrandStorySection from "../components/home/BrandStorySection";
 import NumbersSection from "../components/home/NumbersSection";
+import WhyCakeStorySection from "../components/home/WhyCakeStorySection";
 import FranchiseModelSection from "../components/home/FranchiseModelSection";
 import InstagramGallerySection from "../components/home/InstagramGallerySection";
 import OutletsMapSection from "../components/home/OutletsMapSection";
@@ -24,7 +25,10 @@ export default function Home() {
       {/* 4. Numbers Speak Volumes: 4 Stat Cards + Red Trust Banner */}
       <NumbersSection />
 
-      {/* 5. Franchise Business Model: Zero Baking, Compact Store & 4 Steps */}
+      {/* 5. Why CakeStory: More Than Just Cakes (Product Showcase & Brand Values) */}
+      <WhyCakeStorySection />
+
+      {/* 6. Franchise Business Model: Zero Baking, Compact Store & 4 Steps */}
       <FranchiseModelSection />
 
       {/* 6. Instagram Reel Gallery: Perspective 3D Carousel & Highlights */}

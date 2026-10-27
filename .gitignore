@@ -45,4 +45,7 @@ desktop.ini
 
 # Test outputs and browser sessions
 scripts/output/
-scratch/
+scratch/
+*.mp4
+*.mov
+*.webm
