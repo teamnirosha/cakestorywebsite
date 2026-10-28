@@ -134,7 +134,7 @@ export default function AdminLayout({
               }`}
           >
             <img
-              src="/assets/logo/cs-logo.png"
+              src="/assets/logo/cs-final-logo.png"
               alt="CakeStory Desserts"
               className="h-8 w-auto object-contain shrink-0"
             />

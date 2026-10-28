@@ -303,7 +303,7 @@ export default function Franchise() {
       <section className="reveal-card py-16 px-6">
         <div className="max-w-4xl mx-auto text-center glass rounded-[3rem] p-8 sm:p-14 bg-gradient-to-br from-pink-500/10 via-rose-300/15 to-amber-200/15 border border-white shadow-2xl">
           <div className="w-20 h-20 mx-auto mb-5 p-2.5 rounded-2xl glass-soft border border-white/80 shadow-md flex items-center justify-center bg-white/70">
-            <img src="/assets/logo/cs-logo.png" alt="CakeStory Desserts" className="max-h-full max-w-full object-contain filter drop-shadow-xs" />
+            <img src="/assets/logo/cs-final-logo.png" alt="CakeStory Desserts" className="max-h-full max-w-full object-contain filter drop-shadow-xs" />
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#2a1d2e] mb-3">
             Ready to Take the Next Step?

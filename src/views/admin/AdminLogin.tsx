@@ -131,7 +131,7 @@ export default function AdminLogin() {
           <div className="text-center mb-10">
             <Link to="/" className="inline-block transition-transform duration-300 hover:scale-105">
               <img
-                src="/assets/logo/cs-logo.png"
+                src="/assets/logo/cs-final-logo.png"
                 alt="CakeStory Desserts"
                 className="h-24 sm:h-28 md:h-32 w-auto object-contain mx-auto drop-shadow-sm"
               />

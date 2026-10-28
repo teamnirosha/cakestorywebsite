@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import csLogoImg from "../../assets/logo/cs-logo.png";
+import csLogoImg from "../../assets/logo/cs-final-logo.png";
 import { prefersReducedMotion } from "../../utils/motion";
 
 interface GoldEmblemHeroVisualProps {

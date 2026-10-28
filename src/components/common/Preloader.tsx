@@ -52,7 +52,7 @@ export default function Preloader() {
         {/* Brand Logo */}
         <div className="mb-5 flex items-center justify-center">
           <img
-            src="/assets/logo/cs-logo.png"
+            src="/assets/logo/cs-final-logo.png"
             alt="CakeStory Desserts"
             className="w-44 sm:w-56 h-auto object-contain filter drop-shadow-2xl"
           />

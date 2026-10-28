@@ -314,7 +314,7 @@ export default function Navigation() {
               >
                 <div className="relative transition-transform duration-300 group-hover:scale-105 flex items-center py-0.5 shrink-0">
                   <img
-                    src="/assets/logo/cs-logo.png"
+                    src="/assets/logo/cs-final-logo.png"
                     alt="CakeStory Desserts - Every Flavour Has A Story"
                     className={`w-auto object-contain drop-shadow-md transition-all duration-500 ease-out ${
                       scrolled ? "h-6.5 xs:h-7 sm:h-8 lg:h-8.5" : "h-7.5 xs:h-8 sm:h-9.5 lg:h-10"
@@ -478,7 +478,7 @@ export default function Navigation() {
               <div className="flex items-center justify-between pb-5 border-b border-slate-100">
                 <div className="flex items-center gap-2.5">
                   <img
-                    src="/assets/logo/cs-logo.png"
+                    src="/assets/logo/cs-final-logo.png"
                     alt="CakeStory Desserts"
                     className="h-10 w-auto object-contain drop-shadow-xs"
                   />

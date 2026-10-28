@@ -240,7 +240,7 @@ export default function Footer() {
           <div className="lg:col-span-5 space-y-4 sm:space-y-5">
             <div className="inline-block">
               <img
-                src="/assets/logo/cs-logo.png"
+                src="/assets/logo/cs-final-logo.png"
                 alt="CakeStory Desserts - Every Flavour Has A Story"
                 className="h-12 sm:h-14 w-auto object-contain"
               />

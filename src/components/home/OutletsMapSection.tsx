@@ -66,7 +66,7 @@ function PhoneIcon({ className = "w-3 h-3" }: { className?: string }) {
 const customIcon = (active: boolean) =>
   L.divIcon({
     className: "cs-marker-wrap",
-    html: `<div class="cs-marker ${active ? "active" : ""}"><div class="cs-marker-badge"><img src="/assets/logo/cs-logo.png" alt="CakeStory" class="cs-marker-logo" /></div></div>`,
+    html: `<div class="cs-marker ${active ? "active" : ""}"><div class="cs-marker-badge"><img src="/assets/logo/cs-final-logo.png" alt="CakeStory" class="cs-marker-logo" /></div></div>`,
     iconSize: [42, 42],
     iconAnchor: [21, 42],
     popupAnchor: [0, -42],

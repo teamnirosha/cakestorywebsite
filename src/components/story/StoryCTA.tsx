@@ -22,7 +22,7 @@ export default function StoryCTA() {
           <div className="relative z-20">
             <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-6 p-2.5 rounded-2xl glass-soft border border-white/40 shadow-lg flex items-center justify-center bg-white/20 backdrop-blur-md">
               <img
-                src="/assets/logo/cs-logo.png"
+                src="/assets/logo/cs-final-logo.png"
                 alt="CakeStory Desserts"
                 className="max-h-full max-w-full object-contain filter drop-shadow-md"
               />

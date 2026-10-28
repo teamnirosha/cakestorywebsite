@@ -6,7 +6,7 @@ export function LoadingScreen({ label = "Loading CakeStory Desserts..." }: { lab
       <div className="relative w-20 h-20 flex items-center justify-center">
         <div className="absolute inset-0 rounded-full bg-gradient-to-br from-pink-300 to-rose-400 spin-slow opacity-80" />
         <div className="absolute inset-1.5 rounded-full bg-white flex items-center justify-center p-2 shadow-inner">
-          <img src="/assets/logo/cs-logo.png" alt="CakeStory Desserts" className="max-h-full max-w-full object-contain" />
+          <img src="/assets/logo/cs-final-logo.png" alt="CakeStory Desserts" className="max-h-full max-w-full object-contain" />
         </div>
       </div>
       <p className="text-sm text-[#5a4a5e] font-medium">{label}</p>

@@ -7,6 +7,7 @@ import { defineConfig } from "vite";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Updated branding logo configuration
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
