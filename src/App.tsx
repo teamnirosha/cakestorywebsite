@@ -6,6 +6,7 @@ import FloatingWhatsApp from "./components/common/FloatingWhatsApp";
 import { ToastProvider } from "./components/common/Toast";
 import { FranchiseModalProvider } from "./components/common/FranchiseModal";
 import { LoadingScreen } from "./components/common/Loading";
+import Preloader from "./components/common/Preloader";
 import { authService, isSupabaseConfigured, syncAllFromSupabase } from "./services/data";
 
 // Core Public Views (Eager for instant First Contentful Paint)
@@ -88,6 +89,7 @@ export default function App() {
     <LanguageProvider>
       <ToastProvider>
         <FranchiseModalProvider>
+          <Preloader />
           <ScrollToTop />
           <Suspense fallback={<LoadingScreen />}>
             <Routes>

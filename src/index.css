@@ -624,3 +624,354 @@ html.lang-mr select {
   }
 }
 
+/* ==========================================================================
+   CakeStory Desserts — Premium Loading Screen & Brand Reveal System
+   Exact implementation matching cakestory_loading_to_home_preview.html
+   ========================================================================== */
+
+:root {
+  --cs-loader-wine: #78183d;
+  --cs-loader-berry: #a62b55;
+  --cs-loader-gold: #d5b06b;
+  --cs-loader-gold-soft: #cda75c;
+  --cs-loader-ivory: #fff9f2;
+  --cs-loader-ink: #3d1d2b;
+}
+
+.cs-loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 45%, #fffefa 0%, #fff8f1 43%, #f6e7e1 100%);
+  transition: opacity 1s cubic-bezier(0.22, 0.7, 0.2, 1), visibility 1s;
+  pointer-events: auto;
+}
+
+.cs-loader-overlay::before,
+.cs-loader-overlay::after {
+  content: "";
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 179, 106, 0.21);
+  pointer-events: none;
+}
+
+.cs-loader-overlay::before {
+  width: min(95vw, 1000px);
+  box-shadow: 0 0 0 35px rgba(212, 179, 106, 0.04), 0 0 0 90px rgba(212, 179, 106, 0.03);
+  animation: cs-loader-breathe 6s ease-in-out infinite;
+}
+
+.cs-loader-overlay::after {
+  width: min(70vw, 720px);
+  border-color: rgba(120, 24, 61, 0.1);
+  animation: cs-loader-spin 40s linear infinite;
+}
+
+.cs-loader-overlay.done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cs-loader-ornament {
+  position: absolute;
+  border: 1px solid rgba(212, 179, 106, 0.25);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.cs-loader-ornament-a {
+  top: -170px;
+  left: -90px;
+  width: 260px;
+  height: 260px;
+}
+
+.cs-loader-ornament-b {
+  right: -150px;
+  bottom: -175px;
+  width: 340px;
+  height: 340px;
+}
+
+.cs-loader-card {
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 490px);
+  min-height: 590px;
+  padding: 45px 34px 35px;
+  border: 1px solid rgba(214, 184, 120, 0.46);
+  border-radius: 230px 230px 34px 34px;
+  background: rgba(255, 253, 249, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 25px 85px rgba(100, 43, 55, 0.1), inset 0 0 0 7px #fff9f1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  animation: cs-loader-rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cs-loader-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--cs-loader-berry);
+  margin: 3px 0 35px;
+}
+
+.cs-brand-orbit {
+  position: relative;
+  width: 205px;
+  height: 205px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 32px;
+}
+
+.cs-orbit-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--cs-loader-gold-soft);
+  border-radius: 50%;
+  animation: cs-loader-spin 14s linear infinite;
+}
+
+.cs-orbit-ring::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cs-loader-gold);
+  top: 18px;
+  left: 30px;
+  box-shadow: 0 0 15px rgba(213, 176, 107, 0.6);
+}
+
+.cs-orbit-ring-inner {
+  position: absolute;
+  inset: 13px;
+  border-radius: 50%;
+  border: 1px dashed rgba(166, 43, 85, 0.27);
+  animation: cs-loader-spinback 24s linear infinite;
+}
+
+.cs-logo-halo {
+  position: absolute;
+  inset: 27px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 45px rgba(213, 176, 107, 0.16), inset 0 0 0 1px rgba(213, 176, 107, 0.22);
+}
+
+.cs-loader-logo {
+  position: relative;
+  width: 150px;
+  height: 125px;
+  object-fit: contain;
+  filter: drop-shadow(0 9px 12px rgba(85, 34, 53, 0.08));
+  animation: cs-loader-float 4s ease-in-out infinite;
+}
+
+.cs-loader-h1 {
+  font-family: Georgia, "Fraunces", "Noto Serif Devanagari", serif;
+  font-size: clamp(30px, 4vw, 39px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: var(--cs-loader-wine);
+  margin: 0;
+}
+
+.cs-loader-copy {
+  font-size: 13px;
+  line-height: 1.75;
+  color: #866b76;
+  margin: 14px 0 28px;
+  max-width: 300px;
+}
+
+.cs-loader-progress {
+  width: min(100%, 280px);
+  text-align: left;
+}
+
+.cs-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #927b80;
+  margin-bottom: 10px;
+}
+
+.cs-progress-pct {
+  font-weight: 700;
+  color: var(--cs-loader-wine);
+  font-variant-numeric: tabular-nums;
+}
+
+.cs-progress-track {
+  height: 3px;
+  background: #eadbd8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cs-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cs-loader-wine), #bb5571, var(--cs-loader-gold));
+  box-shadow: 0 0 12px rgba(213, 176, 107, 0.5);
+  transition: width 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cs-loader-status {
+  margin-top: 13px;
+  color: #a18b8e;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.cs-status-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: var(--cs-loader-gold);
+  border-radius: 50%;
+  margin-right: 8px;
+  flex-shrink: 0;
+  animation: cs-loader-blink 1.2s infinite;
+}
+
+.cs-loader-footer {
+  position: absolute;
+  bottom: 25px;
+  left: 15px;
+  right: 15px;
+  text-align: center;
+  font-family: Georgia, "Fraunces", serif;
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #987e82;
+}
+
+@keyframes cs-loader-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes cs-loader-spinback {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes cs-loader-breathe {
+  0%, 100% { transform: scale(0.97); opacity: 0.6; }
+  50% { transform: scale(1.02); opacity: 1; }
+}
+
+@keyframes cs-loader-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes cs-loader-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@keyframes cs-loader-blink {
+  50% { opacity: 0.35; }
+}
+
+@media (max-width: 700px) {
+  .cs-loader-card {
+    min-height: 520px;
+    padding: 36px 24px 28px;
+    border-radius: 180px 180px 28px 28px;
+  }
+  .cs-brand-orbit {
+    width: 170px;
+    height: 170px;
+    margin-bottom: 25px;
+  }
+  .cs-loader-logo {
+    width: 125px;
+    height: 105px;
+  }
+  .cs-loader-eyebrow {
+    margin-bottom: 28px;
+    font-size: 9px;
+  }
+  .cs-loader-h1 {
+    font-size: 32px;
+  }
+  .cs-loader-copy {
+    font-size: 12px;
+    margin-bottom: 24px;
+  }
+  .cs-loader-footer {
+    bottom: 15px;
+  }
+}
+
+@media (max-height: 700px) {
+  .cs-loader-card {
+    min-height: 470px;
+    padding: 24px 20px 20px;
+  }
+  .cs-brand-orbit {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 16px;
+  }
+  .cs-loader-logo {
+    width: 110px;
+    height: 90px;
+  }
+  .cs-loader-eyebrow {
+    margin-bottom: 16px;
+  }
+  .cs-loader-copy {
+    margin: 8px 0 16px;
+  }
+  .cs-loader-footer {
+    bottom: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-loader-overlay,
+  .cs-loader-overlay::before,
+  .cs-loader-overlay::after,
+  .cs-orbit-ring,
+  .cs-orbit-ring-inner,
+  .cs-loader-logo,
+  .cs-loader-card,
+  .cs-status-dot {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+

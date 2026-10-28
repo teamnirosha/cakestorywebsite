@@ -1,5 +1,4 @@
 import PageShell from "../components/layout/PageShell";
-import Preloader from "../components/common/Preloader";
 import StorefrontHero from "../components/home/StorefrontHero";
 import BrandStorySection from "../components/home/BrandStorySection";
 import NumbersSection from "../components/home/NumbersSection";
@@ -13,10 +12,7 @@ import FranchiseLeadSection from "../components/home/FranchiseLeadSection";
 export default function Home() {
   return (
     <PageShell noTopPadding>
-      {/* 1. Animated Preloader inspired by reference screenshot */}
-      <Preloader />
-
-      {/* 2. Storefront Hero with 3D render & high-converting low-clutter copy */}
+      {/* 1. Storefront Hero with 3D render & high-converting low-clutter copy */}
       <StorefrontHero />
 
       {/* 3. The Story: Timeline Milestones + Founder Leadership Card */}
