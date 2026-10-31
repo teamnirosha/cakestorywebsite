@@ -1,16 +1,15 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { gsap } from "gsap";
 import { useLanguage } from "../../context/LanguageContext";
-import { prefersReducedMotion, MOTION } from "../../utils/motion";
+import { prefersReducedMotion } from "../../utils/motion";
 
-import customCakesImg from "../../assets/why-cakestory/custom-cakes.jpg";
+import themeCakesImg from "../../assets/why-cakestory/theme-cakes.jpg";
+import cupcakesBrowniesImg from "../../assets/why-cakestory/cupcakes-brownies.jpg";
 import iceCreamImg from "../../assets/why-cakestory/ice-cream.jpg";
-import coldCoffeeImg from "../../assets/why-cakestory/cold-coffee.jpg";
-import chocolateBouquetsImg from "../../assets/why-cakestory/chocolate-bouquets.jpg";
 import dessertsImg from "../../assets/why-cakestory/desserts.jpg";
+import snacksImg from "../../assets/why-cakestory/snacks.jpg";
 
 // Handcrafted SVG vector icons matching the reference mockup and design tokens
-function CakeIcon({ className = "w-5 h-5" }: { className?: string }) {
+function ThemeCakeIcon({ className = "w-5 h-5" }: { className?: string }) {
   return (
     <svg
       className={className}
@@ -22,11 +21,34 @@ function CakeIcon({ className = "w-5 h-5" }: { className?: string }) {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8" />
-      <path d="M4 16s1.5-1 4-1 4 2 8 0 4-1 4-1" />
-      <path d="M2 21h20" />
-      <path d="M7 11V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4" />
-      <line x1="12" y1="2" x2="12" y2="5" />
+      <rect x="3" y="14" width="18" height="7" rx="1.5" />
+      <rect x="6" y="9" width="12" height="5" rx="1" />
+      <path d="M12 4v2" />
+      <path d="M12 2a1 1 0 0 1 1 1c0 .5-.5 1-1 1s-1-.5-1-1a1 1 0 0 1 1-1z" fill="currentColor" />
+      <line x1="3" y1="18" x2="21" y2="18" strokeDasharray="1 2" />
+      <line x1="6" y1="12" x2="18" y2="12" strokeDasharray="1 2" />
+    </svg>
+  );
+}
+
+function CupcakeIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M18 10h-1.26A5 5 0 0 0 7.26 10H6a3 3 0 0 0-3 3v1a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1a3 3 0 0 0-3-3Z" />
+      <path d="M5 16l1.5 6h11L19 16" />
+      <circle cx="12" cy="4" r="1.5" />
+      <path d="M12 5.5V7" />
+      <path d="M9 16l-.8 6" />
+      <path d="M15 16l.8 6" />
     </svg>
   );
 }
@@ -45,49 +67,8 @@ function IceCreamIcon({ className = "w-5 h-5" }: { className?: string }) {
     >
       <path d="m7 11 5 11 5-11" />
       <path d="M12 2a5 5 0 0 0-4.9 6.02A3.5 3.5 0 0 0 7 11h10a3.5 3.5 0 0 0-.1-2.98A5 5 0 0 0 12 2Z" />
-    </svg>
-  );
-}
-
-function ColdCoffeeIcon({ className = "w-5 h-5" }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
-      <path d="M5 8h12v9a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8Z" />
-      <line x1="6" y1="2" x2="6" y2="4" />
-      <line x1="10" y1="2" x2="10" y2="4" />
-      <line x1="14" y1="2" x2="14" y2="4" />
-    </svg>
-  );
-}
-
-function BouquetIcon({ className = "w-5 h-5" }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M12 2a4 4 0 0 0-4 4c0 1.6 1 3 2.4 3.6L6 22h12l-4.4-12.4A4 4 0 0 0 12 2Z" />
-      <circle cx="12" cy="6" r="1.5" />
-      <circle cx="8" cy="8" r="1.5" />
-      <circle cx="16" cy="8" r="1.5" />
-      <path d="M10 14h4" />
-      <path d="M9 18h6" />
+      <path d="M9 14.5l6-3.5" />
+      <path d="M9.5 17.5l4-2.5" />
     </svg>
   );
 }
@@ -104,16 +85,16 @@ function DessertsIcon({ className = "w-5 h-5" }: { className?: string }) {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M18 10h-1.26A5 5 0 0 0 7.26 10H6a3 3 0 0 0-3 3v1a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1a3 3 0 0 0-3-3Z" />
-      <path d="M5 16l1.5 6h11L19 16" />
-      <circle cx="12" cy="4" r="1.5" />
-      <path d="M12 5.5V7" />
+      <path d="M4 8h16l-2 8a3 3 0 0 1-3 2H9a3 3 0 0 1-3-2L4 8Z" />
+      <path d="M6 8c0-2.2 2.7-4 6-4s6 1.8 6 4" />
+      <circle cx="12" cy="3" r="1.5" fill="currentColor" />
+      <path d="M12 18v3" />
+      <path d="M9 21h6" />
     </svg>
   );
 }
 
-// Brand value icons
-function LeafIcon({ className = "w-6 h-6" }: { className?: string }) {
+function SnacksIcon({ className = "w-5 h-5" }: { className?: string }) {
   return (
     <svg
       className={className}
@@ -125,63 +106,44 @@ function LeafIcon({ className = "w-6 h-6" }: { className?: string }) {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
-      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+      <path d="M4 14c2-4 7-8 12-7 3 .6 5 3 4 6-1 3-5 5-9 5-3 0-6-1.5-7-4Z" />
+      <path d="M8 9.5c1.5 2 3.5 4 6.5 4.5" />
+      <path d="M11 7c1 2 2.5 3.5 5 4" />
+      <path d="M3 13.5c-.8.5-1.5 1.5-1 2.5s2 1.5 3.5 1" />
     </svg>
   );
 }
 
-function ShieldCheckIcon({ className = "w-6 h-6" }: { className?: string }) {
+function ChevronLeftIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
     <svg
       className={className}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.75"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      <path d="m9 12 2 2 4-4" />
+      <path d="m15 18-6-6 6-6" />
     </svg>
   );
 }
 
-function HeartIcon({ className = "w-6 h-6" }: { className?: string }) {
+function ChevronRightIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
     <svg
       className={className}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.75"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-    </svg>
-  );
-}
-
-function SmileIcon({ className = "w-6 h-6" }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-      <line x1="9" y1="9" x2="9.01" y2="9" strokeWidth="2.5" />
-      <line x1="15" y1="9" x2="15.01" y2="9" strokeWidth="2.5" />
+      <path d="m9 18 6-6-6-6" />
     </svg>
   );
 }
@@ -190,36 +152,30 @@ export interface ProductCardData {
   id: string;
   titleKey: string;
   descKey: string;
-  tagKey: string;
-  badgeKey: string;
+  accentKey: string;
   image: string;
   alt: string;
   icon: React.ComponentType<{ className?: string }>;
-  accentGlow: string;
 }
 
 export default function WhyCakeStorySection() {
   const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement | null>(null);
 
-  // Authoritative continuous autoplay sequence index (starts at 2: Cold Coffee)
-  const [autoplayIndex, setAutoplayIndex] = useState<number>(2);
+  // Authoritative active card index (starts at 2: Ice Cream, matching reference screenshot)
+  const [activeIndex, setActiveIndex] = useState<number>(2);
 
-  // Temporary hover override index (null when not hovering any card)
+  // Hover preview state
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Interaction flag: pauses autoplay during active hover, touch, or manual click
+  // Interaction flag: pauses autoplay during active hover, touch, or manual interaction
   const [isInteracting, setIsInteracting] = useState<boolean>(false);
 
   // Viewport visibility tracked via IntersectionObserver
   const [isInViewport, setIsInViewport] = useState<boolean>(true);
 
-  // Pill and dynamic ambient aura display the hovered card if hovering, or the center card if not
-  const pillDisplayIndex = hoveredIndex !== null ? hoveredIndex : autoplayIndex;
-
-  // Refs for bulletproof timer lifecycle management (prevents competing intervals/leaks)
+  // Timer lifecycle management
   const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const leaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const recoveryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Touch swipe support for mobile
@@ -228,90 +184,61 @@ export default function WhyCakeStorySection() {
 
   const productCards: ProductCardData[] = [
     {
-      id: "custom-cakes",
+      id: "theme-cakes",
       titleKey: "why.card1Title",
       descKey: "why.card1Desc",
-      tagKey: "why.card1Tag",
-      badgeKey: "why.card1Badge",
-      image: customCakesImg,
-      alt: "CakeStory Custom Celebration Cake",
-      icon: CakeIcon,
-      accentGlow: "rgba(230, 160, 180, 0.22)",
+      accentKey: "why.card1Accent",
+      image: themeCakesImg,
+      alt: "CakeStory Theme Celebration Cakes",
+      icon: ThemeCakeIcon,
+    },
+    {
+      id: "cupcakes-brownies",
+      titleKey: "why.card2Title",
+      descKey: "why.card2Desc",
+      accentKey: "why.card2Accent",
+      image: cupcakesBrowniesImg,
+      alt: "CakeStory Gourmet Cupcakes and Brownies Box",
+      icon: CupcakeIcon,
     },
     {
       id: "ice-cream",
-      titleKey: "why.card2Title",
-      descKey: "why.card2Desc",
-      tagKey: "why.card2Tag",
-      badgeKey: "why.card2Badge",
-      image: iceCreamImg,
-      alt: "CakeStory Artisan Ice Cream Scoops",
-      icon: IceCreamIcon,
-      accentGlow: "rgba(245, 180, 195, 0.22)",
-    },
-    {
-      id: "cold-coffee",
       titleKey: "why.card3Title",
       descKey: "why.card3Desc",
-      tagKey: "why.card3Tag",
-      badgeKey: "why.card3Badge",
-      image: coldCoffeeImg,
-      alt: "CakeStory Chilled Frappe Cold Coffee",
-      icon: ColdCoffeeIcon,
-      accentGlow: "rgba(216, 166, 78, 0.24)",
-    },
-    {
-      id: "chocolate-bouquets",
-      titleKey: "why.card4Title",
-      descKey: "why.card4Desc",
-      tagKey: "why.card4Tag",
-      badgeKey: "why.card4Badge",
-      image: chocolateBouquetsImg,
-      alt: "CakeStory Luxury Chocolate Bouquet",
-      icon: BouquetIcon,
-      accentGlow: "rgba(134, 27, 67, 0.22)",
+      accentKey: "why.card3Accent",
+      image: iceCreamImg,
+      alt: "CakeStory Pure Dairy Artisan Ice Cream Scoops",
+      icon: IceCreamIcon,
     },
     {
       id: "desserts",
+      titleKey: "why.card4Title",
+      descKey: "why.card4Desc",
+      accentKey: "why.card4Accent",
+      image: dessertsImg,
+      alt: "CakeStory Layered Gourmet Sundae Desserts",
+      icon: DessertsIcon,
+    },
+    {
+      id: "snacks",
       titleKey: "why.card5Title",
       descKey: "why.card5Desc",
-      tagKey: "why.card5Tag",
-      badgeKey: "why.card5Badge",
-      image: dessertsImg,
-      alt: "CakeStory Handcrafted Gourmet Desserts",
-      icon: DessertsIcon,
-      accentGlow: "rgba(235, 175, 95, 0.22)",
+      accentKey: "why.card5Accent",
+      image: snacksImg,
+      alt: "CakeStory Fresh Bakery Snacks and Croissants",
+      icon: SnacksIcon,
     },
   ];
 
-  const brandValues = [
-    {
-      id: "vegetarian",
-      labelKey: "why.value1Label",
-      descKey: "why.value1Desc",
-      icon: LeafIcon,
-    },
-    {
-      id: "hygienic",
-      labelKey: "why.value2Label",
-      descKey: "why.value2Desc",
-      icon: ShieldCheckIcon,
-    },
-    {
-      id: "quality",
-      labelKey: "why.value3Label",
-      descKey: "why.value3Desc",
-      icon: HeartIcon,
-    },
-    {
-      id: "variety",
-      labelKey: "why.value4Label",
-      descKey: "why.value4Desc",
-      icon: SmileIcon,
-    },
-  ];
+  // Helper for modular wrapping distance in range [-2, 2]
+  const getModularOffset = useCallback((index: number, active: number, total: number) => {
+    let diff = index - active;
+    while (diff > total / 2) diff -= total;
+    while (diff < -total / 2) diff += total;
+    return diff;
+  }, []);
 
-  // 1. IntersectionObserver: Suspends autoplay when outside viewport and resumes seamlessly on entry
+  // 1. IntersectionObserver: Suspends autoplay when outside viewport
   useEffect(() => {
     const el = sectionRef.current;
     if (!el || typeof IntersectionObserver === "undefined") return;
@@ -330,9 +257,8 @@ export default function WhyCakeStorySection() {
     return () => observer.disconnect();
   }, []);
 
-  // 2. Continuous Autoplay: Cycles through all 5 categories every 3.5 seconds
+  // 2. Smooth Autoplay (Cycles every 4.2 seconds when not interacting)
   useEffect(() => {
-    // If reduced motion, or section is outside viewport, or user is currently hovering/interacting, pause timer
     if (prefersReducedMotion() || !isInViewport || hoveredIndex !== null || isInteracting) {
       if (autoplayTimerRef.current) {
         clearInterval(autoplayTimerRef.current);
@@ -346,8 +272,8 @@ export default function WhyCakeStorySection() {
     }
 
     autoplayTimerRef.current = setInterval(() => {
-      setAutoplayIndex((prev) => (prev + 1) % productCards.length);
-    }, 3800);
+      setActiveIndex((prev) => (prev + 1) % productCards.length);
+    }, 4200);
 
     return () => {
       if (autoplayTimerRef.current) {
@@ -361,17 +287,12 @@ export default function WhyCakeStorySection() {
   useEffect(() => {
     return () => {
       if (autoplayTimerRef.current) clearInterval(autoplayTimerRef.current);
-      if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
       if (recoveryTimeoutRef.current) clearTimeout(recoveryTimeoutRef.current);
     };
   }, []);
 
-  // 3. Hover Interaction Handlers with automatic smooth recovery
+  // Interaction Handlers
   const handleCardMouseEnter = useCallback((idx: number) => {
-    if (leaveTimeoutRef.current) {
-      clearTimeout(leaveTimeoutRef.current);
-      leaveTimeoutRef.current = null;
-    }
     if (recoveryTimeoutRef.current) {
       clearTimeout(recoveryTimeoutRef.current);
       recoveryTimeoutRef.current = null;
@@ -381,37 +302,25 @@ export default function WhyCakeStorySection() {
   }, []);
 
   const handleCardMouseLeave = useCallback(() => {
-    if (leaveTimeoutRef.current) {
-      clearTimeout(leaveTimeoutRef.current);
-    }
-    // 80ms debounce prevents flickering when moving pointer between adjacent cards
-    leaveTimeoutRef.current = setTimeout(() => {
-      setHoveredIndex(null);
-      // Intentional 800ms recovery delay before resuming continuous autoplay
-      if (recoveryTimeoutRef.current) {
-        clearTimeout(recoveryTimeoutRef.current);
-      }
-      recoveryTimeoutRef.current = setTimeout(() => {
-        setIsInteracting(false);
-      }, 800);
-    }, 80);
-  }, []);
-
-  // 4. Card Click Handler: sets authoritative sequence to target card and resumes autoplay from there
-  const handleCardClick = useCallback((idx: number) => {
-    setAutoplayIndex(idx);
     setHoveredIndex(null);
-    setIsInteracting(true);
-    if (recoveryTimeoutRef.current) {
-      clearTimeout(recoveryTimeoutRef.current);
-    }
+    if (recoveryTimeoutRef.current) clearTimeout(recoveryTimeoutRef.current);
     recoveryTimeoutRef.current = setTimeout(() => {
       setIsInteracting(false);
     }, 800);
   }, []);
 
+  const handleCardClick = useCallback((idx: number) => {
+    setActiveIndex(idx);
+    setHoveredIndex(null);
+    setIsInteracting(true);
+    if (recoveryTimeoutRef.current) clearTimeout(recoveryTimeoutRef.current);
+    recoveryTimeoutRef.current = setTimeout(() => {
+      setIsInteracting(false);
+    }, 1000);
+  }, []);
+
   const handlePrev = useCallback(() => {
-    setAutoplayIndex((prev) => (prev - 1 + productCards.length) % productCards.length);
+    setActiveIndex((prev) => (prev - 1 + productCards.length) % productCards.length);
     setHoveredIndex(null);
     setIsInteracting(true);
     if (recoveryTimeoutRef.current) clearTimeout(recoveryTimeoutRef.current);
@@ -419,14 +328,14 @@ export default function WhyCakeStorySection() {
   }, [productCards.length]);
 
   const handleNext = useCallback(() => {
-    setAutoplayIndex((prev) => (prev + 1) % productCards.length);
+    setActiveIndex((prev) => (prev + 1) % productCards.length);
     setHoveredIndex(null);
     setIsInteracting(true);
     if (recoveryTimeoutRef.current) clearTimeout(recoveryTimeoutRef.current);
     recoveryTimeoutRef.current = setTimeout(() => setIsInteracting(false), 800);
   }, [productCards.length]);
 
-  // Keyboard navigation for accessibility
+  // Keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft") {
       e.preventDefault();
@@ -450,8 +359,8 @@ export default function WhyCakeStorySection() {
   const handleTouchEnd = () => {
     if (touchStartX !== null && touchEndX !== null) {
       const distance = touchStartX - touchEndX;
-      const isLeftSwipe = distance > 40;
-      const isRightSwipe = distance < -40;
+      const isLeftSwipe = distance > 35;
+      const isRightSwipe = distance < -35;
 
       if (isLeftSwipe) {
         handleNext();
@@ -463,250 +372,40 @@ export default function WhyCakeStorySection() {
     setTouchStartX(null);
     setTouchEndX(null);
 
-    // Resume autoplay gracefully after touch interaction settles
     if (recoveryTimeoutRef.current) clearTimeout(recoveryTimeoutRef.current);
     recoveryTimeoutRef.current = setTimeout(() => {
       setIsInteracting(false);
     }, 800);
   };
 
-  // GSAP Entrance Animations
-  useEffect(() => {
-    if (prefersReducedMotion() || !sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      // 1. Luxury Eyebrow Divider Reveal (Outward hairlines, sparkle bloom, text lift, gold shimmer sweep)
-      const eyebrowContainer = sectionRef.current?.querySelector<HTMLElement>(".why-eyebrow-container");
-      if (eyebrowContainer) {
-        const lineLeft = eyebrowContainer.querySelector(".why-eyebrow-line-left");
-        const lineRight = eyebrowContainer.querySelector(".why-eyebrow-line-right");
-        const sparkleLeft = eyebrowContainer.querySelector(".why-eyebrow-sparkle-left");
-        const sparkleRight = eyebrowContainer.querySelector(".why-eyebrow-sparkle-right");
-        const eyebrowText = eyebrowContainer.querySelector(".why-eyebrow-text");
-        const eyebrowGlow = eyebrowContainer.querySelector(".why-eyebrow-glow");
-        const eyebrowSweep = eyebrowContainer.querySelector(".why-eyebrow-sweep");
-        const eyebrowSheen = eyebrowContainer.querySelector(".why-eyebrow-sheen");
-
-        if (
-          lineLeft &&
-          lineRight &&
-          sparkleLeft &&
-          sparkleRight &&
-          eyebrowText &&
-          eyebrowGlow &&
-          eyebrowSweep &&
-          eyebrowSheen
-        ) {
-          // Set initial states for smooth entrance animation
-          gsap.set([lineLeft, lineRight], { scaleX: 0 });
-          gsap.set([sparkleLeft, sparkleRight], { scale: 0, opacity: 0, rotate: -45 });
-          gsap.set(eyebrowText, { opacity: 0, y: 7 });
-          gsap.set(eyebrowGlow, { opacity: 0, scale: 0.85 });
-          gsap.set(eyebrowSweep, { opacity: 0 });
-          gsap.set(eyebrowSheen, { x: "-100%" });
-
-          const eyebrowTL = gsap.timeline({
-            scrollTrigger: {
-              trigger: eyebrowContainer,
-              start: "top 85%",
-              toggleActions: "play none none none",
-              once: true,
-            },
-          });
-
-          eyebrowTL
-            // Label upward reveal & subtle radial glow bloom
-            .to(eyebrowText, {
-              opacity: 1,
-              y: 0,
-              duration: 0.65,
-              ease: "power2.out",
-            })
-            .to(
-              eyebrowGlow,
-              {
-                opacity: 1,
-                scale: 1,
-                duration: 0.75,
-                ease: "power2.out",
-              },
-              "<0.08"
-            )
-            // 4-Point sparkles bloom symmetrically
-            .to(
-              [sparkleLeft, sparkleRight],
-              {
-                scale: 1,
-                opacity: 1,
-                rotate: 0,
-                duration: 0.45,
-                ease: "back.out(1.8)",
-              },
-              "<0.15"
-            )
-            // Delicate champagne hairlines draw outward from the center
-            .to(
-              [lineLeft, lineRight],
-              {
-                scaleX: 1,
-                duration: 0.65,
-                ease: "power2.out",
-              },
-              "<0.1"
-            )
-            // Single refined gold shimmer highlight sweeps across the divider
-            .to(
-              eyebrowSweep,
-              {
-                opacity: 0.75,
-                duration: 0.2,
-              },
-              "-=0.25"
-            )
-            .to(
-              eyebrowSheen,
-              {
-                x: "100%",
-                duration: 0.85,
-                ease: "power1.inOut",
-              },
-              "<"
-            )
-            .to(
-              eyebrowSweep,
-              {
-                opacity: 0,
-                duration: 0.25,
-              },
-              "-=0.2"
-            );
-        }
-      }
-
-      // 2. Header Main Heading & Description reveal
-      const headerElements = sectionRef.current?.querySelectorAll(".why-header-anim");
-      if (headerElements && headerElements.length > 0) {
-        gsap.fromTo(
-          headerElements,
-          { opacity: 0, y: 16 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: MOTION.duration.reveal,
-            stagger: 0.1,
-            ease: MOTION.ease.default,
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
-
-      // 2. Stage track reveal
-      const cardsTrack = sectionRef.current?.querySelector(".why-stage-track");
-      if (cardsTrack) {
-        gsap.fromTo(
-          cardsTrack,
-          { opacity: 0, y: 22 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.85,
-            ease: MOTION.ease.editorial,
-            scrollTrigger: {
-              trigger: cardsTrack,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
-
-      // 3. Values row reveal
-      const valueElements = sectionRef.current?.querySelectorAll(".why-value-item");
-      if (valueElements && valueElements.length > 0) {
-        gsap.fromTo(
-          valueElements,
-          { opacity: 0, y: 14 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            stagger: 0.08,
-            ease: MOTION.ease.default,
-            scrollTrigger: {
-              trigger: ".why-values-track",
-              start: "top 88%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  // Compute circular spatial offset for card index relative to autoplayIndex (the center card)
-  // Returns normalized offset in range: [-2, -1, 0, 1, 2]
-  const getCardOffset = (index: number) => {
-    const raw = (index - autoplayIndex + 5) % 5;
-    if (raw === 3) return -2;
-    if (raw === 4) return -1;
-    return raw; // 0, 1, 2
-  };
-
-  const activePillCard = productCards[pillDisplayIndex];
-
   return (
     <section
       ref={sectionRef}
       id="why-cakestory"
-      aria-label="Why CakeStory: More Than Just Cakes"
-      className="relative scroll-mt-24 sm:scroll-mt-28 pt-0 pb-0 bg-[#FFF9F2] text-[#351522] overflow-hidden select-none transition-colors duration-700"
-      onKeyDown={handleKeyDown}
+      aria-label="CakeStory Specialties: More Than Just Cakes"
       tabIndex={0}
-      role="region"
+      onKeyDown={handleKeyDown}
+      className="relative w-full overflow-hidden focus:outline-hidden scroll-mt-24 sm:scroll-mt-28"
+      style={{
+        background:
+          "radial-gradient(ellipse 75% 65% at 50% 40%, #FFFDF8 0%, #FFF5E8 52%, #F8EADA 100%)",
+      }}
     >
-      {/* 1. Dynamic Ambient Light Aura that shifts tone with active product */}
-      <div
-        className="absolute inset-0 pointer-events-none transition-all duration-700 ease-out"
-        style={{
-          background: `radial-gradient(ellipse 70% 50% at 50% 25%, ${activePillCard.accentGlow} 0%, rgba(255, 249, 242, 0.96) 65%, #FFF9F2 100%)`,
-        }}
-      />
-
-      {/* Decorative top-right circle watermark outline */}
-      <div
-        className="absolute -top-32 -right-32 w-88 sm:w-104 h-88 sm:h-104 rounded-full border border-[#D8A64E]/25 pointer-events-none transition-transform duration-1000 ease-out"
-        style={{ transform: `scale(${1 + pillDisplayIndex * 0.015}) rotate(${pillDisplayIndex * 12}deg)` }}
-        aria-hidden="true"
-      />
-      {/* Subtle warm glow in top-left */}
-      <div
-        className="absolute top-12 left-10 w-72 h-72 rounded-full bg-[#F5DDD4]/40 blur-3xl pointer-events-none"
-        aria-hidden="true"
-      />
-
-      {/* Top Decorative Sweeping Waves (Matching Bottom Divider) */}
-      <div className="relative w-full leading-none z-10" aria-hidden="true">
+      {/* 1. Top Wave Divider (Inverted to smoothly transition from previous section) */}
+      <div className="relative w-full -mt-1 leading-none z-10" aria-hidden="true">
         <svg
           viewBox="0 0 1440 90"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
-          className="w-full h-12 sm:h-16 md:h-20 block"
+          className="w-full h-10 sm:h-14 md:h-18 block"
           style={{ transform: "scaleY(-1)" }}
         >
-          {/* Subtle blush transitional wave */}
           <path
             d="M0 90C280 88 440 45 740 45C1040 45 1240 78 1440 68V90H0Z"
             fill="#F5DDD4"
             fillOpacity="0.85"
           />
-          {/* Deep berry / burgundy top sweep */}
           <path
             d="M0 90C140 90 260 22 480 40C680 58 760 76 960 88L1040 90H0Z"
             fill="#741334"
@@ -714,242 +413,123 @@ export default function WhyCakeStorySection() {
         </svg>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-8 sm:pt-12">
-        {/* 2. Editorial Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-          {/* Eyebrow: Luxury Brand Divider with Tapered Hairlines, 4-Point Sparkle Ornaments & Subtle Ambient Aura */}
-          <div className="relative flex items-center justify-center mb-3 sm:mb-3.5">
-            <div className="why-eyebrow-container relative inline-flex items-center justify-center gap-2 sm:gap-3.5 select-none overflow-visible">
-              {/* Soft Ambient Radial Warmth behind label (no visible pill/box/card) */}
-              <div
-                className="why-eyebrow-glow absolute -inset-x-8 -inset-y-3 pointer-events-none rounded-full"
-                style={{
-                  background:
-                    "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(216, 166, 78, 0.18) 0%, rgba(245, 221, 212, 0.10) 45%, transparent 75%)",
-                  filter: "blur(3px)",
-                }}
-                aria-hidden="true"
-              />
+      {/* Decorative Atmosphere Elements */}
+      {/* Top-Right Delicate Champagne Gold Arcs (matching reference screenshot) */}
+      <div className="absolute top-8 sm:top-12 right-0 w-64 sm:w-96 h-64 sm:h-96 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+        <svg viewBox="0 0 400 400" fill="none" className="w-full h-full text-[#D9A044]">
+          <path
+            d="M400 30 C 260 40, 150 140, 130 380"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeOpacity="0.45"
+            fill="none"
+          />
+          <path
+            d="M400 80 C 290 90, 190 180, 170 380"
+            stroke="currentColor"
+            strokeWidth="0.8"
+            strokeOpacity="0.25"
+            fill="none"
+          />
+        </svg>
+      </div>
 
-              {/* Left Tapered Hairline (Draws outward to the left from origin: right) */}
-              <div className="relative flex items-center justify-end overflow-hidden">
-                <span
-                  className="why-eyebrow-line-left block h-[1px] w-7 sm:w-12 md:w-16 bg-gradient-to-r from-transparent via-[#D8A64E]/60 to-[#D8A64E]"
-                  style={{ transformOrigin: "right center" }}
-                />
-              </div>
+      {/* Subtle soft blur lighting orbs in corners */}
+      <div
+        className="absolute top-1/4 -left-20 w-80 h-80 rounded-full pointer-events-none opacity-40 blur-3xl"
+        style={{
+          background: "radial-gradient(circle, rgba(255, 230, 215, 0.6) 0%, transparent 70%)",
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute bottom-1/4 -right-20 w-96 h-96 rounded-full pointer-events-none opacity-40 blur-3xl"
+        style={{
+          background: "radial-gradient(circle, rgba(217, 160, 68, 0.25) 0%, transparent 70%)",
+        }}
+        aria-hidden="true"
+      />
 
-              {/* Left 4-Point Diamond Sparkle Ornament */}
-              <svg
-                viewBox="0 0 16 16"
-                className="why-eyebrow-sparkle-left w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#D8A64E] fill-current shrink-0 opacity-90 drop-shadow-[0_0_2px_rgba(216,166,78,0.4)]"
-                aria-hidden="true"
-              >
-                <path d="M8 0 C8 4 12 8 16 8 C12 8 8 12 8 16 C8 12 4 8 0 8 C4 8 8 4 8 0 Z" />
-              </svg>
-
-              {/* Eyebrow Label Typography */}
-              <span className="why-eyebrow-text relative z-10 text-[10.5px] sm:text-xs font-bold tracking-[0.22em] sm:tracking-[0.26em] uppercase text-[#861B43] px-1 sm:px-1.5 whitespace-nowrap">
-                {t("why.eyebrow")}
-              </span>
-
-              {/* Right 4-Point Diamond Sparkle Ornament */}
-              <svg
-                viewBox="0 0 16 16"
-                className="why-eyebrow-sparkle-right w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#D8A64E] fill-current shrink-0 opacity-90 drop-shadow-[0_0_2px_rgba(216,166,78,0.4)]"
-                aria-hidden="true"
-              >
-                <path d="M8 0 C8 4 12 8 16 8 C12 8 8 12 8 16 C8 12 4 8 0 8 C4 8 8 4 8 0 Z" />
-              </svg>
-
-              {/* Right Tapered Hairline (Draws outward to the right from origin: left) */}
-              <div className="relative flex items-center justify-start overflow-hidden">
-                <span
-                  className="why-eyebrow-line-right block h-[1px] w-7 sm:w-12 md:w-16 bg-gradient-to-r from-[#D8A64E] via-[#D8A64E]/60 to-transparent"
-                  style={{ transformOrigin: "left center" }}
-                />
-              </div>
-
-              {/* Soft gold highlight sweep (runs once during entrance) */}
-              <div
-                className="why-eyebrow-sweep absolute -inset-y-1 inset-x-0 pointer-events-none overflow-hidden rounded-full"
-                style={{ opacity: 0 }}
-                aria-hidden="true"
-              >
-                <div
-                  className="why-eyebrow-sheen w-full h-full"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, transparent 0%, rgba(255, 235, 180, 0.65) 50%, transparent 100%)",
-                    transform: "translateX(-100%)",
-                  }}
-                />
-              </div>
-            </div>
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-12 sm:pt-16 md:pt-20 pb-10 sm:pb-14">
+        {/* 2. Editorial Section Header (Precision recreation of reference hierarchy) */}
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+          {/* Eyebrow flanked by fine horizontal gold rules */}
+          <div className="flex items-center justify-center gap-3 sm:gap-4 mb-3 sm:mb-3.5 select-none">
+            <span className="h-[1px] w-8 sm:w-14 bg-gradient-to-r from-transparent via-[#D9A044]/70 to-[#D9A044]" />
+            <span className="text-[11px] sm:text-[12px] font-semibold tracking-[0.24em] uppercase text-[#D9A044] px-1">
+              {t("why.eyebrow")}
+            </span>
+            <span className="h-[1px] w-8 sm:w-14 bg-gradient-to-l from-transparent via-[#D9A044]/70 to-[#D9A044]" />
           </div>
 
-          {/* Main Display Heading */}
-          <h2 className="why-header-anim font-display text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-medium text-[#6D1234] leading-[1.18] tracking-tight">
+          {/* Main Display Heading in Deep Burgundy Editorial Serif */}
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-medium text-[#780D32] leading-[1.16] tracking-tight">
             {t("why.title")}
           </h2>
 
-          {/* Supporting Description */}
-          <p className="why-header-anim mt-3 sm:mt-3.5 text-sm sm:text-base text-[#55464A] leading-relaxed font-normal max-w-xl mx-auto">
+          {/* Supporting Description in Muted Warm Taupe */}
+          <p className="mt-3 sm:mt-3.5 text-sm sm:text-base text-[#82716E] leading-relaxed max-w-xl mx-auto font-normal">
             {t("why.desc")}
           </p>
         </div>
 
-        {/* 3. PERMANENT LUXURY TOP PILL (Stable container — only internal content transitions) */}
-        <div className="why-header-anim flex items-center justify-center mb-8 sm:mb-12">
-          <div
-            role="status"
-            aria-live="polite"
-            aria-label={`${t(activePillCard.titleKey)}: ${t(activePillCard.tagKey)}`}
-            onClick={handleNext}
-            className="relative inline-flex items-center gap-2.5 sm:gap-3.5 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-[#861B43] via-[#9B204E] to-[#701336] text-white shadow-[0_8px_24px_rgba(134,27,67,0.32),0_0_0_1px_rgba(216,166,78,0.5)] border border-[#D8A64E]/60 select-none cursor-pointer hover:scale-102 hover:shadow-[0_10px_28px_rgba(216,166,78,0.3)] active:scale-98 transition-all duration-300 min-h-[46px] sm:min-h-[50px] max-w-[94vw] sm:max-w-none"
-          >
-            {/* Fixed-Size Icon Container: Internal Crossfade & Scale */}
-            <div className="w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-full bg-white/15 backdrop-blur-xs flex items-center justify-center text-amber-200 border border-white/20 shrink-0 overflow-hidden relative">
-              {productCards.map((c, i) => {
-                const IconComp = c.icon;
-                const isActive = pillDisplayIndex === i;
-                return (
-                  <div
-                    key={`pill-icon-${c.id}`}
-                    className="absolute inset-0 flex items-center justify-center transition-all duration-350 ease-out"
-                    style={{
-                      opacity: isActive ? 1 : 0,
-                      transform: isActive ? "scale(1) rotate(0deg)" : "scale(0.65) rotate(-15deg)",
-                      pointerEvents: "none",
-                    }}
-                    aria-hidden={!isActive}
-                  >
-                    <IconComp className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-amber-200" />
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Stable Category Name & Tag Container: Smooth Vertical Slide-Fade */}
-            <div className="relative min-w-[160px] sm:min-w-[300px] md:min-w-[340px] h-5 sm:h-6 overflow-hidden flex items-center">
-              {productCards.map((c, i) => {
-                const isActive = pillDisplayIndex === i;
-                return (
-                  <div
-                    key={`pill-text-${c.id}`}
-                    className="absolute inset-0 flex items-center gap-1.5 sm:gap-2 transition-all duration-350 ease-out whitespace-nowrap"
-                    style={{
-                      opacity: isActive ? 1 : 0,
-                      transform: isActive
-                        ? "translateY(0)"
-                        : i < pillDisplayIndex
-                        ? "translateY(-14px)"
-                        : "translateY(14px)",
-                      pointerEvents: "none",
-                    }}
-                    aria-hidden={!isActive}
-                  >
-                    <span className="text-xs sm:text-[13.5px] font-semibold tracking-wide text-white shrink-0">
-                      {t(c.titleKey)}
-                    </span>
-                    <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-[#D8A64E]/80 shrink-0" />
-                    <span className="hidden sm:inline-block text-[10px] sm:text-[11px] font-medium text-amber-200/90 tracking-wider uppercase truncate">
-                      {t(c.tagKey)}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Subtle Progress Indicators: Expanding Gold Capsule */}
-            <div className="flex items-center gap-1.5 pl-2 sm:pl-3 border-l border-white/20 shrink-0">
-              {productCards.map((c, i) => {
-                const isActive = pillDisplayIndex === i;
-                return (
-                  <button
-                    key={`pill-dot-${c.id}`}
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleCardClick(i);
-                    }}
-                    aria-label={t(c.titleKey)}
-                    className={`h-1.5 rounded-full transition-all duration-350 cursor-pointer ${
-                      isActive
-                        ? "w-4 sm:w-5 bg-[#D8A64E] shadow-[0_0_8px_rgba(216,166,78,0.7)]"
-                        : "w-1.5 bg-white/30 hover:bg-white/60"
-                    }`}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* 4. Cinematic 3D Product Stage (Continuous Transitions & Interactive Hover Focus) */}
-        <div className="relative why-stage-track py-4 sm:py-6">
-          {/* DESKTOP 3D CINEMATIC STAGE: 5 Persistent Cards on Coordinated Spatial Coordinates */}
-          <div className="hidden lg:block relative h-[500px] xl:h-[530px] w-full max-w-[1280px] mx-auto overflow-visible [perspective:1400px]">
+        {/* 3. Luxury 5-Card Product Showcase Stage */}
+        <div className="relative py-4 sm:py-6">
+          {/* DESKTOP 3D PERSPECTIVE STAGE: All 5 Cards Visible Together in Precision Curved Geometry */}
+          <div className="hidden lg:block relative h-[505px] xl:h-[530px] w-full max-w-[1260px] mx-auto overflow-visible [perspective:1400px]">
             {productCards.map((card, idx) => {
-              const offset = getCardOffset(idx);
+              const offset = getModularOffset(idx, activeIndex, productCards.length);
               const isCenter = offset === 0;
-              const isCardHovered = hoveredIndex === idx;
+              const isHovered = hoveredIndex === idx;
               const IconComp = card.icon;
 
-              // Spatial 3D Stage parameters with Depth-of-Field Blur
               let translateX = "0%";
               let translateY = "0px";
               let scale = 1;
               let rotateY = 0;
               let zIndex = 10;
-              let opacity = 0.55;
-              let filter = "none";
+              let opacity = 1;
 
               if (offset === 0) {
-                // Center Active Card: Razor Sharp & Elevated
+                // Center active card: elevated, radiant champagne gold border, fully sharp
                 translateX = "0%";
-                translateY = isCardHovered ? "-18px" : "-14px";
-                scale = isCardHovered ? 1.09 : 1.08;
+                translateY = isHovered ? "-16px" : "-12px";
+                scale = 1.05;
                 rotateY = 0;
-                zIndex = 35;
+                zIndex = 30;
                 opacity = 1;
-                filter = "blur(0px) brightness(1.0)";
               } else if (offset === -1) {
-                // Immediate Left Flank: Soft Depth Blur, lifts & sharpens on hover
+                // Immediate Left (Cupcakes & Brownies): subtle inward angle, fully readable
                 translateX = "-106%";
-                translateY = isCardHovered ? "-2px" : "10px";
-                scale = isCardHovered ? 0.97 : 0.92;
-                rotateY = isCardHovered ? 3 : 8;
-                zIndex = isCardHovered ? 32 : 20;
-                opacity = isCardHovered ? 1 : 0.82;
-                filter = isCardHovered ? "blur(0px) brightness(1.0)" : "blur(3px) brightness(0.90)";
+                translateY = isHovered ? "0px" : "6px";
+                scale = 0.95;
+                rotateY = isHovered ? 2 : 6;
+                zIndex = isHovered ? 25 : 20;
+                opacity = 1;
               } else if (offset === 1) {
-                // Immediate Right Flank: Soft Depth Blur, lifts & sharpens on hover
+                // Immediate Right (Desserts): subtle inward angle, fully readable
                 translateX = "106%";
-                translateY = isCardHovered ? "-2px" : "10px";
-                scale = isCardHovered ? 0.97 : 0.92;
-                rotateY = isCardHovered ? -3 : -8;
-                zIndex = isCardHovered ? 32 : 20;
-                opacity = isCardHovered ? 1 : 0.82;
-                filter = isCardHovered ? "blur(0px) brightness(1.0)" : "blur(3px) brightness(0.90)";
+                translateY = isHovered ? "0px" : "6px";
+                scale = 0.95;
+                rotateY = isHovered ? -2 : -6;
+                zIndex = isHovered ? 25 : 20;
+                opacity = 1;
               } else if (offset === -2) {
-                // Outer Left Flank: Atmospheric Blur, lifts & sharpens on hover
+                // Outer Left (Theme Cakes): visible edge card with controlled perspective
                 translateX = "-212%";
-                translateY = isCardHovered ? "6px" : "24px";
-                scale = isCardHovered ? 0.88 : 0.80;
-                rotateY = isCardHovered ? 6 : 15;
-                zIndex = isCardHovered ? 30 : 10;
-                opacity = isCardHovered ? 0.95 : 0.48;
-                filter = isCardHovered ? "blur(0px) brightness(1.0)" : "blur(5.5px) brightness(0.80)";
+                translateY = isHovered ? "6px" : "14px";
+                scale = 0.90;
+                rotateY = isHovered ? 5 : 11;
+                zIndex = isHovered ? 22 : 10;
+                opacity = 0.96;
               } else if (offset === 2) {
-                // Outer Right Flank: Atmospheric Blur, lifts & sharpens on hover
+                // Outer Right (Snacks): visible edge card with controlled perspective
                 translateX = "212%";
-                translateY = isCardHovered ? "6px" : "24px";
-                scale = isCardHovered ? 0.88 : 0.80;
-                rotateY = isCardHovered ? -6 : -15;
-                zIndex = isCardHovered ? 30 : 10;
-                opacity = isCardHovered ? 0.95 : 0.48;
-                filter = isCardHovered ? "blur(0px) brightness(1.0)" : "blur(5.5px) brightness(0.80)";
+                translateY = isHovered ? "6px" : "14px";
+                scale = 0.90;
+                rotateY = isHovered ? -5 : -11;
+                zIndex = isHovered ? 22 : 10;
+                opacity = 0.96;
               }
 
               return (
@@ -972,243 +552,270 @@ export default function WhyCakeStorySection() {
                     transform: `translate3d(${translateX}, ${translateY}, 0) scale(${scale}) rotateY(${rotateY}deg)`,
                     zIndex,
                     opacity,
-                    filter,
                     transition:
-                      "transform 720ms cubic-bezier(0.25, 1, 0.4, 1), opacity 550ms ease, filter 550ms ease, box-shadow 550ms ease",
+                      "transform 680ms cubic-bezier(0.25, 1, 0.4, 1), opacity 500ms ease, box-shadow 500ms ease, border-color 400ms ease",
                   }}
-                  className={`absolute top-4 left-1/2 -ml-[120px] xl:-ml-[130px] w-[240px] xl:w-[260px] group rounded-2xl sm:rounded-3xl cursor-pointer flex flex-col overflow-hidden bg-white ${
+                  className={`absolute top-4 left-1/2 -ml-[120px] xl:-ml-[130px] w-[240px] xl:w-[260px] group rounded-[24px] xl:rounded-[26px] cursor-pointer flex flex-col overflow-hidden bg-[#FFF9F0] select-none ${
                     isCenter
-                      ? isCardHovered
-                        ? "border-2 border-[#E5B55D] shadow-[0_28px_60px_-8px_rgba(216,166,78,0.52),0_14px_32px_rgba(134,27,67,0.2),0_0_20px_rgba(216,166,78,0.25)]"
-                        : "border-2 border-[#D8A64E] shadow-[0_24px_55px_-10px_rgba(216,166,78,0.4),0_12px_28px_rgba(134,27,67,0.15)]"
-                      : isCardHovered
-                      ? "border-2 border-[#E5B55D] shadow-[0_20px_45px_-6px_rgba(216,166,78,0.42),0_8px_20px_rgba(134,27,67,0.12)]"
-                      : "border border-[#F2E5D9] shadow-[0_8px_25px_-5px_rgba(134,27,67,0.06)] hover:border-[#D8A64E]/60 hover:shadow-[0_16px_32px_-6px_rgba(216,166,78,0.22)]"
+                      ? "border-2 border-[#D9A044] shadow-[0_24px_50px_-12px_rgba(120,13,50,0.16),0_10px_24px_-5px_rgba(217,160,68,0.28),0_0_0_1px_rgba(217,160,68,0.4)]"
+                      : isHovered
+                      ? "border border-[#D9A044] shadow-[0_18px_40px_-8px_rgba(120,13,50,0.14),0_6px_16px_rgba(217,160,68,0.2)]"
+                      : "border border-[#D9A044]/45 shadow-[0_10px_28px_-6px_rgba(120,13,50,0.08)] hover:border-[#D9A044]/80"
                   }`}
                 >
-                  {/* Top Product Image Container */}
-                  <div className="relative w-full aspect-[4/4.1] overflow-hidden bg-[#FBF4EE]">
+                  {/* Top Food Photography Container (Edge to edge, ~56% height) */}
+                  <div className="relative w-full aspect-[4/3.8] overflow-hidden bg-[#FFF5E8]">
                     <img
                       src={card.image}
                       alt={card.alt}
                       loading="eager"
                       decoding="async"
-                      className="w-full h-full object-cover object-center group-hover:scale-104 transition-transform duration-700 ease-out"
+                      className="w-full h-full object-cover object-center scale-102 group-hover:scale-106 transition-transform duration-700 ease-out"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-25 group-hover:opacity-10 transition-opacity duration-300" />
 
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300" />
-
-                    {/* Floating Tactical Badge on Active Card */}
-                    {isCenter && (
-                      <div className="absolute top-3 right-3 z-20 animate-fadeIn">
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#180f1b]/80 backdrop-blur-md text-[10px] font-semibold text-amber-200 border border-amber-300/40 shadow-sm tracking-wide">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                          <span>{t(card.badgeKey)}</span>
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Overlapping Circular Category Badge */}
-                  <div className="relative flex justify-center -mt-6 sm:-mt-7 z-20">
-                    <div
-                      className={`w-12 h-12 sm:w-13 sm:h-13 rounded-full flex items-center justify-center transition-all duration-300 shadow-sm ${
-                        isCenter || isCardHovered
-                          ? "bg-[#FFF9F2] text-[#861B43] border-2 border-[#D8A64E] shadow-[0_4px_16px_rgba(216,166,78,0.4)] scale-105"
-                          : "bg-white text-[#861B43] border border-[#F0D5C7] group-hover:border-[#D8A64E] group-hover:text-[#6D1234]"
-                      }`}
-                    >
-                      <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
+                    {/* Subtle Arched Cream Boundary between Image and Panel */}
+                    <div className="absolute bottom-0 inset-x-0 h-6 overflow-hidden pointer-events-none">
+                      <svg
+                        viewBox="0 0 260 24"
+                        preserveAspectRatio="none"
+                        className="w-full h-full text-[#FFF9F0] fill-current"
+                      >
+                        <path d="M0 24 C75 24 95 6 130 6 C165 6 185 24 260 24 Z" />
+                      </svg>
                     </div>
                   </div>
 
-                  {/* Bottom Text Content */}
-                  <div className="p-4 sm:p-5 pt-3 sm:pt-3 text-center flex flex-col items-center flex-grow">
-                    <h3
-                      className={`font-display text-base sm:text-lg xl:text-[19px] font-semibold transition-colors duration-300 line-clamp-1 ${
-                        isCenter || isCardHovered ? "text-[#6D1234]" : "text-[#7B1B3C] group-hover:text-[#6D1234]"
+                  {/* Overlapping Circular Category Icon Badge at Curve Peak */}
+                  <div className="relative flex justify-center -mt-5.5 z-20">
+                    <div
+                      className={`w-11 h-11 xl:w-12 xl:h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        isCenter
+                          ? "bg-[#FFF9F0] text-[#780D32] border-2 border-[#D9A044] shadow-[0_4px_12px_rgba(217,160,68,0.35)] scale-105"
+                          : "bg-[#FFF9F0] text-[#780D32] border border-[#D9A044]/60 group-hover:border-[#D9A044] group-hover:scale-105 shadow-[0_2px_8px_rgba(120,13,50,0.08)]"
                       }`}
                     >
-                      {t(card.titleKey)}
-                    </h3>
+                      <IconComp className="w-5 h-5 xl:w-5.5 xl:h-5.5" />
+                    </div>
+                  </div>
 
-                    <p className="mt-2 text-xs sm:text-[12.5px] text-[#55464A] leading-relaxed line-clamp-3 font-normal max-w-[220px]">
-                      {t(card.descKey)}
-                    </p>
+                  {/* Information Panel */}
+                  <div className="p-4 xl:p-5 pt-2 xl:pt-2.5 text-center flex flex-col items-center flex-grow justify-between">
+                    <div>
+                      <h3
+                        className={`font-display text-[17px] xl:text-[18.5px] font-semibold transition-colors duration-300 line-clamp-1 ${
+                          isCenter ? "text-[#780D32]" : "text-[#780D32] group-hover:text-[#90133E]"
+                        }`}
+                      >
+                        {t(card.titleKey)}
+                      </h3>
 
-                    {/* Active or Hovered Card Bottom Micro-Indicator */}
-                    {(isCenter || isCardHovered) && (
-                      <span className="mt-3 text-[11px] font-semibold tracking-wider uppercase text-[#D8A64E] inline-flex items-center gap-1 group-hover:text-[#861B43] transition-colors">
-                        <span>{t(card.tagKey)}</span>
-                      </span>
-                    )}
+                      <p className="mt-1.5 xl:mt-2 text-xs xl:text-[12.5px] text-[#82716E] leading-relaxed line-clamp-3 font-normal max-w-[215px] mx-auto">
+                        {t(card.descKey)}
+                      </p>
+                    </div>
+
+                    {/* Bottom Affordance: Accent Label on Active Hero, Minimal Arrow on Side Cards */}
+                    <div className="pt-2 xl:pt-3 w-full flex items-center justify-center min-h-[28px]">
+                      {isCenter ? (
+                        <span className="text-[10px] xl:text-[10.5px] font-semibold tracking-[0.2em] uppercase text-[#D9A044] select-none">
+                          {t(card.accentKey)}
+                        </span>
+                      ) : (
+                        <span className="text-sm xl:text-base text-[#780D32]/75 group-hover:text-[#780D32] group-hover:translate-x-1 transition-all duration-300 select-none">
+                          →
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               );
             })}
           </div>
 
-          {/* TABLET VIEW: 3 Visible Cards with Center Prominence & Depth Blur */}
-          <div className="hidden sm:grid lg:hidden grid-cols-3 gap-4 sm:gap-6 items-center px-4 sm:px-6">
-            {[-1, 0, 1].map((offset) => {
-              const rawIdx = (autoplayIndex + offset + productCards.length) % productCards.length;
-              const card = productCards[rawIdx];
+          {/* TABLET VIEW (640px to 1023px): 3 Prominently Visible Cards with Center Hero */}
+          <div className="hidden sm:block lg:hidden relative h-[480px] w-full max-w-[720px] mx-auto overflow-hidden [perspective:1200px]">
+            {productCards.map((card, idx) => {
+              const offset = getModularOffset(idx, activeIndex, productCards.length);
               const isCenter = offset === 0;
-              const isCardHovered = hoveredIndex === rawIdx;
+              const isHovered = hoveredIndex === idx;
               const IconComp = card.icon;
+
+              let translateX = "0%";
+              let translateY = "0px";
+              let scale = 1;
+              let rotateY = 0;
+              let zIndex = 10;
+              let opacity = 1;
+              let pointerEvents: "auto" | "none" = "auto";
+
+              if (offset === 0) {
+                translateX = "0%";
+                translateY = isHovered ? "-12px" : "-8px";
+                scale = isHovered ? 1.06 : 1.04;
+                rotateY = 0;
+                zIndex = isHovered ? 28 : 25;
+                opacity = 1;
+              } else if (offset === -1) {
+                translateX = "-105%";
+                translateY = isHovered ? "0px" : "4px";
+                scale = isHovered ? 0.96 : 0.94;
+                rotateY = isHovered ? 2 : 5;
+                zIndex = isHovered ? 20 : 15;
+                opacity = 0.96;
+              } else if (offset === 1) {
+                translateX = "105%";
+                translateY = isHovered ? "0px" : "4px";
+                scale = isHovered ? 0.96 : 0.94;
+                rotateY = isHovered ? -2 : -5;
+                zIndex = isHovered ? 20 : 15;
+                opacity = 0.96;
+              } else {
+                translateX = offset < 0 ? "-210%" : "210%";
+                translateY = "12px";
+                scale = 0.85;
+                rotateY = offset < 0 ? 12 : -12;
+                zIndex = 5;
+                opacity = 0;
+                pointerEvents = "none";
+              }
 
               return (
                 <div
-                  key={`tablet-${card.id}`}
-                  onClick={() => handleCardClick(rawIdx)}
-                  onMouseEnter={() => handleCardMouseEnter(rawIdx)}
+                  key={`tab-${card.id}`}
+                  onClick={() => handleCardClick(idx)}
+                  onMouseEnter={() => handleCardMouseEnter(idx)}
                   onMouseLeave={handleCardMouseLeave}
                   role="button"
                   tabIndex={0}
                   aria-pressed={isCenter}
                   aria-label={`${t(card.titleKey)}: ${t(card.descKey)}`}
                   style={{
-                    filter: isCenter || isCardHovered ? "none" : "blur(2px) brightness(0.92)",
-                    transform: isCenter
-                      ? isCardHovered
-                        ? "translateY(-12px) scale(1.05)"
-                        : "translateY(-8px) scale(1.03)"
-                      : isCardHovered
-                      ? "translateY(-4px) scale(0.99)"
-                      : "translateY(0) scale(0.96)",
-                    opacity: isCenter || isCardHovered ? 1 : 0.82,
-                    zIndex: isCenter ? 20 : isCardHovered ? 15 : 10,
-                    transition: "all 720ms cubic-bezier(0.25, 1, 0.4, 1)",
+                    transform: `translate3d(${translateX}, ${translateY}, 0) scale(${scale}) rotateY(${rotateY}deg)`,
+                    zIndex,
+                    opacity,
+                    pointerEvents,
+                    transition:
+                      "transform 680ms cubic-bezier(0.25, 1, 0.4, 1), opacity 500ms ease, box-shadow 500ms ease",
                   }}
-                  className={`rounded-3xl cursor-pointer flex flex-col overflow-hidden ${
+                  className={`absolute top-4 left-1/2 -ml-[115px] w-[230px] rounded-[24px] cursor-pointer flex flex-col overflow-hidden bg-[#FFF9F0] select-none ${
                     isCenter
-                      ? "bg-white border-2 border-[#D8A64E] shadow-[0_20px_45px_-6px_rgba(216,166,78,0.35)]"
-                      : isCardHovered
-                      ? "bg-white border-2 border-[#D8A64E] shadow-[0_16px_36px_-6px_rgba(216,166,78,0.3)]"
-                      : "bg-[#FFFDFB] border border-[#F2E5D9] shadow-md hover:border-[#D8A64E]/60"
+                      ? "border-2 border-[#D9A044] shadow-[0_20px_45px_-10px_rgba(120,13,50,0.15),0_8px_20px_-4px_rgba(217,160,68,0.25)]"
+                      : "border border-[#D9A044]/45 shadow-md hover:border-[#D9A044]/80"
                   }`}
                 >
-                  <div className="relative w-full aspect-[4/4.2] overflow-hidden bg-[#FBF4EE]">
+                  <div className="relative w-full aspect-[4/3.8] overflow-hidden bg-[#FFF5E8]">
                     <img
                       src={card.image}
                       alt={card.alt}
                       loading="eager"
                       decoding="async"
-                      className="w-full h-full object-cover object-center"
+                      className="w-full h-full object-cover object-center scale-102"
                     />
-                    {isCenter && (
-                      <div className="absolute top-2.5 right-2.5 z-20">
-                        <span className="px-2 py-0.5 rounded-full bg-black/75 text-[10px] text-amber-200 font-semibold border border-amber-300/40">
-                          {t(card.badgeKey)}
-                        </span>
-                      </div>
-                    )}
+                    <div className="absolute bottom-0 inset-x-0 h-6 overflow-hidden pointer-events-none">
+                      <svg
+                        viewBox="0 0 260 24"
+                        preserveAspectRatio="none"
+                        className="w-full h-full text-[#FFF9F0] fill-current"
+                      >
+                        <path d="M0 24 C75 24 95 6 130 6 C165 6 185 24 260 24 Z" />
+                      </svg>
+                    </div>
                   </div>
 
-                  <div className="relative flex justify-center -mt-6 z-20">
+                  <div className="relative flex justify-center -mt-5 z-20">
                     <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center shadow-sm transition-all duration-300 ${
-                        isCenter || isCardHovered
-                          ? "bg-[#FFF9F2] text-[#861B43] border-2 border-[#D8A64E]"
-                          : "bg-white text-[#861B43] border border-[#F0D5C7]"
+                      className={`w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        isCenter
+                          ? "bg-[#FFF9F0] text-[#780D32] border-2 border-[#D9A044] shadow-sm scale-105"
+                          : "bg-[#FFF9F0] text-[#780D32] border border-[#D9A044]/60"
                       }`}
                     >
                       <IconComp className="w-5 h-5" />
                     </div>
                   </div>
 
-                  <div className="p-4 pt-3 text-center flex flex-col items-center">
-                    <h3 className="font-display text-base font-semibold text-[#6D1234]">
-                      {t(card.titleKey)}
-                    </h3>
-                    <p className="mt-2 text-xs text-[#55464A] leading-relaxed line-clamp-3">
-                      {t(card.descKey)}
-                    </p>
+                  <div className="p-4 pt-2 text-center flex flex-col items-center flex-grow justify-between">
+                    <div>
+                      <h3 className="font-display text-[17px] font-semibold text-[#780D32] line-clamp-1">
+                        {t(card.titleKey)}
+                      </h3>
+                      <p className="mt-1.5 text-xs text-[#82716E] leading-relaxed line-clamp-3">
+                        {t(card.descKey)}
+                      </p>
+                    </div>
+                    <div className="pt-2 w-full flex items-center justify-center min-h-[26px]">
+                      {isCenter ? (
+                        <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#D9A044]">
+                          {t(card.accentKey)}
+                        </span>
+                      ) : (
+                        <span className="text-sm text-[#780D32]/75">→</span>
+                      )}
+                    </div>
                   </div>
                 </div>
               );
             })}
           </div>
 
-          {/* MOBILE VIEW: Luxury 3D Coverflow Carousel (Tight Gap, Visible Adjacent Flanks, Fluid 3D Motion) */}
+          {/* MOBILE COVERFLOW (Below 640px): 1 Dominant Active Card + Peeking Flanks + Natural Touch Swipe */}
           <div
-            className="sm:hidden relative w-full overflow-hidden py-3 select-none [perspective:1200px]"
+            className="sm:hidden relative w-full overflow-hidden py-2 select-none [perspective:1200px]"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            {/* 3D Curved Carousel Track */}
-            <div className="relative h-[485px] w-full mx-auto overflow-visible [transform-style:preserve-3d]">
+            <div className="relative h-[450px] w-full mx-auto overflow-visible [transform-style:preserve-3d]">
               {productCards.map((card, idx) => {
-                const offset = getCardOffset(idx);
+                const offset = getModularOffset(idx, activeIndex, productCards.length);
                 const isCenter = offset === 0;
                 const IconComp = card.icon;
 
-                // Luxury 3D Coverflow spatial parameters:
-                // Geometry provides ~54px recognizable silhouette on narrow mobile screens (375px)
-                // with balanced 10px deliberate spacing and zero horizontal waste
                 let translateX = "-50%";
                 let translateY = "0px";
                 let scale = 1;
                 let rotateY = 0;
                 let opacity = 1;
-                let filter = "none";
                 let zIndex = 10;
                 let pointerEvents: "auto" | "none" = "auto";
 
                 if (offset === 0) {
-                  // Active Center Spotlight Card: razor-sharp, elevated, champagne gold border
                   translateX = "-50%";
                   translateY = "0px";
                   scale = 1;
                   rotateY = 0;
                   opacity = 1;
-                  filter = "blur(0px) brightness(1.0)";
                   zIndex = 25;
                 } else if (offset === -1) {
-                  // Immediate Left Flank: substantially visible (~54px on 375px screen), 10px deliberate spacing, soft depth blur
-                  translateX = "calc(-145.3% - 10px)";
-                  translateY = "6px";
-                  scale = 0.92;
-                  rotateY = 10;
-                  opacity = 0.85;
-                  filter = "blur(1.5px) brightness(0.95)";
+                  // Left flanking card visibly peeking from left edge
+                  translateX = "calc(-142% - 8px)";
+                  translateY = "4px";
+                  scale = 0.90;
+                  rotateY = 8;
+                  opacity = 0.88;
                   zIndex = 15;
                 } else if (offset === 1) {
-                  // Immediate Right Flank: substantially visible (~54px on 375px screen), 10px deliberate spacing, soft depth blur
-                  translateX = "calc(45.3% + 10px)";
-                  translateY = "6px";
-                  scale = 0.92;
-                  rotateY = -10;
-                  opacity = 0.85;
-                  filter = "blur(1.5px) brightness(0.95)";
+                  // Right flanking card visibly peeking from right edge
+                  translateX = "calc(42% + 8px)";
+                  translateY = "4px";
+                  scale = 0.90;
+                  rotateY = -8;
+                  opacity = 0.88;
                   zIndex = 15;
-                } else if (offset === -2) {
-                  // Farther Left: subdued, smoothly fades in as it rotates towards flank
-                  translateX = "calc(-240% - 20px)";
-                  translateY = "14px";
-                  scale = 0.82;
-                  rotateY = 18;
+                } else {
+                  translateX = offset < 0 ? "calc(-230% - 15px)" : "calc(130% + 15px)";
+                  translateY = "10px";
+                  scale = 0.80;
+                  rotateY = offset < 0 ? 15 : -15;
                   opacity = 0;
-                  filter = "blur(4px)";
-                  zIndex = 5;
-                  pointerEvents = "none";
-                } else if (offset === 2) {
-                  // Farther Right: subdued, smoothly fades in as it rotates towards flank
-                  translateX = "calc(140% + 20px)";
-                  translateY = "14px";
-                  scale = 0.82;
-                  rotateY = -18;
-                  opacity = 0;
-                  filter = "blur(4px)";
                   zIndex = 5;
                   pointerEvents = "none";
                 }
 
                 return (
                   <div
-                    key={`mobile-${card.id}`}
+                    key={`mob-${card.id}`}
                     onClick={() => handleCardClick(idx)}
                     role="button"
                     tabIndex={0}
@@ -1216,141 +823,141 @@ export default function WhyCakeStorySection() {
                     aria-label={`${t(card.titleKey)}: ${t(card.descKey)}`}
                     style={{
                       position: "absolute",
-                      top: "6px",
+                      top: "4px",
                       left: "50%",
-                      width: "min(66vw, 275px)",
+                      width: "min(68vw, 260px)",
                       transformOrigin: "center center",
                       transform: `translate3d(${translateX}, ${translateY}, 0) scale(${scale}) rotateY(${rotateY}deg)`,
                       zIndex,
                       opacity,
-                      filter,
                       pointerEvents,
                       transition:
-                        "transform 720ms cubic-bezier(0.25, 1, 0.4, 1), opacity 550ms ease, filter 550ms ease, box-shadow 550ms ease",
+                        "transform 680ms cubic-bezier(0.25, 1, 0.4, 1), opacity 500ms ease, box-shadow 500ms ease",
                     }}
-                    className={`rounded-2xl cursor-pointer flex flex-col overflow-hidden bg-white ${
+                    className={`rounded-[22px] cursor-pointer flex flex-col overflow-hidden bg-[#FFF9F0] ${
                       isCenter
-                        ? "border-2 border-[#D8A64E] shadow-[0_22px_48px_-6px_rgba(216,166,78,0.45),0_12px_24px_rgba(134,27,67,0.18)]"
-                        : "border border-[#F2E5D9] shadow-md hover:border-[#D8A64E]/60"
+                        ? "border-2 border-[#D9A044] shadow-[0_20px_45px_-8px_rgba(120,13,50,0.18),0_8px_20px_-4px_rgba(217,160,68,0.28)]"
+                        : "border border-[#D9A044]/45 shadow-md"
                     }`}
                   >
-                    {/* Top Product Image Container */}
-                    <div className="relative w-full aspect-[4/3.8] overflow-hidden bg-[#FBF4EE]">
+                    <div className="relative w-full aspect-[4/3.8] overflow-hidden bg-[#FFF5E8]">
                       <img
                         src={card.image}
                         alt={card.alt}
                         loading="eager"
                         decoding="async"
-                        className="w-full h-full object-cover object-center"
+                        className="w-full h-full object-cover object-center scale-102"
                       />
-                      {isCenter && (
-                        <div className="absolute top-2.5 right-2.5 z-20 animate-fadeIn">
-                          <span className="px-2.5 py-1 rounded-full bg-black/80 text-[10px] font-semibold text-amber-200 border border-amber-300/40 shadow-sm inline-flex items-center gap-1.5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            <span>{t(card.badgeKey)}</span>
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Overlapping Circular Category Badge */}
-                    <div className="relative flex justify-center -mt-6 z-20">
-                      <div
-                        className={`w-12 h-12 rounded-full flex items-center justify-center shadow-sm transition-all duration-300 ${
-                          isCenter
-                            ? "bg-[#FFF9F2] text-[#861B43] border-2 border-[#D8A64E]"
-                            : "bg-white text-[#861B43] border border-[#F0D5C7]"
-                        }`}
-                      >
-                        <IconComp className="w-5 h-5" />
+                      <div className="absolute bottom-0 inset-x-0 h-5 overflow-hidden pointer-events-none">
+                        <svg
+                          viewBox="0 0 260 24"
+                          preserveAspectRatio="none"
+                          className="w-full h-full text-[#FFF9F0] fill-current"
+                        >
+                          <path d="M0 24 C75 24 95 6 130 6 C165 6 185 24 260 24 Z" />
+                        </svg>
                       </div>
                     </div>
 
-                    {/* Bottom Text Content */}
-                    <div className="p-4 pt-2.5 text-center flex flex-col items-center">
-                      <h3 className="font-display text-base font-semibold text-[#6D1234]">
-                        {t(card.titleKey)}
-                      </h3>
-                      <p className="mt-1.5 text-xs text-[#55464A] leading-relaxed line-clamp-3">
-                        {t(card.descKey)}
-                      </p>
-                      {isCenter && (
-                        <span className="mt-2 text-[10.5px] font-semibold tracking-wider uppercase text-[#D8A64E]">
-                          {t(card.tagKey)}
-                        </span>
-                      )}
+                    <div className="relative flex justify-center -mt-5 z-20">
+                      <div
+                        className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+                          isCenter
+                            ? "bg-[#FFF9F0] text-[#780D32] border-2 border-[#D9A044] shadow-sm scale-105"
+                            : "bg-[#FFF9F0] text-[#780D32] border border-[#D9A044]/60"
+                        }`}
+                      >
+                        <IconComp className="w-4.5 h-4.5" />
+                      </div>
+                    </div>
+
+                    <div className="p-3.5 pt-1.5 text-center flex flex-col items-center flex-grow justify-between">
+                      <div>
+                        <h3 className="font-display text-base font-semibold text-[#780D32] line-clamp-1">
+                          {t(card.titleKey)}
+                        </h3>
+                        <p className="mt-1 text-xs text-[#82716E] leading-relaxed line-clamp-2">
+                          {t(card.descKey)}
+                        </p>
+                      </div>
+                      <div className="pt-1.5 w-full flex items-center justify-center min-h-[24px]">
+                        {isCenter ? (
+                          <span className="text-[9.5px] font-semibold tracking-[0.18em] uppercase text-[#D9A044]">
+                            {t(card.accentKey)}
+                          </span>
+                        ) : (
+                          <span className="text-xs text-[#780D32]/75">→</span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 );
               })}
             </div>
+          </div>
 
-            {/* Mobile Dots Indicator */}
-            <div className="flex items-center justify-center gap-2 mt-4">
-              {productCards.map((c, idx) => (
+          {/* 4. Elegant Carousel Navigation Controls: Left Arrow, 5 Pagination Dots, Right Arrow */}
+          <div className="flex items-center justify-center gap-4 sm:gap-6 mt-6 sm:mt-8 select-none">
+            <button
+              type="button"
+              onClick={handlePrev}
+              aria-label="Previous specialty"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#D9A044]/60 bg-[#FFF9F0]/80 hover:bg-[#FFF9F0] hover:border-[#D9A044] text-[#780D32] flex items-center justify-center transition-all duration-300 shadow-xs cursor-pointer hover:scale-105 active:scale-95"
+            >
+              <ChevronLeftIcon className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+            </button>
+
+            <div className="flex items-center gap-2 sm:gap-2.5">
+              {productCards.map((c, i) => (
                 <button
-                  key={`mobile-dot-${c.id}`}
+                  key={`dot-${c.id}`}
                   type="button"
-                  onClick={() => handleCardClick(idx)}
-                  aria-label={`Jump to ${t(c.titleKey)}`}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    autoplayIndex === idx
-                      ? "w-6 bg-[#861B43] shadow-[0_0_8px_rgba(134,27,67,0.5)]"
-                      : "w-2 bg-[#D8A64E]/40 hover:bg-[#D8A64E]/80"
+                  onClick={() => handleCardClick(i)}
+                  aria-label={`Go to ${t(c.titleKey)}`}
+                  className={`rounded-full transition-all duration-300 cursor-pointer ${
+                    activeIndex === i
+                      ? "w-2.5 h-2.5 bg-[#780D32] shadow-xs scale-110"
+                      : "w-2 h-2 bg-[#D9A044]/60 hover:bg-[#D9A044]"
                   }`}
                 />
               ))}
             </div>
+
+            <button
+              type="button"
+              onClick={handleNext}
+              aria-label="Next specialty"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#D9A044]/60 bg-[#FFF9F0]/80 hover:bg-[#FFF9F0] hover:border-[#D9A044] text-[#780D32] flex items-center justify-center transition-all duration-300 shadow-xs cursor-pointer hover:scale-105 active:scale-95"
+            >
+              <ChevronRightIcon className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+            </button>
           </div>
-        </div>
 
-        {/* 5. Four Brand-Value Indicators (Elevated Cards with Minimalist Icons) */}
-        <div className="why-values-track mt-14 sm:mt-18 md:mt-20 pt-8 sm:pt-10 border-t border-[#E8D4C8]/60">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-5 items-stretch">
-            {brandValues.map((val) => {
-              const IconComp = val.icon;
-              return (
-                <div
-                  key={val.id}
-                  className="why-value-item flex flex-col items-center text-center p-3.5 sm:p-5 rounded-2xl bg-white/75 backdrop-blur-sm border border-[#F2E5D9] hover:border-[#D8A64E]/60 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group"
-                >
-                  {/* Minimalist Berry Icon with Warm Ivory Circle */}
-                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#FFF9F2] border border-[#F0D5C7] group-hover:border-[#D8A64E] flex items-center justify-center text-[#861B43] group-hover:scale-108 transition-all duration-300 mb-2.5 sm:mb-3 shadow-xs">
-                    <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </div>
-
-                  {/* Uppercase Category Label */}
-                  <h4 className="font-sans font-semibold text-[10.5px] sm:text-xs tracking-[0.14em] uppercase text-[#861B43]">
-                    {t(val.labelKey)}
-                  </h4>
-
-                  {/* Supporting Muted Description */}
-                  <p className="mt-1 text-[11px] sm:text-xs text-[#55464A] leading-relaxed font-normal">
-                    {t(val.descKey)}
-                  </p>
-                </div>
-              );
-            })}
+          {/* 5. Footer Caption Flanked by Champagne Gold Rules */}
+          <div className="flex items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10 select-none">
+            <span className="h-[1px] w-8 sm:w-14 bg-gradient-to-r from-transparent via-[#D9A044]/70 to-[#D9A044]" />
+            <span className="text-[10px] sm:text-[11.5px] font-semibold tracking-[0.24em] uppercase text-[#780D32]">
+              {t("why.footerCaption")}
+            </span>
+            <span className="h-[1px] w-8 sm:w-14 bg-gradient-to-l from-transparent via-[#D9A044]/70 to-[#D9A044]" />
           </div>
         </div>
       </div>
 
-      {/* 6. Bottom Decorative Sweeping Waves (Matching Reference Image) */}
-      <div className="relative w-full mt-14 sm:mt-18 leading-none" aria-hidden="true">
+      {/* 6. Bottom Decorative Waves (smoothly transitioning into FranchiseModelSection) */}
+      <div className="relative w-full mt-10 sm:mt-14 leading-none" aria-hidden="true">
         <svg
           viewBox="0 0 1440 90"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
-          className="w-full h-12 sm:h-16 md:h-20 block"
+          className="w-full h-10 sm:h-14 md:h-18 block"
         >
-          {/* Subtle blush transitional wave */}
           <path
             d="M0 90C280 88 440 45 740 45C1040 45 1240 78 1440 68V90H0Z"
             fill="#F5DDD4"
             fillOpacity="0.85"
           />
-          {/* Deep berry / burgundy bottom sweep transitioning smoothly into next dark section */}
           <path
             d="M0 90C140 90 260 22 480 40C680 58 760 76 960 88L1040 90H0Z"
             fill="#741334"

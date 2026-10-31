@@ -116,11 +116,13 @@ export const enquiryService = {
       supabase
         .from("enquiries")
         .insert(mapModelToDbEnquiry(newEnquiry))
-        .then(({ error }) => {
-          if (error) console.warn("[Supabase] Failed to persist enquiry lead:", error.message);
-          else console.log("[Supabase] ✓ Enquiry successfully recorded in cloud:", newEnquiry.id);
-        })
-        .catch((err) => console.warn("[Supabase] Enquiry insertion error:", err));
+        .then(
+          ({ error }) => {
+            if (error) console.warn("[Supabase] Failed to persist enquiry lead:", error.message);
+            else console.log("[Supabase] ✓ Enquiry successfully recorded in cloud:", newEnquiry.id);
+          },
+          (err: unknown) => console.warn("[Supabase] Enquiry insertion error:", err)
+        );
     }
 
     return newEnquiry;
@@ -137,10 +139,12 @@ export const enquiryService = {
         .from("enquiries")
         .update({ status })
         .eq("id", id)
-        .then(({ error }) => {
-          if (error) console.warn("[Supabase] Failed to update enquiry status:", error.message);
-        })
-        .catch((err) => console.warn("[Supabase] Update status error:", err));
+        .then(
+          ({ error }) => {
+            if (error) console.warn("[Supabase] Failed to update enquiry status:", error.message);
+          },
+          (err: unknown) => console.warn("[Supabase] Update status error:", err)
+        );
     }
 
     return all[idx];
@@ -155,10 +159,12 @@ export const enquiryService = {
         .from("enquiries")
         .delete()
         .eq("id", id)
-        .then(({ error }) => {
-          if (error) console.warn("[Supabase] Failed to remove enquiry:", error.message);
-        })
-        .catch((err) => console.warn("[Supabase] Remove enquiry error:", err));
+        .then(
+          ({ error }) => {
+            if (error) console.warn("[Supabase] Failed to remove enquiry:", error.message);
+          },
+          (err: unknown) => console.warn("[Supabase] Remove enquiry error:", err)
+        );
     }
 
     return next.length < all.length;
@@ -294,13 +300,13 @@ export function mapModelToDbFranchise(f: Franchise) {
   };
 }
 
-const FRANCHISE_INIT_KEY = "__cs_franchises_verified_official_v16__";
+const FRANCHISE_INIT_KEY = "__cs_franchises_official_sheet8_v18__";
 
 function getFranchisesRaw(): Franchise[] {
   const cached = storage.get<Franchise[]>(STORAGE_KEYS.FRANCHISES, []);
   const needsHydration =
     !localStorage.getItem(PREFIX + FRANCHISE_INIT_KEY) ||
-    cached.length < (seedFranchises as Franchise[]).length ||
+    cached.length !== (seedFranchises as Franchise[]).length ||
     cached.some((c) => !c.citySlug || !c.locality);
 
   if (needsHydration) {
@@ -352,10 +358,17 @@ export const franchiseService = {
 
     // Graceful backward compatibility mapping for legacy/test slugs
     const legacyAliases: Record<string, string> = {
-      "cakestory-hinjewadi": "wakad",
+      "cakestory-hinjewadi": "dange-chowk",
+      "cakestory-wakad": "dange-chowk",
+      "wakad": "dange-chowk",
       "cakestory-kalyani-nagar": "viman-nagar",
-      "cakestory-satara": "powai-naka",
-      "cakestory-hadapsar": "phursungi",
+      "cakestory-satara": "satara-city",
+      "powai-naka": "satara-city",
+      "highway-junction": "satara",
+      "cakestory-hadapsar": "bhekrai-nagar",
+      "phursungi": "bhekrai-nagar",
+      "bibwewadi": "balajinagar",
+      "manjri": "shewalwadi",
       "cakestory-saswad": "saswad",
       "anand-plaza": "saswad",
     };
@@ -403,11 +416,13 @@ export const franchiseService = {
       supabase
         .from("franchises")
         .insert(mapModelToDbFranchise(newFranchise))
-        .then(({ error }) => {
-          if (error) console.warn("[Supabase] Failed to create franchise:", error.message);
-          else console.log("[Supabase] ✓ Franchise created in cloud:", newFranchise.outletName);
-        })
-        .catch((err) => console.warn("[Supabase] Franchise create error:", err));
+        .then(
+          ({ error }) => {
+            if (error) console.warn("[Supabase] Failed to create franchise:", error.message);
+            else console.log("[Supabase] ✓ Franchise created in cloud:", newFranchise.outletName);
+          },
+          (err: unknown) => console.warn("[Supabase] Franchise create error:", err)
+        );
     }
 
     return newFranchise;
@@ -425,10 +440,12 @@ export const franchiseService = {
         .from("franchises")
         .update(mapModelToDbFranchise(updated))
         .eq("id", id)
-        .then(({ error }) => {
-          if (error) console.warn("[Supabase] Failed to update franchise:", error.message);
-        })
-        .catch((err) => console.warn("[Supabase] Franchise update error:", err));
+        .then(
+          ({ error }) => {
+            if (error) console.warn("[Supabase] Failed to update franchise:", error.message);
+          },
+          (err: unknown) => console.warn("[Supabase] Franchise update error:", err)
+        );
     }
 
     return updated;
@@ -448,10 +465,12 @@ export const franchiseService = {
         .from("franchises")
         .delete()
         .eq("id", id)
-        .then(({ error }) => {
-          if (error) console.warn("[Supabase] Failed to delete franchise:", error.message);
-        })
-        .catch((err) => console.warn("[Supabase] Franchise delete error:", err));
+        .then(
+          ({ error }) => {
+            if (error) console.warn("[Supabase] Failed to delete franchise:", error.message);
+          },
+          (err: unknown) => console.warn("[Supabase] Franchise delete error:", err)
+        );
     }
 
     return next.length < all.length;
@@ -618,11 +637,13 @@ export const cakeService = {
       supabase
         .from("cakes")
         .insert(mapModelToDbCake(newCake))
-        .then(({ error }) => {
-          if (error) console.warn("[Supabase] Failed to insert cake:", error.message);
-          else console.log("[Supabase] ✓ Cake saved to cloud:", newCake.name);
-        })
-        .catch((err) => console.warn("[Supabase] Cake insert error:", err));
+        .then(
+          ({ error }) => {
+            if (error) console.warn("[Supabase] Failed to insert cake:", error.message);
+            else console.log("[Supabase] ✓ Cake saved to cloud:", newCake.name);
+          },
+          (err: unknown) => console.warn("[Supabase] Cake insert error:", err)
+        );
     }
 
     return newCake;
@@ -643,10 +664,12 @@ export const cakeService = {
         .from("cakes")
         .update(mapModelToDbCake(updated))
         .eq("id", id)
-        .then(({ error }) => {
-          if (error) console.warn("[Supabase] Failed to update cake:", error.message);
-        })
-        .catch((err) => console.warn("[Supabase] Cake update error:", err));
+        .then(
+          ({ error }) => {
+            if (error) console.warn("[Supabase] Failed to update cake:", error.message);
+          },
+          (err: unknown) => console.warn("[Supabase] Cake update error:", err)
+        );
     }
 
     return updated;
@@ -662,10 +685,12 @@ export const cakeService = {
         .from("cakes")
         .delete()
         .eq("id", id)
-        .then(({ error }) => {
-          if (error) console.warn("[Supabase] Failed to delete cake:", error.message);
-        })
-        .catch((err) => console.warn("[Supabase] Cake delete error:", err));
+        .then(
+          ({ error }) => {
+            if (error) console.warn("[Supabase] Failed to delete cake:", error.message);
+          },
+          (err: unknown) => console.warn("[Supabase] Cake delete error:", err)
+        );
     }
 
     return true;
@@ -896,9 +921,8 @@ const ADMIN_INIT_KEY = "__cs_admin_auth_v8__";
 const INITIAL_USERNAME = "admin";
 // Initial temporary setup hash for CakeStory#Admin2026 — No plaintext password in code
 const INITIAL_PASSWORD_HASH = "bb274ace4faf6d51cac26714fa9dc9b792cd98815017a9d5a4b06d4c62ef8a32";
-const CLOUD_AUTH_URL = "https://api.restful-api.dev/objects/ff808181a09d98f701a148d0b7a87adf";
 
-async function pushToCloud(creds: AdminCredentials): Promise<void> {
+export async function pushToCloud(creds: AdminCredentials): Promise<void> {
   if (isSupabaseConfigured() && supabase) {
     try {
       await supabase.from("admin_users").upsert(
@@ -1643,10 +1667,12 @@ export const galleryService = {
       supabase
         .from("gallery_settings")
         .upsert(mapModelToDbSettings(updated), { onConflict: "id" })
-        .then(({ error }) => {
-          if (error) console.warn("[Supabase] Failed to update gallery settings:", error.message);
-        })
-        .catch((err) => console.warn("[Supabase] Gallery settings update error:", err));
+        .then(
+          ({ error }) => {
+            if (error) console.warn("[Supabase] Failed to update gallery settings:", error.message);
+          },
+          (err: unknown) => console.warn("[Supabase] Gallery settings update error:", err)
+        );
     }
 
     return updated;
@@ -1685,10 +1711,12 @@ export const galleryService = {
       supabase
         .from("gallery_reels")
         .upsert(rows, { onConflict: "id" })
-        .then(({ error }) => {
-          if (error) console.warn("[Supabase] Failed to persist gallery reels:", error.message);
-        })
-        .catch((err) => console.warn("[Supabase] Gallery reels upsert error:", err));
+        .then(
+          ({ error }) => {
+            if (error) console.warn("[Supabase] Failed to persist gallery reels:", error.message);
+          },
+          (err: unknown) => console.warn("[Supabase] Gallery reels upsert error:", err)
+        );
     }
   },
 
@@ -1747,10 +1775,12 @@ export const galleryService = {
         .from("gallery_reels")
         .delete()
         .eq("id", id)
-        .then(({ error }) => {
-          if (error) console.warn("[Supabase] Failed to delete gallery reel:", error.message);
-        })
-        .catch((err) => console.warn("[Supabase] Gallery reel delete error:", err));
+        .then(
+          ({ error }) => {
+            if (error) console.warn("[Supabase] Failed to delete gallery reel:", error.message);
+          },
+          (err: unknown) => console.warn("[Supabase] Gallery reel delete error:", err)
+        );
     }
 
     return true;
