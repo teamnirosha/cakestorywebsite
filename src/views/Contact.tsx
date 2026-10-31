@@ -78,8 +78,8 @@ export default function Contact() {
                     <div>
                       <h4 className="font-bold text-[#2a1d2e] mb-0.5">Franchise Desk</h4>
                       <p>
-                        <a href="tel:+918623940744" className="hover:text-pink-600 transition font-semibold">
-                          +91 86239 40744
+                        <a href="tel:+919881914444" className="hover:text-pink-600 transition font-semibold">
+                          +91 98819 14444
                         </a>
                       </p>
                     </div>

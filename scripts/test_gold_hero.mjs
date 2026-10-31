@@ -53,7 +53,7 @@ async function run() {
   console.log("Franchise CTA visible:", await franchiseCta.isVisible());
 
   // Check WhatsApp button
-  const whatsappBtn = page.locator('a[href*="wa.me/918623940744"]');
+  const whatsappBtn = page.locator('a[href*="wa.me/919881914444"]');
   console.log("WhatsApp button visible:", (await whatsappBtn.count()) > 0);
 
   // Test opening franchise modal

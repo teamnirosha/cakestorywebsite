@@ -340,7 +340,7 @@ export default function OutletDetail() {
   const whatsappOrderUrl = `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(
     `Hello CakeStory Desserts (${outlet.outletName || outlet.name}), I would like to order fresh celebration cakes.`
   )}`;
-  const franchiseWhatsappUrl = `https://wa.me/918623940744?text=${encodeURIComponent(
+  const franchiseWhatsappUrl = `https://wa.me/919881914444?text=${encodeURIComponent(
     `Hello CakeStory Franchise Team, I am interested in opening a franchise in ${outlet.zone || outlet.city}.`
   )}`;
 

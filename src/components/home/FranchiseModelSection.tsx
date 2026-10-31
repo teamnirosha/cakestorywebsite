@@ -1070,12 +1070,12 @@ export default function FranchiseModelSection() {
                   </button>
 
                   <a
-                    href="tel:+918623940744"
+                    href="tel:+919881914444"
                     className="w-full sm:w-auto px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 text-stone-200 hover:text-white font-medium text-sm border border-white/15 hover:border-white/25 transition-all flex items-center justify-center gap-2.5"
                     title="Direct Helpline"
                   >
                     <PhoneIcon className="w-4 h-4 text-[#e6cb9f]" />
-                    <span>+91 86239 40744</span>
+                    <span>+91 98819 14444</span>
                   </a>
                 </div>
               </div>

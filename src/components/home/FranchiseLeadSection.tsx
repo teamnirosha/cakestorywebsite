@@ -394,10 +394,10 @@ export default function FranchiseLeadSection() {
                   {language === "mr" ? "थेट फ्रँचायझी डेस्क" : "Direct Franchise Desk"}
                 </div>
                 <a
-                  href="tel:+918623940744"
+                  href="tel:+919881914444"
                   className="text-sm sm:text-[15px] font-medium text-stone-100 hover:text-[#e6ca9c] transition-colors truncate block"
                 >
-                  +91 86239 40744
+                  +91 98819 14444
                 </a>
               </div>
             </div>

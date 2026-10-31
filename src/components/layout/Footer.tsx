@@ -332,11 +332,11 @@ export default function Footer() {
               <div className="p-3.5 rounded-2xl bg-[#1b1219]/90 border border-stone-800/90 hover:border-[#c9a46a]/30 transition-all">
                 <div className="text-xs text-stone-400 mb-1 font-medium tracking-wide">{t("footer.helpdeskLabel")}</div>
                 <a
-                  href="tel:+918623940744"
+                  href="tel:+919881914444"
                   className="text-base font-semibold text-stone-100 hover:text-[#e6ca9c] transition-colors flex items-center gap-2"
                 >
                   <PhoneIcon className="w-4 h-4 text-[#c9a46a] shrink-0" />
-                  <span>+91 86239 40744</span>
+                  <span>+91 98819 14444</span>
                 </a>
               </div>
 

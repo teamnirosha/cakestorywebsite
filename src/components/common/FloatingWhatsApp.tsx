@@ -4,7 +4,7 @@ import { franchiseService } from "../../services/data";
 import { useLanguage } from "../../context/LanguageContext";
 
 // Official CakeStory Owner & Franchise Management Team Helpline
-const OWNER_FRANCHISE_WHATSAPP_PHONE = "918623940744"; // +91 86239 40744
+const OWNER_FRANCHISE_WHATSAPP_PHONE = "919881914444"; // +91 98819 14444
 
 function WhatsAppIcon({ className = "w-7 h-7" }: { className?: string }) {
   return (
@@ -22,7 +22,7 @@ function WhatsAppIcon({ className = "w-7 h-7" }: { className?: string }) {
 /**
  * FloatingWhatsApp — Active, responsive, context-aware WhatsApp chat widget.
  * Features:
- * - On main & brand pages: Maps directly to the CakeStory Owner & Franchise Team helpline (+91 86239 40744).
+ * - On main & brand pages: Maps directly to the CakeStory Owner & Franchise Team helpline (+91 98819 14444).
  * - On store/outlet pages: Dynamically switches to that specific store's / franchise owner's phone number.
  * - Active radar ping & online status indicator.
  * - Smart vertical lifting when scrolled into footer (never obscures Team Nirosha credit).
@@ -108,7 +108,7 @@ export default function FloatingWhatsApp() {
 
   const targetTitle = currentOutlet
     ? `Order from CakeStory ${currentOutlet.outletName || currentOutlet.name} on WhatsApp`
-    : "Chat with CakeStory Owner & Franchise Team on WhatsApp (+91 86239 40744)";
+    : "Chat with CakeStory Owner & Franchise Team on WhatsApp (+91 98819 14444)";
 
   return (
     <div
