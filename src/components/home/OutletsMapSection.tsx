@@ -496,19 +496,8 @@ export default function OutletsMapSection() {
         </div>
       </div>
 
-      {/* 7. Seamless Organic Curvature Transition to FAQ Section */}
-      <div className="absolute inset-x-0 bottom-0 pointer-events-none overflow-hidden leading-none z-10">
-        <svg
-          className="relative block w-full h-10 sm:h-14 lg:h-16 text-[#faf7f2]"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M 0,0 C 350,85 850,85 1200,0 L 1200,120 L 0,120 Z"
-            fill="currentColor"
-          />
-        </svg>
-      </div>
+      {/* 7. Seamless Atmospheric Ambient Transition into FAQ Section */}
+      <div className="absolute inset-x-0 bottom-0 h-28 sm:h-36 bg-gradient-to-t from-[#fde9d2]/90 via-[#fde9d2]/40 to-transparent pointer-events-none z-10" />
     </section>
   );
 }

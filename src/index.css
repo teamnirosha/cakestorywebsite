@@ -78,6 +78,10 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 
+.font-serif-luxury {
+  font-family: 'Playfair Display', 'Fraunces', Georgia, serif;
+}
+
 /* Regal, Stylish Marathi & Devanagari Typography */
 .lang-mr,
 [lang="mr"] {
