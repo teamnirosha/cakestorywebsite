@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 import PageShell from "../components/layout/PageShell";
 import FloatingCake from "../components/three/FloatingCake";
+import { useSEO } from "../utils/seo";
 
 export default function NotFound() {
+  useSEO({
+    title: "404 - Page Not Found | CakeStory Desserts",
+    description: "The requested page could not be found on CakeStory Desserts.",
+    robots: "noindex, follow",
+  });
+
   return (
     <PageShell>
       <div className="max-w-md mx-auto text-center pt-20">

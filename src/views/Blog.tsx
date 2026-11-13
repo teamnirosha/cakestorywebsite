@@ -3,8 +3,18 @@ import { Link } from "react-router-dom";
 import PageShell from "../components/layout/PageShell";
 import { blogService } from "../services/data";
 import CakeImage from "../components/common/CakeImage";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 export default function Blog() {
+  useSEO({
+    title: "CakeStory Desserts",
+    description:
+      "CakeStory Desserts is a growing Pune bakery brand offering scalable franchise opportunities. Centralized production, standard hygiene, and turnkey operational support.",
+    canonical: `${PRIMARY_DOMAIN}/`,
+    robots: "noindex, nofollow",
+    ogType: "website",
+  });
+
   const posts = blogService.list();
   const rawCategories = Array.from(new Set(posts.map((p) => p.category || "General").filter(Boolean)));
   const categories = ["All Insights", ...rawCategories];

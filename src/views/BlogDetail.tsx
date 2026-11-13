@@ -3,11 +3,22 @@ import PageShell from "../components/layout/PageShell";
 import { blogService } from "../services/data";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
 import CakeImage from "../components/common/CakeImage";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 export default function BlogDetail() {
   const { id } = useParams<{ id: string }>();
   const { openModal } = useFranchiseModal();
   const post = id ? blogService.get(id) : undefined;
+
+  useSEO(
+    {
+      title: "CakeStory Desserts",
+      canonical: `${PRIMARY_DOMAIN}/`,
+      robots: "noindex, nofollow",
+      ogType: "website",
+    },
+    [post]
+  );
 
   if (!post) {
     return <Navigate to="/blog" replace />;

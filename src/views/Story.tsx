@@ -9,11 +9,21 @@ import ProcessStory from "../components/story/ProcessStory";
 import BrandValues from "../components/story/BrandValues";
 import StoryTimeline from "../components/story/StoryTimeline";
 import StoryVision from "../components/story/StoryVision";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Story() {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useSEO({
+    title: "Our Story & Heritage | CakeStory Desserts Pune",
+    description:
+      "Discover the journey of CakeStory Desserts — from artisanal passion to an automated central kitchen bakery network in Pune.",
+    canonical: `${PRIMARY_DOMAIN}/`,
+    robots: "index, follow",
+    ogType: "article",
+  });
 
   useEffect(() => {
     // Respect reduced motion accessibility

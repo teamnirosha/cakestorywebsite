@@ -4,6 +4,7 @@ import PageShell from "../components/layout/PageShell";
 import Cake3D from "../components/three/Cake3D";
 import { cartService } from "../services/data";
 import { useToast } from "../components/common/Toast";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 const SHAPES = [
   { id: "round", label: "Round", emoji: "⭕", price: 0 },
@@ -62,6 +63,16 @@ const THEMES = [
 export default function CustomCake() {
   const navigate = useNavigate();
   const { show } = useToast();
+
+  useSEO({
+    title: "Custom 3D Cake Design Studio | CakeStory Desserts",
+    description:
+      "Customize your celebration cake in 3D. Choose shapes, flavours, tiers, and messages with precision preparation by CakeStory Desserts Pune.",
+    canonical: `${PRIMARY_DOMAIN}/custom-cake`,
+    robots: "index, follow",
+    ogType: "website",
+  });
+
   const [shape, setShape] = useState("round");
   const [size, setSize] = useState("medium");
   const [flavor, setFlavor] = useState("vanilla");

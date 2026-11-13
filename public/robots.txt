@@ -1,0 +1,12 @@
+# CakeStory Desserts - Production Robots Policy
+# Primary Production Domain: https://www.cakestorydesserts.in
+
+User-agent: *
+Allow: /
+
+# Explicitly allow OpenAI Search crawling
+User-agent: OAI-SearchBot
+Allow: /
+
+# Sitemap Location
+Sitemap: https://www.cakestorydesserts.in/sitemap.xml

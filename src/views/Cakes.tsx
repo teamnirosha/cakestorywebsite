@@ -4,8 +4,17 @@ import PageShell from "../components/layout/PageShell";
 import { cakeService, categoryService } from "../services/data";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
 import CakeImage from "../components/common/CakeImage";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 export default function Cakes() {
+  useSEO({
+    title: "Signature Cakes & Pastries Catalog | CakeStory Desserts",
+    description:
+      "Explore handcrafted 100% pure veg celebration cakes, artisanal pastries, and desserts available across all CakeStory Desserts boutiques in Pune.",
+    canonical: `${PRIMARY_DOMAIN}/cakes`,
+    robots: "index, follow",
+    ogType: "website",
+  });
   const { openModal } = useFranchiseModal();
   const [activeCategory, setActiveCategory] = useState("all");
   const [query, setQuery] = useState("");

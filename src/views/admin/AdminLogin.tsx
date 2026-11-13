@@ -3,8 +3,14 @@ import { useNavigate, Link } from "react-router-dom";
 import { authService } from "../../services/data";
 import { useToast } from "../../components/common/Toast";
 import kitchenProductionBg from "../../assets/business/kitchen-production.jpg";
+import { useSEO } from "../../utils/seo";
 
 export default function AdminLogin() {
+  useSEO({
+    title: "Admin Login | CakeStory Desserts",
+    robots: "noindex, nofollow",
+  });
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);

@@ -7,6 +7,7 @@ import { useFranchiseModal } from "../components/common/FranchiseModal";
 import { franchiseService, contentService, SiteContent } from "../services/data";
 import CakeImage from "../components/common/CakeImage";
 import { prefersReducedMotion, MOTION } from "../utils/motion";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,6 +16,15 @@ export default function Franchise() {
   const { openModal } = useFranchiseModal();
   const [siteContent, setSiteContent] = useState<SiteContent>(() => contentService.get());
   const totalOutlets = franchiseService.countActive();
+
+  useSEO({
+    title: "Bakery Franchise Opportunity in Pune | CakeStory Desserts",
+    description:
+      "Partner with CakeStory Desserts in Pune & Maharashtra. High margins, centralized daily supply, zero baking in store, turnkey setup support.",
+    canonical: `${PRIMARY_DOMAIN}/`,
+    robots: "index, follow",
+    ogType: "website",
+  });
 
   useEffect(() => {
     const onStorage = () => setSiteContent(contentService.get());

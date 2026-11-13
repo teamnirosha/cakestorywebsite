@@ -2,8 +2,18 @@ import { Link } from "react-router-dom";
 import PageShell from "../components/layout/PageShell";
 import { eventService } from "../services/data";
 import CakeImage from "../components/common/CakeImage";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 export default function Events() {
+  useSEO({
+    title: "Celebration Cakes & Event Catering | CakeStory Desserts",
+    description:
+      "Custom celebration cakes and dessert catering for weddings, birthdays, corporate gatherings, and anniversaries across Pune.",
+    canonical: `${PRIMARY_DOMAIN}/events`,
+    robots: "index, follow",
+    ogType: "website",
+  });
+
   const events = eventService.list();
   return (
     <PageShell>

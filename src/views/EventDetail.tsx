@@ -2,10 +2,22 @@ import { Link, useParams } from "react-router-dom";
 import PageShell from "../components/layout/PageShell";
 import { eventService } from "../services/data";
 import CakeImage from "../components/common/CakeImage";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 export default function EventDetail() {
   const { id } = useParams();
   const event = id ? eventService.get(id) : undefined;
+
+  useSEO(
+    {
+      title: event ? `${event.title} Catering & Cakes | CakeStory Desserts` : "Event Catering | CakeStory Desserts",
+      description: event ? `${event.description} Premium event cake catering by CakeStory Desserts Pune.` : undefined,
+      canonical: event ? `${PRIMARY_DOMAIN}/events/${event.id}` : `${PRIMARY_DOMAIN}/events`,
+      robots: "index, follow",
+      ogType: "article",
+    },
+    [event]
+  );
   if (!event) {
     return (
       <PageShell>

@@ -4,11 +4,24 @@ import Cake3D from "../components/three/Cake3D";
 import { cakeService } from "../services/data";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
 import CakeImage from "../components/common/CakeImage";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 export default function CakeDetail() {
   const { id } = useParams();
   const { openModal } = useFranchiseModal();
   const cake = id ? cakeService.get(id) : undefined;
+
+  useSEO(
+    {
+      title: cake ? `${cake.name} | CakeStory Desserts` : "Cake Creation | CakeStory Desserts",
+      description: cake ? `${cake.description} Pure veg artisanal cake by CakeStory Desserts.` : undefined,
+      canonical: cake ? `${PRIMARY_DOMAIN}/cakes/${cake.id}` : `${PRIMARY_DOMAIN}/cakes`,
+      robots: "index, follow",
+      ogType: "article",
+      ogImage: cake?.image ? `${PRIMARY_DOMAIN}${cake.image}` : undefined,
+    },
+    [cake]
+  );
 
   if (!cake) {
     return (

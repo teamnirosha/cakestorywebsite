@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/generate-sitemap.mjs && vite build",
+    "sitemap": "node scripts/generate-sitemap.mjs",
     "preview": "vite preview",
     "db:generate-seed": "node scripts/generate_seed_sql.mjs",
     "db:migrate": "node scripts/migrate_to_supabase.mjs"

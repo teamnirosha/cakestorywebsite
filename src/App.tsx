@@ -18,8 +18,6 @@ import Franchise from "./views/Franchise";
 const FAQ = lazy(() => import("./views/FAQ"));
 const OutletDetail = lazy(() => import("./views/OutletDetail"));
 const Contact = lazy(() => import("./views/Contact"));
-const Blog = lazy(() => import("./views/Blog"));
-const BlogDetail = lazy(() => import("./views/BlogDetail"));
 
 // Secondary & Feature Views
 const Cakes = lazy(() => import("./views/Cakes"));
@@ -104,8 +102,10 @@ export default function App() {
             <Route path="/outlets/:citySlug/:areaSlug" element={<PublicLayout><OutletDetail /></PublicLayout>} />
             <Route path="/outlets/:legacyParam" element={<PublicLayout><OutletDetail /></PublicLayout>} />
             <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
-            <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
-            <Route path="/blog/:id" element={<PublicLayout><BlogDetail /></PublicLayout>} />
+
+            {/* Obsolete Legacy Blog Routes — Redirected cleanly to canonical Homepage */}
+            <Route path="/blog" element={<Navigate to="/" replace />} />
+            <Route path="/blog/*" element={<Navigate to="/" replace />} />
 
             {/* Catalog, Custom Builder & Ordering Routes */}
             <Route path="/cakes" element={<PublicLayout><Cakes /></PublicLayout>} />

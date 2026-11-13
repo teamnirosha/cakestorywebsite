@@ -1,9 +1,19 @@
 import { Link } from "react-router-dom";
 import PageShell from "../components/layout/PageShell";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 export default function About() {
   const { openModal } = useFranchiseModal();
+
+  useSEO({
+    title: "About CakeStory Desserts | Premier Bakery Brand & Manufacturing",
+    description:
+      "Learn about CakeStory Desserts — our mission, vision, core brand pillars, and how we are building Pune's premier cake bakery network.",
+    canonical: `${PRIMARY_DOMAIN}/about`,
+    robots: "index, follow",
+    ogType: "website",
+  });
 
   return (
     <PageShell>

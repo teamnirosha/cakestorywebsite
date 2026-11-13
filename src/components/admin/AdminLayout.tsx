@@ -2,6 +2,7 @@ import { ReactNode, useState, useEffect } from "react";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { authService } from "../../services/data";
 import { useToast } from "../common/Toast";
+import { useSEO } from "../../utils/seo";
 
 export default function AdminLayout({
   children,
@@ -14,6 +15,13 @@ export default function AdminLayout({
   subtitle?: string;
   action?: ReactNode;
 }) {
+  useSEO(
+    {
+      title: title ? `${title} | CakeStory Admin` : "CakeStory Admin Operations",
+      robots: "noindex, nofollow",
+    },
+    [title]
+  );
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(() => {
     try {

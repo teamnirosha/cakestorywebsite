@@ -10,6 +10,7 @@ import { useFranchiseModal } from "../components/common/FranchiseModal";
 import { useLanguage } from "../context/LanguageContext";
 import { prefersReducedMotion, MOTION } from "../utils/motion";
 import { getOutletUrl, getOutletLocality, getOutletCity, getOutletZone, formatHeroLocation } from "../utils/outletRouting";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -185,64 +186,56 @@ export default function OutletDetail() {
     }
   }, [outlet?.id, outlet?.image]);
 
-  // Dynamic SEO Metadata
-  useEffect(() => {
-    if (!outlet) return;
+  // Dynamic SEO Metadata (Unique Title, Description, Self-Referencing Canonical & Schema)
+  const loc = outlet ? getOutletLocality(outlet, language) : "";
+  const cit = outlet ? getOutletCity(outlet.city, language) : "";
+  const baseTitle = outlet
+    ? `${t("outletDetail.bestCakesIn", "Best Cakes in")} ${loc}, ${cit} | CakeStory Desserts`
+    : "Boutique Outlets | CakeStory Desserts";
+  const metaDescription = outlet
+    ? `${outlet.description || t("outletDetail.newDesc")} ${outlet.address}. Call ${outlet.phone}.`
+    : "";
+  const canonicalUrl = outlet
+    ? `${PRIMARY_DOMAIN}${getOutletUrl(outlet)}`
+    : `${PRIMARY_DOMAIN}/outlets`;
 
-    const loc = getOutletLocality(outlet, language);
-    const cit = getOutletCity(outlet.city, language);
-    const baseTitle = `${t("outletDetail.bestCakesIn", "Best Cakes in")} ${loc}, ${cit} | CakeStory Desserts`;
-    const metaDescription = `${outlet.description || t("outletDetail.newDesc")} ${outlet.address}. Call ${outlet.phone}.`;
-
-    document.title = baseTitle;
-
-    let metaTag = document.querySelector('meta[name="description"]');
-    if (!metaTag) {
-      metaTag = document.createElement("meta");
-      metaTag.setAttribute("name", "description");
-      document.head.appendChild(metaTag);
-    }
-    metaTag.setAttribute("content", metaDescription);
-
-    const schemaId = "cakestory-outlet-schema";
-    let scriptTag = document.getElementById(schemaId) as HTMLScriptElement | null;
-    if (!scriptTag) {
-      scriptTag = document.createElement("script");
-      scriptTag.id = schemaId;
-      scriptTag.type = "application/ld+json";
-      document.head.appendChild(scriptTag);
-    }
-
-    const schemaData = {
-      "@context": "https://schema.org",
-      "@type": "Bakery",
-      name: outlet.name,
-      image: window.location.origin + (outlet.image || "/images/outlets/baner.jpg"),
-      telephone: outlet.phone,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: outlet.address,
-        addressLocality: outlet.zone || outlet.city,
-        addressRegion: outlet.state || "Maharashtra",
-        addressCountry: "IN",
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: outlet.latitude,
-        longitude: outlet.longitude,
-      },
-      openingHours: outlet.openingHours,
-      servesCuisine: "Pure Vegetarian Bakery, Cakes, Pastries, Desserts",
-      priceRange: "₹₹",
-    };
-
-    scriptTag.text = JSON.stringify(schemaData);
-
-    return () => {
-      const existingScript = document.getElementById(schemaId);
-      if (existingScript) existingScript.remove();
-    };
-  }, [outlet, language, t]);
+  useSEO(
+    {
+      title: baseTitle,
+      description: metaDescription,
+      canonical: canonicalUrl,
+      robots: "index, follow",
+      ogType: "article",
+      ogImage: outlet?.image ? `${PRIMARY_DOMAIN}${outlet.image}` : undefined,
+      jsonLdId: "cakestory-outlet-schema",
+      jsonLd: outlet
+        ? {
+            "@context": "https://schema.org",
+            "@type": "Bakery",
+            name: outlet.name,
+            image: `${PRIMARY_DOMAIN}${outlet.image || "/images/outlets/baner.jpg"}`,
+            telephone: outlet.phone,
+            url: canonicalUrl,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: outlet.address,
+              addressLocality: outlet.zone || outlet.city,
+              addressRegion: outlet.state || "Maharashtra",
+              addressCountry: "IN",
+            },
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: outlet.latitude,
+              longitude: outlet.longitude,
+            },
+            openingHours: outlet.openingHours,
+            servesCuisine: "Pure Vegetarian Bakery, Cakes, Pastries, Desserts",
+            priceRange: "₹₹",
+          }
+        : undefined,
+    },
+    [outlet, language, t]
+  );
 
   // Smooth Entrance Animations with GSAP
   useEffect(() => {

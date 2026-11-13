@@ -2,9 +2,20 @@ import { useState } from "react";
 import PageShell from "../components/layout/PageShell";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
 import { enquiryService } from "../services/data";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 export default function Contact() {
   const { openModal } = useFranchiseModal();
+
+  useSEO({
+    title: "Contact Us & Corporate Operations Hub | CakeStory Desserts",
+    description:
+      "Get in touch with CakeStory Desserts headquarters in Saswad, Pune. Dedicated support for franchise partners, corporate alignments, and inquiries.",
+    canonical: `${PRIMARY_DOMAIN}/`,
+    robots: "index, follow",
+    ogType: "website",
+  });
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",

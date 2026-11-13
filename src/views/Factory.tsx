@@ -3,6 +3,7 @@ import PageShell from "../components/layout/PageShell";
 import Factory3D from "../components/three/Factory3D";
 import Cake3D from "../components/three/Cake3D";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 const MANUFACTURING_STATIONS = [
   {
@@ -56,6 +57,15 @@ export default function Factory() {
   const { openModal } = useFranchiseModal();
   const [active, setActive] = useState(1);
   const current = MANUFACTURING_STATIONS[active - 1];
+
+  useSEO({
+    title: "How Our Cakes Are Made | CakeStory Desserts Virtual Factory Tour",
+    description:
+      "Take an interactive tour inside the CakeStory Desserts central manufacturing plant in Pune. Automated mixing, artisanal decoration, and cold-chain logistics.",
+    canonical: `${PRIMARY_DOMAIN}/factory`,
+    robots: "index, follow",
+    ogType: "article",
+  });
 
   useEffect(() => {
     const t = setInterval(() => setActive((a) => (a % MANUFACTURING_STATIONS.length) + 1), 6000);

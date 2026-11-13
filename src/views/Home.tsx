@@ -8,8 +8,40 @@ import InstagramGallerySection from "../components/home/InstagramGallerySection"
 import OutletsMapSection from "../components/home/OutletsMapSection";
 import FranchiseFaqSection from "../components/home/FranchiseFaqSection";
 import FranchiseLeadSection from "../components/home/FranchiseLeadSection";
+import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
 
 export default function Home() {
+  useSEO(
+    {
+      title: "CakeStory Desserts | Franchise Opportunity in Pune",
+      description:
+        "CakeStory Desserts is a growing Pune bakery brand offering scalable franchise opportunities. Centralized production, standard hygiene, and turnkey operational support.",
+      canonical: `${PRIMARY_DOMAIN}/`,
+      robots: "index, follow",
+      ogType: "website",
+      jsonLdId: "cakestory-org-schema",
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "Bakery",
+        name: "CakeStory Desserts",
+        url: `${PRIMARY_DOMAIN}/`,
+        logo: `${PRIMARY_DOMAIN}/assets/logo/cs-final-logo.png`,
+        image: `${PRIMARY_DOMAIN}/assets/logo/cs-final-logo.png`,
+        telephone: "+919881914444",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Saswad, Pune",
+          addressRegion: "Maharashtra",
+          postalCode: "412301",
+          addressCountry: "IN",
+        },
+        servesCuisine: "Pure Vegetarian Bakery, Cakes, Pastries, Desserts",
+        priceRange: "₹₹",
+      },
+    },
+    []
+  );
+
   return (
     <PageShell noTopPadding>
       {/* 1. Storefront Hero with 3D render & high-converting low-clutter copy */}
