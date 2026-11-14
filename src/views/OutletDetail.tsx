@@ -205,6 +205,8 @@ export default function OutletDetail() {
       description: metaDescription,
       canonical: canonicalUrl,
       robots: "index, follow",
+      ogTitle: baseTitle,
+      ogDescription: metaDescription,
       ogType: "article",
       ogImage: outlet?.image ? `${PRIMARY_DOMAIN}${outlet.image}` : undefined,
       jsonLdId: "cakestory-outlet-schema",

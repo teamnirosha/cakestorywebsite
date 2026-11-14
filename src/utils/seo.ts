@@ -29,13 +29,21 @@ function ensureAbsoluteUrl(pathOrUrl?: string): string {
 }
 
 function setMetaTag(attrName: "name" | "property", attrValue: string, content: string) {
-  let el = document.querySelector<HTMLMetaElement>(`meta[${attrName}="${attrValue}"]`);
-  if (!el) {
-    el = document.createElement("meta");
+  const elements = document.querySelectorAll<HTMLMetaElement>(`meta[${attrName}="${attrValue}"]`);
+  if (elements.length === 0) {
+    const el = document.createElement("meta");
     el.setAttribute(attrName, attrValue);
+    el.setAttribute("content", content);
     document.head.appendChild(el);
+  } else {
+    elements.forEach((el, index) => {
+      if (index === 0) {
+        el.setAttribute("content", content);
+      } else {
+        el.remove();
+      }
+    });
   }
-  el.setAttribute("content", content);
 }
 
 function setCanonicalTag(url: string) {
