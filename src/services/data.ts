@@ -1418,10 +1418,7 @@ function getSiteContentRaw(): SiteContent {
   }
   // Sync dynamic outlet count according to backend
   if (content.homeHero?.statistics?.[0]) {
-    const activeOutlets = franchiseService.countActive();
-    if (activeOutlets > 0) {
-      content.homeHero.statistics[0].value = `${activeOutlets}+`;
-    }
+    content.homeHero.statistics[0].value = "61+";
   }
   return content;
 }

@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import PageShell from "../components/layout/PageShell";
 import { useFranchiseModal } from "../components/common/FranchiseModal";
-import { franchiseService, contentService, SiteContent } from "../services/data";
+import { contentService, SiteContent } from "../services/data";
 import CakeImage from "../components/common/CakeImage";
 import { prefersReducedMotion, MOTION } from "../utils/motion";
 import { useSEO, PRIMARY_DOMAIN } from "../utils/seo";
@@ -15,7 +15,6 @@ export default function Franchise() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { openModal } = useFranchiseModal();
   const [siteContent, setSiteContent] = useState<SiteContent>(() => contentService.get());
-  const totalOutlets = franchiseService.countActive();
 
   useSEO({
     title: "Bakery Franchise Opportunity in Pune | CakeStory Desserts",
@@ -85,7 +84,7 @@ export default function Franchise() {
           <div className="lg:col-span-7 space-y-6 reveal-hero">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-100 text-[#ff5c97] text-xs font-bold uppercase tracking-wider">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Expanding Across Pune • {totalOutlets} Operational Outlets
+              Expanding Across Pune • 61+ Operational Outlets
             </div>
 
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[#2a1d2e] leading-tight">

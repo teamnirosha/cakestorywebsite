@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { franchiseService } from "../services/data";
 
 export type Language = "en" | "mr";
 
@@ -43,7 +42,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Story & Timeline Graph
     "story.tag": "Growth Journey",
     "story.title": "One Dream. Countless Celebrations. A Story Still Growing.",
-    "story.subtitle": "From a visionary centralized kitchen in Pune to 62+ high-performing franchise outlets",
+    "story.subtitle": "From a visionary centralized kitchen in Pune to 61+ high-performing franchise outlets",
     "story.graphTitle": "CakeStory Expansion & Scale Timeline (2013 – 2026)",
     "story.graphSubtitle": "Click any milestone node to view the operational breakthroughs behind each phase",
     "story.t1Year": "2013",
@@ -68,12 +67,12 @@ const translations: Record<Language, Record<string, string>> = {
     "story.t4Stat": "Quality-Focused Delivery",
     "story.t5Year": "2026",
     "story.t5Tag": "Phase 5: Maharashtra Scale",
-    "story.t5Title": "47+ Outlets & Regional Leadership",
+    "story.t5Title": "61+ Outlets & Regional Leadership",
     "story.t5Desc": "Established presence across PCMC, Kothrud, Hadapsar, Sinhagad Road, and Satara, with sustained profitability and zero store shutdowns.",
-    "story.t5Stat": "47+ Operational Outlets",
+    "story.t5Stat": "61+ Operational Outlets",
 
     // Timeline Summary Stats
-    "story.statOutlets": "47+",
+    "story.statOutlets": "61+",
     "story.statOutletsLabel": "Successful Outlets",
     "story.statCelebrations": "10,00,000+",
     "story.statCelebrationsLabel": "Happy Celebrations Served",
@@ -92,7 +91,7 @@ const translations: Record<Language, Record<string, string>> = {
     "numbers.tag": "100% Organic Growth",
     "numbers.title": "Growth That Builds Confidence",
     "numbers.subtitle": "Growth driven by customer love, repeat celebrations, and trusted franchise partners",
-    "numbers.stat1Val": "62+",
+    "numbers.stat1Val": "61+",
     "numbers.stat1Label": "Operational Outlets",
     "numbers.stat1Sub": "Pune, PCMC & Satara",
     "numbers.stat2Val": "10,00,000+",
@@ -308,7 +307,7 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.tagline": "Every Flavour Has A Story • Pune Franchise Network",
     "footer.devBy": "Designed & developed by",
     "footer.featVeg": "100% Pure Vegetarian Formulations",
-    "footer.featDelivery": "Daily 6 AM Cold-Chain Dispatch to 62+ Stores",
+    "footer.featDelivery": "Daily 6 AM Cold-Chain Dispatch to 61+ Stores",
     "footer.featModel": "Turnkey Zero In-Store Baking Model",
     "footer.desc": "CakeStory Desserts brings centralized cleanroom manufacturing and turnkey store support to high-growth neighborhood franchise partners across Pune, PCMC & Satara.",
     "footer.ctaProspectus": "Request Franchise Prospectus",
@@ -408,7 +407,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Story & Timeline Graph
     "story.tag": "आमचा प्रवास",
     "story.title": "एक स्वप्न, असंख्य उत्सव आणि सतत वाढणारी यशोगाथा.",
-    "story.subtitle": "पुण्यातील एका मध्यवर्ती किचनपासून ते ६२+ यशस्वी आऊटलेट्सचा प्रेरणादायी प्रवास",
+    "story.subtitle": "पुण्यातील एका मध्यवर्ती किचनपासून ते ६१+ यशस्वी आऊटलेट्सचा प्रेरणादायी प्रवास",
     "story.graphTitle": "केकस्टोरी विस्तार आणि प्रगतीचा आलेख (२०१३ – २०२६)",
     "story.graphSubtitle": "प्रत्येक टप्प्यावर क्लिक करून आमच्या यशाचे टप्पे जाणून घ्या",
     "story.t1Year": "२०१३",
@@ -433,12 +432,12 @@ const translations: Record<Language, Record<string, string>> = {
     "story.t4Stat": "गुणवत्तापूर्ण वितरण",
     "story.t5Year": "२०२६",
     "story.t5Tag": "टप्पा ५: महाराष्ट्रभर विस्तार",
-    "story.t5Title": "४७+ आऊटलेट्स व अग्रगण्य स्थान",
-    "story.t5Desc": "कोथरूड, हडपसर, सिंहगड रोड, पिंपरी-चिंचवड आणि साताऱ्यात ४७+ कार्यरत आणि फायदेशीर आऊटलेट्स.",
-    "story.t5Stat": "४७+ कार्यरत आऊटलेट्स",
+    "story.t5Title": "६१+ आऊटलेट्स व अग्रगण्य स्थान",
+    "story.t5Desc": "कोथरूड, हडपसर, सिंहगड रोड, पिंपरी-चिंचवड आणि साताऱ्यात ६१+ कार्यरत आणि फायदेशीर आऊटलेट्स.",
+    "story.t5Stat": "६१+ कार्यरत आऊटलेट्स",
 
     // Timeline Summary Stats
-    "story.statOutlets": "४७+",
+    "story.statOutlets": "६१+",
     "story.statOutletsLabel": "यशस्वी आऊटलेट्स",
     "story.statCelebrations": "१०,००,०००+",
     "story.statCelebrationsLabel": "आनंदी सेलिब्रेशन्स",
@@ -457,7 +456,7 @@ const translations: Record<Language, Record<string, string>> = {
     "numbers.tag": "१००% सेंद्रिय प्रगती",
     "numbers.title": "आमची आकडेवारीच सर्व काही सांगते",
     "numbers.subtitle": "ग्राहकांचे प्रेम, पुन्हा पुन्हा होणारी सेलिब्रेशन्स आणि पार्टनर्सचा विश्वास",
-    "numbers.stat1Val": "४७+",
+    "numbers.stat1Val": "६१+",
     "numbers.stat1Label": "कार्यरत आऊटलेट्स",
     "numbers.stat1Sub": "पुणे, पिंपरी-चिंचवड व सातारा",
     "numbers.stat2Val": "१०,००,०००+",
@@ -673,7 +672,7 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.tagline": "प्रत्येक चवीची एक सुंदर गोष्ट • पुणे फ्रँचायझी नेटवर्क",
     "footer.devBy": "डिझाईन व डेव्हलपमेंट",
     "footer.featVeg": "१००% शुद्ध शाकाहारी रेसिपीज",
-    "footer.featDelivery": "दररोज सकाळी ६ वाजता ६२+ स्टोअर्सना ताजी डिलिव्हरी",
+    "footer.featDelivery": "दररोज सकाळी ६ वाजता ६१+ स्टोअर्सना ताजी डिलिव्हरी",
     "footer.featModel": "टर्नकी शून्य इन-स्टोअर बेकिंग मॉडेल",
     "footer.desc": "केकस्टोरी डेझर्ट्स अत्याधुनिक सेंट्रलाइज्ड मॅन्युफॅक्चरिंग आणि टर्नकी सपोर्टसह पुणे, पिंपरी-चिंचवड आणि साताऱ्यातील फ्रँचायझी पार्टनर्सना स्थिर व्यवसायाची संधी देते.",
     "footer.ctaProspectus": "फ्रँचायझी माहिती पुस्तिका मिळवा",
@@ -783,8 +782,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const t = (key: string, defaultVal?: string): string => {
-    // Dynamic values according to backend
-    const count = franchiseService.countActive() || 62;
+    // UI Outlet Target Count
+    const count = 61;
     const mrCount = toMarathiDigits(count);
 
     if (key === "story.statOutlets" || key === "numbers.stat1Val") {
