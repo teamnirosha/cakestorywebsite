@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import { gsap } from "gsap";
 import { franchiseService, Franchise } from "../../services/data";
-import { useLanguage } from "../../context/LanguageContext";
+import { useLanguage, toMarathiDigits } from "../../context/LanguageContext";
 import { prefersReducedMotion, MOTION } from "../../utils/motion";
 import { getOutletUrl } from "../../utils/outletRouting";
 import bakeryBg from "../../assets/hero/cakestory-hero.jpg";
@@ -350,7 +350,10 @@ export default function OutletsMapSection() {
                 </span>
               </div>
               <span className="text-xs bg-white/20 px-2.5 py-0.5 rounded-full font-medium">
-                {filtered.length} {t("outlets.locations")}
+                {activeZone === "all" && !query.trim()
+                  ? (language === "mr" ? "६१+" : "61+")
+                  : (language === "mr" ? toMarathiDigits(filtered.length) : filtered.length)}{" "}
+                {t("outlets.locations")}
               </span>
             </div>
 

@@ -138,8 +138,8 @@ export default function Outlets() {
               </h1>
               <p className="text-sm text-[#5a4a5e] mt-1">
                 {language === "mr"
-                  ? `"प्रत्येक आऊटलेट म्हणजे केकस्टोरी प्रवासातील नवा गोड अध्याय." पुणे व परिसरामध्ये ${all.length} फ्रँचायझी आऊटलेट्स.`
-                  : `"Every outlet is another chapter in the CakeStory Desserts journey." ${all.length} franchise locations across Pune & regional corridors.`}
+                  ? `"प्रत्येक आऊटलेट म्हणजे केकस्टोरी प्रवासातील नवा गोड अध्याय." पुणे व परिसरामध्ये ६१+ फ्रँचायझी आऊटलेट्स.`
+                  : `"Every outlet is another chapter in the CakeStory Desserts journey." 61+ franchise locations across Pune & regional corridors.`}
               </p>
             </div>
             <div>
