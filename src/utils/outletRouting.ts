@@ -93,6 +93,7 @@ export const MARATHI_LOCALITY_MAP: Record<string, string> = {
   "Tilekar Nagar": "टिळेकर नगर",
   "Magarpatta": "मगरपट्टा",
   "Satara City": "सातारा शहर",
+  "Kopar Khairane": "कोपर खैरणे",
   // Common compound variants
   "Baner Road": "बाणेर रोड",
   "Camp Pune": "कॅम्प",
@@ -127,6 +128,8 @@ export const MARATHI_CITY_MAP: Record<string, string> = {
   "Khandala": "खंडाळा",
   "Khed Shivapur": "खेड शिवापूर",
   "Lonand": "लोणंद",
+  "Mumbai": "मुंबई",
+  "Navi Mumbai": "नवी मुंबई",
 };
 
 /**
@@ -138,6 +141,7 @@ export const MARATHI_ZONE_MAP: Record<string, string> = {
   "East Pune": "पूर्व पुणे",
   "South Pune": "दक्षिण पुणे",
   "Satara": "सातारा",
+  "Mumbai": "मुंबई",
 };
 
 /**

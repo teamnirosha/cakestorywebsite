@@ -196,6 +196,7 @@ const translations: Record<Language, Record<string, string>> = {
     "outlets.zone_EastPune": "East Pune",
     "outlets.zone_PCMC": "PCMC",
     "outlets.zone_Satara": "Satara",
+    "outlets.zone_Mumbai": "Mumbai",
 
     // Outlet Detail Page (Customer-Centric Luxury Boutique View)
     "outletDetail.back": "Back to Outlets Directory",
@@ -561,6 +562,7 @@ const translations: Record<Language, Record<string, string>> = {
     "outlets.zone_EastPune": "पूर्व पुणे",
     "outlets.zone_PCMC": "पिंपरी-चिंचवड",
     "outlets.zone_Satara": "सातारा",
+    "outlets.zone_Mumbai": "मुंबई",
 
     // Outlet Detail Page (Customer-Centric Luxury Boutique View)
     "outletDetail.back": "आउटलेट्स डिरेक्टरीकडे परत",

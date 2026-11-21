@@ -139,13 +139,13 @@ export default function OutletsMapSection() {
   }, []);
 
   const allOutlets = franchiseService.listActive();
-  const zones = ["all", "West Pune", "South Pune", "East Pune", "PCMC", "Satara"];
+  const zones = ["all", "West Pune", "South Pune", "East Pune", "PCMC", "Satara", "Mumbai"];
 
   // Filtered outlets
   const filtered = useMemo(() => {
     let list = allOutlets;
     if (activeZone !== "all") {
-      list = list.filter((o) => o.zone === activeZone || (activeZone === "South Pune" && (o.zone || "").includes("Satara")));
+      list = list.filter((o) => o.zone === activeZone || (activeZone === "Mumbai" && (o.zone === "Mumbai" || (o.city || "").toLowerCase().includes("mumbai"))));
     }
     if (query.trim()) {
       const q = query.toLowerCase();
@@ -172,6 +172,7 @@ export default function OutletsMapSection() {
     { zone: "East Pune", count: allOutlets.filter((o) => o.zone === "East Pune").length, dot: "bg-rose-900" },
     { zone: "PCMC", count: allOutlets.filter((o) => o.zone === "PCMC").length, dot: "bg-stone-700" },
     { zone: "Satara", count: allOutlets.filter((o) => o.zone === "Satara" || o.city.toLowerCase().includes("satara")).length, dot: "bg-amber-700" },
+    { zone: "Mumbai", count: allOutlets.filter((o) => o.zone === "Mumbai" || (o.city || "").toLowerCase().includes("mumbai")).length, dot: "bg-emerald-600" },
   ];
 
   return (
@@ -463,7 +464,7 @@ export default function OutletsMapSection() {
         </div>
 
         {/* 5. Regional Zone Count Summary Cards */}
-        <div className="zone-summary-grid grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 mt-8">
+        <div className="zone-summary-grid grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 mt-8">
           {zoneSummary.map((z) => (
             <div
               key={z.zone}

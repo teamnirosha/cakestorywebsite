@@ -1641,5 +1641,40 @@
       "satara-shahu-chowk"
     ],
     "googleMapsUrl": "https://share.google/OV13EkVUXa6fdkKf7"
+  },
+  {
+    "id": "franchise-069",
+    "slug": "kopar-khairane",
+    "name": "CakeStory Desserts — Kopar Khairane",
+    "outletName": "Kopar Khairane",
+    "zone": "Mumbai",
+    "address": "Shop No 6, Orchid CHS, Plot No 56, near D'mart, Sector 15, Kopar Khairane, Navi Mumbai, Maharashtra 400709",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India",
+    "latitude": 19.1065,
+    "longitude": 73.0042,
+    "phone": "+91 91209 12444",
+    "ownerPhone": "+91 98704 16350",
+    "email": "care@cakestorydesserts.com",
+    "openingHours": "10:00 AM - 11:30 PM",
+    "manager": "Ganesh Jadhav",
+    "services": [
+      "Celebration Cakes",
+      "Artisanal Pastries",
+      "100% Pure Veg",
+      "Custom Orders",
+      "Takeaway"
+    ],
+    "description": "Official CakeStory Desserts boutique at Kopar Khairane, offering 100% pure vegetarian cakes, handcrafted gourmet pastries, and custom celebration designs.",
+    "image": "/images/outlets/baner.jpg",
+    "active": true,
+    "established": "2026",
+    "citySlug": "mumbai",
+    "locality": "Kopar Khairane",
+    "legacySlugs": [
+      "cakestory-kopar-khairane"
+    ],
+    "googleMapsUrl": "https://maps.google.com/?q=19.1065,73.0042"
   }
 ]

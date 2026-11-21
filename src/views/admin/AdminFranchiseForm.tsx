@@ -4,7 +4,7 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import { franchiseService, Franchise } from "../../services/data";
 import { useToast } from "../../components/common/Toast";
 
-const PUNE_ZONES = ["West Pune", "South Pune", "East Pune", "PCMC", "Satara", "Other Regional"];
+const PUNE_ZONES = ["West Pune", "South Pune", "East Pune", "PCMC", "Satara", "Mumbai", "Other Regional"];
 const SERVICE_OPTIONS = [
   "Celebration Cakes",
   "Custom Gourmet Cakes",

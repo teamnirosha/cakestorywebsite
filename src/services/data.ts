@@ -389,6 +389,8 @@ export const franchiseService = {
         fCitySlug === cleanCity ||
         (cleanCity === "pcmc" && fCitySlug === "pimpri-chinchwad") ||
         (cleanCity === "pimpri-chinchwad" && fCitySlug === "pcmc") ||
+        (cleanCity === "mumbai" && (fCitySlug === "mumbai" || fCitySlug === "navi-mumbai")) ||
+        (cleanCity === "navi-mumbai" && (fCitySlug === "mumbai" || fCitySlug === "navi-mumbai")) ||
         (cleanCity === "saswad" && (f.slug === "saswad" || f.id === "franchise-016"));
 
       if (!cityMatches) return false;
@@ -483,7 +485,7 @@ export const franchiseService = {
   },
   zones(): string[] {
     const found = Array.from(new Set(getFranchisesRaw().map((f) => f.zone).filter(Boolean)));
-    return found.length ? found.sort() : ["West Pune", "East Pune", "South Pune", "PCMC", "Satara"];
+    return found.length ? found.sort() : ["West Pune", "East Pune", "South Pune", "PCMC", "Satara", "Mumbai"];
   },
   cities(): string[] {
     return Array.from(new Set(getFranchisesRaw().map((f) => f.city))).sort();
